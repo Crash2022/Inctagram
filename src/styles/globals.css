@@ -39,10 +39,7 @@ a {
 :root {
   --navbar-height: 60px;
   --footer-height: 40px;
-
-  /*--font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',*/
-  /*  'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',*/
-  /*  'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;*/
+  font-family: 'Montserrat', sans-serif;
 }
 
 /*------------Main (_app.tsx)------------*/
