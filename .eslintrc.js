@@ -20,6 +20,7 @@ module.exports = {
     rules: {
         '@typescript-eslint/consistent-type-imports': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off'
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-floating-promises': 'off'
     }
 };

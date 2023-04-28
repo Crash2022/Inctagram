@@ -1,29 +1,30 @@
-import React from 'react'
-import {ReactNode} from 'react'
-import {Header} from '@/components/header'
-import {Footer} from '@/components/footer'
-import s from '../styles/Layout.module.scss'
+import { PropsWithChildren, ReactElement } from 'react';
 
-type LayoutPropsType = {
-    children: ReactNode
-}
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+import s from '../styles/Layout.module.scss';
+import { inter } from '@/pages/_app';
+import Head from 'next/head';
 
-export const Layout: React.FC<LayoutPropsType> = ({children}) => {
-
+export const Layout = ({ children }: PropsWithChildren) => {
     return (
-        <div className={s.layoutContainer}>
-            <div className={s.layoutContent}>
-                <div>
-                    <Header/>
-                </div>
-                <div>
-                    {children}
-                </div>
-            </div>
-
-            <div>
-                <Footer/>
-            </div>
-        </div>
-    )
-}
+        <>
+            <Head>
+                <title>Incubator Inctagram</title>
+                <meta name='description' content='Inctagram App' />
+                <meta name='viewport' content='width=device-width, initial-scale=1' />
+                <link rel='icon' href='/favicon.ico' />
+            </Head>
+            <Header />
+            <div className={s.layoutContainer}>{children}</div>
+            <Footer />
+        </>
+    );
+};
+export const getLayout = (page: ReactElement) => {
+    return (
+        <main className={inter.className}>
+            <Layout>{page}</Layout>
+        </main>
+    );
+};

@@ -1,35 +1,33 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 
 export const useComponentVisible = (initialIsVisible: boolean) => {
-
-    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
-    const ref = useRef(null)
+    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+    const ref = useRef<HTMLElement>(null);
 
     const handleHideDropdown = (event: KeyboardEvent) => {
-        if (event.key === "Escape") {
-            setIsComponentVisible(false)
+        if (event.key === 'Escape') {
+            setIsComponentVisible(false);
         }
-    }
+    };
 
     const handleClickOutside = (event: Event | React.SyntheticEvent) => {
-        // @ts-ignore
-        if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
-            setIsComponentVisible(false)
+        if (ref.current !== null && !ref.current.contains(event.target as HTMLElement)) {
+            setIsComponentVisible(false);
         }
-    }
+    };
 
     useEffect(() => {
-        document.addEventListener('keydown', handleHideDropdown, true)
-        document.addEventListener('click', handleClickOutside, true)
+        document.addEventListener('keydown', handleHideDropdown, true);
+        document.addEventListener('click', handleClickOutside, true);
 
         return () => {
-            document.removeEventListener('keydown', handleHideDropdown, true)
-            document.removeEventListener('click', handleClickOutside, true)
-        }
-    }, [])
+            document.removeEventListener('keydown', handleHideDropdown, true);
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    }, []);
 
-    return { ref, isComponentVisible, setIsComponentVisible }
-}
+    return { ref, isComponentVisible, setIsComponentVisible };
+};
 
 // FROM MUI
 // const anchorRef = React.useRef<HTMLButtonElement>(null)

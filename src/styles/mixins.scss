@@ -8,11 +8,11 @@
 }
 // container height
 @mixin defaultContainerHeight() {
-    height: $defaultContentHeight;
+    height: var(--default-Content-Height);
     //overflow-y: auto;
 }
 @mixin defaultContainerHeightMobile() {
-    height: $defaultContentHeightMobile;
+    height: var(--default-Content-Height-Mobile);
     overflow-y: auto;
 }
 
@@ -51,9 +51,9 @@
     top: 50%;
     left: 50%;
     width: 450px;
-    padding: $defaultLargeMargin;
+    padding: var(--default-Large-Margin);
     transform: translate(-50%, -50%);
-    background-color: $themeColorDark;
+    background-color: var(--theme-Color-Dark);
     //border-radius: $largeBorderRadius;
     border: 1px solid white;
     color: white;
