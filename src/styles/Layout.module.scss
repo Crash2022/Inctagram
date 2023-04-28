@@ -1,0 +1,10 @@
+.layoutContainer {
+    height: 100%; /*чтобы прибить футер к низу*/
+    display: flex;
+    flex-direction: column;
+
+    /*весь контент кроме футера*/
+    .layoutContent {
+        flex: 1 1 auto;
+    }
+}
