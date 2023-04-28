@@ -2,14 +2,14 @@
 
 // container mixin
 @mixin defaultContainer() {
-    max-width: 1600px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
 }
 // container height
 @mixin defaultContainerHeight() {
     height: $defaultContentHeight;
-    overflow-y: auto;
+    //overflow-y: auto;
 }
 @mixin defaultContainerHeightMobile() {
     height: $defaultContentHeightMobile;
