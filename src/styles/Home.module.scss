@@ -1,0 +1,7 @@
+@import '../styles/mixins';
+
+.main {
+    @include flexColumn;
+    background-color: #C0C0C0;
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+}

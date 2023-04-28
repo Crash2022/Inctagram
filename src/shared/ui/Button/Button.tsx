@@ -1,7 +1,7 @@
-import React, {type ButtonHTMLAttributes, type FC, MouseEvent} from 'react';
-import cls from './Button.module.scss';
-import {Animate, createRipple} from "./lib/ripple";
-import clsx from "clsx";
+import React, {type ButtonHTMLAttributes, type FC, MouseEvent} from 'react'
+import cls from './Button.module.scss'
+import {Animate, createRipple} from "./lib/ripple"
+import clsx from "clsx"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     // variant?: string

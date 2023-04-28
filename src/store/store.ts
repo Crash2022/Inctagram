@@ -1,0 +1,3 @@
+// RTK store
+
+export default {}

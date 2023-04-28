@@ -1,6 +1,12 @@
+@import '../styles/mixins';
+
 .footer {
-    display: flex;
-    justify-content: space-between;
     background-color: green;
-    height: 40px;
+    height: var(--footer-height);
+
+    .container {
+        height: var(--footer-height);
+        @include defaultContainer;
+        @include flexBetween;
+    }
 }

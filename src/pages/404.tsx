@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import {useEffect} from 'react'
 import {useRouter} from 'next/router'
+import LinkA from "@/shared/ui/LinkA/LinkA"
 
 const NotFoundPage = () => {
 
@@ -23,9 +23,7 @@ const NotFoundPage = () => {
             </div>
             <div className='notFound_text'>
                 <span>You will be redirect automatically to </span>
-                    <Link href='/'>
-                        Home Page
-                    </Link>
+                    <LinkA href={'/'} text={'Home Page'}/>
                 <span> after 5 seconds...</span>
             </div>
             {/*<div className='notFoundImage'>*/}

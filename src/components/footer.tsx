@@ -4,8 +4,21 @@ export const Footer = () => {
 
     return (
         <footer className={s.footer}>
-            <div>
-                Footer - Copyright, 2023
+            <div className={s.container}>
+
+                <div>
+                    Icon1
+                </div>
+                <div>
+                    Icon2
+                </div>
+                <div>
+                    Icon3
+                </div>
+                <div>
+                    Icon4
+                </div>
+
             </div>
         </footer>
     )

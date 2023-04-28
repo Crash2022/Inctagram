@@ -24,16 +24,19 @@ a {
 }
 
 :root {
+  --navbar-height: 60px;
+  --footer-height: 40px;
+
   /*--max-width: 1100px;*/
   /*--font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',*/
   /*  'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',*/
   /*  'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;*/
 }
 
-/*---------------Main---------------*/
+/*------------Main (_app.tsx)------------*/
 
 .container {
-  /*max-width: 1200px;*/ /*если нужно ограничить по ширине*/
+  /*max-width: 1400px;*/ /*если нужно ограничить по ширине*/
   max-width: 100vw;
   height: 100%; /*чтобы прибить футер к низу*/
   margin: 0 auto;

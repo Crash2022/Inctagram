@@ -1,15 +1,10 @@
 @import 'variables';
 
-// container mixins
+// container mixin
 @mixin defaultContainer() {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 40px;
-}
-
-@mixin wrapperMainBlock() {
-    min-height: calc(100vh - var(--navbar-height));
-    padding: $defaultLargeMargin;
 }
 
 // flex mixins
