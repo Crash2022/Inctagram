@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import {Inter} from 'next/font/google'
 import s from '@/styles/Home.module.css'
+import LinkA from "@/shared/ui/LinkA/LinkA"
 
 const inter = Inter({subsets: ['latin']})
 
@@ -18,6 +19,7 @@ export default function Home() {
                 <div>
                     <h1>Incubator Inctagram</h1>
                 </div>
+                <LinkA href={'https://www.google.com'} text={'Google'}/>
             </main>
         </>
     )
