@@ -5,7 +5,7 @@ import React, {
 } from 'react'
 import cls from './CustomModal.module.scss'
 import clsx from "clsx"
-import {Portal} from "../../../widgets/workspace/Portal/Portal"
+import {Portal} from '../Portal/Portal'
 
 interface ModalProps extends HTMLAttributes<HTMLDivElement> {
     children?: ReactNode

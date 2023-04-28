@@ -4,9 +4,16 @@
     background-color: green;
     height: var(--footer-height);
 
+    display: none;
+
+    @media(max-width: 390px) {
+        display: block;
+    }
+
     .container {
         height: var(--footer-height);
         @include defaultContainer;
         @include flexBetween;
+        gap: 10px;
     }
 }

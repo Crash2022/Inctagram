@@ -3,10 +3,10 @@ import React, {
     KeyboardEvent, ReactNode
 } from 'react'
 import s from './CustomSearchInput.module.scss'
-import CancelIcon from '../../assets/workspace/cancel-icon-white.svg'
-import CancelIconBlack from '../../assets/workspace/cancel-icon-black.svg'
-import GlassIcon from '../../assets/workspace/magnifying-glass-white.svg'
-import GlassIconBlack from '../../assets/workspace/magnifying-glass-black.svg'
+import CancelIcon from '../../../../public/assets/icons/cancel-icon-white.svg'
+import CancelIconBlack from '../../../../public/assets/icons/cancel-icon-black.svg'
+import GlassIcon from '../../../../public/assets/icons/magnifying-glass-white.svg'
+import GlassIconBlack from '../../../../public/assets/icons/magnifying-glass-black.svg'
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,

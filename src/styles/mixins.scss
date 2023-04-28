@@ -6,6 +6,15 @@
     margin: 0 auto;
     padding: 0 40px;
 }
+// container height
+@mixin defaultContainerHeight() {
+    height: $defaultContentHeight;
+    overflow-y: auto;
+}
+@mixin defaultContainerHeightMobile() {
+    height: $defaultContentHeightMobile;
+    overflow-y: auto;
+}
 
 // flex mixins
 @mixin flexCenter() {
@@ -45,7 +54,7 @@
     padding: $defaultLargeMargin;
     transform: translate(-50%, -50%);
     background-color: $themeColorDark;
-    border-radius: $largeBorderRadius;
+    //border-radius: $largeBorderRadius;
     border: 1px solid white;
     color: white;
 }

@@ -1,0 +1,15 @@
+@import '../styles/mixins';
+
+.loginPage {
+    //background-color: darkorange;
+
+    .container {
+        @include defaultContainer;
+        @include defaultContainerHeight;
+
+        @media(max-width: 390px) {
+            @include defaultContainerHeightMobile;
+        }
+    }
+}
+

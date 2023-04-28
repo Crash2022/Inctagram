@@ -1,6 +1,6 @@
 import React, {type FC} from 'react'
 import cls from './PageLoader.module.scss'
-import {Loader, VariantLoadingType} from 'shared/ui/Loader/Loader'
+import {Loader, VariantLoadingType} from './Loader'
 
 interface PageLoaderProps {
     className?: string

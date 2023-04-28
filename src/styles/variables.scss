@@ -1,3 +1,7 @@
+// height
+$defaultContentHeight: calc(100vh - var(--navbar-height));
+$defaultContentHeightMobile: calc(100vh - var(--navbar-height) - var(--footer-height));
+
 // colors
 $themeColorWhite: white;
 $themeColorSomeWhite: #f8f8f8;
@@ -13,9 +17,9 @@ $headerColorHover: #1c508a;
 $containerWidth: 1400px;
 
 // border-radius
-$extraSmallBorderRadius: 5px;
-$smallBorderRadius: 10px;
-$largeBorderRadius: 20px;
+//$extraSmallBorderRadius: 5px;
+//$smallBorderRadius: 10px;
+//$largeBorderRadius: 20px;
 
 // default margins and paddings
 $defaultExtraSmallMargin: 5px;
@@ -24,9 +28,9 @@ $defaultLargeMargin: 20px;
 $defaultExtraLargeMargin: 40px;
 
 // buttons
-$smallButtonPadding: 10px 20px;
-$largeButtonPadding: 15px 20px;
-$largeButtonHeight: 50px;
+//$smallButtonPadding: 10px 20px;
+//$largeButtonPadding: 15px 20px;
+//$largeButtonHeight: 50px;
 
 // text
 $minLineHeight: 1.2;
