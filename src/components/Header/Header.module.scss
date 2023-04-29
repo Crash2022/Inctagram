@@ -1,0 +1,9 @@
+@import '../../styles/mixins';
+.header {
+    border-bottom: 1px solid var(--snippet-border);
+    height: var(--navbar-height);
+    background-color: black;
+    color: var(--light-100);
+    padding: 12px 60px;
+    @include large-text;
+}
