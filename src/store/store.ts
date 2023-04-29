@@ -1,17 +1,9 @@
 import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import authReducer from '@/redux/slices/auth/authSlice';
-import appReducer from '@/redux/slices/app/appSlice';
-import moderationSlice from '@/redux/slices/moderation/moderationSlice';
-import s_adminSlice from '@/redux/slices/s_admin/s_adminSlice';
-import adminSlice from '@/redux/slices/admin/adminSlice';
+import appReducer from '@/store/slices/app/appSlice';
 
 const combinedReducer = combineReducers({
-    app: appReducer,
-    auth: authReducer,
-    s_admin: s_adminSlice,
-    admin: adminSlice,
-    moderation: moderationSlice
+    app: appReducer
 });
 
 const reducer: typeof combinedReducer = (state, action: AnyAction) => {
