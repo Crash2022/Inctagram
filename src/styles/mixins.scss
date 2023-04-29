@@ -1,5 +1,3 @@
-@import 'variables';
-
 /*----------------!* Typography *!----------------*/
 @mixin large-text {
     font-weight: 600;
@@ -55,7 +53,7 @@
     line-height: 24px;
 };
 
-
+/*----------------!* Container *!----------------*/
 
 // container mixin
 @mixin defaultContainer() {
@@ -73,7 +71,8 @@
     overflow-y: auto;
 }
 
-// flex mixins
+/*----------------!* Flex Mixins *!----------------*/
+
 @mixin flexCenter() {
     display: flex;
     justify-content: center;
@@ -102,7 +101,7 @@
     align-items: center;
 }
 
-// default modal-window styles
+/*----------------!* Default Modal-Window Styles *!----------------*/
 @mixin defaultModalStyle() {
     position: absolute;
     top: 50%;
@@ -111,7 +110,6 @@
     padding: var(--default-Large-Margin);
     transform: translate(-50%, -50%);
     background-color: var(--theme-Color-Dark);
-    //border-radius: $largeBorderRadius;
     border: 1px solid white;
     color: white;
 }

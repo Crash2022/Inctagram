@@ -2,13 +2,13 @@ import s from '@/styles/Home.module.scss';
 import LinkA from '@/shared/ui/LinkA/LinkA';
 import { NextPageWithLayout } from '@/pages/_app';
 import { getLayout } from '@/components/Layout/Layout';
-import { Button } from '@/shared/ui/Button/ui/Button';
+import { Button } from '@/shared/ui/Button/Button';
 
 const Home: NextPageWithLayout = () => {
     return (
         <>
             <main className={s.main}>
-                <div style={{marginTop: '20px'}}>
+                <div style={{ marginTop: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div
                             style={{
