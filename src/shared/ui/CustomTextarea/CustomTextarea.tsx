@@ -7,12 +7,13 @@ import React, {
 } from 'react';
 import s from './CustomTextarea.module.scss';
 
-type DefaultInputPropsType = DetailedHTMLProps<
-    InputHTMLAttributes<HTMLTextAreaElement>,
-    HTMLTextAreaElement
->;
+// type DefaultInputPropsType = DetailedHTMLProps<
+//     InputHTMLAttributes<HTMLTextAreaElement>,
+//     HTMLTextAreaElement
+// >;
 
-type CustomTextareaPropsType = DefaultInputPropsType & {
+type CustomTextareaPropsType = {
+    onChange: any;
     onChangeText?: (value: string) => void;
     onEnter?: () => void;
     error?: ReactNode;
