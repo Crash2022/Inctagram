@@ -1,6 +1,11 @@
 import Link from 'next/link';
 
-export default function ({ href, text }) {
+interface LinkProps {
+    href: string;
+    text: string;
+}
+
+export default function ({ href, text }: LinkProps) {
     return (
         <Link href={href} style={{ color: 'white' }}>
             {text}
