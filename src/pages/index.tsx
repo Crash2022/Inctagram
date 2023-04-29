@@ -51,5 +51,6 @@ const Home: NextPageWithLayout = () => {
         </>
     );
 };
+
 Home.getLayout = getLayout;
 export default Home;
