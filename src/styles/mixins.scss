@@ -1,5 +1,62 @@
 @import 'variables';
 
+/*----------------!* Typography *!----------------*/
+@mixin large-text {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 36px;
+};
+
+@mixin h1-text-size {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 36px;
+};
+
+@mixin h2-text-size {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+};
+
+@mixin h3-text-size {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+};
+
+@mixin regular-text-16 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+};
+
+@mixin regular-text-14 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+};
+
+@mixin bold-text-16 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+};
+
+@mixin bold-text-14 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+};
+
+@mixin medium-text-14 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+};
+
+
+
 // container mixin
 @mixin defaultContainer() {
     max-width: 1400px;
