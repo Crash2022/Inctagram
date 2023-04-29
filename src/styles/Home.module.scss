@@ -1,11 +1,11 @@
 @import '../styles/mixins';
 
 .main {
-    background-color: #C0C0C0;
+    background-color: black;
     @include flexColumn;
     @include defaultContainerHeight;
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         @include defaultContainerHeightMobile;
     }
 }

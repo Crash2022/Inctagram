@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = memo((props: PropsWithChildren<ButtonProps>) => {
-    const { theme = 'filled', className, children, ...restProps } = props;
+    const { theme = 'primary', className, children, ...restProps } = props;
 
     return (
         <button className={clsx(cls.button, [className, cls[theme]])} {...restProps}>

@@ -1,8 +1,8 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
-import { Header } from '@/components/header';
 import cls from './Layout.module.scss';
 import Head from 'next/head';
+import { Header } from '@/components/Header/Header';
 
 export const Layout = ({ children }: PropsWithChildren) => {
     return (
