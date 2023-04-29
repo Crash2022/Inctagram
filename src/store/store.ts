@@ -35,5 +35,3 @@ export type AsyncThunkType<RV = unknown> = {
 };
 
 export const wrapper = createWrapper(makeStore /*{ debug: true }*/);
-
-// export default {}
