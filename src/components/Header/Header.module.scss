@@ -2,7 +2,7 @@
 .header {
     border-bottom: 1px solid var(--snippet-border);
     height: var(--navbar-height);
-    background-color: black;
+    background-color: var(--header-color);
     color: var(--light-100);
     padding: 12px 60px;
     @include large-text;

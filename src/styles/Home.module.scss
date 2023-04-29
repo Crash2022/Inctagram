@@ -1,7 +1,7 @@
 @import '../styles/mixins';
 
 .main {
-    background-color: black;
+    background-color: var(--contentBgColor);
     @include flexColumn;
     @include defaultContainerHeight;
 

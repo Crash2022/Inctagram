@@ -3,6 +3,7 @@ import { PropsWithChildren, ReactElement } from 'react';
 import cls from './Layout.module.scss';
 import Head from 'next/head';
 import { Header } from '@/components/Header/Header';
+import { Footer } from "@/components/Footer/Footer";
 
 export const Layout = ({ children }: PropsWithChildren) => {
     return (
@@ -14,10 +15,14 @@ export const Layout = ({ children }: PropsWithChildren) => {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Header />
-            <main className={cls.layoutContainer}>{children}</main>
+            <main className={cls.layoutContainer}>
+                {children}
+            </main>
+            <Footer />
         </>
     );
 };
+
 export const getLayout = (page: ReactElement) => {
     return <Layout>{page}</Layout>;
 };
