@@ -3,7 +3,6 @@ import LinkA from '@/shared/ui/LinkA/LinkA';
 import { NextPageWithLayout } from '@/pages/_app';
 import { getLayout } from '@/components/Layout/Layout';
 import { Button } from '@/shared/ui/Button/Button';
-import { CustomTextarea } from '@/shared/ui/CustomTextarea/CustomTextarea';
 
 const Home: NextPageWithLayout = () => {
     return (
@@ -48,7 +47,6 @@ const Home: NextPageWithLayout = () => {
                     </div>
                 </div>
                 <LinkA href={'/login'} text={'Login'} />
-                <CustomTextarea />
             </main>
         </>
     );
