@@ -20,13 +20,16 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout): ReactNode {
     const getLayout = Component.getLayout ?? ((page) => page);
+
     return getLayout(
         <>
-            <style jsx global>{`
-                html {
-                    font-family: ${inter.style.fontFamily};
-                }
-            `}</style>
+            <style jsx global>
+                {`
+                    html {
+                        font-family: ${inter.style.fontFamily};
+                    }
+                `}
+            </style>
             <Component {...pageProps} />
         </>
     );
