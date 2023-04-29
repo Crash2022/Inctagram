@@ -7,13 +7,12 @@ import React, {
 } from 'react';
 import s from './CustomTextarea.module.scss';
 
-// type DefaultInputPropsType = DetailedHTMLProps<
-//     InputHTMLAttributes<HTMLTextAreaElement>,
-//     HTMLTextAreaElement
-// >;
+type DefaultInputPropsType = DetailedHTMLProps<
+    InputHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+>;
 
-type CustomTextareaPropsType = {
-    onChange: any;
+type CustomTextareaPropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void;
     onEnter?: () => void;
     error?: ReactNode;
@@ -23,7 +22,7 @@ type CustomTextareaPropsType = {
 };
 
 export const CustomTextarea: React.FC<CustomTextareaPropsType> = ({
-    onChange,
+    // onChange,
     onChangeText,
     onKeyPress,
     onEnter,
@@ -34,7 +33,7 @@ export const CustomTextarea: React.FC<CustomTextareaPropsType> = ({
     ...restProps // все остальные пропсы попадут в объект restProps
 }) => {
     const onChangeCallback = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onChange && onChange(e);
+        // onChange && onChange(e);
         onChangeText && onChangeText(e.currentTarget.value);
     };
     const onKeyPressCallback = (e: KeyboardEvent<HTMLTextAreaElement>) => {
