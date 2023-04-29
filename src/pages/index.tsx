@@ -8,8 +8,7 @@ const Home: NextPageWithLayout = () => {
     return (
         <>
             <main className={s.main}>
-                <div>
-                    <h1>Incubator Inctagram</h1>
+                <div style={{marginTop: '20px'}}>
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div
                             style={{
