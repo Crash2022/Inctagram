@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import s from '../styles/Login.module.scss';
+import s from './Login.module.scss';
 import { useSnackbar } from 'notistack';
 
 const Login = () => {
@@ -13,8 +13,8 @@ const Login = () => {
     return (
         <>
             <Head>
-                <title>Inctagram Login</title>
-                <meta name='title' content='Login' />
+                <title>Inctagram Index</title>
+                <meta name='title' content='Index' />
             </Head>
             <div className={s.loginPage}>
                 <div className={s.container}>
