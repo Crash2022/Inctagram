@@ -5,6 +5,9 @@
     padding: 0;
     margin: 0;
 }
+body {
+    background-color: var(--contentBgColor);
+}
 
 /*html,*/
 /*body {*/
@@ -79,6 +82,10 @@ a {
     --default-Content-Height-Mobile: calc(100vh - var(--navbar-height) - var(--footer-height));
     --navbar-height: 60px;
     --footer-height: 40px;
+
+    /*-----------------!* heights *!----------------*/
+
+    --layout-width: 1400px;
 
     /*----------------!* sizes *!----------------*/
     --default-Extra-Small-Margin: 5px;

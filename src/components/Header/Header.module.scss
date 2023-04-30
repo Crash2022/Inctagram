@@ -1,10 +1,15 @@
 @import '../../styles/mixins';
 
-.header {
+.headerWrapper {
     border-bottom: 1px solid var(--snippet-border);
     height: var(--navbar-height);
     background-color: var(--header-color);
     color: var(--light-100);
-    padding: 12px 60px;
     @include large-text;
+}
+
+.header {
+    max-width: var(--layout-width);
+    padding: 12px 60px;
+    margin: 0 auto;
 }
