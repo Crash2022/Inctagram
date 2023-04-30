@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import Head from 'next/head';
 import s from './Login.module.scss';
 import { useSnackbar } from 'notistack';
+import { NextPageWithLayout } from '@/pages/_app';
+import { getLayout } from '@/components/Layout/Layout';
 
-const Login = () => {
+const Login: NextPageWithLayout = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
@@ -24,5 +26,5 @@ const Login = () => {
         </>
     );
 };
-
+Login.getLayout = getLayout;
 export default Login;

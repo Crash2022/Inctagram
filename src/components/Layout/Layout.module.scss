@@ -1,7 +1,11 @@
-
 .layoutContainer {
-  min-height: var(--default-Content-Height);
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
+    min-height: var(--default-Content-Height);
+    max-width: var(--layout-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    @media (max-width: 390px) {
+        min-height: var(--default-Content-Height-Mobile);
+    }
 }
