@@ -3,7 +3,8 @@ import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import appReducer from '@/store/slices/app/appSlice';
 
 const combinedReducer = combineReducers({
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 });
 
 const reducer: typeof combinedReducer = (state, action: AnyAction) => {
