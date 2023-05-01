@@ -3,6 +3,9 @@ import type { AppProps } from 'next/app';
 import { Inter } from 'next/font/google';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
+import { useLoader } from '@/shared/hooks/useLoader';
+import '../styles/nprogress.css';
+// import 'nprogress/nprogress.css';
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -19,6 +22,8 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout): ReactNode {
+    useLoader();
+
     const getLayout = Component.getLayout ?? ((page) => page);
 
     return getLayout(
