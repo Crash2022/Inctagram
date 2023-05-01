@@ -9,11 +9,11 @@ const meta: Meta<typeof Input> = {
     error: '',
     password: false,
   },
-  argTypes: {
-    password: {
-      table: {disable: true}
-    }
-  }
+  // argTypes: {
+  //   password: {
+  //     table: {disable: true}
+  //   }
+  // }
 }
 
 export default meta;
