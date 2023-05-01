@@ -33,9 +33,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 className={clsx(cls.input, { [cls.error]: error })}
                 {...restProps}
             />
-            <span onClick={toggleTypeHandler} className={cls.icon}>
-                {typeInput === 'password' ? <EyeIcon /> : <EyeIconSlashed />}
-            </span>
+            {password && (
+                <span onClick={toggleTypeHandler} className={cls.icon}>
+                    {typeInput === 'password' ? <EyeIcon /> : <EyeIconSlashed />}
+                </span>
+            )}
             {error && <span className={cls.errorMessage}>{error}</span>}
             {placeholder && (
                 <label htmlFor={'title'} className={cls.inputLabel}>
