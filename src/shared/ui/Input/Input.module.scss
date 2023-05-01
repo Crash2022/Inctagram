@@ -19,6 +19,7 @@
 
     &::placeholder {
         color: transparent;
+        user-select: none;
     }
 
     &:placeholder-shown ~ .inputLabel {
