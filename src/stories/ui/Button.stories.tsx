@@ -15,13 +15,13 @@ const meta: Meta<typeof Button> = {
           summary: 'primary'
         }
       }
-    }
+    },
+    onClick: {action: 'clicked'}
   }
 }
 
 export default meta;
 type Story = StoryObj<typeof Button>;
-
 
 export const Primary: Story = {
   args: {theme: "primary"}
