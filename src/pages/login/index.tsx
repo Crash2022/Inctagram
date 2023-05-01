@@ -26,5 +26,6 @@ const Login: NextPageWithLayout = () => {
         </>
     );
 };
+
 Login.getLayout = getLayout;
 export default Login;
