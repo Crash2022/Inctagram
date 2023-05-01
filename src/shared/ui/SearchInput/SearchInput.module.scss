@@ -13,6 +13,7 @@
     outline: none;
     color: var(--light-900);
     background: transparent;
+    transition: 0.2s;
     @include regular-text-16;
 
     &:focus {

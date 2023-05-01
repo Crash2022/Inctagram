@@ -12,7 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-    const { error, onEnter, placeholder, password, ...restProps } = props;
+    const { error, onEnter, placeholder, password, id, ...restProps } = props;
     const [typeInput, setTypeInput] = useState<'password' | 'text'>(password ? 'password' : 'text');
     const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -28,7 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 ref={ref}
                 type={typeInput}
                 onKeyUp={onEnterHandler}
-                id={'title'}
+                id={id}
                 placeholder={placeholder}
                 className={clsx(cls.input, { [cls.error]: error })}
                 {...restProps}
@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             )}
             {error && <span className={cls.errorMessage}>{error}</span>}
             {placeholder && (
-                <label htmlFor={'title'} className={cls.inputLabel}>
+                <label htmlFor={id} className={cls.inputLabel}>
                     {placeholder}
                 </label>
             )}
