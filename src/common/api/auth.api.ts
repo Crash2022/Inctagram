@@ -2,19 +2,19 @@ import {instance} from "@/common/api/api.instance";
 
 
 export const authAPI = {
-    async registration(data: RegistrationParamsType) {
-        return await instance.post<ResponseType>('auth/registration', data);
+    register: async (arg: RegistrationParamsType) => {
+        return await instance.post<ResponseType>('auth/registration', arg);
     },
-    async login(data: LoginParamsType) {
-        return await instance.post<ResponseType>('auth/login', data);
+    login: async (arg: LoginParamsType) => {
+        return await instance.post<ResponseType>('auth/login', arg);
     },
-    async passRecovery(data) {
-        return await instance.post<ResponseType>('auth/password-recovery', data);
+   recoverPass: async (arg:PassRecoveryType) => {
+        return await instance.post<ResponseType>('auth/password-recovery', arg);
     },
-    async logout() {
+    logout: async() => {
         return await instance.post<ResponseType>('auth/logout');
     },
-    async me() {
+    me: async() => {
         return await instance.get<ResponseType>('auth/me')
     }
 }
@@ -26,7 +26,7 @@ export interface RegistrationParamsType {
 }
 
 export interface LoginParamsType {
-    XXX:string
+    XXX:any
 }
  export interface PassRecoveryType {
      email: string
