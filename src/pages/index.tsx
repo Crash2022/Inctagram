@@ -50,16 +50,21 @@ const Home: NextPageWithLayout = () => {
                 </div>
                 <LinkA href={'/login'} text={'Login'} />
                 <div style={{ marginBottom: '25px', width: '450px' }}>
-                    <Input placeholder={'Email'} />
+                    <Input id={'Email'} placeholder={'Email'} />
                 </div>
                 <div style={{ marginBottom: '25px', width: '450px' }}>
                     <SearchInput placeholder={'Search input'} />
                 </div>
                 <div style={{ marginBottom: '25px', width: '450px' }}>
-                    <Input placeholder={'Password'} password />
+                    <Input id={'Password'} placeholder={'Password'} password />
                 </div>
                 <div style={{ marginBottom: '25px', width: '450px' }}>
-                    <Input placeholder={'Password'} error={'Error Text'} password />
+                    <Input
+                        id={'PasswordError'}
+                        placeholder={'Password'}
+                        error={'Error Text'}
+                        password
+                    />
                 </div>
                 <div style={{ marginBottom: '25px', width: '450px' }}>
                     <SearchInput placeholder={'Search input'} error={'Error Text'} />
