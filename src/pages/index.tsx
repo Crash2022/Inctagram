@@ -3,6 +3,8 @@ import LinkA from '@/shared/ui/LinkA/LinkA';
 import { NextPageWithLayout } from '@/pages/_app';
 import { getLayout } from '@/components/Layout/Layout';
 import { Button } from '@/shared/ui/Button/Button';
+import { Input } from '@/shared/ui/Input/Input';
+import { SearchInput } from '@/shared/ui/SearchInput/SearchInput';
 
 const Home: NextPageWithLayout = () => {
     return (
@@ -47,6 +49,10 @@ const Home: NextPageWithLayout = () => {
                     </div>
                 </div>
                 <LinkA href={'/login'} text={'Login'} />
+                <div style={{ marginBottom: '25px' }}>
+                    <Input placeholder={'Email'} password />
+                </div>
+                <SearchInput error={'Error Text'} />
             </main>
         </>
     );
