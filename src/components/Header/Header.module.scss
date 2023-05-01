@@ -11,10 +11,10 @@
         max-width: var(--layout-width);
         padding: 12px 60px;
         margin: 0 auto;
-        @include flexBetween;
+        @include flexOnlyBetween;
 
         .header_logo {
-            @include flexBetween;
+            display: flex;
             gap: 10px;
 
             .logo {
