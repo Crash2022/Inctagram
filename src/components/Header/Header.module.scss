@@ -6,10 +6,27 @@
     background-color: var(--header-color);
     color: var(--light-100);
     @include large-text;
-}
 
-.header {
-    max-width: var(--layout-width);
-    padding: 12px 60px;
-    margin: 0 auto;
+    .header {
+        max-width: var(--layout-width);
+        padding: 12px 60px;
+        margin: 0 auto;
+        @include flexBetween;
+
+        .header_logo {
+            @include flexBetween;
+            gap: 10px;
+
+            .logo {
+
+            }
+            .title {
+
+            }
+        }
+
+        .auth {
+
+        }
+    }
 }

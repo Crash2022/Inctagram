@@ -4,6 +4,8 @@
     background-color: var(--contentBgColor);
     @include flexColumn;
     @include defaultContainerHeight;
+    max-width: var(--layout-width);
+    overflow: hidden;
 
     @media (max-width: 390px) {
         @include defaultContainerHeightMobile;
