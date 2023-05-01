@@ -1,15 +1,15 @@
-import {Header} from "../../components/Header/Header";
+import {Header as HeaderComponent} from "../../components/Header/Header";
 import {Meta, StoryObj} from "@storybook/react";
 
-const meta: Meta<typeof Header> = {
+const meta: Meta<typeof HeaderComponent> = {
   title: 'Components/Header',
-  component: Header,
+  component: HeaderComponent,
   tags: ['aotodocs']
 }
 
 export default meta;
-type Story = StoryObj<typeof Header>;
+type Story = StoryObj<typeof HeaderComponent>;
 
-export const Primary: Story = {
-  render: () => <Header />
+export const Header: Story = {
+  render: () => <HeaderComponent />
 }
