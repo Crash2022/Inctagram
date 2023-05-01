@@ -54,7 +54,14 @@
     right: 15px;
 
     svg {
+        cursor: pointer;
+        transition: 0.2s;
         fill: var(--light-900);
+    }
+    &:hover {
+        svg {
+            fill: var(--light-100);
+        }
     }
 }
 
