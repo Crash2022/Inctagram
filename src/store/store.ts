@@ -1,6 +1,7 @@
 import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import appReducer from '@/store/slices/app/appSlice';
+import {authReducer} from "@/store/slices/auth/authSlice";
 
 const combinedReducer = combineReducers({
     app: appReducer,
