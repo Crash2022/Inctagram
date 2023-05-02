@@ -1,11 +1,13 @@
 import '@/styles/globals.scss';
 import type { AppProps } from 'next/app';
 import { Inter } from 'next/font/google';
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, Suspense } from 'react';
 import { NextPage } from 'next';
 import { useLoader } from '@/shared/hooks/useLoader';
 import '../styles/nprogress.css';
 // import 'nprogress/nprogress.css';
+import { ni18nConfig } from '@/common/config/i18n.config';
+import { appWithI18Next } from 'ni18n';
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -21,7 +23,7 @@ type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps }: AppPropsWithLayout): ReactNode {
+function App({ Component, pageProps }: AppPropsWithLayout) /*: ReactNode*/ {
     useLoader();
 
     const getLayout = Component.getLayout ?? ((page) => page);
@@ -35,23 +37,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout): React
                     }
                 `}
             </style>
-            <Component {...pageProps} />
+            <Suspense fallback={<div>...</div>}>
+                <Component {...pageProps} />
+            </Suspense>
         </>
     );
 }
 
-// export default function App({Component, pageProps}: AppProps) {
-//     return (
-//         <div className='container'>
-//             <SnackbarProvider maxSnack={1}>
-//                 <Layout>
-//                     <Component {...pageProps} />
-//                 </Layout>
-//             </SnackbarProvider>
-//         </div>
-//     )
-// }
-
-// export default function App({ Component, pageProps }: AppProps) {
-//   return <Component {...pageProps} />
-// }
+// export default App;
+export default appWithI18Next(App, ni18nConfig);

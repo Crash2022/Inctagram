@@ -5,11 +5,15 @@ import { getLayout } from '@/components/Layout/Layout';
 import { Button } from '@/shared/ui/Button/Button';
 import { Input } from '@/shared/ui/Input/Input';
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput';
+import { useTranslation } from 'react-i18next';
 
 const Home: NextPageWithLayout = () => {
+    const { t } = useTranslation('home');
+
     return (
         <>
             <main className={s.main}>
+                <LinkA href={'/login'} text={t('Login')} />
                 <div style={{ marginTop: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div
@@ -48,7 +52,6 @@ const Home: NextPageWithLayout = () => {
                         </div>
                     </div>
                 </div>
-                <LinkA href={'/login'} text={'Login'} />
                 <div style={{ marginBottom: '25px', width: '450px' }}>
                     <Input id={'Email'} placeholder={'Email'} />
                 </div>
