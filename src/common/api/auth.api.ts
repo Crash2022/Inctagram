@@ -9,7 +9,8 @@ export const authAPI = {
         return await instance.post<ResponseType>('auth/login', arg);
     },
    recoverPass: async (arg:PassRecoveryType) => {
-        return await instance.post<ResponseType>('auth/password-recovery', arg);
+        return await instance.post<ResponseType>('auth/password-recovery', {arg},
+            {withCredentials: true});
     },
     logout: async() => {
         return await instance.post<ResponseType>('auth/logout');
