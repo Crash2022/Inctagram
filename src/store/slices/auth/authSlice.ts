@@ -2,13 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authAPI, LoginParamsType, RegistrationParamsType } from '@/common/api/auth.api';
 import { createAppAsyncThunk } from '@/common/utils/createAppAsyncThunk';
 
+interface AuthStateType {
+    profile: any;
+    isLoggedIn: boolean;
+    isEmailSent: boolean;
+}
+
+const initialState: AuthStateType = {
+    profile: null as any | null,
+    isLoggedIn: false,
+    isEmailSent: false
+};
+
 const authSlice = createSlice<any, any>({
     name: 'auth',
-    initialState: {
-        profile: null as any | null,
-        isLoggedIn: false,
-        isEmailSent: false
-    },
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder

@@ -1,7 +1,7 @@
 import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-import appReducer from '@/store/slices/app/appSlice';
-import {authReducer} from "@/store/slices/auth/authSlice";
+import { appReducer } from '@/store/slices/app/appSlice';
+import { authReducer } from '@/store/slices/auth/authSlice';
 
 const combinedReducer = combineReducers({
     app: appReducer,
@@ -36,4 +36,4 @@ export type AsyncThunkType<RV = unknown> = {
     extra?: { s: string; n: number };
 };
 
-export const wrapper = createWrapper(makeStore /*{ debug: true }*/);
+// export const wrapper = createWrapper(makeStore /*{ debug: true }*/);
