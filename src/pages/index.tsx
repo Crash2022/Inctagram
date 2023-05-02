@@ -6,9 +6,13 @@ import { Button } from '@/shared/ui/Button/Button';
 import { Input } from '@/shared/ui/Input/Input';
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '@/shared/hooks/useAppSelector';
+import { selectorIsLoading } from '@/store/selectors/app-selectors';
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home');
+
+    // const isLoading = useAppSelector(selectorIsLoading); // пример
 
     return (
         <>

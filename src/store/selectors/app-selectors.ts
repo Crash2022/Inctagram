@@ -1,3 +1,3 @@
-// export const setIsLoading = (state: RootState) => state.app.isLoading;
+import { RootState } from '@/store/store';
 
-export default {};
+export const selectorIsLoading = (state: RootState) => state.app.isLoading;
