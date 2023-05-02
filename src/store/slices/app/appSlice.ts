@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AppStateType {
     isLoading: boolean;
-    error: string;
+    error: ErrorStatusType;
 }
 
 const initialState: AppStateType = {
-    isLoading: false,
-    error: ''
+    isLoading: true,
+    error: 'default'
 };
 
 export const appSlice = createSlice<any, any>({
@@ -22,3 +22,5 @@ export const appSlice = createSlice<any, any>({
 
 export const { setAppStatus } = appSlice.actions;
 export const appReducer = appSlice.reducer;
+
+export type ErrorStatusType = 'default' | 'error' | 'success';
