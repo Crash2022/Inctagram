@@ -5,32 +5,37 @@ const meta: Meta<typeof Button> = {
   title: 'UI/Button',
   component: Button,
   tags: ['autodocs'],
+  args: {
+    children: 'Button new text',
+  },
+  argTypes: {
+    theme: {
+      table: {
+        defaultValue: {
+          summary: 'primary'
+        }
+      }
+    },
+    onClick: {action: 'clicked'}
+  }
 }
 
 export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
-  render: () => (
-    <Button theme={'primary'}>Button</Button>
-  )
+  args: {theme: "primary"}
 }
 
 export const PrimaryWhite: Story = {
-  render: () => (
-    <Button theme={'primaryWhite'}>Button</Button>
-  )
+  args: {theme: "primaryWhite"}
 }
 
 export const Outline: Story = {
-  render: () => (
-    <Button theme={'outline'}>Button</Button>
-  )
+  args: {theme: "outline"}
 }
 
 export const Clear: Story = {
-  render: () => (
-    <Button theme={'clear'}>Button</Button>
-  )
+  args: {theme: 'clear'}
 }
 
