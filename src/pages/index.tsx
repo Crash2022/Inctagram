@@ -9,10 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@/shared/hooks/useAppSelector';
 import { selectorIsLoading } from '@/store/selectors/app-selectors';
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen';
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home');
-
+    const dispatch = useAppDispatch();
     const isLoading = useAppSelector(selectorIsLoading);
 
     return (
