@@ -4,10 +4,12 @@ import { Inter } from 'next/font/google';
 import { ReactElement, ReactNode, Suspense } from 'react';
 import { NextPage } from 'next';
 import { useLoader } from '@/shared/hooks/useLoader';
-import '../styles/nprogress.css';
-// import 'nprogress/nprogress.css';
+import '../styles/nprogress.css'; // кастомные стили progress bar
+// import 'nprogress/nprogress.css'; // стандартные стили progress bar
 import { ni18nConfig } from '@/common/config/i18n.config';
 import { appWithI18Next } from 'ni18n';
+import { wrapper } from '@/store/store';
+import { Provider } from 'react-redux';
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -27,6 +29,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) /*: ReactNode*/ {
     useLoader();
 
     const getLayout = Component.getLayout ?? ((page) => page);
+    const { store } = wrapper.useWrappedStore(pageProps);
 
     return getLayout(
         <>
@@ -37,9 +40,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) /*: ReactNode*/ {
                     }
                 `}
             </style>
-            <Suspense fallback={<div>...</div>}>
-                <Component {...pageProps} />
-            </Suspense>
+            <Provider store={store}>
+                <Suspense fallback={<div>...</div>}>
+                    <Component {...pageProps} />
+                </Suspense>
+            </Provider>
         </>
     );
 }

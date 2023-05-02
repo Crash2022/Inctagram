@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AppStateType {
     isLoading: boolean;
+    error: string;
 }
 
 const initialState: AppStateType = {
-    isLoading: false
+    isLoading: false,
+    error: ''
 };
 
 export const appSlice = createSlice<any, any>({

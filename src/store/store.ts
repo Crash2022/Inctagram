@@ -12,7 +12,6 @@ const reducer: typeof combinedReducer = (state, action: AnyAction) => {
     switch (action.type) {
         case HYDRATE:
             return { ...state, ...action.payload };
-
         default:
             return combinedReducer(state, action);
     }
@@ -36,4 +35,4 @@ export type AsyncThunkType<RV = unknown> = {
     extra?: { s: string; n: number };
 };
 
-// export const wrapper = createWrapper(makeStore /*{ debug: true }*/);
+export const wrapper = createWrapper(makeStore /*{ debug: true }*/);
