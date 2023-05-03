@@ -3,10 +3,10 @@ import Head from 'next/head';
 import {useSnackbar} from 'notistack';
 import {getLayout} from "@/components/Layout/Layout";
 import {FormWrapper} from "@/components/Forms/FormWrapper/FormWrapper";
-import {LoginForm} from "@/components/Forms/LoginForm/LoginForm";
+import {RegistrationForm} from "@/components/Forms/RegistrationForm/RegistrationForm";
 import {NextPageWithLayout} from "@/pages/_app";
 
-const Login: NextPageWithLayout = () => {
+const Registration: NextPageWithLayout = () => {
     const {enqueueSnackbar} = useSnackbar();
 
     useEffect(() => {
@@ -16,17 +16,17 @@ const Login: NextPageWithLayout = () => {
     return (
         <>
             <Head>
-                <title>Inctagram Login</title>
-                <meta name='title' content='Login'/>
+                <title>Inctagram Registration</title>
+                <meta name='title' content='Registration'/>
             </Head>
 
-            <FormWrapper top={36}>
-                <LoginForm/>
+            <FormWrapper top={24}>
+                <RegistrationForm/>
             </FormWrapper>
         </>
     );
 };
 
-Login.getLayout = getLayout;
+Registration.getLayout = getLayout;
 
-export default Login;
+export default Registration;
