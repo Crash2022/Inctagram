@@ -9,9 +9,7 @@ import { useFetchUserProfileQuery } from '@/services/UserProfile'
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
 
-    const { data, error, isLoading, isError } = useFetchUserProfileQuery({
-        limit: '10'
-    })
+    const { data: posts, error, isLoading, isError } = useFetchUserProfileQuery(10)
 
     return (
         <>
@@ -22,6 +20,16 @@ const Profile: NextPageWithLayout = () => {
             <div className={s.loginPage}>
                 <div className={s.container}>
                     <div>{t('ProfilePage')}</div>
+                    <div>
+                        {posts &&
+                            posts.map((post) => {
+                                return (
+                                    <div key={post.id}>
+                                        {post.id} {post.title}
+                                    </div>
+                                )
+                            })}
+                    </div>
                 </div>
             </div>
         </>
