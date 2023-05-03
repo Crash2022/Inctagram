@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { authAPI, LoginParamsType, RegistrationParamsType } from '@/common/api/auth.api';
 import { createAppAsyncThunk } from '@/common/utils/createAppAsyncThunk';
+import { AxiosError } from 'axios';
 
 interface AuthStateType {
     profile: any;
@@ -39,23 +40,30 @@ const authSlice = createSlice<any, any>({
 
 export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, RegistrationParamsType>(
     'auth/register',
-    async (arg) => {
-        await authAPI.register(arg);
-        return { isLoggedIn: true };
+    async (data, thunkAPI) => {
+        try {
+            await authAPI.register(data);
+            return { isLoggedIn: true };
+        } catch (err: any | AxiosError) {
+            return thunkAPI.rejectWithValue({
+                message: err.response.message,
+                fields: err.response.fields
+            });
+        }
     }
 );
 
 export const login = createAppAsyncThunk<{ profile: any; isLoggedIn: boolean }, LoginParamsType>(
     'auth/login',
-    async (arg) => {
-        const res = await authAPI.login(arg);
+    async (data, thunkAPI) => {
+        const res = await authAPI.login(data);
         return { profile: res.data, isLoggedIn: true };
     }
 );
 
 export const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
     'auth/logout',
-    async (arg) => {
+    async (_, thunkAPI) => {
         await authAPI.logout();
         return { isLoggedIn: false };
     }
@@ -63,8 +71,8 @@ export const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
 
 export const recoverPass = createAppAsyncThunk<{ isEmailSent: boolean }, any>(
     'auth/recoverPass',
-    async (arg) => {
-        await authAPI.recoverPass(arg);
+    async (data, thunkAPI) => {
+        await authAPI.recoverPass(data);
         return { isEmailSent: true };
     }
 );
