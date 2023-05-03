@@ -4,12 +4,14 @@ import s from './Profile.module.scss'
 import { NextPageWithLayout } from '@/pages/_app'
 import { getLayout } from '@/components/Layout/Layout'
 import { useTranslation } from 'react-i18next'
-import { userProfileAPI } from '@/services/UserProfile'
+import { useFetchUserProfileQuery } from '@/services/UserProfile'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
 
-    // const {} = userProfileAPI.useFetchUserProfileQuery('')
+    const { data, error, isLoading, isError } = useFetchUserProfileQuery({
+        limit: '10'
+    })
 
     return (
         <>
