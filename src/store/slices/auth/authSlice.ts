@@ -56,24 +56,45 @@ export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, Registratio
 export const login = createAppAsyncThunk<{ profile: any; isLoggedIn: boolean }, LoginParamsType>(
     'auth/login',
     async (data, thunkAPI) => {
-        const res = await authAPI.login(data)
-        return { profile: res.data, isLoggedIn: true }
+        try {
+            const res = await authAPI.login(data)
+            return { profile: res.data, isLoggedIn: true }
+        } catch (err: any | AxiosError) {
+            return thunkAPI.rejectWithValue({
+                message: err.response.message,
+                fields: err.response.fields
+            })
+        }
     }
 )
 
 export const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
     'auth/logout',
     async (_, thunkAPI) => {
-        await authAPI.logout()
-        return { isLoggedIn: false }
+        try {
+            await authAPI.logout()
+            return { isLoggedIn: false }
+        } catch (err: any | AxiosError) {
+            return thunkAPI.rejectWithValue({
+                message: err.response.message,
+                fields: err.response.fields
+            })
+        }
     }
 )
 
 export const recoverPass = createAppAsyncThunk<{ isEmailSent: boolean }, any>(
     'auth/recoverPass',
     async (data, thunkAPI) => {
-        await authAPI.recoverPass(data)
-        return { isEmailSent: true }
+        try {
+            await authAPI.recoverPass(data)
+            return { isEmailSent: true }
+        } catch (err: any | AxiosError) {
+            return thunkAPI.rejectWithValue({
+                message: err.response.message,
+                fields: err.response.fields
+            })
+        }
     }
 )
 
