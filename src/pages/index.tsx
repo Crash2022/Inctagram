@@ -1,25 +1,26 @@
-import s from '@/styles/Home.module.scss';
-import LinkA from '@/shared/ui/LinkA/LinkA';
-import { NextPageWithLayout } from '@/pages/_app';
-import { getLayout } from '@/components/Layout/Layout';
-import { Button } from '@/shared/ui/Button/Button';
-import { Input } from '@/shared/ui/Input/Input';
-import { SearchInput } from '@/shared/ui/SearchInput/SearchInput';
-import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '@/shared/hooks/useAppSelector';
-import { selectorIsLoading } from '@/store/selectors/app-selectors';
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen';
-import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
+import s from '@/styles/Home.module.scss'
+import LinkA from '@/shared/ui/LinkA/LinkA'
+import { NextPageWithLayout } from '@/pages/_app'
+import { getLayout } from '@/components/Layout/Layout'
+import { Button } from '@/shared/ui/Button/Button'
+import { Input } from '@/shared/ui/Input/Input'
+import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
+import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { selectorIsLoading } from '@/store/selectors/app-selectors'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
 
 const Home: NextPageWithLayout = () => {
-    const { t } = useTranslation('home');
-    const dispatch = useAppDispatch();
-    const isLoading = useAppSelector(selectorIsLoading);
+    const { t } = useTranslation('home')
+    const dispatch = useAppDispatch()
+    const isLoading = useAppSelector(selectorIsLoading)
 
     return (
         <>
             <main className={s.main}>
                 <LinkA href={'/login'} text={t('Login')} />
+                <LinkA href={'/profile'} text={t('Profile')} />
                 <div style={{ marginTop: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div
@@ -80,8 +81,8 @@ const Home: NextPageWithLayout = () => {
                 </div>
             </main>
         </>
-    );
-};
+    )
+}
 
-Home.getLayout = getLayout;
-export default Home;
+Home.getLayout = getLayout
+export default Home
