@@ -29,6 +29,13 @@
             display: flex;
             gap: 10px;
             font-size: 20px;
+
+            > div {
+                &:hover {
+                    cursor: pointer;
+                    color: orange;
+                }
+            }
         }
     }
 }

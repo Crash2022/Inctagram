@@ -1,9 +1,9 @@
-import React, { type FC } from 'react';
-import cls from './Loader.module.scss';
+import React, { type FC } from 'react'
+import cls from './Loader.module.scss'
 
 interface LoaderProps {
-    className?: string;
-    variant?: VariantLoadingType;
+    className?: string
+    variant?: VariantLoadingType
 }
 
 const VariantLoading = {
@@ -23,18 +23,18 @@ const VariantLoading = {
         name: cls.ldsEllipsis,
         value: 4
     }
-} as const;
+} as const
 
-export type VariantLoadingType = keyof typeof VariantLoading;
+export type VariantLoadingType = keyof typeof VariantLoading
 
 export const Loader: FC<LoaderProps> = ({ className = '', variant = 'loader' }) => {
-    const loading = VariantLoading[variant];
+    const loading = VariantLoading[variant]
 
     return (
         <div className={`${loading.name} ${className}`}>
             {[...Array(loading.value)].map((_, index) => {
-                return <div key={index}></div>;
+                return <div key={index}></div>
             })}
         </div>
-    );
-};
+    )
+}

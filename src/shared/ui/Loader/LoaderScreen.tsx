@@ -1,9 +1,9 @@
-import React from 'react';
-import { Loader, VariantLoadingType } from '../Loader/Loader';
-import s from './LoaderScreen.module.scss';
+import React from 'react'
+import { Loader, VariantLoadingType } from '../Loader/Loader'
+import s from './LoaderScreen.module.scss'
 
 interface LoaderScreenProps {
-    variant: VariantLoadingType;
+    variant: VariantLoadingType
 }
 
 export const LoaderScreen: React.FC<LoaderScreenProps> = ({ variant }) => {
@@ -13,5 +13,5 @@ export const LoaderScreen: React.FC<LoaderScreenProps> = ({ variant }) => {
                 <Loader variant={variant} />
             </div>
         </div>
-    );
-};
+    )
+}

@@ -9,8 +9,7 @@ import { useFetchUserProfileQuery } from '@/services/UserProfile'
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
 
-    // const { data: posts, error, isLoading, isError } = useFetchUserProfileQuery(10)
-    const { data: posts, error, isLoading, isError } = useFetchUserProfileQuery()
+    const { data: posts, error, isLoading, isError } = useFetchUserProfileQuery(10)
 
     return (
         <>
