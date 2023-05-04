@@ -1,4 +1,4 @@
-import { instance } from '@/common/api/api.instance'
+import { instance } from '@/shared/api/api.instance'
 
 export const authAPI = {
     register: async (arg: RegistrationParamsType) => {
