@@ -1,0 +1,30 @@
+@import '../../../styles/mixins';
+.mainBox {
+  @include flexColumnOnlyBetween;
+  width: 378px;
+  background-color: #313131;
+  min-height: 200px;
+  .header {
+    border-bottom: 1px solid rgba(89, 89, 89, 0.6);
+    @include flexOnlyBetween;
+    .title {
+      @include h1-text-size;
+      margin: 15px 20px;
+    }
+    .closeButton {
+      margin: 10px 20px;
+      background-color: #313131;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
+  .body {
+    @include regular-text-16;
+    margin: 0 20px;
+  }
+  .buttonWrapper {
+    margin: 0 20px 20px;
+    @include flexEnd
+  }
+}

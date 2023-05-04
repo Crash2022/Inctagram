@@ -101,6 +101,17 @@
     align-items: center;
 }
 
+@mixin flexColumnOnlyBetween() {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@mixin flexEnd {
+    display: flex;
+    justify-content: flex-end;
+}
+
 /*----------------!* Default Modal-Window Styles *!----------------*/
 
 @mixin defaultModalStyle() {
