@@ -1,12 +1,12 @@
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { useSnackbar } from 'notistack'
 import { getLayout } from '@/components/Layout/Layout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
-import { ForgotPassword } from '@/components/Forms/ForgotPassword/ForgotPassword'
-import { useEffect } from 'react'
+import { RegistrationForm } from '@/components/Forms/RegistrationForm/RegistrationForm'
 import { NextPageWithLayout } from '@/pages/_app'
 
-const Forgot: NextPageWithLayout = () => {
+const Registration: NextPageWithLayout = () => {
     const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
@@ -16,17 +16,17 @@ const Forgot: NextPageWithLayout = () => {
     return (
         <>
             <Head>
-                <title>Forgot Password</title>
-                <meta name='title' content='Forgot Password' />
+                <title>Inctagram Registration</title>
+                <meta name='title' content='Registration' />
             </Head>
 
-            <FormWrapper top={72}>
-                <ForgotPassword />
+            <FormWrapper top={24}>
+                <RegistrationForm />
             </FormWrapper>
         </>
     )
 }
 
-Forgot.getLayout = getLayout
+Registration.getLayout = getLayout
 
-export default Forgot
+export default Registration

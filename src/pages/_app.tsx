@@ -1,14 +1,14 @@
 import '@/styles/globals.scss'
-import type {AppProps} from 'next/app'
-import {Inter} from 'next/font/google'
-import {ReactElement, Suspense} from 'react'
-import {NextPage} from 'next'
-import {useLoader} from '@/shared/hooks/useLoader'
+import type { AppProps } from 'next/app'
+import { Inter } from 'next/font/google'
+import { ReactElement, Suspense } from 'react'
+import { NextPage } from 'next'
+import { useLoader } from '@/shared/hooks/useLoader'
 import '../styles/nprogress.css'
-import {ni18nConfig} from '@/common/config/i18n.config'
-import {appWithI18Next} from 'ni18n'
-import {wrapper} from '@/store/store'
-import {Provider} from 'react-redux'
+import { ni18nConfig } from '@/shared/config/i18n.config'
+import { appWithI18Next } from 'ni18n'
+import { wrapper } from '@/store/store'
+import { Provider } from 'react-redux'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],

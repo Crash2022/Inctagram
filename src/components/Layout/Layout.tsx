@@ -1,9 +1,9 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import { PropsWithChildren, ReactElement } from 'react'
 
-import cls from './Layout.module.scss';
-import Head from 'next/head';
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
+import cls from './Layout.module.scss'
+import Head from 'next/head'
+import { Header } from '../Header/Header'
+import { Footer } from '../Footer/Footer'
 
 export const Layout = ({ children }: PropsWithChildren) => {
     return (
@@ -19,9 +19,9 @@ export const Layout = ({ children }: PropsWithChildren) => {
             <main className={cls.layoutContainer}>{children}</main>
             <Footer />
         </>
-    );
-};
+    )
+}
 
 export const getLayout = (page: ReactElement) => {
-    return <Layout>{page}</Layout>;
-};
+    return <Layout>{page}</Layout>
+}

@@ -6,9 +6,10 @@ import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
 import { useTranslation } from 'react-i18next'
+import { CustomTextarea } from '@/shared/ui/CustomTextarea/CustomTextarea'
 
 const Home: NextPageWithLayout = () => {
-    const { t } = useTranslation('login')
+    const { t } = useTranslation('home')
 
     // пример i18n через useContext
     // const lang = useContext('en') // обернуть App
@@ -17,7 +18,7 @@ const Home: NextPageWithLayout = () => {
 
     return (
         <>
-            <main className={s.main}>
+            <div className={s.main}>
                 <LinkA href={'/login'} text={t('Login')} />
                 <LinkA href={'/profile'} text={t('Profile')} />
 
@@ -80,7 +81,9 @@ const Home: NextPageWithLayout = () => {
                 <div style={{ marginBottom: '25px', width: '450px' }}>
                     <SearchInput placeholder={'Search input'} error={'Error Text'} />
                 </div>
-            </main>
+
+                <CustomTextarea />
+            </div>
         </>
     )
 }

@@ -3,6 +3,6 @@ interface IPropsType {
     title: string
 }
 
-export const Title = ({title, className}: IPropsType) => {
+export const Title = ({ title, className }: IPropsType) => {
     return <h2 className={className}>{title}</h2>
-};
+}
