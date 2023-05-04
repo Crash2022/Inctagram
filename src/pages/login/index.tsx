@@ -7,11 +7,11 @@ import { LoginForm } from '@/components/Forms/LoginForm/LoginForm'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const Login: NextPageWithLayout = () => {
-    const { enqueueSnackbar } = useSnackbar()
-
-    useEffect(() => {
-        enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
-    }, [])
+    // const { enqueueSnackbar } = useSnackbar()
+    //
+    // useEffect(() => {
+    //     enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
+    // }, [])
 
     return (
         <>
