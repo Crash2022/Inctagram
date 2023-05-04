@@ -1,25 +1,35 @@
-import '@/styles/globals.scss';
-import type { AppProps } from 'next/app';
-import { Inter } from 'next/font/google';
-import { ReactElement, ReactNode } from 'react';
-import { NextPage } from 'next';
+import '@/styles/globals.scss'
+import type { AppProps } from 'next/app'
+import { Inter } from 'next/font/google'
+import { ReactElement, ReactNode, Suspense } from 'react'
+import { NextPage } from 'next'
+import { useLoader } from '@/shared/hooks/useLoader'
+import '../styles/nprogress.css' // кастомные стили progress bar
+// import 'nprogress/nprogress.css'; // стандартные стили progress bar
+import { ni18nConfig } from '@/common/config/i18n.config'
+import { appWithI18Next } from 'ni18n'
+import { wrapper } from '@/store/store'
+import { Provider } from 'react-redux'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
     style: 'normal',
     subsets: ['latin', 'cyrillic']
-});
+})
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
-    getLayout?: (page: ReactElement) => ReactNode;
-};
+    getLayout?: (page: ReactElement) => ReactNode
+}
 
 type AppPropsWithLayout = AppProps & {
-    Component: NextPageWithLayout;
-};
+    Component: NextPageWithLayout
+}
 
-export default function App({ Component, pageProps }: AppPropsWithLayout): ReactNode {
-    const getLayout = Component.getLayout ?? ((page) => page);
+function App({ Component, pageProps }: AppPropsWithLayout) /*: ReactNode*/ {
+    useLoader()
+
+    const getLayout = Component.getLayout ?? ((page) => page)
+    const { store } = wrapper.useWrappedStore(pageProps)
 
     return getLayout(
         <>
@@ -30,23 +40,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout): React
                     }
                 `}
             </style>
-            <Component {...pageProps} />
+            <Provider store={store}>
+                <Suspense fallback={<div>...</div>}>
+                    <Component {...pageProps} />
+                </Suspense>
+            </Provider>
         </>
-    );
+    )
 }
 
-// export default function App({Component, pageProps}: AppProps) {
-//     return (
-//         <div className='container'>
-//             <SnackbarProvider maxSnack={1}>
-//                 <Layout>
-//                     <Component {...pageProps} />
-//                 </Layout>
-//             </SnackbarProvider>
-//         </div>
-//     )
-// }
-
-// export default function App({ Component, pageProps }: AppProps) {
-//   return <Component {...pageProps} />
-// }
+// export default App;
+export default appWithI18Next(App, ni18nConfig)

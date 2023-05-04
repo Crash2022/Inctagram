@@ -1,0 +1,30 @@
+@import '../../styles/mixins';
+
+.messageModal_mainBox {
+    @include defaultModalStyle;
+    @include flexColumn;
+    width: 350px;
+
+    .messageModal_title {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .messageModal_buttons {
+        display: flex;
+        gap: 40px;
+
+        button {
+            padding: 10px;
+        }
+
+        .messageModal_cancelButton {
+            button {
+                background-color: #ff6b6b;
+
+                &:hover {
+                    background-color: red;
+                }
+            }
+        }
+    }
+}

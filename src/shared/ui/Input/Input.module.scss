@@ -1,0 +1,78 @@
+@import 'src/styles/mixins';
+
+.inputGroup {
+    position: relative;
+    padding: 15px 0 0;
+    width: 50%;
+}
+
+.input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--snippet-border);
+    outline: none;
+    color: var(--light-900);
+    padding: 5px 45px 5px 0;
+    background: transparent;
+    transition: 0.2s;
+    @include regular-text-16;
+
+    &::placeholder {
+        color: transparent;
+        user-select: none;
+    }
+
+    &:placeholder-shown ~ .inputLabel {
+        cursor: text;
+        top: 20px;
+    }
+
+    &:focus {
+        ~ .inputLabel {
+            top: 0;
+        }
+        border-color: var(--light-100);
+        color: var(--light-100);
+    }
+    &:hover {
+        border-color: var(--light-900);
+        color: var(--light-100);
+    }
+}
+
+.inputLabel {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    color: var(--dark-100);
+    @include regular-text-14;
+}
+.icon {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+
+    svg {
+        cursor: pointer;
+        transition: 0.2s;
+        fill: var(--light-900);
+    }
+    &:hover {
+        svg {
+            fill: var(--light-100);
+        }
+    }
+}
+
+.errorMessage {
+    position: absolute;
+    color: var(--danger-500);
+    left: 0;
+    top: 50px;
+    @include regular-text-16;
+}
+
+.error {
+    border-color: var(--danger-500);
+}

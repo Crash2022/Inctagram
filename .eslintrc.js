@@ -22,6 +22,7 @@ module.exports = {
         '@typescript-eslint/restrict-template-expressions': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-floating-promises': 'off',
-        'react/display-name': 'off'
+        'react/display-name': 'off',
+        '@typescript-eslint/strict-boolean-expressions': 'off'
     }
 };

@@ -1,10 +1,41 @@
 @import '../../styles/mixins';
 
-.header {
+.headerWrapper {
     border-bottom: 1px solid var(--snippet-border);
     height: var(--navbar-height);
     background-color: var(--header-color);
     color: var(--light-100);
-    padding: 12px 60px;
     @include large-text;
+
+    .header {
+        max-width: var(--layout-width);
+        padding: 12px 60px;
+        margin: 0 auto;
+        @include flexOnlyBetween;
+
+        .header_logo {
+            display: flex;
+            gap: 10px;
+
+            .logo {
+
+            }
+            .title {
+
+            }
+        }
+
+        .auth {
+            display: flex;
+            gap: 10px;
+            font-size: 20px;
+
+            > div {
+                &:hover {
+                    cursor: pointer;
+                    color: orange;
+                }
+            }
+        }
+    }
 }

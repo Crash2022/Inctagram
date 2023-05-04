@@ -1,13 +1,26 @@
-import s from '@/styles/Home.module.scss';
-import LinkA from '@/shared/ui/LinkA/LinkA';
-import { NextPageWithLayout } from '@/pages/_app';
-import { getLayout } from '@/components/Layout/Layout';
-import { Button } from '@/shared/ui/Button/Button';
+import s from '@/styles/Home.module.scss'
+import LinkA from '@/shared/ui/LinkA/LinkA'
+import { NextPageWithLayout } from '@/pages/_app'
+import { getLayout } from '@/components/Layout/Layout'
+import { Button } from '@/shared/ui/Button/Button'
+import { Input } from '@/shared/ui/Input/Input'
+import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
+import { useTranslation } from 'react-i18next'
 
 const Home: NextPageWithLayout = () => {
+    const { t } = useTranslation('login')
+
+    // пример i18n через useContext
+    // const lang = useContext('en') // обернуть App
+    // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
+    // <div>{allPageData.title}</div> // вставить в разметку
+
     return (
         <>
             <main className={s.main}>
+                <LinkA href={'/login'} text={t('Login')} />
+                <LinkA href={'/profile'} text={t('Profile')} />
+
                 <div style={{ marginTop: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div
@@ -46,11 +59,31 @@ const Home: NextPageWithLayout = () => {
                         </div>
                     </div>
                 </div>
-                <LinkA href={'/login'} text={'Login'} />
+
+                <div style={{ marginBottom: '25px', width: '450px' }}>
+                    <Input id={'Email'} placeholder={'Email'} />
+                </div>
+                <div style={{ marginBottom: '25px', width: '450px' }}>
+                    <SearchInput placeholder={'Search input'} />
+                </div>
+                <div style={{ marginBottom: '25px', width: '450px' }}>
+                    <Input id={'Password'} placeholder={'Password'} password />
+                </div>
+                <div style={{ marginBottom: '25px', width: '450px' }}>
+                    <Input
+                        id={'PasswordError'}
+                        placeholder={'Password'}
+                        error={'Error Text'}
+                        password
+                    />
+                </div>
+                <div style={{ marginBottom: '25px', width: '450px' }}>
+                    <SearchInput placeholder={'Search input'} error={'Error Text'} />
+                </div>
             </main>
         </>
-    );
-};
+    )
+}
 
-Home.getLayout = getLayout;
-export default Home;
+Home.getLayout = getLayout
+export default Home

@@ -1,25 +1,25 @@
-import React, {type FC} from 'react'
+import React, { type FC } from 'react'
 import cls from './Loader.module.scss'
 
 interface LoaderProps {
-    className?: string,
+    className?: string
     variant?: VariantLoadingType
 }
 
 const VariantLoading = {
-    'spinner': {
+    spinner: {
         name: cls.ldsSpinner,
         value: 12
     },
-    'loader': {
+    loader: {
         name: cls.loader,
         value: 0
     },
-    'circle': {
+    circle: {
         name: cls.circle,
         value: 0
     },
-    'ellipsis': {
+    ellipsis: {
         name: cls.ldsEllipsis,
         value: 4
     }
@@ -27,8 +27,7 @@ const VariantLoading = {
 
 export type VariantLoadingType = keyof typeof VariantLoading
 
-export const Loader: FC<LoaderProps> = ({className = '', variant = 'loader'}) => {
-
+export const Loader: FC<LoaderProps> = ({ className = '', variant = 'loader' }) => {
     const loading = VariantLoading[variant]
 
     return (
