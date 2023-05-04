@@ -1,11 +1,10 @@
+@import '../../styles/mixins';
+
 .container {
   width: 30%;
   height: 570px;
   margin: 50px auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  @include flexColumnBetween;
   text-align: center;
   .button {
     min-width: 200px;
