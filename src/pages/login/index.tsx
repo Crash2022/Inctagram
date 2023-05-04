@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
-import { useSnackbar } from 'notistack'
-import { getLayout } from '@/components/Layout/Layout'
-import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
-import { LoginForm } from '@/components/Forms/LoginForm/LoginForm'
-import { NextPageWithLayout } from '@/pages/_app'
+import {getLayout} from '@/components/Layout/Layout'
+import {FormWrapper} from '@/components/Forms/FormWrapper/FormWrapper'
+import {LoginForm} from '@/components/Forms/LoginForm/LoginForm'
+import {NextPageWithLayout} from '@/pages/_app'
 
 const Login: NextPageWithLayout = () => {
     // const { enqueueSnackbar } = useSnackbar()
@@ -20,7 +19,7 @@ const Login: NextPageWithLayout = () => {
                 <meta name='title' content='Login' />
             </Head>
 
-            <FormWrapper top={36}>
+            <FormWrapper marginTop={36}>
                 <LoginForm />
             </FormWrapper>
         </>

@@ -1,9 +1,9 @@
-import {PropsWithChildren} from "react";
+import {ReactNode} from "react";
 
 interface IPropsType {
     type: string
     className: string
-    children? : PropsWithChildren
+    children? : ReactNode
     placeholder?: string
     placeholderClass?: string
     inputBodyClass?: string

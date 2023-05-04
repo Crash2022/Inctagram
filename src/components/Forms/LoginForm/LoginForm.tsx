@@ -1,13 +1,12 @@
 import {Button} from "@/shared/ui/Button/Button";
 import Link from "next/link";
 import styles from "@/styles/Form.module.scss";
-import Image from "next/image";
-import google from "public/assets/icons/googleIcon.svg";
-import git from "public/assets/icons/gitIcon.svg";
+import GoogleIcon from "public/assets/icons/googleIcon.svg";
+import GitIcon from "public/assets/icons/gitIcon.svg";
 import {Title} from "@/components/Forms/components/Title";
 import {Input} from "@/components/Forms/components/Input";
-import eye from "public/assets/icons/eye.svg"
-import eyeOff from "public/assets/icons/eye-off.svg"
+import EyeIcon from "public/assets/icons/eye.svg"
+import EyeOffIcon from "public/assets/icons/eye-off.svg"
 import {useState} from "react";
 
 export const LoginForm = () => {
@@ -25,8 +24,8 @@ export const LoginForm = () => {
             />
 
             <div className={styles.imgBody}>
-                <Image className={styles.img} src={google} alt={'logo-google'}/>
-                <Image className={styles.img} src={git} alt={'logo-git'}/>
+              <GoogleIcon />
+              <GitIcon />
             </div>
 
             <div className={styles.inputContainer}>
@@ -43,12 +42,7 @@ export const LoginForm = () => {
                     className={styles.input}
                     inputBodyClass={styles.inputBody}
                 >
-                    <Image
-                        className={styles.img}
-                        src={isLock ? eyeOff : eye}
-                        onClick={lockHandler}
-                        alt={""}
-                    />
+                  {isLock ? <EyeOffIcon onClick={lockHandler} /> : <EyeIcon onClick={lockHandler} />}
                 </Input>
             </div>
 

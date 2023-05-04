@@ -1,9 +1,14 @@
-import {PropsWithChildren} from "react";
+import {ReactNode} from "react";
 import styles from "@/styles/FormWrapper.module.scss";
 
-export const FormWrapper = ({children, top}: PropsWithChildren & number) => {
+interface Props {
+  children: ReactNode;
+  marginTop: number;
+}
+
+export const FormWrapper = ({children, marginTop}: Props) => {
     return (
-        <div className={styles.container} style ={{marginTop: `${top}px`}}>
+        <div className={styles.container} style ={{marginTop: `${marginTop}px`}}>
             {children}
         </div>
     );
