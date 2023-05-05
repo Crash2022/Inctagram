@@ -57,9 +57,9 @@
 
 // container mixin
 @mixin defaultContainer() {
-    max-width: 1400px;
+    max-width: var(--layout-width);
     margin: 0 auto;
-    padding: 0 40px;
+    padding: var(--default-container-padding);
 }
 // container height
 @mixin defaultContainerHeight() {

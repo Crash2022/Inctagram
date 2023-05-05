@@ -28,6 +28,10 @@ a {
     text-decoration: none;
 }
 
+ul li {
+    list-style:none;
+}
+
 body {
     background-color: var(--contentBgColor);
 }
@@ -85,12 +89,13 @@ body {
 
     --default-Content-Height: calc(100vh - var(--navbar-height));
     --default-Content-Height-Mobile: calc(100vh - var(--navbar-height) - var(--footer-height));
+    --layout-width: 1400px;
     --navbar-height: 60px;
     --footer-height: 40px;
-
-    /*-----------------!* heights *!----------------*/
-
-    --layout-width: 1400px;
+    --default-container-padding: 40px 60px 0 60px;
+    --default-sidedar-padding: 60px;
+    --default-container-padding-top: 42px;
+    --default-container-padding-sides: 24px;
 
     /*----------------!* sizes *!----------------*/
     --default-Extra-Small-Margin: 5px;
