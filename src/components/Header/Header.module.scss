@@ -20,6 +20,13 @@
             align-items: center;
             gap: 10px;
 
+            > div {
+                &:hover {
+                    cursor: pointer;
+                    color: gold;
+                }
+            }
+
             .logo {
 
             }
@@ -49,6 +56,13 @@
             align-items: center;
             gap: 10px;
             @include regular-text-16;
+
+            > div {
+                &:hover {
+                    cursor: pointer;
+                    color: gold;
+                }
+            }
         }
     }
 }

@@ -37,9 +37,7 @@ const Profile: NextPageWithLayout = () => {
                         <div className={cls.header_info}>
                             <div className={cls.info_control}>
                                 <div>Profile URL</div>
-                                <div>
-                                    <Button theme={'primaryWhite'}>{t('ProfileSettings')}</Button>
-                                </div>
+                                <Button theme={'primaryWhite'}>{t('ProfileSettings')}</Button>
                             </div>
                             <div className={cls.info_numbers}>
                                 <div className={cls.numbers_item}>
