@@ -1,4 +1,5 @@
 import { instance } from '@/shared/api/api.instance'
+import { LoginParamsType, PassRecoveryType, RegistrationParamsType } from '@/models/auth-types'
 
 export const authAPI = {
     register: async (arg: RegistrationParamsType) => {
@@ -20,17 +21,4 @@ export const authAPI = {
     me: async () => {
         return await instance.get<ResponseType>('auth/me')
     }
-}
-
-export interface RegistrationParamsType {
-    userName: string
-    email: string
-}
-
-export interface LoginParamsType {
-    XXX: any
-}
-
-export interface PassRecoveryType {
-    email: string
 }
