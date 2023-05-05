@@ -132,3 +132,11 @@
     border: 1px solid white;
     color: white;
 }
+
+/*----------------!* Other Mixins *!----------------*/
+
+@mixin divDefaultMarginBottom() {
+    > div:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}

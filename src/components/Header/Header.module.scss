@@ -14,19 +14,23 @@
         @include flexOnlyBetween;
 
         .header_logo {
+            width: 200px;
             display: flex;
             gap: 10px;
 
             .logo {
 
             }
+
             .title {
 
             }
         }
 
-        .auth {
+        .lang {
+            width: 75px;
             display: flex;
+            align-items: center;
             gap: 10px;
             font-size: 20px;
 
@@ -36,6 +40,14 @@
                     color: orange;
                 }
             }
+        }
+
+        .auth {
+            width: 100px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            @include regular-text-16;
         }
     }
 }

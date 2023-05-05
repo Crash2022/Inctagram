@@ -1,17 +1,19 @@
 import React from 'react'
 import Head from 'next/head'
 import cls from './Profile.module.scss'
+import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 import { useTranslation } from 'react-i18next'
 import { useFetchUserProfileQuery } from '@/services/UserProfileService'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
+import { Button } from '@/shared/ui/Button/Button'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
 
-    const { data: posts, error, isLoading, isError } = useFetchUserProfileQuery(10)
+    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(10)
 
     if (isLoading) {
         return <LoaderScreen variant={'loader'} />
@@ -32,16 +34,56 @@ const Profile: NextPageWithLayout = () => {
                                 height={204}
                             />
                         </div>
-                        <div className={cls.header_info}></div>
+                        <div className={cls.header_info}>
+                            <div className={cls.info_control}>
+                                <div>Profile URL</div>
+                                <div>
+                                    <Button theme={'primaryWhite'}>{t('ProfileSettings')}</Button>
+                                </div>
+                            </div>
+                            <div className={cls.info_numbers}>
+                                <div className={cls.numbers_item}>
+                                    <div>2218</div>
+                                    <div>{t('Subscriptions')}</div>
+                                </div>
+                                <div className={cls.numbers_item}>
+                                    <div>2218</div>
+                                    <div>{t('Subscribers')}</div>
+                                </div>
+                                <div className={cls.numbers_item}>
+                                    <div>2218</div>
+                                    <div>{t('Publications')}</div>
+                                </div>
+                            </div>
+                            <div className={cls.info_description}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
                     </div>
                     <div className={cls.profilePage_content}>
-                        <div>{t('ProfilePage')}</div>
-                        <div>
-                            {posts &&
-                                posts.map((post) => {
+                        <div className={cls.content_list}>
+                            {photos &&
+                                photos.map((photo) => {
                                     return (
-                                        <div key={post.id}>
-                                            {post.id} {post.title}
+                                        <div key={photo.id} className={cls.list_item}>
+                                            {/*{photo.title}*/}
+
+                                            {/*<Image*/}
+                                            {/*    src={photo.url}*/}
+                                            {/*    alt={'profile-photo'}*/}
+                                            {/*    width={234}*/}
+                                            {/*    height={234}*/}
+                                            {/*/>*/}
+
+                                            <img
+                                                src={photo.url}
+                                                alt='gallery-photo'
+                                                width={265}
+                                                height={265}
+                                            />
                                         </div>
                                     )
                                 })}
