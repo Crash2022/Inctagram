@@ -69,13 +69,21 @@ const Profile: NextPageWithLayout = () => {
                                 photos.map((photo) => {
                                     return (
                                         <div key={photo.id} className={cls.list_item}>
-                                            {photo.title}
+                                            {/*{photo.title}*/}
+
                                             {/*<Image*/}
                                             {/*    src={photo.url}*/}
                                             {/*    alt={'profile-photo'}*/}
                                             {/*    width={234}*/}
                                             {/*    height={234}*/}
                                             {/*/>*/}
+
+                                            <img
+                                                src={photo.url}
+                                                alt='gallery-photo'
+                                                width={265}
+                                                height={265}
+                                            />
                                         </div>
                                     )
                                 })}

@@ -27,38 +27,42 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
             <Header />
             <main className={cls.layoutContainer}>
                 <nav>
-                    <ul>
-                        <li>
-                            <div>
-                                <HomeIcon />
+                    <div className={cls.menuList}>
+                        <div className={cls.menuList_top}>
+                            <div className={cls.menuList_item}>
+                                <div>
+                                    <HomeIcon />
+                                </div>
+                                <LinkA href={'/'} text={t('Home')} />
                             </div>
-                            <LinkA href={'/'} text={t('Home')} />
-                        </li>
-                        <li>
-                            <div>
-                                <AddIcon />
+                            <div className={cls.menuList_item}>
+                                <div>
+                                    <AddIcon />
+                                </div>
+                                <LinkA href={'/'} text={t('Add')} />
                             </div>
-                            <LinkA href={'/'} text={t('Add')} />
-                        </li>
-                        <li>
-                            <div>
-                                <ProfileIcon />
+                            <div className={cls.menuList_item}>
+                                <div>
+                                    <ProfileIcon />
+                                </div>
+                                <LinkA href={'/'} text={t('Profile')} />
                             </div>
-                            <LinkA href={'/'} text={t('Profile')} />
-                        </li>
-                        <li>
-                            <div>
-                                <BookmarkIcon />
+                            <div className={cls.menuList_item}>
+                                <div>
+                                    <BookmarkIcon />
+                                </div>
+                                <LinkA href={'/'} text={t('Favorites')} />
                             </div>
-                            <LinkA href={'/'} text={t('Favorites')} />
-                        </li>
-                        <li>
-                            <div>
-                                <LogoutIcon />
+                        </div>
+                        <div className={cls.menuList_bottom}>
+                            <div className={cls.menuList_item}>
+                                <div>
+                                    <LogoutIcon />
+                                </div>
+                                <LinkA href={'/'} text={t('LogOut')} />
                             </div>
-                            <LinkA href={'/'} text={t('LogOut')} />
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </nav>
                 <div className={cls.childrenClass}>{children}</div>
             </main>
