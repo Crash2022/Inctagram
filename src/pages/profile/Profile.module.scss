@@ -2,13 +2,34 @@
 
 .profilePage {
     .profilePage_header {
+        @include flexBetween;
+        gap: 40px;
+        margin-bottom: 54px;
+
         .header_photo {
             img {
                 border-radius: 50%;
             }
         }
         .header_info {
+            @include divDefaultMarginBottom;
 
+            .info_control {
+                @include flexBetween;
+            }
+            .info_numbers {
+                display: flex;
+                gap: 72px;
+
+                .numbers_item {
+                    > div:first-child {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+            .info_description {
+
+            }
         }
     }
     .profilePage_content {

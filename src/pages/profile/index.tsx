@@ -35,18 +35,27 @@ const Profile: NextPageWithLayout = () => {
                             />
                         </div>
                         <div className={cls.header_info}>
-                            <div>
+                            <div className={cls.info_control}>
                                 <div>Profile URL</div>
                                 <div>
                                     <Button theme={'primaryWhite'}>{t('ProfileSettings')}</Button>
                                 </div>
                             </div>
-                            <div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
+                            <div className={cls.info_numbers}>
+                                <div className={cls.numbers_item}>
+                                    <div>2218</div>
+                                    <div>{t('Subscriptions')}</div>
+                                </div>
+                                <div className={cls.numbers_item}>
+                                    <div>2218</div>
+                                    <div>{t('Subscribers')}</div>
+                                </div>
+                                <div className={cls.numbers_item}>
+                                    <div>2218</div>
+                                    <div>{t('Publications')}</div>
+                                </div>
                             </div>
-                            <div>
+                            <div className={cls.info_description}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
                                 ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
