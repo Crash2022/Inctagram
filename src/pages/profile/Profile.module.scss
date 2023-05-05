@@ -3,7 +3,9 @@
 .profilePage {
     .profilePage_header {
         .header_photo {
-
+            img {
+                border-radius: 50%;
+            }
         }
         .header_info {
 

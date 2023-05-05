@@ -10,8 +10,11 @@ import AddIcon from './../../../public/assets/icons/add-icon.svg'
 import ProfileIcon from './../../../public/assets/icons/profile-icon.svg'
 import BookmarkIcon from './../../../public/assets/icons/bookmark-outline.svg'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
+import { useTranslation } from 'react-i18next'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
+    const { t } = useTranslation('sidebar')
+
     return (
         <>
             <Head>
@@ -29,31 +32,31 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             <div>
                                 <HomeIcon />
                             </div>
-                            <LinkA href={'/'} text={'Home'} />
+                            <LinkA href={'/'} text={t('Home')} />
                         </li>
                         <li>
                             <div>
                                 <AddIcon />
                             </div>
-                            <LinkA href={'/'} text={'Add'} />
+                            <LinkA href={'/'} text={t('Add')} />
                         </li>
                         <li>
                             <div>
                                 <ProfileIcon />
                             </div>
-                            <LinkA href={'/'} text={'Profile'} />
+                            <LinkA href={'/'} text={t('Profile')} />
                         </li>
                         <li>
                             <div>
                                 <BookmarkIcon />
                             </div>
-                            <LinkA href={'/'} text={'Favorites'} />
+                            <LinkA href={'/'} text={t('Favorites')} />
                         </li>
                         <li>
                             <div>
                                 <LogoutIcon />
                             </div>
-                            <LinkA href={'/'} text={'Log Out'} />
+                            <LinkA href={'/'} text={t('LogOut')} />
                         </li>
                     </ul>
                 </nav>

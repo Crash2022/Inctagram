@@ -1,12 +1,14 @@
 import React from 'react'
 import Head from 'next/head'
 import cls from './Profile.module.scss'
+import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 import { useTranslation } from 'react-i18next'
 import { useFetchUserProfileQuery } from '@/services/UserProfileService'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
+import { Button } from '@/shared/ui/Button/Button'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
@@ -32,10 +34,27 @@ const Profile: NextPageWithLayout = () => {
                                 height={204}
                             />
                         </div>
-                        <div className={cls.header_info}></div>
+                        <div className={cls.header_info}>
+                            <div>
+                                <div>Profile URL</div>
+                                <div>
+                                    <Button theme={'primaryWhite'}>{t('ProfileSettings')}</Button>
+                                </div>
+                            </div>
+                            <div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea commodo consequat.
+                            </div>
+                        </div>
                     </div>
                     <div className={cls.profilePage_content}>
-                        <div>{t('ProfilePage')}</div>
                         <div>
                             {posts &&
                                 posts.map((post) => {
