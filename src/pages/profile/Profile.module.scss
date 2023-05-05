@@ -1,14 +1,15 @@
 @import '../../styles/mixins';
 
-.loginPage {
-    //background-color: darkorange;
+.profilePage {
+    .profilePage_header {
+        .header_photo {
 
-    .container {
-        @include defaultContainer;
-        @include defaultContainerHeight;
-
-        @media(max-width: 390px) {
-            @include defaultContainerHeightMobile;
         }
+        .header_info {
+
+        }
+    }
+    .profilePage_content {
+
     }
 }
