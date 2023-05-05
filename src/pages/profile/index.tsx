@@ -13,7 +13,7 @@ import { Button } from '@/shared/ui/Button/Button'
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
 
-    const { data: posts, error, isLoading, isError } = useFetchUserProfileQuery(10)
+    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(10)
 
     if (isLoading) {
         return <LoaderScreen variant={'loader'} />
@@ -64,12 +64,18 @@ const Profile: NextPageWithLayout = () => {
                         </div>
                     </div>
                     <div className={cls.profilePage_content}>
-                        <div>
-                            {posts &&
-                                posts.map((post) => {
+                        <div className={cls.content_list}>
+                            {photos &&
+                                photos.map((photo) => {
                                     return (
-                                        <div key={post.id}>
-                                            {post.id} {post.title}
+                                        <div key={photo.id} className={cls.list_item}>
+                                            {photo.title}
+                                            {/*<Image*/}
+                                            {/*    src={photo.url}*/}
+                                            {/*    alt={'profile-photo'}*/}
+                                            {/*    width={234}*/}
+                                            {/*    height={234}*/}
+                                            {/*/>*/}
                                         </div>
                                     )
                                 })}

@@ -16,6 +16,10 @@
 
             .info_control {
                 @include flexBetween;
+
+                > div:first-child {
+                    @include bold-text-16;
+                }
             }
             .info_numbers {
                 display: flex;
@@ -33,6 +37,10 @@
         }
     }
     .profilePage_content {
+        .content_list {
+            .list_item {
 
+            }
+        }
     }
 }
