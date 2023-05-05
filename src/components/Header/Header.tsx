@@ -15,9 +15,7 @@ export const Header = () => {
         <header className={cls.headerWrapper}>
             <div className={cls.header}>
                 <div className={cls.header_logo}>
-                    <div className={cls.logo}>
-                        <Image src={LogoIcon} alt={'login-icon'} width={40} height={40} />
-                    </div>
+                    <Image src={LogoIcon} alt={'login-icon'} width={40} height={40} />
                     <div className={cls.title}>{t('Inctagram')}</div>
                 </div>
 

@@ -9,13 +9,15 @@
 
     .header {
         max-width: var(--layout-width);
+        height: var(--navbar-height);
         padding: 12px 60px;
         margin: 0 auto;
-        @include flexOnlyBetween;
+        @include flexBetween;
 
         .header_logo {
-            width: 200px;
+            width: 220px;
             display: flex;
+            align-items: center;
             gap: 10px;
 
             .logo {
@@ -30,7 +32,6 @@
         .lang {
             width: 75px;
             display: flex;
-            align-items: center;
             gap: 10px;
             font-size: 20px;
 
