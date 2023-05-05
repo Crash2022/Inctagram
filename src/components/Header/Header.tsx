@@ -1,6 +1,7 @@
 import cls from './Header.module.scss'
 import Image from 'next/image'
 import LogoIcon from '../../../public/assets/images/logo.png'
+import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
 import { useTranslation } from 'react-i18next'
 
 export const Header = () => {
@@ -19,12 +20,15 @@ export const Header = () => {
                     </div>
                     <div className={cls.title}>{t('Inctagram')}</div>
                 </div>
-                <div className={cls.auth}>
+
+                <div className={cls.lang}>
                     <div onClick={() => toggleLanguage('en')}>EN</div>
                     <div onClick={() => toggleLanguage('ru')}>RU</div>
-                    <div className={cls.auth} style={{ width: '100px' }}>
-                        {t('AuthBlock')}
-                    </div>
+                </div>
+
+                <div className={cls.auth}>
+                    <div>{t('LogOut')}</div>
+                    <LogoutIcon />
                 </div>
             </div>
         </header>
