@@ -5,5 +5,9 @@
   "Email": "E-mail",
   "Password": "Password",
   "ConfirmPassword": "Password Confirmation",
-  "HaveAccount": "Do you have an account?"
+  "HaveAccount": "Do you have an account?",
+  "Err_Yup_Min": "Too short",
+  "Err_Yup_Max": "Too long",
+  "Err_Yup_Email": "Email must be a valid email",
+  "Err_Yup_Required": "The field is required"
 }

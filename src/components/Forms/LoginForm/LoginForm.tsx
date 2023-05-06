@@ -4,7 +4,7 @@ import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import GoogleIcon from 'public/assets/icons/googleIcon.svg'
 import GitIcon from 'public/assets/icons/gitIcon.svg'
 import { Title } from '@/components/Forms/components/Title'
-// import { Input } from '@/components/Forms/components/Input'
+// import { _Input } from '@/components/Forms/components/_Input'
 import { Input } from '@/shared/ui/Input/Input'
 // import EyeIcon from 'public/assets/icons/eye.svg'
 // import EyeOffIcon from 'public/assets/icons/eye-off.svg'
@@ -56,7 +56,7 @@ export const LoginForm = () => {
                         <Input {...field} id={'Login_Email'} placeholder={t('Email')} />
                     )}
                 />
-                {/*<Input*/}
+                {/*<_Input*/}
                 {/*    // type={'email'}*/}
                 {/*    placeholder={'Email'}*/}
                 {/*    // className={styles.input}*/}
@@ -75,7 +75,7 @@ export const LoginForm = () => {
                         />
                     )}
                 />
-                {/*<Input*/}
+                {/*<_Input*/}
                 {/*    // type={isLock ? 'text' : 'password'}*/}
                 {/*    placeholder={'Password'}*/}
                 {/*    // className={styles.input}*/}
@@ -86,7 +86,7 @@ export const LoginForm = () => {
                 {/*    ) : (*/}
                 {/*        <EyeIcon onClick={lockHandler} />*/}
                 {/*    )}*/}
-                {/*</Input>*/}
+                {/*</_Input>*/}
             </div>
 
             <Link className={styles.forgot} href={'/forgot-password'}>

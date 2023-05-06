@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Title } from '@/components/Forms/components/Title'
-// import { Input } from '@/components/Forms/components/Input'
+// import { _Input } from '@/components/Forms/components/_Input'
 import { Input } from '@/shared/ui/Input/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
@@ -48,7 +48,7 @@ export const ForgotPassword = () => {
                         <Input {...field} id={'Forgot_Email'} placeholder={t('Email')} />
                     )}
                 />
-                {/*<Input*/}
+                {/*<_Input*/}
                 {/*    type={'email'}*/}
                 {/*    className={styles.input}*/}
                 {/*    placeholder={'Email'}*/}
@@ -77,7 +77,7 @@ export const ForgotPassword = () => {
                     {/*    name='captcha'*/}
                     {/*    control={control}*/}
                     {/*    render={({ field }) => (*/}
-                    {/*        <Input {...field} id={'Forgot_Email'} type={'checkbox'} />*/}
+                    {/*        <_Input {...field} id={'Forgot_Email'} type={'checkbox'} />*/}
                     {/*    )}*/}
                     {/*/>*/}
                     {/*<input type='checkbox' />*/}

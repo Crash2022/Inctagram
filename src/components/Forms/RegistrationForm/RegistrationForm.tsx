@@ -1,7 +1,7 @@
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Title } from '@/components/Forms/components/Title'
 // import Image from 'next/image'
-// import { Input } from '@/components/Forms/components/Input'
+// import { _Input } from '@/components/Forms/components/_Input'
 import { Input } from '@/shared/ui/Input/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
@@ -10,6 +10,8 @@ import GitIcon from 'public/assets/icons/gitIcon.svg'
 // import eye from 'public/assets/icons/eye.svg'
 // import eyeOff from 'public/assets/icons/eye-off.svg'
 // import { useEffect } from 'react'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegistrationMutation } from '@/services/AuthService'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { RegistrationParamsType } from '@/models/auth-types'
@@ -42,13 +44,38 @@ export const RegistrationForm = () => {
     //     setIsConfirm(!isConfirm)
     // }
 
-    const { control, handleSubmit } = useForm<RegistrationParamsType>({
+    const SignUpSchema = yup.object().shape({
+        userName: yup
+            .string()
+            .required(t('Err_Yup_Required'))
+            .min(8, t('Err_Yup_Min'))
+            .max(15, t('Err_Yup_Max')),
+        email: yup
+            .string()
+            .required(t('Err_Yup_Required'))
+            .email(t('Err_Yup_Email'))
+            .min(8, t('Err_Yup_Min'))
+            .max(15, t('Err_Yup_Max')),
+        password: yup
+            .string()
+            .required(t('Err_Yup_Required'))
+            .min(8, t('Err_Yup_Min'))
+            .max(15, t('Err_Yup_Max')),
+        confirmPassword: yup.string().required(t('Err_Yup_Required'))
+    })
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<RegistrationParamsType>({
         defaultValues: {
             userName: '',
             email: '',
             password: '',
             confirmPassword: ''
-        }
+        },
+        resolver: yupResolver(SignUpSchema)
     })
 
     const onSubmit: SubmitHandler<RegistrationParamsType> = async (
@@ -66,113 +93,124 @@ export const RegistrationForm = () => {
     }, [error, push])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
-    else {
-        return (
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                <Title title={t('SignUp')} className={styles.title} />
 
-                <div className={styles.imgBody}>
-                    <GoogleIcon />
-                    <GitIcon />
-                </div>
+    return (
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <Title title={t('SignUp')} className={styles.title} />
 
-                <div className={styles.inputContainer}>
-                    <Controller
-                        name='userName'
-                        control={control}
-                        render={({ field }) => (
-                            <Input {...field} id={'Reg_Username'} placeholder={t('Username')} />
-                        )}
-                    />
-                    {/*<Input*/}
-                    {/*    id={'Reg_Username'}*/}
-                    {/*    placeholder={'Username'}*/}
-                    {/*    // className={styles.input}*/}
-                    {/*    // inputBodyClass={styles.inputBody}*/}
-                    {/*/>*/}
+            <div className={styles.imgBody}>
+                <GoogleIcon />
+                <GitIcon />
+            </div>
 
-                    <Controller
-                        name='email'
-                        control={control}
-                        render={({ field }) => (
-                            <Input {...field} id={'Reg_Email'} placeholder={t('Email')} />
-                        )}
-                    />
-                    {/*<Input*/}
-                    {/*    id={'Reg_Email'}*/}
-                    {/*    placeholder={'Email'}*/}
-                    {/*    // className={styles.input}*/}
-                    {/*    // inputBodyClass={styles.inputBody}*/}
-                    {/*/>*/}
+            <div className={styles.inputContainer}>
+                <Controller
+                    name='userName'
+                    control={control}
+                    render={({ field }) => (
+                        <Input
+                            {...field}
+                            id={'Reg_Username'}
+                            placeholder={t('Username')}
+                            error={errors.userName?.message}
+                        />
+                    )}
+                />
+                {/*<_Input*/}
+                {/*    id={'Reg_Username'}*/}
+                {/*    placeholder={'Username'}*/}
+                {/*    // className={styles.input}*/}
+                {/*    // inputBodyClass={styles.inputBody}*/}
+                {/*/>*/}
 
-                    <Controller
-                        name='password'
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                id={'Reg_Password'}
-                                placeholder={t('Password')}
-                                password
-                            />
-                        )}
-                    />
-                    {/*<Input*/}
-                    {/*    id={'Reg_Password'}*/}
-                    {/*    password*/}
-                    {/*    placeholder={'Password'}*/}
-                    {/*    // className={styles.input}*/}
-                    {/*    // inputBodyClass={styles.inputBody}*/}
-                    {/*/>*/}
-                    {/*    <Image*/}
-                    {/*        className={styles.img}*/}
-                    {/*        src={isPassword ? eyeOff : eye}*/}
-                    {/*        onClick={lockPasswordHandler}*/}
-                    {/*        alt={'eye-icon'}*/}
-                    {/*    />*/}
-                    {/*</Input>*/}
+                <Controller
+                    name='email'
+                    control={control}
+                    render={({ field }) => (
+                        <Input
+                            {...field}
+                            id={'Reg_Email'}
+                            placeholder={t('Email')}
+                            error={errors.email?.message}
+                        />
+                    )}
+                />
+                {/*<_Input*/}
+                {/*    id={'Reg_Email'}*/}
+                {/*    placeholder={'Email'}*/}
+                {/*    // className={styles.input}*/}
+                {/*    // inputBodyClass={styles.inputBody}*/}
+                {/*/>*/}
 
-                    <Controller
-                        name='confirmPassword'
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                id={'Reg_ConfirmPassword'}
-                                placeholder={t('ConfirmPassword')}
-                                password
-                            />
-                        )}
-                    />
-                    {/*<Input*/}
-                    {/*    id={'Reg_ConfirmPassword'}*/}
-                    {/*    password*/}
-                    {/*    placeholder={'Password confirmation'}*/}
-                    {/*    // className={styles.input}*/}
-                    {/*    // inputBodyClass={styles.inputBody}*/}
-                    {/*/>*/}
-                    {/*    <Image*/}
-                    {/*        className={styles.img}*/}
-                    {/*        src={isConfirm ? eyeOff : eye}*/}
-                    {/*        onClick={lockConfirmHandler}*/}
-                    {/*        alt={'eye-icon'}*/}
-                    {/*    />*/}
-                    {/*</Input>*/}
-                </div>
+                <Controller
+                    name='password'
+                    control={control}
+                    render={({ field }) => (
+                        <Input
+                            {...field}
+                            id={'Reg_Password'}
+                            placeholder={t('Password')}
+                            error={errors.password?.message}
+                            password
+                        />
+                    )}
+                />
+                {/*<_Input*/}
+                {/*    id={'Reg_Password'}*/}
+                {/*    password*/}
+                {/*    placeholder={'Password'}*/}
+                {/*    // className={styles.input}*/}
+                {/*    // inputBodyClass={styles.inputBody}*/}
+                {/*/>*/}
+                {/*    <Image*/}
+                {/*        className={styles.img}*/}
+                {/*        src={isPassword ? eyeOff : eye}*/}
+                {/*        onClick={lockPasswordHandler}*/}
+                {/*        alt={'eye-icon'}*/}
+                {/*    />*/}
+                {/*</_Input>*/}
 
-                <div>
-                    <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                        {t('SignUp')}
-                    </Button>
-                    <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
-                    <Link className={styles.link} href={'/login'}>
-                        {' '}
-                        {t('SignIn')}
-                    </Link>
-                </div>
-            </form>
-        )
-    }
+                <Controller
+                    name='confirmPassword'
+                    control={control}
+                    render={({ field }) => (
+                        <Input
+                            {...field}
+                            id={'Reg_ConfirmPassword'}
+                            placeholder={t('ConfirmPassword')}
+                            error={errors.confirmPassword?.message}
+                            password
+                        />
+                    )}
+                />
+                {/*<_Input*/}
+                {/*    id={'Reg_ConfirmPassword'}*/}
+                {/*    password*/}
+                {/*    placeholder={'Password confirmation'}*/}
+                {/*    // className={styles.input}*/}
+                {/*    // inputBodyClass={styles.inputBody}*/}
+                {/*/>*/}
+                {/*    <Image*/}
+                {/*        className={styles.img}*/}
+                {/*        src={isConfirm ? eyeOff : eye}*/}
+                {/*        onClick={lockConfirmHandler}*/}
+                {/*        alt={'eye-icon'}*/}
+                {/*    />*/}
+                {/*</_Input>*/}
+            </div>
+
+            <div>
+                <Button className={styles.btn} theme={'primary'} type={'submit'}>
+                    {t('SignUp')}
+                </Button>
+                <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
+                <Link className={styles.link} href={'/login'}>
+                    {' '}
+                    {t('SignIn')}
+                </Link>
+            </div>
+        </form>
+    )
 }
 
 // import * as yup from 'yup'
