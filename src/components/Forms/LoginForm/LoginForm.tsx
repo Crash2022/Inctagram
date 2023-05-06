@@ -14,25 +14,27 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 // import { RegistrationParamsType } from '@/models/auth-types'
 // import { useRegistrationMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
+import { useLoginMutation } from '@/services/AuthService'
+import { LoginParamsType } from '@/models/auth-types'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
     const { router } = useRouter()
-    // const [login, { onSuccess, error, isLoading }] = useRegistrationMutation()
+    const [login, { onSuccess, error, isLoading }] = useLoginMutation()
     // const [isLock, setIsLock] = useState(false)
     //
     // const lockHandler = () => {
     //     setIsLock(!isLock)
     // }
 
-    const { control, handleSubmit } = useForm<any>({
+    const { control, handleSubmit } = useForm<LoginParamsType>({
         defaultValues: {
             email: '',
             password: ''
         }
     })
 
-    const onSubmit: SubmitHandler<any> = async (data: any) => {
+    const onSubmit: SubmitHandler<LoginParamsType> = async (data: LoginParamsType) => {
         console.log('submit', data)
         // await login(data).then((res) => console.log(res))
     }
