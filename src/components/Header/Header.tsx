@@ -4,10 +4,12 @@ import LogoIcon from '../../../public/assets/images/logo.png'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
 import { useTranslation } from 'react-i18next'
 import { usePush } from '@/shared/hooks/usePush'
+import { useLogoutMutation } from '@/services/AuthService'
 
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
     const push = usePush()
+    // const [logout, { onSuccess, error, isError, isLoading }] = useLogoutMutation()
 
     const toggleLanguage = (language: string): void => {
         void i18n.changeLanguage(language)
@@ -31,7 +33,12 @@ export const Header = () => {
                     <div onClick={() => toggleLanguage('ru')}>RU</div>
                 </div>
 
-                <div className={cls.auth}>
+                <div
+                    className={cls.auth}
+                    // onClick={async () => {
+                    //     await logout()
+                    // }}
+                >
                     <div>{t('LogOut')}</div>
                     <LogoutIcon />
                 </div>
