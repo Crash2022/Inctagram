@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { authAPI, LoginParamsType, RegistrationParamsType } from '@/shared/api/auth.api'
+import { authAPI } from '@/shared/api/auth.api'
 import { createAppAsyncThunk } from '@/shared/utils/createAppAsyncThunk'
 import { AxiosError } from 'axios'
+import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 
 interface AuthStateType {
     profile: any
