@@ -4,13 +4,24 @@ import Image from 'next/image'
 import { Input } from '@/components/Forms/components/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
-import google from 'public/assets/icons/googleIcon.svg'
-import git from 'public/assets/icons/gitIcon.svg'
+import GoogleIcon from 'public/assets/icons/googleIcon.svg'
+import GitIcon from 'public/assets/icons/gitIcon.svg'
 import eye from 'public/assets/icons/eye.svg'
 import eyeOff from 'public/assets/icons/eye-off.svg'
 import { useState } from 'react'
+import { authAPI, useAuthQuery } from '@/services/AuthService'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
+import { RegistrationParamsType } from '@/models/auth-types'
 
 export const RegistrationForm = () => {
+    // const { isLoading, error, isError } = useAuthQuery()
+    // const [registration, {}] = authAPI.useRegistrationMutation()
+
+    // const [userName, setUserName] = useState<string>('')
+    // const [email, setEmail] = useState<string>('')
+    // const [password, setPassword] = useState<string>('')
+    // const [confirmPassword, setConfirmPassword] = useState<string>('')
+
     const [isPassword, setIsPassword] = useState(false)
     const [isConfirm, setIsConfirm] = useState(false)
 
@@ -22,16 +33,43 @@ export const RegistrationForm = () => {
         setIsConfirm(!isConfirm)
     }
 
+    const { control, handleSubmit } = useForm<any>({
+        defaultValues: {
+            userName: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        }
+    })
+
+    const onSubmit: SubmitHandler<any> = (data: RegistrationParamsType) => {
+        console.log('submit', data)
+    }
+
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <Title title={'Sign Up'} className={styles.title} />
 
             <div className={styles.imgBody}>
-                <Image className={styles.img} src={google} alt={''} />
-                <Image className={styles.img} src={git} alt={''} />
+                <GoogleIcon />
+                <GitIcon />
             </div>
 
             <div className={styles.inputContainer}>
+                {/*<Controller*/}
+                {/*    name='userName'*/}
+                {/*    control={control}*/}
+                {/*    render={({ field }) => (*/}
+                {/*        <Input*/}
+                {/*            {...field}*/}
+                {/*            type={'text'}*/}
+                {/*            placeholder={'Username'}*/}
+                {/*            className={styles.input}*/}
+                {/*            inputBodyClass={styles.inputBody}*/}
+                {/*        />*/}
+                {/*    )}*/}
+                {/*/>*/}
+
                 <Input
                     type={'text'}
                     placeholder={'Username'}

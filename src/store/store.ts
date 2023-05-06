@@ -3,11 +3,13 @@ import { createWrapper, HYDRATE } from 'next-redux-wrapper'
 import { appReducer } from '@/store/slices/app/appSlice'
 import { authReducer } from '@/store/slices/auth/authSlice'
 import { userProfileAPI } from '@/services/UserProfileService'
+import { authAPI } from '@/services/AuthService'
 
 const combinedReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
-    [userProfileAPI.reducerPath]: userProfileAPI.reducer
+    [userProfileAPI.reducerPath]: userProfileAPI.reducer,
+    [authAPI.reducerPath]: authAPI.reducer
 })
 
 const reducer: typeof combinedReducer = (state, action: AnyAction) => {
@@ -23,7 +25,7 @@ export const makeStore = () =>
     configureStore({
         reducer,
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(userProfileAPI.middleware)
+            getDefaultMiddleware().concat(userProfileAPI.middleware, authAPI.middleware)
     })
 
 type Store = ReturnType<typeof makeStore>
