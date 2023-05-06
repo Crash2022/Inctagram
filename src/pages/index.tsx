@@ -19,7 +19,9 @@ const Home: NextPageWithLayout = () => {
     return (
         <>
             <div className={s.main}>
+                <LinkA href={'/registration'} text={t('Registration')} />
                 <LinkA href={'/login'} text={t('Login')} />
+                <LinkA href={'/forgot-password'} text={t('ForgotPassword')} />
                 <LinkA href={'/profile'} text={t('Profile')} />
 
                 <div style={{ marginTop: '20px' }}>

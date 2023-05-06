@@ -1,18 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
-import { useSnackbar } from 'notistack'
 import { getLayout } from '@/components/Layout/Layout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { RegistrationForm } from '@/components/Forms/RegistrationForm/RegistrationForm'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const Registration: NextPageWithLayout = () => {
-    const { enqueueSnackbar } = useSnackbar()
-
-    useEffect(() => {
-        enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
-    }, [])
-
     return (
         <>
             <Head>
@@ -20,7 +13,7 @@ const Registration: NextPageWithLayout = () => {
                 <meta name='title' content='Registration' />
             </Head>
 
-            <FormWrapper top={24}>
+            <FormWrapper marginTop={36}>
                 <RegistrationForm />
             </FormWrapper>
         </>
@@ -28,5 +21,4 @@ const Registration: NextPageWithLayout = () => {
 }
 
 Registration.getLayout = getLayout
-
 export default Registration

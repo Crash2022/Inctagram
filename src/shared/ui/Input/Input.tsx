@@ -1,35 +1,35 @@
-import React, { forwardRef, InputHTMLAttributes, KeyboardEvent, useState } from 'react';
+import React, { forwardRef, InputHTMLAttributes, KeyboardEvent, useState } from 'react'
 
-import cls from './Input.module.scss';
-import EyeIcon from '../../../../public/assets/icons/eye-Icon.svg';
-import EyeIconSlashed from '../../../../public/assets/icons/eye-icon-slashed.svg';
-import clsx from 'clsx';
+import cls from './Input.module.scss'
+import EyeIcon from '../../../../public/assets/icons/eye-Icon.svg'
+import EyeIconSlashed from '../../../../public/assets/icons/eye-icon-slashed.svg'
+import clsx from 'clsx'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    error?: string;
-    onEnter?: () => void;
-    password?: boolean;
+    error?: string
+    onEnter?: () => void
+    password?: boolean
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-    const { error, onEnter, placeholder, password, id, ...restProps } = props;
-    const [typeInput, setTypeInput] = useState<'password' | 'text'>(password ? 'password' : 'text');
+    const { error, onEnter, placeholder, password, id, ...restProps } = props
+    const [typeInput, setTypeInput] = useState<'password' | 'text'>(password ? 'password' : 'text')
     const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            onEnter?.();
+            onEnter?.()
         }
-    };
+    }
     const toggleTypeHandler = () => {
-        setTypeInput((prev) => (prev === 'text' ? 'password' : 'text'));
-    };
+        setTypeInput((prev) => (prev === 'text' ? 'password' : 'text'))
+    }
     return (
         <div className={cls.inputGroup}>
             <input
+                id={id}
                 ref={ref}
                 type={typeInput}
-                onKeyUp={onEnterHandler}
-                id={id}
                 placeholder={placeholder}
+                onKeyUp={onEnterHandler}
                 className={clsx(cls.input, { [cls.error]: error })}
                 {...restProps}
             />
@@ -45,5 +45,5 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 </label>
             )}
         </div>
-    );
-});
+    )
+})

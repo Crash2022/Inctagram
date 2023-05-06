@@ -1,10 +1,12 @@
 export interface RegistrationParamsType {
     userName: string
     email: string
+    password: string
 }
 
 export interface LoginParamsType {
-    XXX: any
+    email: string
+    password: string
 }
 
 export interface PassRecoveryType {

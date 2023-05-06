@@ -28,5 +28,4 @@ const Forgot: NextPageWithLayout = () => {
 }
 
 Forgot.getLayout = getLayout
-
 export default Forgot

@@ -1,8 +1,7 @@
 {
-  "SignIn": "Sign In",
   "SignUp": "Sign Up",
+  "Username": "Username",
   "Email": "E-mail",
   "Password": "Password",
-  "ForgotPassword": "Forgot Password",
   "HaveAccount": "Do you have an account?"
 }
