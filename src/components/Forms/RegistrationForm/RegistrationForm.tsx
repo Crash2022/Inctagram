@@ -167,7 +167,7 @@ export const RegistrationForm = () => {
                     <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
                     <Link className={styles.link} href={'/login'}>
                         {' '}
-                        {t('SignUp')}
+                        {t('SignIn')}
                     </Link>
                 </div>
             </form>
