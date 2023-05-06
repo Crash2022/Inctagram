@@ -94,7 +94,7 @@ export const LoginForm = () => {
 
             <div>
                 <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                    {t('SignUp')}
+                    {t('SignIn')}
                 </Button>
                 <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
                 {/*<h3 className={styles.subtitle}>Don&apos;t have an account?</h3>*/}
