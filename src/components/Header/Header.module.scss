@@ -20,6 +20,9 @@
             align-items: center;
             gap: 10px;
 
+            &:hover {
+                cursor: pointer;
+            }
             > div {
                 &:hover {
                     cursor: pointer;

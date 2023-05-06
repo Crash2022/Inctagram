@@ -3,5 +3,6 @@
   "Username": "Username",
   "Email": "E-mail",
   "Password": "Password",
+  "ConfirmPassword": "Password Confirmation",
   "HaveAccount": "Do you have an account?"
 }
