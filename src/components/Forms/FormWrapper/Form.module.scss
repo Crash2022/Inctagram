@@ -53,6 +53,7 @@
         width: 100%;
         @include flexColumnOnly;
         gap: 34px;
+        margin-bottom: 5px;
 
         p {
             position: absolute;

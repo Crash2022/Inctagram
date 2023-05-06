@@ -6,7 +6,7 @@ import EyeIconSlashed from '../../../../public/assets/icons/eye-icon-slashed.svg
 import clsx from 'clsx'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    error?: string
+    error?: string | undefined
     onEnter?: () => void
     password?: boolean
 }

@@ -1,7 +1,7 @@
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Title } from '@/components/Forms/components/Title'
 // import Image from 'next/image'
-// import { Input } from '@/components/Forms/components/Input'
+// import { _Input } from '@/components/Forms/components/_Input'
 import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 // import eye from 'public/assets/icons/eye.svg'
@@ -53,7 +53,7 @@ export const CreateNewPasswordForm = () => {
                         />
                     )}
                 />
-                {/*<Input*/}
+                {/*<_Input*/}
                 {/*    type={isPassword ? 'text' : 'password'}*/}
                 {/*    inputBodyClass={styles.inputBody}*/}
                 {/*    className={styles.input}*/}
@@ -65,7 +65,7 @@ export const CreateNewPasswordForm = () => {
                 {/*        onClick={lockPasswordHandler}*/}
                 {/*        alt={''}*/}
                 {/*    />*/}
-                {/*</Input>*/}
+                {/*</_Input>*/}
                 <Controller
                     name='confirmPassword'
                     control={control}
@@ -78,7 +78,7 @@ export const CreateNewPasswordForm = () => {
                         />
                     )}
                 />
-                {/*<Input*/}
+                {/*<_Input*/}
                 {/*    type={isConfirm ? 'text' : 'password'}*/}
                 {/*    className={styles.input}*/}
                 {/*    inputBodyClass={styles.inputBody}*/}
@@ -90,7 +90,7 @@ export const CreateNewPasswordForm = () => {
                 {/*        onClick={lockConfirmHandler}*/}
                 {/*        alt={''}*/}
                 {/*    />*/}
-                {/*</Input>*/}
+                {/*</_Input>*/}
                 <p>{t('PasswordLength')}</p>
             </div>
 
