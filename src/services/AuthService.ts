@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { RegistrationParamsType } from '@/models/auth-types'
+import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 
 export const authAPI = createApi({
     reducerPath: 'authAPI',
@@ -14,11 +14,18 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: payload
             })
+        }),
+        login: build.mutation<any, LoginParamsType>({
+            query: (payload: LoginParamsType) => ({
+                url: '/auth/login',
+                method: 'POST',
+                body: payload
+            })
         })
     })
 })
 
-export const { useRegistrationMutation } = authAPI
+export const { useRegistrationMutation, useLoginMutation } = authAPI
 
 // export const registerApiSlice = createApi({
 //     reducerPath: 'register/api',
