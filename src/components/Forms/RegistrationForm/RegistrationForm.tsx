@@ -16,12 +16,15 @@ import { RegistrationParamsType } from '@/models/auth-types'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'notistack'
+import { useEffect, useRef } from 'react'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { usePush } from '@/shared/hooks/usePush'
 
 export const RegistrationForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('registration')
-    const { router } = useRouter()
-    const [registration, { onSuccess, error, isLoading }] = useRegistrationMutation()
+    const push = usePush()
+    const [registration, { onSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
     // const [userName, setUserName] = useState<string>('')
     // const [email, setEmail] = useState<string>('')
@@ -55,119 +58,121 @@ export const RegistrationForm = () => {
         await registration(data).then((res) => console.log(res))
     }
 
-    // useEffect(() => {
-    //     if (onSuccess) router.push('/')
-    // }, [onSuccess])
+    useEffect(() => {
+        if (error) {
+            push('/login').then()
+        }
+        // error && enqueueSnackbar('Ошибка', { variant: 'error', autoHideDuration: 2000 })
+    }, [error, push])
 
-    // useEffect(() => {
-    //     enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
-    // }, [])
+    if (isLoading) return <LoaderScreen variant={'loader'} />
+    else {
+        return (
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <Title title={t('SignUp')} className={styles.title} />
 
-    return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-            <Title title={t('SignUp')} className={styles.title} />
+                <div className={styles.imgBody}>
+                    <GoogleIcon />
+                    <GitIcon />
+                </div>
 
-            <div className={styles.imgBody}>
-                <GoogleIcon />
-                <GitIcon />
-            </div>
+                <div className={styles.inputContainer}>
+                    <Controller
+                        name='userName'
+                        control={control}
+                        render={({ field }) => (
+                            <Input {...field} id={'Reg_Username'} placeholder={t('Username')} />
+                        )}
+                    />
+                    {/*<Input*/}
+                    {/*    id={'Reg_Username'}*/}
+                    {/*    placeholder={'Username'}*/}
+                    {/*    // className={styles.input}*/}
+                    {/*    // inputBodyClass={styles.inputBody}*/}
+                    {/*/>*/}
 
-            <div className={styles.inputContainer}>
-                <Controller
-                    name='userName'
-                    control={control}
-                    render={({ field }) => (
-                        <Input {...field} id={'Reg_Username'} placeholder={t('Username')} />
-                    )}
-                />
-                {/*<Input*/}
-                {/*    id={'Reg_Username'}*/}
-                {/*    placeholder={'Username'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
+                    <Controller
+                        name='email'
+                        control={control}
+                        render={({ field }) => (
+                            <Input {...field} id={'Reg_Email'} placeholder={t('Email')} />
+                        )}
+                    />
+                    {/*<Input*/}
+                    {/*    id={'Reg_Email'}*/}
+                    {/*    placeholder={'Email'}*/}
+                    {/*    // className={styles.input}*/}
+                    {/*    // inputBodyClass={styles.inputBody}*/}
+                    {/*/>*/}
 
-                <Controller
-                    name='email'
-                    control={control}
-                    render={({ field }) => (
-                        <Input {...field} id={'Reg_Email'} placeholder={t('Email')} />
-                    )}
-                />
-                {/*<Input*/}
-                {/*    id={'Reg_Email'}*/}
-                {/*    placeholder={'Email'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
+                    <Controller
+                        name='password'
+                        control={control}
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                id={'Reg_Password'}
+                                placeholder={t('Password')}
+                                password
+                            />
+                        )}
+                    />
+                    {/*<Input*/}
+                    {/*    id={'Reg_Password'}*/}
+                    {/*    password*/}
+                    {/*    placeholder={'Password'}*/}
+                    {/*    // className={styles.input}*/}
+                    {/*    // inputBodyClass={styles.inputBody}*/}
+                    {/*/>*/}
+                    {/*    <Image*/}
+                    {/*        className={styles.img}*/}
+                    {/*        src={isPassword ? eyeOff : eye}*/}
+                    {/*        onClick={lockPasswordHandler}*/}
+                    {/*        alt={'eye-icon'}*/}
+                    {/*    />*/}
+                    {/*</Input>*/}
 
-                <Controller
-                    name='password'
-                    control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Reg_Password'}
-                            placeholder={t('Password')}
-                            password
-                        />
-                    )}
-                />
-                {/*<Input*/}
-                {/*    id={'Reg_Password'}*/}
-                {/*    password*/}
-                {/*    placeholder={'Password'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-                {/*    <Image*/}
-                {/*        className={styles.img}*/}
-                {/*        src={isPassword ? eyeOff : eye}*/}
-                {/*        onClick={lockPasswordHandler}*/}
-                {/*        alt={'eye-icon'}*/}
-                {/*    />*/}
-                {/*</Input>*/}
+                    <Controller
+                        name='confirmPassword'
+                        control={control}
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                id={'Reg_ConfirmPassword'}
+                                placeholder={t('ConfirmPassword')}
+                                password
+                            />
+                        )}
+                    />
+                    {/*<Input*/}
+                    {/*    id={'Reg_ConfirmPassword'}*/}
+                    {/*    password*/}
+                    {/*    placeholder={'Password confirmation'}*/}
+                    {/*    // className={styles.input}*/}
+                    {/*    // inputBodyClass={styles.inputBody}*/}
+                    {/*/>*/}
+                    {/*    <Image*/}
+                    {/*        className={styles.img}*/}
+                    {/*        src={isConfirm ? eyeOff : eye}*/}
+                    {/*        onClick={lockConfirmHandler}*/}
+                    {/*        alt={'eye-icon'}*/}
+                    {/*    />*/}
+                    {/*</Input>*/}
+                </div>
 
-                <Controller
-                    name='confirmPassword'
-                    control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Reg_ConfirmPassword'}
-                            placeholder={'Password confirmation'}
-                            password
-                        />
-                    )}
-                />
-                {/*<Input*/}
-                {/*    id={'Reg_ConfirmPassword'}*/}
-                {/*    password*/}
-                {/*    placeholder={'Password confirmation'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-                {/*    <Image*/}
-                {/*        className={styles.img}*/}
-                {/*        src={isConfirm ? eyeOff : eye}*/}
-                {/*        onClick={lockConfirmHandler}*/}
-                {/*        alt={'eye-icon'}*/}
-                {/*    />*/}
-                {/*</Input>*/}
-            </div>
-
-            <div>
-                <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                    {t('SignUp')}
-                </Button>
-                <h3 className={styles.subtitle}>{t('HaveAccount?')}</h3>
-                <Link className={styles.link} href={'/login'}>
-                    {' '}
-                    {t('SignUp')}
-                </Link>
-            </div>
-        </form>
-    )
+                <div>
+                    <Button className={styles.btn} theme={'primary'} type={'submit'}>
+                        {t('SignUp')}
+                    </Button>
+                    <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
+                    <Link className={styles.link} href={'/login'}>
+                        {' '}
+                        {t('SignUp')}
+                    </Link>
+                </div>
+            </form>
+        )
+    }
 }
 
 // import * as yup from 'yup'
