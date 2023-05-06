@@ -57,7 +57,7 @@ export const ForgotPassword = () => {
                 <p>{t('EnterEmail')}</p>
             </div>
 
-            <Button className={styles.btn} theme={'primary'}>
+            <Button className={styles.btn} theme={'primary'} type={'submit'}>
                 {t('SendLink')}
             </Button>
             <Link className={styles.link} href={'/login'}>
