@@ -6,7 +6,7 @@ import { Input } from '@/shared/ui/Input/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
 import Image from 'next/image'
-import captcha from 'public/assets/icons/reCaotcha.svg'
+import CaptchaIcon from 'public/assets/icons/reCaotcha.svg'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { useSnackbar } from 'notistack'
@@ -56,7 +56,8 @@ export const ForgotPassword = () => {
                     {/*<span>I&apos;m not a robot</span>*/}
                 </div>
 
-                <Image className={styles.img} src={captcha} alt={'captcha'} />
+                <CaptchaIcon />
+                {/*<Image className={styles.img} src={CaptchaIcon} alt={'captcha'} />*/}
             </div>
         </form>
     )
