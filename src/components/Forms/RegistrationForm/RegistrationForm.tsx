@@ -9,14 +9,16 @@ import GoogleIcon from 'public/assets/icons/googleIcon.svg'
 import GitIcon from 'public/assets/icons/gitIcon.svg'
 // import eye from 'public/assets/icons/eye.svg'
 // import eyeOff from 'public/assets/icons/eye-off.svg'
-import { useEffect, useState } from 'react'
+// import { useEffect } from 'react'
 import { useRegistrationMutation } from '@/services/AuthService'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { RegistrationParamsType } from '@/models/auth-types'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
+import { useSnackbar } from 'notistack'
 
 export const RegistrationForm = () => {
+    const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('registration')
     const { router } = useRouter()
     const [registration, { onSuccess, error, isLoading }] = useRegistrationMutation()
@@ -41,8 +43,8 @@ export const RegistrationForm = () => {
         defaultValues: {
             userName: '',
             email: '',
-            password: ''
-            // confirmPassword: ''
+            password: '',
+            confirmPassword: ''
         }
     })
 
@@ -57,6 +59,10 @@ export const RegistrationForm = () => {
     //     if (onSuccess) router.push('/')
     // }, [onSuccess])
 
+    // useEffect(() => {
+    //     enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
+    // }, [])
+
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <Title title={t('SignUp')} className={styles.title} />
@@ -70,7 +76,9 @@ export const RegistrationForm = () => {
                 <Controller
                     name='userName'
                     control={control}
-                    render={({ field }) => <Input {...field} placeholder={t('Username')} />}
+                    render={({ field }) => (
+                        <Input {...field} id={'Reg_Username'} placeholder={t('Username')} />
+                    )}
                 />
                 {/*<Input*/}
                 {/*    id={'Reg_Username'}*/}
@@ -82,7 +90,9 @@ export const RegistrationForm = () => {
                 <Controller
                     name='email'
                     control={control}
-                    render={({ field }) => <Input {...field} placeholder={t('Email')} />}
+                    render={({ field }) => (
+                        <Input {...field} id={'Reg_Email'} placeholder={t('Email')} />
+                    )}
                 />
                 {/*<Input*/}
                 {/*    id={'Reg_Email'}*/}
@@ -95,7 +105,12 @@ export const RegistrationForm = () => {
                     name='password'
                     control={control}
                     render={({ field }) => (
-                        <Input {...field} placeholder={t('Password')} password />
+                        <Input
+                            {...field}
+                            id={'Reg_Password'}
+                            placeholder={t('Password')}
+                            password
+                        />
                     )}
                 />
                 {/*<Input*/}
@@ -113,13 +128,18 @@ export const RegistrationForm = () => {
                 {/*    />*/}
                 {/*</Input>*/}
 
-                {/*<Controller*/}
-                {/*    name='confirmPassword'*/}
-                {/*    control={control}*/}
-                {/*    render={({ field }) => (*/}
-                {/*        <Input {...field} placeholder={'Password confirmation'} password />*/}
-                {/*    )}*/}
-                {/*/>*/}
+                <Controller
+                    name='confirmPassword'
+                    control={control}
+                    render={({ field }) => (
+                        <Input
+                            {...field}
+                            id={'Reg_ConfirmPassword'}
+                            placeholder={'Password confirmation'}
+                            password
+                        />
+                    )}
+                />
                 {/*<Input*/}
                 {/*    id={'Reg_ConfirmPassword'}*/}
                 {/*    password*/}

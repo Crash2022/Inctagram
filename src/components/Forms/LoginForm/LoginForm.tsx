@@ -6,13 +6,13 @@ import GitIcon from 'public/assets/icons/gitIcon.svg'
 import { Title } from '@/components/Forms/components/Title'
 // import { Input } from '@/components/Forms/components/Input'
 import { Input } from '@/shared/ui/Input/Input'
-import EyeIcon from 'public/assets/icons/eye.svg'
-import EyeOffIcon from 'public/assets/icons/eye-off.svg'
-import { useState } from 'react'
+// import EyeIcon from 'public/assets/icons/eye.svg'
+// import EyeOffIcon from 'public/assets/icons/eye-off.svg'
+// import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { RegistrationParamsType } from '@/models/auth-types'
-import { useRegistrationMutation } from '@/services/AuthService'
+// import { RegistrationParamsType } from '@/models/auth-types'
+// import { useRegistrationMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 
 export const LoginForm = () => {
@@ -38,7 +38,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <Title title={t('SignIn')} className={styles.title} />
 
             <div className={styles.imgBody}>
@@ -50,7 +50,9 @@ export const LoginForm = () => {
                 <Controller
                     name='email'
                     control={control}
-                    render={({ field }) => <Input {...field} placeholder={t('Email')} />}
+                    render={({ field }) => (
+                        <Input {...field} id={'Login_Email'} placeholder={t('Email')} />
+                    )}
                 />
                 {/*<Input*/}
                 {/*    // type={'email'}*/}
@@ -63,7 +65,12 @@ export const LoginForm = () => {
                     name='password'
                     control={control}
                     render={({ field }) => (
-                        <Input {...field} placeholder={t('Password')} password />
+                        <Input
+                            {...field}
+                            id={'Login_Password'}
+                            placeholder={t('Password')}
+                            password
+                        />
                     )}
                 />
                 {/*<Input*/}
