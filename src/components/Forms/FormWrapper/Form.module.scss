@@ -105,14 +105,14 @@
         .checkboxBody {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 5px;
 
             input {
                 width: 20px;
                 height: 20px;
             }
 
-            span {
+            div {
                 font-style: normal;
                 font-weight: 500;
                 font-size: 12px;
