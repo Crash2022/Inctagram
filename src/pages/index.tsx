@@ -6,7 +6,7 @@ import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
 import { useTranslation } from 'react-i18next'
-import { CustomTextarea } from '@/shared/ui/CustomTextarea/CustomTextarea'
+import { Textarea } from '@/shared/ui/Textarea/Textarea'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
@@ -84,7 +84,7 @@ const Home: NextPageWithLayout = () => {
                     <SearchInput placeholder={'Search input'} error={'Error Text'} />
                 </div>
 
-                <CustomTextarea />
+                <Textarea />
             </div>
         </>
     )
