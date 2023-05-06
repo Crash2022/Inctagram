@@ -95,7 +95,7 @@ export const CreateNewPasswordForm = () => {
             </div>
 
             <div style={{ marginTop: '72px' }}>
-                <Button className={styles.btn} theme={'primary'}>
+                <Button className={styles.btn} theme={'primary'} type={'submit'}>
                     {t('CreateNewPassword')}
                 </Button>
             </div>

@@ -93,7 +93,7 @@ export const LoginForm = () => {
             </Link>
 
             <div>
-                <Button className={styles.btn} theme={'primary'}>
+                <Button className={styles.btn} theme={'primary'} type={'submit'}>
                     {t('SignUp')}
                 </Button>
                 <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
