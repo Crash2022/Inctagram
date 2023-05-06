@@ -21,5 +21,4 @@ const Registration: NextPageWithLayout = () => {
 }
 
 Registration.getLayout = getLayout
-
 export default Registration

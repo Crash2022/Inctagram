@@ -25,11 +25,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     return (
         <div className={cls.inputGroup}>
             <input
+                id={id}
                 ref={ref}
                 type={typeInput}
-                onKeyUp={onEnterHandler}
-                id={id}
                 placeholder={placeholder}
+                onKeyUp={onEnterHandler}
                 className={clsx(cls.input, { [cls.error]: error })}
                 {...restProps}
             />
