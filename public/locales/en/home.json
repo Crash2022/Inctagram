@@ -1,4 +1,6 @@
 {
+  "Registration": "Registration Page",
   "Login": "Login Page",
+  "ForgotPassword": "Forgot Password Page",
   "Profile": "Profile Page"
 }
