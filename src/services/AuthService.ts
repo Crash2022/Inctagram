@@ -21,11 +21,17 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: payload
             })
+        }),
+        logout: build.mutation({
+            query: () => ({
+                url: '/auth/logout',
+                method: 'POST'
+            })
         })
     })
 })
 
-export const { useRegistrationMutation, useLoginMutation } = authAPI
+export const { useRegistrationMutation, useLoginMutation, useLogoutMutation } = authAPI
 
 // export const registerApiSlice = createApi({
 //     reducerPath: 'register/api',
