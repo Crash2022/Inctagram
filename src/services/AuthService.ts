@@ -8,7 +8,8 @@ export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
         // baseUrl: process.env.BASE_URL
-        baseUrl: baseURL
+        // baseUrl: baseURL,
+        baseUrl: 'baseUrl'
     }),
     endpoints: (build) => ({
         // registration: build.mutation<any, RegistrationParamsType>({
