@@ -18,7 +18,7 @@ import { RegistrationParamsType } from '@/models/auth-types'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'notistack'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { usePush } from '@/shared/hooks/usePush'
 
@@ -27,22 +27,6 @@ export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
     const push = usePush()
     const [registration, { onSuccess, error, isError, isLoading }] = useRegistrationMutation()
-
-    // const [userName, setUserName] = useState<string>('')
-    // const [email, setEmail] = useState<string>('')
-    // const [password, setPassword] = useState<string>('')
-    // const [confirmPassword, setConfirmPassword] = useState<string>('')
-
-    // const [isPassword, setIsPassword] = useState(false)
-    // const [isConfirm, setIsConfirm] = useState(false)
-
-    // const lockPasswordHandler = () => {
-    //     setIsPassword(!isPassword)
-    // }
-    //
-    // const lockConfirmHandler = () => {
-    //     setIsConfirm(!isConfirm)
-    // }
 
     const SignUpSchema = yup.object().shape({
         userName: yup
@@ -119,13 +103,6 @@ export const RegistrationForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    id={'Reg_Username'}*/}
-                {/*    placeholder={'Username'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-
                 <Controller
                     name='email'
                     control={control}
@@ -138,13 +115,6 @@ export const RegistrationForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    id={'Reg_Email'}*/}
-                {/*    placeholder={'Email'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-
                 <Controller
                     name='password'
                     control={control}
@@ -158,21 +128,6 @@ export const RegistrationForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    id={'Reg_Password'}*/}
-                {/*    password*/}
-                {/*    placeholder={'Password'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-                {/*    <Image*/}
-                {/*        className={styles.img}*/}
-                {/*        src={isPassword ? eyeOff : eye}*/}
-                {/*        onClick={lockPasswordHandler}*/}
-                {/*        alt={'eye-icon'}*/}
-                {/*    />*/}
-                {/*</_Input>*/}
-
                 <Controller
                     name='confirmPassword'
                     control={control}
@@ -186,22 +141,7 @@ export const RegistrationForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    id={'Reg_ConfirmPassword'}*/}
-                {/*    password*/}
-                {/*    placeholder={'Password confirmation'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-                {/*    <Image*/}
-                {/*        className={styles.img}*/}
-                {/*        src={isConfirm ? eyeOff : eye}*/}
-                {/*        onClick={lockConfirmHandler}*/}
-                {/*        alt={'eye-icon'}*/}
-                {/*    />*/}
-                {/*</_Input>*/}
             </div>
-
             <div>
                 <Button className={styles.btn} theme={'primary'} type={'submit'}>
                     {t('SignUp')}
@@ -215,104 +155,3 @@ export const RegistrationForm = () => {
         </form>
     )
 }
-
-// import * as yup from 'yup'
-// export const Schema = yup.object({
-//     email: yup
-//         .string()
-//         .email('Email must be a valid email')
-//         .required('Email is required'),
-//     password: yup
-//         .string()
-//         .min(8, 'Password must be at least 8 characters')
-//         .required('Password is required')
-// })
-//
-//     const {
-//         handleSubmit,
-//         control,
-//         register,
-//         formState: { errors }
-//     } = useForm<LoginForm>({
-//         defaultValues: {
-//             email: '',
-//             password: '',
-//             rememberMe: false
-//         },
-//         mode: 'all',
-//         resolver: yupResolver(Schema)
-//     })
-//
-//     const onSubmit: SubmitHandler<LoginForm> = async data => {
-//         await login(data)
-//     }
-//
-//     const errorHandler = errorMessageHandler(
-//         (loginError as FetchError)?.data?.error
-//     )
-//
-//     const disableButton =
-//         !!errors.email?.message ||
-//         !!errors.password?.message ||
-//         !!errors.rememberMe?.message ||
-//         isLoginLoading
-//
-//     const isBundleLoading = isLoginLoading
-//
-//     return (
-//         <form onSubmit={handleSubmit(onSubmit)}>
-//             {isBundleLoading ? <LinearPageLoader /> : null}
-//             <BoxCard>
-//                 <Title marginBottom={'17px'}>Sign in</Title>
-//                 <Controller
-//                     name={'email'}
-//                     control={control}
-//                     render={({ field }) => (
-//                         <TextField
-//                             title={'Email'}
-//                             error={errors?.email?.message}
-//                             textFieldMode={'nonOutlined'}
-//                             {...field}
-//                         />
-//                     )}
-//                 />
-//                 <Controller
-//                     name={'password'}
-//                     control={control}
-//                     render={({ field }) => (
-//                         <TextField
-//                             error={errors?.password?.message}
-//                             title={'Password'}
-//                             showPassword
-//                             textFieldMode={'nonOutlined'}
-//                             {...field}
-//                         />
-//                     )}
-//                 />
-//                 <StyledFormGroup>
-//                     <StyledCheckboxLabel>
-//                         <StyledFormCheckbox {...register('rememberMe')} type={'checkbox'} />
-//                         <Span nonSelect bold>
-//                             Remember me
-//                         </Span>
-//                     </StyledCheckboxLabel>
-//                 </StyledFormGroup>
-//                 <StyledFormGroup margin={'0 0 45px 0'}>
-//                     <AppLink
-//                         to={AppPaths.forgotPasswordPage}
-//                         secondary
-//                         justifyContent={'flex-end'}
-//                     >
-//                         Forgot Password?
-//                     </AppLink>
-//                 </StyledFormGroup>
-//                 <Button disabled={disableButton}>Sign in</Button>
-//                 <Span medium>Already have an account?</Span>
-//                 <AppLink primary to={AppPaths.registrationPage}>
-//                     Sign Up
-//                 </AppLink>
-//             </BoxCard>
-//             <ErrorAlert errorMessage={errorHandler} />
-//         </form>
-//     )
-// }
