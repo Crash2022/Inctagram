@@ -4,8 +4,12 @@ import cls from './Input.module.scss'
 import EyeIcon from '../../../../public/assets/icons/eye-Icon.svg'
 import EyeIconSlashed from '../../../../public/assets/icons/eye-icon-slashed.svg'
 import clsx from 'clsx'
+import { DefaultTFuncReturn, TFuncReturn } from 'i18next'
+import { ControllerRenderProps } from 'react-hook-form'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    // placeholder: TFuncReturn<string, string, DefaultTFuncReturn, undefined>
+    // field?: ControllerRenderProps<TFieldValues, TName>
     error?: string | undefined
     onEnter?: () => void
     password?: boolean

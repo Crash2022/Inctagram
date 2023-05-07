@@ -1,14 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
+import dotenv from 'dotenv'
 
+// dotenv.config()
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
         // baseUrl: process.env.BASE_URL
         baseUrl: baseURL
+        // baseUrl: 'baseUrl'
     }),
     endpoints: (build) => ({
+        // registration: {
+        //     query: (args: { queryArg: RegistrationParamsType }) => ({
+        //         url: '/auth/registration',
+        //         method: 'POST',
+        //         body: args.queryArg
+        //     }),
+        //     invalidatesTags: ['Users']
+        // },
         registration: build.mutation<any, RegistrationParamsType>({
             query: (payload: RegistrationParamsType) => ({
                 url: '/auth/registration',
