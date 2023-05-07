@@ -153,10 +153,10 @@ export const RegistrationForm = () => {
     )
 }
 
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ['header', 'registration']))
-        }
-    }
-}
+// export async function getStaticProps({ locale }) {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, ['header', 'registration']))
+//         }
+//     }
+// }

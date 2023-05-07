@@ -8,6 +8,7 @@ import { usePush } from '@/shared/hooks/usePush'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
@@ -69,10 +70,10 @@ export const Header = () => {
     )
 }
 
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ['header']))
-        }
-    }
-}
+// export async function getStaticProps({ locale }) {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, ['header']))
+//         }
+//     }
+// }

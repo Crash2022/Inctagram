@@ -96,10 +96,10 @@ const Home: NextPageWithLayout = () => {
 Home.getLayout = getLayout
 export default Home
 
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ['header', 'home']))
-        }
-    }
-}
+// export async function getStaticProps({ locale }) {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, ['header', 'home']))
+//         }
+//     }
+// }
