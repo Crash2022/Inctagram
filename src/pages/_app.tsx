@@ -9,6 +9,7 @@ import { ni18nConfig } from '@/shared/config/i18n.config'
 import { appWithI18Next } from 'ni18n'
 import { wrapper } from '@/store/store'
 import { Provider } from 'react-redux'
+import { GetStaticProps } from 'next'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -49,3 +50,12 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 }
 
 export default appWithI18Next(App, ni18nConfig)
+
+// для i18n !!!
+// export const getStaticProps: GetStaticProps = async ({locale = DEFAULT_LOCALE}) => {
+//     return (
+//         props: {
+//             ...(await serverSideTranslations(locale, ['common']))
+//         }
+//     )
+// }
