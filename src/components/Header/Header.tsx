@@ -5,13 +5,18 @@ import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
 import { useTranslation } from 'react-i18next'
 import { usePush } from '@/shared/hooks/usePush'
 import { useLogoutMutation } from '@/services/AuthService'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
+    const { locales } = useRouter()
     const push = usePush()
+    const [activeLang, setActiveLang] = useState<string>('en')
     // const [logout, { onSuccess, error, isError, isLoading }] = useLogoutMutation()
 
     const toggleLanguage = (language: string): void => {
+        setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
         void i18n.changeLanguage(language)
     }
 
@@ -29,8 +34,17 @@ export const Header = () => {
                 </div>
 
                 <div className={cls.lang}>
-                    <div onClick={() => toggleLanguage('en')}>EN</div>
-                    <div onClick={() => toggleLanguage('ru')}>RU</div>
+                    {locales &&
+                        locales.map((l) => {
+                            return (
+                                <div
+                                    onClick={() => toggleLanguage(l)}
+                                    className={activeLang === l ? cls.active : ''}
+                                >
+                                    {l.toUpperCase()}
+                                </div>
+                            )
+                        })}
                 </div>
 
                 <div

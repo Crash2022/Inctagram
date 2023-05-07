@@ -7,10 +7,11 @@ import { Input } from '@/shared/ui/Input/Input'
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
 import { useTranslation } from 'react-i18next'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
+import { useRouter } from 'next/router'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
-
+    const { locale, locales } = useRouter()
     // пример i18n через useContext
     // const lang = useContext('en') // обернуть App
     // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
