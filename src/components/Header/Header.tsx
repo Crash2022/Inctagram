@@ -38,6 +38,7 @@ export const Header = () => {
                         locales.map((l) => {
                             return (
                                 <div
+                                    key={l}
                                     onClick={() => toggleLanguage(l)}
                                     className={activeLang === l ? cls.active : ''}
                                 >
