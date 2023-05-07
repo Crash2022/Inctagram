@@ -12,13 +12,6 @@ export const authAPI = createApi({
         // baseUrl: 'baseUrl'
     }),
     endpoints: (build) => ({
-        registration: build.mutation<any, RegistrationParamsType>({
-            query: (payload: RegistrationParamsType) => ({
-                url: '/auth/registration',
-                method: 'POST',
-                body: payload
-            })
-        }),
         // registration: {
         //     query: (args: { queryArg: RegistrationParamsType }) => ({
         //         url: '/auth/registration',
@@ -27,6 +20,13 @@ export const authAPI = createApi({
         //     }),
         //     invalidatesTags: ['Users']
         // },
+        registration: build.mutation<any, RegistrationParamsType>({
+            query: (payload: RegistrationParamsType) => ({
+                url: '/auth/registration',
+                method: 'POST',
+                body: payload
+            })
+        }),
         login: build.mutation<any, LoginParamsType>({
             query: (payload: LoginParamsType) => ({
                 url: '/auth/login',

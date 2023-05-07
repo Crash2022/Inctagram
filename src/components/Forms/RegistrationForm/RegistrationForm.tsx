@@ -61,7 +61,10 @@ export const RegistrationForm = () => {
             .required(t('Err_Yup_Required'))
             .min(8, t('Err_Yup_Min'))
             .max(15, t('Err_Yup_Max')),
-        confirmPassword: yup.string().required(t('Err_Yup_Required'))
+        confirmPassword: yup
+            .string()
+            .required(t('Err_Yup_Required'))
+            .oneOf([yup.ref('password'), null], t('Err_Yup_FieldMatch'))
     })
 
     const {
