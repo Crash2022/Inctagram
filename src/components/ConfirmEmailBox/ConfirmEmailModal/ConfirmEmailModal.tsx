@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import { Button } from '@/shared/ui/Button/Button'
