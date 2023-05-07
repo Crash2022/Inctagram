@@ -43,17 +43,17 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
                 `}
             </style>
             <Provider store={store}>
-                <Suspense fallback={<div>...</div>}>
-                    <Component {...pageProps} />
-                </Suspense>
+                {/*<Suspense fallback={<div>...</div>}>*/}
+                <Component {...pageProps} />
+                {/*</Suspense>*/}
             </Provider>
         </>
     )
 }
 
 // export default App
-// export default appWithI18Next(App, ni18nConfig)
-export default appWithTranslation(App)
+export default appWithI18Next(App, ni18nConfig)
+// export default appWithTranslation(App)
 
 // для i18n !!!
 // export const getStaticProps: GetStaticProps = async ({locale = DEFAULT_LOCALE}) => {

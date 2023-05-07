@@ -13,17 +13,17 @@ export const Header = () => {
     const { t, i18n } = useTranslation('header')
     const { locale, locales, push } = useRouter()
     const pushHook = usePush()
-    // const [activeLang, setActiveLang] = useState<string>('en')
+    const [activeLang, setActiveLang] = useState<string>('en')
     // const [logout, { onSuccess, error, isError, isLoading }] = useLogoutMutation()
 
-    // const toggleLanguage = (language: string): void => {
-    //     // setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
-    //     // void i18n.changeLanguage(language)
-    // }
-
-    const toggleLanguageNew = (l: string): void => {
-        push('/', undefined, { locale: l }).then()
+    const toggleLanguage = (language: string): void => {
+        setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
+        void i18n.changeLanguage(language)
     }
+
+    // const toggleLanguageNew = (l: string): void => {
+    //     push('/', undefined, { locale: l }).then()
+    // }
 
     return (
         <header className={cls.headerWrapper}>
@@ -45,9 +45,9 @@ export const Header = () => {
                             return (
                                 <div
                                     key={l}
-                                    // onClick={() => toggleLanguage(l)}
-                                    onClick={() => toggleLanguageNew(l)}
-                                    // className={activeLang === l ? cls.active : ''}
+                                    onClick={() => toggleLanguage(l)}
+                                    // onClick={() => toggleLanguageNew(l)}
+                                    className={activeLang === l ? cls.active : ''}
                                 >
                                     {l.toUpperCase()}
                                 </div>
