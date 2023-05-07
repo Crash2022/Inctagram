@@ -101,14 +101,14 @@ export async function getStaticProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, [
-                'home',
                 'header',
-                'sidebar',
-                'login',
-                'registration',
-                'forgot',
-                'new-password',
-                'profile'
+                'home'
+                // 'sidebar',
+                // 'login',
+                // 'registration',
+                // 'forgot',
+                // 'new-password',
+                // 'profile'
             ]))
             // Will be passed to the page component as props
         }

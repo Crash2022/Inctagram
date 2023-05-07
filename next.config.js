@@ -5,6 +5,7 @@ const nextConfig = {
     reactStrictMode: true,
     webpack(config) {
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'))
+        config.resolve.fallback = { fs: false }
         config.module.rules.push(
             {
                 ...fileLoaderRule,

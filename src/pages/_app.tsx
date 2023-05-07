@@ -43,9 +43,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
                 `}
             </style>
             <Provider store={store}>
-                {/*<Suspense fallback={<div>...</div>}>*/}
-                <Component {...pageProps} />
-                {/*</Suspense>*/}
+                <Suspense fallback={<div>...</div>}>
+                    <Component {...pageProps} />
+                </Suspense>
             </Provider>
         </>
     )
