@@ -9,13 +9,21 @@ export const authAPI = createApi({
         baseUrl: baseURL
     }),
     endpoints: (build) => ({
-        registration: build.mutation<any, RegistrationParamsType>({
-            query: (payload: RegistrationParamsType) => ({
+        // registration: build.mutation<any, RegistrationParamsType>({
+        //     query: (payload: RegistrationParamsType) => ({
+        //         url: '/auth/registration',
+        //         method: 'POST',
+        //         body: payload
+        //     })
+        // }),
+        registration: {
+            query: (args: { queryArg: RegistrationParamsType }) => ({
                 url: '/auth/registration',
                 method: 'POST',
-                body: payload
-            })
-        }),
+                body: args.queryArg
+            }),
+            invalidatesTags: ['Users']
+        },
         login: build.mutation<any, LoginParamsType>({
             query: (payload: LoginParamsType) => ({
                 url: '/auth/login',
