@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
+import dotenv from 'dotenv'
 
+dotenv.config()
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
