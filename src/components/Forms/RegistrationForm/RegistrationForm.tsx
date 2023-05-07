@@ -10,16 +10,19 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegistrationMutation } from '@/services/AuthService'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { RegistrationParamsType } from '@/models/auth-types'
-import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { usePush } from '@/shared/hooks/usePush'
+import { useRouter } from 'next/router'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export const RegistrationForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('registration')
-    const push = usePush()
+    const pushHook = usePush()
     const [registration, { onSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
     const SignUpSchema = yup.object().shape({
@@ -68,10 +71,10 @@ export const RegistrationForm = () => {
 
     useEffect(() => {
         if (error) {
-            push('/login').then()
+            pushHook('/login').then()
         }
         // error && enqueueSnackbar('Ошибка', { variant: 'error', autoHideDuration: 2000 })
-    }, [error, push])
+    }, [error, pushHook])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -149,3 +152,11 @@ export const RegistrationForm = () => {
         </form>
     )
 }
+
+// export async function getStaticProps({ locale }) {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, ['header', 'registration']))
+//         }
+//     }
+// }

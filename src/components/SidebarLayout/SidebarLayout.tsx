@@ -10,7 +10,8 @@ import AddIcon from './../../../public/assets/icons/add-icon.svg'
 import ProfileIcon from './../../../public/assets/icons/profile-icon.svg'
 import BookmarkIcon from './../../../public/assets/icons/bookmark-outline.svg'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
-import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')

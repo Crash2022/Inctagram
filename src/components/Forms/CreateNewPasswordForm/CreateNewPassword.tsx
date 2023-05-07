@@ -1,14 +1,11 @@
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Title } from '@/components/Forms/components/Title'
-// import Image from 'next/image'
-// import { _Input } from '@/components/Forms/components/_Input'
 import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
-// import eye from 'public/assets/icons/eye.svg'
-// import eyeOff from 'public/assets/icons/eye-off.svg'
-import React, { useState } from 'react'
+import React from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
     const { t } = useTranslation('new-password')

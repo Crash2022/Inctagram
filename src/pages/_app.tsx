@@ -9,7 +9,9 @@ import { appWithI18Next } from 'ni18n'
 import { wrapper } from '@/store/store'
 import { Provider } from 'react-redux'
 import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ni18nConfig } from '../../ni18n.config'
+import { appWithTranslation } from 'next-i18next'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -51,12 +53,32 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
 // export default App
 export default appWithI18Next(App, ni18nConfig)
+// export default appWithTranslation(App)
 
 // для i18n !!!
 // export const getStaticProps: GetStaticProps = async ({locale = DEFAULT_LOCALE}) => {
 //     return (
 //         props: {
-//             ...(await serverSideTranslations(locale, ['common']))
+//             ...(await serverSideTranslations(locale, ['common'])),
+//             // Will be passed to the page component as props
 //         }
 //     )
+// }
+
+// export async function getStaticProps({ locale }) {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, [
+//                 'home',
+//                 'header',
+//                 'sidebar',
+//                 'login',
+//                 'registration',
+//                 'forgot',
+//                 'new-password',
+//                 'profile'
+//             ]))
+//             // Will be passed to the page component as props
+//         }
+//     }
 // }

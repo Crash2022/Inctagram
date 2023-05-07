@@ -1,8 +1,11 @@
+// const { i18n } = require('./next-i18next.config')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
     webpack(config) {
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'))
+        // config.resolve.fallback = { fs: false }
         config.module.rules.push(
             {
                 ...fileLoaderRule,
@@ -20,6 +23,7 @@ const nextConfig = {
 
         return config
     },
+    // i18n
     i18n: {
         defaultLocale: 'en',
         locales: ['en', 'ru']
