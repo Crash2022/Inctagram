@@ -82,7 +82,7 @@ export const RegistrationForm = () => {
         data: RegistrationParamsType
     ) => {
         console.log('submit', data)
-        await registration(data).then((res) => console.log(res))
+        // await registration(data).then((res) => console.log(res))
     }
 
     useEffect(() => {
@@ -107,7 +107,7 @@ export const RegistrationForm = () => {
                 <Controller
                     name='userName'
                     control={control}
-                    render={({ field }) => (
+                    render={({ field }: any) => (
                         <Input
                             {...field}
                             id={'Reg_Username'}

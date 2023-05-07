@@ -3,30 +3,30 @@ import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
 import dotenv from 'dotenv'
 
-dotenv.config()
+// dotenv.config()
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
         // baseUrl: process.env.BASE_URL
-        // baseUrl: baseURL,
-        baseUrl: 'baseUrl'
+        baseUrl: baseURL
+        // baseUrl: 'baseUrl'
     }),
     endpoints: (build) => ({
-        // registration: build.mutation<any, RegistrationParamsType>({
-        //     query: (payload: RegistrationParamsType) => ({
-        //         url: '/auth/registration',
-        //         method: 'POST',
-        //         body: payload
-        //     })
-        // }),
-        registration: {
-            query: (args: { queryArg: RegistrationParamsType }) => ({
+        registration: build.mutation<any, RegistrationParamsType>({
+            query: (payload: RegistrationParamsType) => ({
                 url: '/auth/registration',
                 method: 'POST',
-                body: args.queryArg
-            }),
-            invalidatesTags: ['Users']
-        },
+                body: payload
+            })
+        }),
+        // registration: {
+        //     query: (args: { queryArg: RegistrationParamsType }) => ({
+        //         url: '/auth/registration',
+        //         method: 'POST',
+        //         body: args.queryArg
+        //     }),
+        //     invalidatesTags: ['Users']
+        // },
         login: build.mutation<any, LoginParamsType>({
             query: (payload: LoginParamsType) => ({
                 url: '/auth/login',
