@@ -2,7 +2,8 @@ import cls from './Header.module.scss'
 import Image from 'next/image'
 import LogoIcon from '../../../public/assets/images/logo.png'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
-import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { usePush } from '@/shared/hooks/usePush'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
@@ -10,14 +11,18 @@ import { useState } from 'react'
 
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
-    const { locales } = useRouter()
-    const push = usePush()
-    const [activeLang, setActiveLang] = useState<string>('en')
+    const { locale, locales, push } = useRouter()
+    const pushHook = usePush()
+    // const [activeLang, setActiveLang] = useState<string>('en')
     // const [logout, { onSuccess, error, isError, isLoading }] = useLogoutMutation()
 
-    const toggleLanguage = (language: string): void => {
-        setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
-        void i18n.changeLanguage(language)
+    // const toggleLanguage = (language: string): void => {
+    //     // setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
+    //     // void i18n.changeLanguage(language)
+    // }
+
+    const toggleLanguageNew = (l: string): void => {
+        push('/', undefined, { locale: l }).then()
     }
 
     return (
@@ -26,7 +31,7 @@ export const Header = () => {
                 <div
                     className={cls.header_logo}
                     onClick={() => {
-                        push('/').then()
+                        pushHook('/').then()
                     }}
                 >
                     <Image src={LogoIcon} alt={'login-icon'} width={40} height={40} />
@@ -34,13 +39,15 @@ export const Header = () => {
                 </div>
 
                 <div className={cls.lang}>
+                    <div>NOW={locale}</div>
                     {locales &&
                         locales.map((l) => {
                             return (
                                 <div
                                     key={l}
-                                    onClick={() => toggleLanguage(l)}
-                                    className={activeLang === l ? cls.active : ''}
+                                    // onClick={() => toggleLanguage(l)}
+                                    onClick={() => toggleLanguageNew(l)}
+                                    // className={activeLang === l ? cls.active : ''}
                                 >
                                     {l.toUpperCase()}
                                 </div>

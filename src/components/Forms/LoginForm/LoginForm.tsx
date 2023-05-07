@@ -4,15 +4,10 @@ import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import GoogleIcon from 'public/assets/icons/googleIcon.svg'
 import GitIcon from 'public/assets/icons/gitIcon.svg'
 import { Title } from '@/components/Forms/components/Title'
-// import { _Input } from '@/components/Forms/components/_Input'
 import { Input } from '@/shared/ui/Input/Input'
-// import EyeIcon from 'public/assets/icons/eye.svg'
-// import EyeOffIcon from 'public/assets/icons/eye-off.svg'
-// import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-// import { RegistrationParamsType } from '@/models/auth-types'
-// import { useRegistrationMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { useLoginMutation } from '@/services/AuthService'
 import { LoginParamsType } from '@/models/auth-types'
@@ -21,11 +16,6 @@ export const LoginForm = () => {
     const { t } = useTranslation('login')
     const { router } = useRouter()
     const [login, { onSuccess, error, isLoading }] = useLoginMutation()
-    // const [isLock, setIsLock] = useState(false)
-    //
-    // const lockHandler = () => {
-    //     setIsLock(!isLock)
-    // }
 
     const { control, handleSubmit } = useForm<LoginParamsType>({
         defaultValues: {
