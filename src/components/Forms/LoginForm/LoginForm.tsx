@@ -5,8 +5,8 @@ import GoogleIcon from 'public/assets/icons/googleIcon.svg'
 import GitIcon from 'public/assets/icons/gitIcon.svg'
 import { Title } from '@/components/Forms/components/Title'
 import { Input } from '@/shared/ui/Input/Input'
-// import { useTranslation } from 'react-i18next'
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'next-i18next'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation } from '@/services/AuthService'
@@ -46,13 +46,6 @@ export const LoginForm = () => {
                         <Input {...field} id={'Login_Email'} placeholder={t('Email')} />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    // type={'email'}*/}
-                {/*    placeholder={'Email'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-
                 <Controller
                     name='password'
                     control={control}
@@ -65,18 +58,6 @@ export const LoginForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    // type={isLock ? 'text' : 'password'}*/}
-                {/*    placeholder={'Password'}*/}
-                {/*    // className={styles.input}*/}
-                {/*    // inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
-                {/*    {isLock ? (*/}
-                {/*        <EyeOffIcon onClick={lockHandler} />*/}
-                {/*    ) : (*/}
-                {/*        <EyeIcon onClick={lockHandler} />*/}
-                {/*    )}*/}
-                {/*</_Input>*/}
             </div>
 
             <Link className={styles.forgot} href={'/forgot-password'}>

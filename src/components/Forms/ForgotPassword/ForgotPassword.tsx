@@ -5,8 +5,8 @@ import { Input } from '@/shared/ui/Input/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
 import CaptchaIcon from 'public/assets/icons/reCaotcha.svg'
-// import { useTranslation } from 'react-i18next'
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useSnackbar } from 'notistack'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -47,12 +47,6 @@ export const ForgotPassword = () => {
                         <Input {...field} id={'Forgot_Email'} placeholder={t('Email')} />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    type={'email'}*/}
-                {/*    className={styles.input}*/}
-                {/*    placeholder={'Email'}*/}
-                {/*    inputBodyClass={styles.inputBody}*/}
-                {/*/>*/}
                 <p>{t('EnterEmail')}</p>
             </div>
 
@@ -72,20 +66,11 @@ export const ForgotPassword = () => {
                             render={({ field }) => <Checkbox {...field} />}
                         />
                     </div>
-                    {/*<Controller*/}
-                    {/*    name='captcha'*/}
-                    {/*    control={control}*/}
-                    {/*    render={({ field }) => (*/}
-                    {/*        <_Input {...field} id={'Forgot_Email'} type={'checkbox'} />*/}
-                    {/*    )}*/}
-                    {/*/>*/}
-                    {/*<input type='checkbox' />*/}
                     <div>{t('Robot')}</div>
                     {/*<span>I&apos;m not a robot</span>*/}
                 </div>
 
                 <CaptchaIcon />
-                {/*<Image className={styles.img} src={CaptchaIcon} alt={'captcha'} />*/}
             </div>
         </form>
     )

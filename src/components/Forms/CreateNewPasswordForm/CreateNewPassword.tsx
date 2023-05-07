@@ -4,8 +4,8 @@ import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import React from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-// import { useTranslation } from 'react-i18next'
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
     const { t } = useTranslation('new-password')
@@ -50,19 +50,6 @@ export const CreateNewPasswordForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    type={isPassword ? 'text' : 'password'}*/}
-                {/*    inputBodyClass={styles.inputBody}*/}
-                {/*    className={styles.input}*/}
-                {/*    placeholder={'New password'}*/}
-                {/*>*/}
-                {/*    <Image*/}
-                {/*        className={styles.img}*/}
-                {/*        src={isPassword ? eyeOff : eye}*/}
-                {/*        onClick={lockPasswordHandler}*/}
-                {/*        alt={''}*/}
-                {/*    />*/}
-                {/*</_Input>*/}
                 <Controller
                     name='confirmPassword'
                     control={control}
@@ -75,19 +62,6 @@ export const CreateNewPasswordForm = () => {
                         />
                     )}
                 />
-                {/*<_Input*/}
-                {/*    type={isConfirm ? 'text' : 'password'}*/}
-                {/*    className={styles.input}*/}
-                {/*    inputBodyClass={styles.inputBody}*/}
-                {/*    placeholder={'Password confirmation'}*/}
-                {/*>*/}
-                {/*    <Image*/}
-                {/*        className={styles.img}*/}
-                {/*        src={isConfirm ? eyeOff : eye}*/}
-                {/*        onClick={lockConfirmHandler}*/}
-                {/*        alt={''}*/}
-                {/*    />*/}
-                {/*</_Input>*/}
                 <p>{t('PasswordLength')}</p>
             </div>
 
