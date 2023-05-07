@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
-    const { locale, locales } = useRouter()
+
     // пример i18n через useContext
     // const lang = useContext('en') // обернуть App
     // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
@@ -93,3 +93,11 @@ const Home: NextPageWithLayout = () => {
 
 Home.getLayout = getLayout
 export default Home
+
+// export async function getStaticProps({ locale }) {
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(locale, ['header', 'home']))
+//         }
+//     }
+// }
