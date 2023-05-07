@@ -13,7 +13,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
-    const { locale, locales } = useRouter()
 
     // пример i18n через useContext
     // const lang = useContext('en') // обернуть App
