@@ -3,7 +3,7 @@ import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
 import dotenv from 'dotenv'
 
-// dotenv.config()
+dotenv.config()
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
