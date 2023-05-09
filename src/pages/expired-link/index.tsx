@@ -3,27 +3,28 @@ import React from "react"
 import {getLayout} from "@/components/Layout/Layout"
 import {ConfirmEmailBox} from "@/components/ConfirmEmailBox/ConfirmEmailBox"
 import waitEmailLink from "../../../public/assets/images/waitEmailLink.png"
+import {useTranslation} from "react-i18next";
 
 
-const MergeAccount = () => {
+const ExpiredLink = () => {
+
+    const { t } = useTranslation('expired-link')
 
     return (
         <>
             <Head>
-                <title>Inctagram - Confirm Email</title>
+                <title>Inctagram - Expired link</title>
                 <meta name='title' content='Confirm' />
             </Head>
             <ConfirmEmailBox
-                title={'Email verification link expired'}
-                text={
-                'Looks like the verification link has expired. Not to worry, we can send the link again'
-            }
+                title={t('title')}
+                text={t('text')}
                 src={waitEmailLink}
-                buttonText={'Resend verification link'}
+                buttonText={t('resend')}
             />
         </>
     )
 }
 
-MergeAccount.getLayout = getLayout
-export default MergeAccount
+ExpiredLink.getLayout = getLayout
+export default ExpiredLink

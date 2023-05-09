@@ -3,25 +3,28 @@ import React from "react"
 import {getLayout} from "@/components/Layout/Layout"
 import {ConfirmEmailBox} from "@/components/ConfirmEmailBox/ConfirmEmailBox"
 import congratulations from "../../../public/assets/images/congratulations.png"
+import {useTranslation} from "react-i18next";
 
 
-const MergeAccount = () => {
+const Congratulations = () => {
+
+    const { t } = useTranslation('congratulations')
 
     return (
         <>
             <Head>
-                <title>Inctagram - Confirm Email</title>
+                <title>Inctagram - Congratulations</title>
                 <meta name='title' content='Confirm' />
             </Head>
             <ConfirmEmailBox
-                title={'Congratulations!'}
-                text={'Your email has been confirmed'}
+                title={t('congratulations')}
+                text={t('text')}
                 src={congratulations}
-                buttonText={'Sign In'}
+                buttonText={t('SignIn')}
             />
         </>
     )
 }
 
-MergeAccount.getLayout = getLayout
-export default MergeAccount
+Congratulations.getLayout = getLayout
+export default Congratulations

@@ -1,0 +1,6 @@
+{
+  "mergeAccount": "Merger of Accounts",
+  "text": "The user with email Epam@epam.com is already in the system. Could we merge this accounts?",
+  "yes": "Yes, merge",
+  "no": "No"
+}
