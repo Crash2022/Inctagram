@@ -1,7 +1,6 @@
 @import '../../../styles/mixins';
 
 .textarea_wrapper {
-    border: 1px solid white;
     border-radius: 4px;
     width: 250px;
     height: 100px;
@@ -15,6 +14,10 @@
         background-color: var(--header-color);
         font-size: 14px;
         color: white;
+        &:focus {
+            border: 2px solid black;
+            outline: none;
+        }
     }
 
     ::placeholder {
