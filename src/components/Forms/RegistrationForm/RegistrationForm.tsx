@@ -87,7 +87,7 @@ export const RegistrationForm = () => {
                 open={open}
                 setOpen={setOpen}
                 header={t('EmailSent')}
-                text={t('HaveSent')}
+                text={t('HaveSent') + control._getWatch('email')}
             />
             <Title title={t('SignUp')} className={styles.title} />
 
