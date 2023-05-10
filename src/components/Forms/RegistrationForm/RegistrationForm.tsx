@@ -86,7 +86,6 @@ export const RegistrationForm = () => {
             <MessageModal
                 open={open}
                 setOpen={setOpen}
-                extraButton
                 header={t('EmailSent')}
                 text={t('HaveSent')}
             />

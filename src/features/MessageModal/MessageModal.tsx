@@ -3,6 +3,7 @@ import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import s from './MessageModal.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
+import clsx from 'clsx'
 
 interface MessageModalProps {
     open: boolean
@@ -11,6 +12,7 @@ interface MessageModalProps {
     text: string
     extraButton?: boolean
     extraCallback?: () => void
+    longButton?: boolean
 }
 
 export const MessageModal = (props: MessageModalProps) => {
@@ -37,7 +39,12 @@ export const MessageModal = (props: MessageModalProps) => {
                     </div>
                 </div>
                 <div className={s.messageModal_title}>{props.text}</div>
-                <div className={s.messageModal_buttons}>
+                <div
+                    className={clsx({
+                        [s.messageModal_buttons]: !props.longButton,
+                        [s.messageModal_longButton]: props.longButton
+                    })}
+                >
                     {props.extraButton ? (
                         <>
                             <div>
