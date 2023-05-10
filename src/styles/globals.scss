@@ -82,7 +82,8 @@ body {
 
     /* dark */
     --dark-100: #747d86;
-    --dark-300: #46515e;
+    //--dark-300: #46515e;
+    --dark-300: #333333;
     --dark-500: #182636;
     --dark-700: #131e2b;
     --dark-900: #0e1720;
@@ -107,6 +108,7 @@ body {
     --default-container-padding-sides: 24px;
 
     /*----------------!* sizes *!----------------*/
+    --default-Modal-Margin: 12px 24px;
     --default-Extra-Small-Margin: 5px;
     --default-Small-Margin: 10px;
     --default-Large-Margin: 20px;

@@ -13,16 +13,18 @@ import { RegistrationParamsType } from '@/models/auth-types'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { usePush } from '@/shared/hooks/usePush'
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { MessageModal } from '@/features/MessageModal/MessageModal'
 
 export const RegistrationForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('registration')
     const pushHook = usePush()
+    const [open, setOpen] = useState<boolean>(false)
     const [registration, { onSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
     const SignUpSchema = yup.object().shape({
@@ -30,13 +32,13 @@ export const RegistrationForm = () => {
             .string()
             .required(t('Err_Yup_Required'))
             .min(8, t('Err_Yup_Min'))
-            .max(15, t('Err_Yup_Max')),
+            .max(50, t('Err_Yup_Max')),
         email: yup
             .string()
             .required(t('Err_Yup_Required'))
             .email(t('Err_Yup_Email'))
             .min(8, t('Err_Yup_Min'))
-            .max(15, t('Err_Yup_Max')),
+            .max(50, t('Err_Yup_Max')),
         password: yup
             .string()
             .required(t('Err_Yup_Required'))
@@ -66,6 +68,7 @@ export const RegistrationForm = () => {
         data: RegistrationParamsType
     ) => {
         console.log('submit', data)
+        setOpen(true)
         // await registration(data).then((res) => console.log(res))
     }
 
@@ -80,6 +83,13 @@ export const RegistrationForm = () => {
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <MessageModal
+                open={open}
+                setOpen={setOpen}
+                extraButton
+                header={t('EmailSent')}
+                text={t('HaveSent')}
+            />
             <Title title={t('SignUp')} className={styles.title} />
 
             <div className={styles.imgBody}>

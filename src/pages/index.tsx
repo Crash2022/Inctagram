@@ -37,44 +37,44 @@ const Home: NextPageWithLayout = () => {
                     <LinkA href={'/profile'} text={t('Profile')} />
                 </div>
 
-                {/*<div style={{ marginTop: '20px' }}>*/}
-                {/*    <div style={{ display: 'flex', gap: '20px' }}>*/}
-                {/*        <div*/}
-                {/*            style={{*/}
-                {/*                display: 'flex',*/}
-                {/*                width: '200px',*/}
-                {/*                flexDirection: 'column',*/}
-                {/*                gap: '20px'*/}
-                {/*            }}*/}
-                {/*        >*/}
-                {/*            <Button theme={'primary'}>Button</Button>*/}
-                {/*            <Button theme={'primaryWhite'}>Button</Button>*/}
-                {/*            <Button theme={'outline'}>Button</Button>*/}
-                {/*            <Button theme={'clear'}>Button</Button>*/}
-                {/*        </div>*/}
-                {/*        <div*/}
-                {/*            style={{*/}
-                {/*                display: 'flex',*/}
-                {/*                width: '200px',*/}
-                {/*                flexDirection: 'column',*/}
-                {/*                gap: '20px'*/}
-                {/*            }}*/}
-                {/*        >*/}
-                {/*            <Button disabled theme={'primary'}>*/}
-                {/*                Button*/}
-                {/*            </Button>*/}
-                {/*            <Button disabled theme={'primaryWhite'}>*/}
-                {/*                Button*/}
-                {/*            </Button>*/}
-                {/*            <Button disabled theme={'outline'}>*/}
-                {/*                Button*/}
-                {/*            </Button>*/}
-                {/*            <Button disabled theme={'clear'}>*/}
-                {/*                Button*/}
-                {/*            </Button>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div style={{ marginTop: '20px' }}>
+                    <div style={{ display: 'flex', gap: '20px' }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                width: '200px',
+                                flexDirection: 'column',
+                                gap: '20px'
+                            }}
+                        >
+                            <Button theme={'primary'}>Button</Button>
+                            <Button theme={'primaryWhite'}>Button</Button>
+                            <Button theme={'outline'}>Button</Button>
+                            <Button theme={'clear'}>Button</Button>
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                width: '200px',
+                                flexDirection: 'column',
+                                gap: '20px'
+                            }}
+                        >
+                            <Button disabled theme={'primary'}>
+                                Button
+                            </Button>
+                            <Button disabled theme={'primaryWhite'}>
+                                Button
+                            </Button>
+                            <Button disabled theme={'outline'}>
+                                Button
+                            </Button>
+                            <Button disabled theme={'clear'}>
+                                Button
+                            </Button>
+                        </div>
+                    </div>
+                </div>
 
                 {/*<div style={{ marginBottom: '25px', width: '450px' }}>*/}
                 {/*    <Input id={'Email'} placeholder={'Email'} />*/}

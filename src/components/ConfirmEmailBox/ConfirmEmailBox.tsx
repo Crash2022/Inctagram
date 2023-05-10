@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image'
 import s from './ConfirmEmailBox.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
-import {useTranslation} from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
 interface ConfirmEmailBoxType {
     title: string
@@ -12,7 +12,6 @@ interface ConfirmEmailBoxType {
 }
 
 export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: ConfirmEmailBoxType) => {
-
     const { t } = useTranslation('mergeAccount')
 
     return (

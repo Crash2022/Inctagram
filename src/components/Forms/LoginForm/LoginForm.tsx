@@ -26,7 +26,7 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<LoginParamsType> = async (data: LoginParamsType) => {
         console.log('submit', data)
-        // await login(data).then((res) => console.log(res))
+        await login(data).then((res) => console.log(res))
     }
 
     return (

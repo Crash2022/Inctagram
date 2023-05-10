@@ -4,27 +4,33 @@
     @include defaultModalStyle;
     @include flexColumn;
     width: 350px;
+    background-color: var(--dark-300);
 
-    .messageModal_title {
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .messageModal_buttons {
-        display: flex;
-        gap: 40px;
+    .messageModal_header {
+        width: 100%;
+        border-bottom: 1px solid var(--snippet-border);
+        padding: var(--default-Modal-Margin);
+        margin-bottom: 30px;
+        @include h1-text-size;
+        @include flexBetween;
 
-        button {
-            padding: 10px;
-        }
-
-        .messageModal_cancelButton {
-            button {
-                background-color: #ff6b6b;
-
-                &:hover {
-                    background-color: red;
-                }
+        .header_cancel {
+            &:hover {
+                cursor: pointer;
             }
         }
+    }
+
+    .messageModal_title {
+        margin-bottom: 18px;
+        padding: 0 24px;
+    }
+    .messageModal_buttons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 24px;
+        margin-bottom: 30px;
+        padding: 0 24px;
     }
 }
