@@ -13,7 +13,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
     const { locale, locales, push } = useRouter()
-    const pushHook = usePush()
+    const router = useRouter()
     const [activeLang, setActiveLang] = useState<string>('en')
     // const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
 
@@ -32,7 +32,7 @@ export const Header = () => {
                 <div
                     className={cls.header_logo}
                     onClick={() => {
-                        pushHook('/').then()
+                        router.push('/').then()
                     }}
                 >
                     <Image src={LogoIcon} alt={'login-icon'} width={40} height={40} />

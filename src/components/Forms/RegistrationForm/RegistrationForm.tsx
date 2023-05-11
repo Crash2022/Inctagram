@@ -23,7 +23,7 @@ import { MessageModal } from '@/features/MessageModal/MessageModal'
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
     const { enqueueSnackbar } = useSnackbar()
-    const pushHook = usePush()
+    const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
     const [registration, { isSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
@@ -72,7 +72,7 @@ export const RegistrationForm = () => {
     }
 
     const messageModalOKHandler = () => {
-        pushHook('/login').then()
+        router.push('/login').then()
     }
 
     useEffect(() => {

@@ -20,7 +20,6 @@ export const LoginForm = () => {
     const { t } = useTranslation('login')
     const { enqueueSnackbar } = useSnackbar()
     const { router } = useRouter()
-    const pushHook = usePush()
     const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
 
     const { control, handleSubmit } = useForm<LoginParamsType>({
@@ -34,14 +33,21 @@ export const LoginForm = () => {
         console.log('submit login', submitData)
         await login(submitData).then((res) => {
             console.log(res)
-            localStorage.setItem('accessToken', loginData)
+            // localStorage.setItem('accessToken', loginData)
         })
     }
 
     useEffect(() => {
-        // if (isSuccess) pushHook('/profile').then()
         if (isSuccess) router.push('/profile')
-    }, [isSuccess])
+        if (isError)
+            enqueueSnackbar(
+                error.data.messages[0].message ? error.data.messages[0].message : 'Server error',
+                {
+                    variant: 'error',
+                    autoHideDuration: 3000
+                }
+            )
+    }, [isSuccess, isError])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
