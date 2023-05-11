@@ -76,8 +76,22 @@ export const RegistrationForm = () => {
     }
 
     useEffect(() => {
-        if (isSuccess) setOpen(true)
+        if (isSuccess) {
+            setOpen(true)
+        }
     }, [isSuccess])
+
+    // useEffect(() => {
+    //     enqueueSnackbar('Works', {
+    //         variant: 'error',
+    //         autoHideDuration: 2000
+    //     })
+    //
+    //     // enqueueSnackbar(error.data.messages[0].message, {
+    //     //     variant: 'error',
+    //     //     autoHideDuration: 2000
+    //     // })
+    // }, [])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
