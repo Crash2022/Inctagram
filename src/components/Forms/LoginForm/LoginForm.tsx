@@ -11,11 +11,17 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation } from '@/services/AuthService'
 import { LoginParamsType } from '@/models/auth-types'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { useSnackbar } from 'notistack'
+import { useEffect } from 'react'
+import { usePush } from '@/shared/hooks/usePush'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
+    const { enqueueSnackbar } = useSnackbar()
     const { router } = useRouter()
-    const [login, { onSuccess, error, isLoading }] = useLoginMutation()
+    const pushHook = usePush()
+    const [login, { data: loginData, isSuccess, error, isLoading }] = useLoginMutation()
 
     const { control, handleSubmit } = useForm<LoginParamsType>({
         defaultValues: {
@@ -24,10 +30,19 @@ export const LoginForm = () => {
         }
     })
 
-    const onSubmit: SubmitHandler<LoginParamsType> = async (data: LoginParamsType) => {
-        console.log('submit', data)
-        await login(data).then((res) => console.log(res))
+    const onSubmit: SubmitHandler<LoginParamsType> = async (submitData: LoginParamsType) => {
+        console.log('submit', submitData)
+        await login(submitData).then((res) => {
+            console.log(res)
+            // localStorage.setItem('accessToken', loginData.accessToken)
+        })
     }
+
+    useEffect(() => {
+        if (isSuccess) pushHook('/profile').then()
+    }, [isSuccess])
+
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -70,7 +85,6 @@ export const LoginForm = () => {
                     {t('SignIn')}
                 </Button>
                 <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
-                {/*<h3 className={styles.subtitle}>Don&apos;t have an account?</h3>*/}
                 <Link className={styles.link} href={'/registration'}>
                     {' '}
                     {t('SignUp')}

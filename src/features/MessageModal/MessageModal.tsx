@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import s from './MessageModal.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
@@ -10,13 +10,14 @@ interface MessageModalProps {
     setOpen: (value: boolean) => void
     header: string
     text: string
-    extraButton?: boolean
-    extraCallback?: () => void
-    longButton?: boolean
+    extraButton?: boolean // модалка с двумя кнопками (+ нужен extraCallbackYES)
+    extraCallbackYES?: () => void // функция для модалки с двумя кнопками
+    buttonTitleOK: string // название кнопки для модалки с одной кнопкой
+    extraCallbackOK?: () => void
+    longButton?: boolean // одна кнопка на всю ширину (только стили)
 }
 
 export const MessageModal = (props: MessageModalProps) => {
-    // const [open, setOpen] = useState<boolean>(false)
     const { t } = useTranslation('message-modal')
 
     return (
@@ -51,8 +52,8 @@ export const MessageModal = (props: MessageModalProps) => {
                                 <Button
                                     theme={'outline'}
                                     onClick={() => {
-                                        if (props.extraCallback) {
-                                            props.extraCallback()
+                                        if (props.extraCallbackYES) {
+                                            props.extraCallbackYES()
                                         }
                                     }}
                                 >
@@ -73,10 +74,12 @@ export const MessageModal = (props: MessageModalProps) => {
                         <div>
                             <Button
                                 onClick={() => {
-                                    props.setOpen(false)
+                                    if (props.extraCallbackOK) {
+                                        props.extraCallbackOK()
+                                    }
                                 }}
                             >
-                                ОК
+                                {props.buttonTitleOK}
                             </Button>
                         </div>
                     )}

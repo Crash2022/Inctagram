@@ -21,24 +21,24 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { MessageModal } from '@/features/MessageModal/MessageModal'
 
 export const RegistrationForm = () => {
-    const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('registration')
+    const { enqueueSnackbar } = useSnackbar()
     const pushHook = usePush()
     const [open, setOpen] = useState<boolean>(false)
-    const [registration, { onSuccess, error, isError, isLoading }] = useRegistrationMutation()
+    const [registration, { isSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
     const SignUpSchema = yup.object().shape({
         userName: yup
             .string()
             .required(t('Err_Yup_Required'))
             .min(8, t('Err_Yup_Min'))
-            .max(50, t('Err_Yup_Max')),
+            .max(20, t('Err_Yup_Max')),
         email: yup
             .string()
             .required(t('Err_Yup_Required'))
             .email(t('Err_Yup_Email'))
             .min(8, t('Err_Yup_Min'))
-            .max(50, t('Err_Yup_Max')),
+            .max(40, t('Err_Yup_Max')),
         password: yup
             .string()
             .required(t('Err_Yup_Required'))
@@ -65,19 +65,19 @@ export const RegistrationForm = () => {
     })
 
     const onSubmit: SubmitHandler<RegistrationParamsType> = async (
-        data: RegistrationParamsType
+        submitData: RegistrationParamsType
     ) => {
-        console.log('submit', data)
-        setOpen(true)
-        // await registration(data).then((res) => console.log(res))
+        console.log('submit', submitData)
+        await registration(submitData).then((res) => console.log(res))
+    }
+
+    const messageModalOKHandler = () => {
+        pushHook('/login').then()
     }
 
     useEffect(() => {
-        if (error) {
-            pushHook('/login').then()
-        }
-        // error && enqueueSnackbar('Ошибка', { variant: 'error', autoHideDuration: 2000 })
-    }, [error, pushHook])
+        if (isSuccess) setOpen(true)
+    }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -88,6 +88,8 @@ export const RegistrationForm = () => {
                 setOpen={setOpen}
                 header={t('EmailSent')}
                 text={t('HaveSent') + control._getWatch('email')}
+                buttonTitleOK={t('MainButton')}
+                extraCallbackOK={messageModalOKHandler}
             />
             <Title title={t('SignUp')} className={styles.title} />
 
