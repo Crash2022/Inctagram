@@ -67,7 +67,7 @@ export const RegistrationForm = () => {
     const onSubmit: SubmitHandler<RegistrationParamsType> = async (
         submitData: RegistrationParamsType
     ) => {
-        console.log('submit', submitData)
+        console.log('submit registration', submitData)
         await registration(submitData).then((res) => console.log(res))
     }
 

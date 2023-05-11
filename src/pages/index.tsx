@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useLogoutMutation } from '@/services/AuthService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
@@ -18,6 +20,10 @@ const Home: NextPageWithLayout = () => {
     // const lang = useContext('en') // обернуть App
     // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
     // <div>{allPageData.title}</div> // вставить в разметку
+
+    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <>
@@ -47,7 +53,16 @@ const Home: NextPageWithLayout = () => {
                                 gap: '20px'
                             }}
                         >
-                            <Button theme={'primary'}>Button</Button>
+                            <Button
+                                theme={'primary'}
+                                onClick={async () => {
+                                    await logout().then((res) => {
+                                        console.log('logout', res)
+                                    })
+                                }}
+                            >
+                                LogOut
+                            </Button>
                             <Button theme={'primaryWhite'}>Button</Button>
                             <Button theme={'outline'}>Button</Button>
                             <Button theme={'clear'}>Button</Button>

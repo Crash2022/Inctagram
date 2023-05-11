@@ -15,7 +15,7 @@ export const Header = () => {
     const { locale, locales, push } = useRouter()
     const pushHook = usePush()
     const [activeLang, setActiveLang] = useState<string>('en')
-    // const [logout, { onSuccess, error, isError, isLoading }] = useLogoutMutation()
+    // const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
 
     // const toggleLanguage = (language: string): void => {
     //     setActiveLang(activeLang === 'ru' ? 'en' : 'ru')

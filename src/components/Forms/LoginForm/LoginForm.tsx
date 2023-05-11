@@ -31,10 +31,10 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<LoginParamsType> = async (submitData: LoginParamsType) => {
-        console.log('submit', submitData)
+        console.log('submit login', submitData)
         await login(submitData).then((res) => {
             console.log(res)
-            // localStorage.setItem('accessToken', loginData.accessToken)
+            localStorage.setItem('accessToken', loginData)
         })
     }
 
