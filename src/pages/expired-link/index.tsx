@@ -1,13 +1,11 @@
-import Head from "next/head"
-import React from "react"
-import {getLayout} from "@/components/Layout/Layout"
-import {ConfirmEmailBox} from "@/components/ConfirmEmailBox/ConfirmEmailBox"
-import waitEmailLink from "../../../public/assets/images/waitEmailLink.png"
-import {useTranslation} from "react-i18next";
-
+import Head from 'next/head'
+import React from 'react'
+import { getLayout } from '@/components/Layout/Layout'
+import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
+import waitEmailLink from '../../../public/assets/images/waitEmailLink.png'
+import { useTranslation } from 'react-i18next'
 
 const ExpiredLink = () => {
-
     const { t } = useTranslation('expired-link')
 
     return (

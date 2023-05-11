@@ -10,17 +10,6 @@ import { useTranslation } from 'react-i18next'
 export const CreateNewPasswordForm = () => {
     const { t } = useTranslation('new-password')
 
-    // const [isPassword, setIsPassword] = useState(false)
-    // const [isConfirm, setIsConfirm] = useState(false)
-    //
-    // const lockPasswordHandler = () => {
-    //     setIsPassword(!isPassword)
-    // }
-    //
-    // const lockConfirmHandler = () => {
-    //     setIsConfirm(!isConfirm)
-    // }
-
     const { control, handleSubmit } = useForm<any>({
         defaultValues: {
             password: '',
