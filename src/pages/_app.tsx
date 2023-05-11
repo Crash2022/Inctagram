@@ -12,6 +12,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ni18nConfig } from '../../ni18n.config'
 import { appWithTranslation } from 'next-i18next'
+import { SnackbarProvider } from 'notistack'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -43,8 +44,10 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
                 `}
             </style>
             <Provider store={store}>
-                {/*<Suspense fallback={<div>...</div>}>*/}
-                <Component {...pageProps} />
+                <SnackbarProvider maxSnack={2}>
+                    {/*<Suspense fallback={<div>...</div>}>*/}
+                    <Component {...pageProps} />
+                </SnackbarProvider>
                 {/*</Suspense>*/}
             </Provider>
         </>

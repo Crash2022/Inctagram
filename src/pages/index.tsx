@@ -45,7 +45,13 @@ const Home: NextPageWithLayout = () => {
                     <LinkA href={'/profile'} text={t('Profile')} />
                 </div>
 
-                <div>{me ? me : <div>Вы не вошли в систему</div>}</div>
+                <div>
+                    {me ? (
+                        me
+                    ) : (
+                        <div style={{ marginTop: '40px' }}>!!! Вы не вошли в систему !!!</div>
+                    )}
+                </div>
 
                 <div style={{ marginTop: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>

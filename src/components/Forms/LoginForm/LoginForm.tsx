@@ -21,7 +21,7 @@ export const LoginForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { router } = useRouter()
     const pushHook = usePush()
-    const [login, { data: loginData, isSuccess, error, isLoading }] = useLoginMutation()
+    const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
 
     const { control, handleSubmit } = useForm<LoginParamsType>({
         defaultValues: {
@@ -39,7 +39,8 @@ export const LoginForm = () => {
     }
 
     useEffect(() => {
-        if (isSuccess) pushHook('/profile').then()
+        // if (isSuccess) pushHook('/profile').then()
+        if (isSuccess) router.push('/profile')
     }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
