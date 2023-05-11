@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
 import dotenv from 'dotenv'
+import { Photo } from '@/models/userProfileService-types'
 
 // dotenv.config()
 export const authAPI = createApi({
@@ -39,11 +40,16 @@ export const authAPI = createApi({
                 url: '/auth/logout',
                 method: 'POST'
             })
+        }),
+        me: build.query({
+            query: () => ({
+                url: '/auth/me'
+            })
         })
     })
 })
 
-export const { useRegistrationMutation, useLoginMutation, useLogoutMutation } = authAPI
+export const { useRegistrationMutation, useLoginMutation, useLogoutMutation, useMeQuery } = authAPI
 
 // export const registerApiSlice = createApi({
 //     reducerPath: 'register/api',

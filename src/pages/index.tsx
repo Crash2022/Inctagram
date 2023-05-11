@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useLogoutMutation } from '@/services/AuthService'
+import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 const Home: NextPageWithLayout = () => {
@@ -22,6 +22,8 @@ const Home: NextPageWithLayout = () => {
     // <div>{allPageData.title}</div> // вставить в разметку
 
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+    const { me } = useMeQuery()
+    console.log('me request', me)
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -42,6 +44,8 @@ const Home: NextPageWithLayout = () => {
                     <LinkA href={'/forgot-password'} text={t('ForgotPassword')} />
                     <LinkA href={'/profile'} text={t('Profile')} />
                 </div>
+
+                <div>{me ? me : <div>Вы не вошли в систему</div>}</div>
 
                 <div style={{ marginTop: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
