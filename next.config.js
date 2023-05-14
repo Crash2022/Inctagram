@@ -3,6 +3,8 @@ const { i18n } = require('./next-i18next.config')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    basePath: '/Inctagram', // add this line
+    assetPrefix: '/Inctagram/', // add this line
     webpack(config) {
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'))
         config.resolve.fallback = { fs: false }

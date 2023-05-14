@@ -14,8 +14,8 @@ import { LoginParamsType } from '@/models/auth-types'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
-    const { router } = useRouter()
-    const [login, { onSuccess, error, isLoading }] = useLoginMutation()
+    const router = useRouter()
+    const [login, { isLoading }] = useLoginMutation()
 
     const { control, handleSubmit } = useForm<LoginParamsType>({
         defaultValues: {
@@ -26,7 +26,12 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<LoginParamsType> = async (data: LoginParamsType) => {
         console.log('submit', data)
-        // await login(data).then((res) => console.log(res))
+        try {
+            await login(data).unwrap()
+            // handle success here, like a router push or a success message
+        } catch (error) {
+            // handle error here, like showing an error message
+        }
     }
 
     return (
@@ -43,7 +48,7 @@ export const LoginForm = () => {
                     name='email'
                     control={control}
                     render={({ field }) => (
-                        <Input {...field} id={'Login_Email'} placeholder={t('Email')} />
+                        <Input {...field} id={'Login_Email'} placeholder={t('Email') as string} />
                     )}
                 />
                 <Controller
@@ -53,7 +58,7 @@ export const LoginForm = () => {
                         <Input
                             {...field}
                             id={'Login_Password'}
-                            placeholder={t('Password')}
+                            placeholder={t('Password') as string}
                             password
                         />
                     )}

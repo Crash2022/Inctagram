@@ -1,40 +1,47 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types';
-
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
 
 
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://inctagram-api-git-main-shuliakleonid.vercel.app',
+        // baseUrl: process.env.BASE_URL
+        baseUrl: "https://inctagram-api-git-main-shuliakleonid.vercel.app"
+        // baseUrl: 'baseUrl'
     }),
-    endpoints: {
-        registration: {
-            query: (args: { queryArg: RegistrationParamsType }) => ({
+    endpoints: (build) => ({
+        // registration: {
+        //     query: (args: { queryArg: RegistrationParamsType }) => ({
+        //         url: '/auth/registration',
+        //         method: 'POST',
+        //         body: args.queryArg
+        //     }),
+        //     invalidatesTags: ['Users']
+        // },
+        registration: build.mutation<any, RegistrationParamsType>({
+            query: (payload: RegistrationParamsType) => ({
                 url: '/auth/registration',
                 method: 'POST',
-                body: args.queryArg,
-            }),
-            invalidatesTags: ['Users'],
-        },
-        login: {
+                body: payload
+            })
+        }),
+        login: build.mutation<any, LoginParamsType>({
             query: (payload: LoginParamsType) => ({
                 url: '/auth/login',
                 method: 'POST',
-                body: payload,
-            }),
-        },
-        logout: {
+                body: payload
+            })
+        }),
+        logout: build.mutation({
             query: () => ({
                 url: '/auth/logout',
-                method: 'POST',
-            }),
-        },
-    },
-});
+                method: 'POST'
+            })
+        })
+    })
+})
 
-export const { useRegistrationMutation, useLoginMutation, useLogoutMutation } = authAPI;
-
+export const { useRegistrationMutation, useLoginMutation, useLogoutMutation } = authAPI
 
 // export const registerApiSlice = createApi({
 //     reducerPath: 'register/api',

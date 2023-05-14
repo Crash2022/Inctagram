@@ -45,7 +45,7 @@ export const CreateNewPasswordForm = () => {
                         <Input
                             {...field}
                             id={'New_Password'}
-                            placeholder={t('Password')}
+                            placeholder={t('Password') as string}
                             password
                         />
                     )}
@@ -57,7 +57,7 @@ export const CreateNewPasswordForm = () => {
                         <Input
                             {...field}
                             id={'New_ConfirmPassword'}
-                            placeholder={t('ConfirmPassword')}
+                            placeholder={t('ConfirmPassword') as string}
                             password
                         />
                     )}

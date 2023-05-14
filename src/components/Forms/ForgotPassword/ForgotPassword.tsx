@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
 import CaptchaIcon from 'public/assets/icons/reCaotcha.svg'
 import { useTranslation } from 'react-i18next'
-// import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useSnackbar } from 'notistack'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -14,9 +13,8 @@ import { RegistrationParamsType } from '@/models/auth-types'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
 
 export const ForgotPassword = () => {
-    // const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
-    const { router } = useRouter()
+    const router = useRouter()
 
     const { control, handleSubmit } = useForm<RegistrationParamsType>({
         defaultValues: {
@@ -29,12 +27,7 @@ export const ForgotPassword = () => {
         data: RegistrationParamsType
     ) => {
         console.log('submit', data)
-        // await registration(data).then((res) => console.log(res))
     }
-
-    // useEffect(() => {
-    //     enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
-    // }, [])
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -44,7 +37,7 @@ export const ForgotPassword = () => {
                     name='email'
                     control={control}
                     render={({ field }) => (
-                        <Input {...field} id={'Forgot_Email'} placeholder={t('Email')} />
+                        <Input {...field} id={'Forgot_Email'} placeholder={t('Email') as string} />
                     )}
                 />
                 <p>{t('EnterEmail')}</p>
@@ -63,11 +56,10 @@ export const ForgotPassword = () => {
                         <Controller
                             name='captcha'
                             control={control}
-                            render={({ field }) => <Checkbox {...field} />}
+                            render={({ field:{onChange, value} }) => <Checkbox onChange={onChange} checked={value} />}
                         />
                     </div>
                     <div>{t('Robot')}</div>
-                    {/*<span>I&apos;m not a robot</span>*/}
                 </div>
 
                 <CaptchaIcon />

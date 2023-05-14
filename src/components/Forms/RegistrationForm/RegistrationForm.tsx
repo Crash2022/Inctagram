@@ -11,7 +11,6 @@ import {useRegistrationMutation} from '@/services/AuthService'
 import {Controller, SubmitHandler, useForm} from 'react-hook-form'
 import {RegistrationParamsType} from '@/models/auth-types'
 import {useTranslation} from 'react-i18next'
-// import { useTranslation } from 'next-i18next'
 import {useSnackbar} from 'notistack'
 import {useEffect} from 'react'
 import {LoaderScreen} from '@/shared/ui/Loader/LoaderScreen'
@@ -21,28 +20,28 @@ export const RegistrationForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('registration')
     const pushHook = usePush()
-    const [registration, { onSuccess, error, isError, isLoading }] = useRegistrationMutation()
+    const [registration, { error, isError, isLoading, isSuccess }] = useRegistrationMutation()
 
     const SignUpSchema = yup.object().shape({
         userName: yup
             .string()
-            .required(t('Err_Yup_Required'))
-            .min(8, t('Err_Yup_Min'))
-            .max(15, t('Err_Yup_Max')),
+            .required(t('Err_Yup_Required')as string)
+            .min(8, t('Err_Yup_Min')as string)
+            .max(15, t('Err_Yup_Max')as string),
         email: yup
             .string()
-            .required(t('Err_Yup_Required'))
-            .email(t('Err_Yup_Email'))
-            .min(8, t('Err_Yup_Min'))
-            .max(15, t('Err_Yup_Max')),
+            .required(t('Err_Yup_Required') as string)
+            .email(t('Err_Yup_Email') as string)
+            .min(8, t('Err_Yup_Min') as string)
+            .max(15, t('Err_Yup_Max') as string),
         password: yup
             .string()
-            .required(t('Err_Yup_Required'))
-            .min(8, t('Err_Yup_Min'))
-            .max(15, t('Err_Yup_Max')),
+            .required(t('Err_Yup_Required') as string)
+            .min(8, t('Err_Yup_Min') as string)
+            .max(15, t('Err_Yup_Max') as string),
         confirmPassword: yup
             .string()
-            .required(t('Err_Yup_Required'))
+            .required(t('Err_Yup_Required') as string)
             .oneOf([yup.ref('password'), null], t('Err_Yup_FieldMatch'))
     })
 
@@ -64,15 +63,23 @@ export const RegistrationForm = () => {
         data: RegistrationParamsType
     ) => {
         console.log('submit', data)
-        // await registration(data).then((res) => console.log(res))
+        try {
+            await registration(data).unwrap()
+            // handle success here, like a router push or a success message
+        } catch (error) {
+            // handle error here, like showing an error message
+        }
     }
 
     useEffect(() => {
-        if (error) {
+        if (isError) {
+            enqueueSnackbar('Error', { variant: 'error', autoHideDuration: 2000 })
             pushHook('/login').then()
         }
-        // error && enqueueSnackbar('Ошибка', { variant: 'error', autoHideDuration: 2000 })
-    }, [error, pushHook])
+        if (isSuccess) {
+            enqueueSnackbar('Success', { variant: 'success', autoHideDuration: 2000 })
+        }
+    }, [isError, isSuccess, pushHook, enqueueSnackbar])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -93,7 +100,7 @@ export const RegistrationForm = () => {
                         <Input
                             {...field}
                             id={'Reg_Username'}
-                            placeholder={t('Username')}
+                            placeholder={t('Username') as string}
                             error={errors.userName?.message}
                         />
                     )}
@@ -117,7 +124,7 @@ export const RegistrationForm = () => {
                         <Input
                             {...field}
                             id={'Reg_Password'}
-                            placeholder={t('Password')}
+                            placeholder={t('Password') as string}
                             error={errors.password?.message}
                             password
                         />
@@ -144,7 +151,7 @@ export const RegistrationForm = () => {
                 <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
                 <Link className={styles.link} href={'/login'}>
                     {' '}
-                    {t('SignIn')}
+                    {t('SignIn') as string}
                 </Link>
             </div>
         </form>
