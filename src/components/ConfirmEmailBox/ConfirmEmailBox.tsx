@@ -53,7 +53,8 @@ export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: Confirm
                     className={s.button}
                     theme={'primary'}
                     onClick={() => {
-                        pushHook('/auth/login').then()
+                        // pushHook('/auth/login').then()
+                        router.push('/auth/login').then()
                     }}
                 >
                     {buttonText}
