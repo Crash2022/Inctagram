@@ -39,9 +39,9 @@ const Home: NextPageWithLayout = () => {
                         gap: '10px'
                     }}
                 >
-                    <LinkA href={'/registration'} text={t('Registration')} />
-                    <LinkA href={'/login'} text={t('Login')} />
-                    <LinkA href={'/forgot-password'} text={t('ForgotPassword')} />
+                    <LinkA href={'/auth/registration'} text={t('Registration')} />
+                    <LinkA href={'/auth/login'} text={t('Login')} />
+                    <LinkA href={'/auth/forgot-password'} text={t('ForgotPassword')} />
                     <LinkA href={'/profile'} text={t('Profile')} />
                 </div>
 

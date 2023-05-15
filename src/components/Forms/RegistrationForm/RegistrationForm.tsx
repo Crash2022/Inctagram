@@ -78,7 +78,7 @@ export const RegistrationForm = () => {
     useEffect(() => {
         if (isSuccess) setOpen(true)
         if (isError)
-            enqueueSnackbar(error.data.messages[0].message, {
+            enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
                 variant: 'error',
                 autoHideDuration: 3000
             })

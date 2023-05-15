@@ -33,7 +33,7 @@ export const LoginForm = () => {
         console.log('submit login', submitData)
         await login(submitData).then((res) => {
             console.log(res)
-            // localStorage.setItem('accessToken', loginData)
+            localStorage.setItem('accessToken', loginData)
         })
     }
 

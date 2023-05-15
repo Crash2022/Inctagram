@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
+import {
+    LoginPayloadType,
+    RegistrationConfirmationPayloadType,
+    RegistrationPayloadType
+} from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
 import dotenv from 'dotenv'
 import { Photo } from '@/models/userProfileService-types'
@@ -21,15 +25,22 @@ export const authAPI = createApi({
         //     }),
         //     invalidatesTags: ['Users']
         // },
-        registration: build.mutation<any, RegistrationParamsType>({
-            query: (payload: RegistrationParamsType) => ({
+        registration: build.mutation<any, RegistrationPayloadType>({
+            query: (payload: RegistrationPayloadType) => ({
                 url: '/auth/registration',
                 method: 'POST',
                 body: payload
             })
         }),
-        login: build.mutation<any, LoginParamsType>({
-            query: (payload: LoginParamsType) => ({
+        registrationConfirmation: build.mutation<any, RegistrationConfirmationPayloadType>({
+            query: (payload: RegistrationConfirmationPayloadType) => ({
+                url: '/auth/registration-confirmation',
+                method: 'POST',
+                body: payload
+            })
+        }),
+        login: build.mutation<any, LoginPayloadType>({
+            query: (payload: LoginPayloadType) => ({
                 url: '/auth/login',
                 method: 'POST',
                 body: payload
@@ -49,7 +60,13 @@ export const authAPI = createApi({
     })
 })
 
-export const { useRegistrationMutation, useLoginMutation, useLogoutMutation, useMeQuery } = authAPI
+export const {
+    useRegistrationMutation,
+    useRegistrationConfirmationMutation,
+    useLoginMutation,
+    useLogoutMutation,
+    useMeQuery
+} = authAPI
 
 // export const registerApiSlice = createApi({
 //     reducerPath: 'register/api',

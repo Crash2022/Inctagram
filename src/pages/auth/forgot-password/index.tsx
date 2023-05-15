@@ -9,9 +9,9 @@ import { NextPageWithLayout } from '@/pages/_app'
 const Forgot: NextPageWithLayout = () => {
     const { enqueueSnackbar } = useSnackbar()
 
-    useEffect(() => {
-        enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
-    }, [])
+    // useEffect(() => {
+    //     enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
+    // }, [])
 
     return (
         <>

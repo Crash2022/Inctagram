@@ -1,29 +1,28 @@
 import Head from 'next/head'
 import React from 'react'
-import mergeAccount from '../../../public/assets/images/mergeAccount.png'
 import { getLayout } from '@/components/Layout/Layout'
 import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
+import congratulations from '../../../../public/assets/images/congratulations.png'
 import { useTranslation } from 'react-i18next'
 
-const MergeAccount = () => {
-    const { t } = useTranslation('mergeAccount')
+const RegistrationConfirmation = () => {
+    const { t } = useTranslation('congratulations')
 
     return (
         <>
             <Head>
-                <title>Inctagram - Merger of Accounts</title>
+                <title>Inctagram - Congratulations</title>
                 <meta name='title' content='Confirm' />
             </Head>
             <ConfirmEmailBox
-                title={t('mergeAccount')}
+                title={t('congratulations')}
                 text={t('text')}
-                src={mergeAccount}
-                buttonText={''}
-                merge={true}
+                src={congratulations}
+                buttonText={t('SignIn')}
             />
         </>
     )
 }
 
-MergeAccount.getLayout = getLayout
-export default MergeAccount
+RegistrationConfirmation.getLayout = getLayout
+export default RegistrationConfirmation
