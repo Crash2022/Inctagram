@@ -12,9 +12,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
+    const router = useRouter()
 
     // пример i18n через useContext
     // const lang = useContext('en') // обернуть App
@@ -22,105 +25,97 @@ const Home: NextPageWithLayout = () => {
     // <div>{allPageData.title}</div> // вставить в разметку
 
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
-    const { me } = useMeQuery()
-    console.log('me request', me)
+
+    useEffect(() => {
+        if (localStorage.getItem('accessToken')) {
+            router.push('/profile').then()
+        } else {
+            router.push('/auth/login').then()
+        }
+    }, [router])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <>
             <div className={s.main}>
-                <div
-                    style={{
-                        marginTop: '20px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '10px'
-                    }}
-                >
-                    <LinkA href={'/auth/registration'} text={t('Registration')} />
-                    <LinkA href={'/auth/login'} text={t('Login')} />
-                    <LinkA href={'/auth/forgot-password'} text={t('ForgotPassword')} />
-                    <LinkA href={'/profile'} text={t('Profile')} />
-                </div>
+                {/*<div*/}
+                {/*    style={{*/}
+                {/*        marginTop: '20px',*/}
+                {/*        display: 'flex',*/}
+                {/*        flexDirection: 'column',*/}
+                {/*        alignItems: 'center',*/}
+                {/*        gap: '10px'*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <LinkA href={'/auth/registration'} text={t('Registration')} />*/}
+                {/*    <LinkA href={'/auth/login'} text={t('Login')} />*/}
+                {/*    <LinkA href={'/auth/forgot-password'} text={t('ForgotPassword')} />*/}
+                {/*    <LinkA href={'/profile'} text={t('Profile')} />*/}
+                {/*</div>*/}
 
-                <div>
-                    {/*{me ? (*/}
-                    {/*    me*/}
-                    {/*) : (*/}
-                    {/*    <div style={{ marginTop: '40px' }}>!!! Вы не вошли в систему !!!</div>*/}
-                    {/*)}*/}
+                {/*<div style={{ marginTop: '20px' }}>*/}
+                {/*    <div style={{ display: 'flex', gap: '20px' }}>*/}
+                {/*        <div*/}
+                {/*            style={{*/}
+                {/*                display: 'flex',*/}
+                {/*                width: '200px',*/}
+                {/*                flexDirection: 'column',*/}
+                {/*                gap: '20px'*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            <Button theme={'primary'}>Button</Button>*/}
+                {/*            <Button theme={'primaryWhite'}>Button</Button>*/}
+                {/*            <Button theme={'outline'}>Button</Button>*/}
+                {/*            <Button theme={'clear'}>Button</Button>*/}
+                {/*        </div>*/}
+                {/*        <div*/}
+                {/*            style={{*/}
+                {/*                display: 'flex',*/}
+                {/*                width: '200px',*/}
+                {/*                flexDirection: 'column',*/}
+                {/*                gap: '20px'*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            <Button disabled theme={'primary'}>*/}
+                {/*                Button*/}
+                {/*            </Button>*/}
+                {/*            <Button disabled theme={'primaryWhite'}>*/}
+                {/*                Button*/}
+                {/*            </Button>*/}
+                {/*            <Button disabled theme={'outline'}>*/}
+                {/*                Button*/}
+                {/*            </Button>*/}
+                {/*            <Button disabled theme={'clear'}>*/}
+                {/*                Button*/}
+                {/*            </Button>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                    {/*{localStorage.getItem('accessToken') ? (*/}
-                    {/*    <div style={{ marginTop: '40px' }}>OK</div>*/}
-                    {/*) : (*/}
-                    {/*    <div style={{ marginTop: '40px' }}>!!! Вы не вошли в систему !!!</div>*/}
-                    {/*)}*/}
-                </div>
-
-                <div style={{ marginTop: '20px' }}>
-                    <div style={{ display: 'flex', gap: '20px' }}>
-                        <div
-                            style={{
-                                display: 'flex',
-                                width: '200px',
-                                flexDirection: 'column',
-                                gap: '20px'
-                            }}
-                        >
-                            <Button theme={'primary'}>Button</Button>
-                            <Button theme={'primaryWhite'}>Button</Button>
-                            <Button theme={'outline'}>Button</Button>
-                            <Button theme={'clear'}>Button</Button>
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                width: '200px',
-                                flexDirection: 'column',
-                                gap: '20px'
-                            }}
-                        >
-                            <Button disabled theme={'primary'}>
-                                Button
-                            </Button>
-                            <Button disabled theme={'primaryWhite'}>
-                                Button
-                            </Button>
-                            <Button disabled theme={'outline'}>
-                                Button
-                            </Button>
-                            <Button disabled theme={'clear'}>
-                                Button
-                            </Button>
-                        </div>
-                    </div>
-
-                    <div
-                        style={{
-                            display: 'flex',
-                            gap: '20px'
-                        }}
-                    >
-                        <ButtonLink
-                            theme={'primary'}
-                            href={'/auth/login'}
-                            title={'ButtonLinkLogin'}
-                        />
-                        <Button
-                            theme={'primary'}
-                            onClick={async () => {
-                                await logout().then((res) => {
-                                    console.log('logout', res)
-                                    localStorage.removeItem('accessToken')
-                                })
-                            }}
-                        >
-                            LogOut
-                        </Button>
-                    </div>
-                </div>
+                {/*    <div*/}
+                {/*        style={{*/}
+                {/*            display: 'flex',*/}
+                {/*            gap: '20px'*/}
+                {/*        }}*/}
+                {/*    >*/}
+                {/*        <ButtonLink*/}
+                {/*            theme={'primary'}*/}
+                {/*            href={'/auth/login'}*/}
+                {/*            title={'ButtonLinkLogin'}*/}
+                {/*        />*/}
+                {/*        <Button*/}
+                {/*            theme={'primary'}*/}
+                {/*            onClick={async () => {*/}
+                {/*                await logout().then((res) => {*/}
+                {/*                    console.log('logout', res)*/}
+                {/*                    localStorage.removeItem('accessToken')*/}
+                {/*                })*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            LogOut*/}
+                {/*        </Button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
                 {/*<div style={{ marginBottom: '25px', width: '450px' }}>*/}
                 {/*    <Input id={'Email'} placeholder={'Email'} />*/}

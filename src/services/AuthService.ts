@@ -6,8 +6,8 @@ import {
     RegistrationPayloadType
 } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
-import dotenv from 'dotenv'
-import { Photo } from '@/models/userProfileService-types'
+// import dotenv from 'dotenv'
+// import { Photo } from '@/models/userProfileService-types'
 
 // dotenv.config()
 export const authAPI = createApi({
@@ -53,7 +53,7 @@ export const authAPI = createApi({
                 method: 'POST'
             })
         }),
-        me: build.query<MeResponseType, any>({
+        me: build.query<MeResponseType, void>({
             query: () => ({
                 url: '/auth/me'
             })

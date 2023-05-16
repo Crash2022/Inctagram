@@ -7,6 +7,7 @@ import { useRegistrationConfirmationMutation } from '@/services/AuthService'
 import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
+import { useSnackbar } from 'notistack'
 
 interface ConfirmEmailBoxType {
     title: string
@@ -18,6 +19,7 @@ interface ConfirmEmailBoxType {
 
 export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: ConfirmEmailBoxType) => {
     const { t } = useTranslation('mergeAccount')
+    const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
     const { code } = router.query
 
@@ -33,6 +35,12 @@ export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: Confirm
         }
     }, [code])
 
+    if (isError) {
+        return enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
+            variant: 'error',
+            autoHideDuration: 3000
+        })
+    }
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (

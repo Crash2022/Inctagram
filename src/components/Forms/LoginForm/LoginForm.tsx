@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
-import { LoginPayloadType, MeResponseType } from '@/models/auth-types'
+import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
@@ -20,9 +20,7 @@ export const LoginForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
     const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
-    const { data: me } = useMeQuery()
-
-    console.log(me)
+    const { data: meData } = useMeQuery()
 
     const { control, handleSubmit } = useForm<LoginPayloadType>({
         defaultValues: {
@@ -34,17 +32,12 @@ export const LoginForm = () => {
     const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {
         console.log('submit login', submitData)
         await login(submitData).then((res) => {
-            console.log(res)
+            console.log('login response', res)
             localStorage.setItem('accessToken', res.data.accessToken)
 
-            me.then((res: MeResponseType) => {
-                console.log(res)
-                localStorage.setItem('userId', res.userId.toString())
-                localStorage.setItem('userName', res.userName)
-                localStorage.setItem('email', res.email)
-            }).catch((err) => {
-                console.log(err)
-            })
+            localStorage.setItem('userId', meData.userId.toString())
+            localStorage.setItem('userName', meData.userId)
+            localStorage.setItem('email', meData.userId)
         })
     }
 
