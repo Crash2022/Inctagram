@@ -103,17 +103,19 @@ const Home: NextPageWithLayout = () => {
                 {/*            href={'/auth/login'}*/}
                 {/*            title={'ButtonLinkLogin'}*/}
                 {/*        />*/}
-                {/*        <Button*/}
-                {/*            theme={'primary'}*/}
-                {/*            onClick={async () => {*/}
-                {/*                await logout().then((res) => {*/}
-                {/*                    console.log('logout', res)*/}
-                {/*                    localStorage.removeItem('accessToken')*/}
-                {/*                })*/}
-                {/*            }}*/}
-                {/*        >*/}
-                {/*            LogOut*/}
-                {/*        </Button>*/}
+
+                {/*<Button*/}
+                {/*    theme={'primary'}*/}
+                {/*    onClick={async () => {*/}
+                {/*        await logout().then((res) => {*/}
+                {/*            console.log('logout', res)*/}
+                {/*            localStorage.removeItem('accessToken')*/}
+                {/*        })*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    LogOut*/}
+                {/*</Button>*/}
+
                 {/*    </div>*/}
                 {/*</div>*/}
 
