@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useRegistrationConfirmationMutation } from '@/services/AuthService'
 import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 
 interface ConfirmEmailBoxType {
     title: string
@@ -47,15 +48,21 @@ export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: Confirm
                 </>
             )}
             {!merge && (
-                <Button
+                // <Button
+                //     className={s.button}
+                //     theme={'primary'}
+                //     onClick={() => {
+                //         router.push('/auth/login').then()
+                //     }}
+                // >
+                //     {buttonText}
+                // </Button>
+                <ButtonLink
                     className={s.button}
                     theme={'primary'}
-                    onClick={() => {
-                        router.push('/auth/login').then()
-                    }}
-                >
-                    {buttonText}
-                </Button>
+                    href={'/auth/login'}
+                    title={buttonText}
+                />
             )}
             <Image src={src} alt={''} />
         </div>

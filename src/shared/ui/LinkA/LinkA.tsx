@@ -6,9 +6,5 @@ interface LinkProps {
 }
 
 export default function ({ href, text }: LinkProps) {
-    return (
-        <Link href={href} style={{ color: 'white' }}>
-            {text}
-        </Link>
-    )
+    return <Link href={href}>{text}</Link>
 }

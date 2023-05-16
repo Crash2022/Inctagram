@@ -10,11 +10,10 @@ import { useTranslation } from 'react-i18next'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation } from '@/services/AuthService'
-import { LoginParamsType } from '@/models/auth-types'
+import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
-import { usePush } from '@/shared/hooks/usePush'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -22,14 +21,14 @@ export const LoginForm = () => {
     const { router } = useRouter()
     const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
 
-    const { control, handleSubmit } = useForm<LoginParamsType>({
+    const { control, handleSubmit } = useForm<LoginPayloadType>({
         defaultValues: {
             email: '',
             password: ''
         }
     })
 
-    const onSubmit: SubmitHandler<LoginParamsType> = async (submitData: LoginParamsType) => {
+    const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {
         console.log('submit login', submitData)
         await login(submitData).then((res) => {
             console.log(res)

@@ -9,13 +9,12 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegistrationMutation } from '@/services/AuthService'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
-import { RegistrationParamsType } from '@/models/auth-types'
+import { RegistrationPayloadType } from '@/models/auth-types'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useEffect, useState } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { usePush } from '@/shared/hooks/usePush'
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { MessageModal } from '@/features/MessageModal/MessageModal'
@@ -54,7 +53,7 @@ export const RegistrationForm = () => {
         control,
         handleSubmit,
         formState: { errors }
-    } = useForm<RegistrationParamsType>({
+    } = useForm<RegistrationPayloadType>({
         defaultValues: {
             userName: '',
             email: '',
@@ -64,8 +63,8 @@ export const RegistrationForm = () => {
         resolver: yupResolver(SignUpSchema)
     })
 
-    const onSubmit: SubmitHandler<RegistrationParamsType> = async (
-        submitData: RegistrationParamsType
+    const onSubmit: SubmitHandler<RegistrationPayloadType> = async (
+        submitData: RegistrationPayloadType
     ) => {
         console.log('submit registration', submitData)
         await registration(submitData).then((res) => console.log(res))
