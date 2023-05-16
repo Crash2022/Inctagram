@@ -8,6 +8,7 @@
     border-radius: 2px;
     transition: 0.2s;
     @include h3-text-size;
+    text-align: center; // для ButtonLink
 }
 
 .primary {

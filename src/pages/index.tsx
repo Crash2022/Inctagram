@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
@@ -60,7 +61,8 @@ const Home: NextPageWithLayout = () => {
                                 display: 'flex',
                                 width: '200px',
                                 flexDirection: 'column',
-                                gap: '20px'
+                                gap: '20px',
+                                textAlign: 'center'
                             }}
                         >
                             <Button
@@ -98,6 +100,20 @@ const Home: NextPageWithLayout = () => {
                                 Button
                             </Button>
                         </div>
+                    </div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            width: '200px',
+                            flexDirection: 'column',
+                            gap: '20px'
+                        }}
+                    >
+                        <ButtonLink
+                            theme={'primary'}
+                            href={'/auth/login'}
+                            title={'ButtonLinkLogin'}
+                        />
                     </div>
                 </div>
 

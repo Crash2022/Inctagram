@@ -3,7 +3,6 @@ import s from './ConfirmEmailBox.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
-import { usePush } from '@/shared/hooks/usePush'
 import { useRegistrationConfirmationMutation } from '@/services/AuthService'
 import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
@@ -18,7 +17,6 @@ interface ConfirmEmailBoxType {
 
 export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: ConfirmEmailBoxType) => {
     const { t } = useTranslation('mergeAccount')
-    const pushHook = usePush()
     const router = useRouter()
     const { code } = router.query
 
@@ -53,7 +51,6 @@ export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: Confirm
                     className={s.button}
                     theme={'primary'}
                     onClick={() => {
-                        // pushHook('/auth/login').then()
                         router.push('/auth/login').then()
                     }}
                 >
