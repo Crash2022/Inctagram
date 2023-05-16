@@ -24,25 +24,19 @@ export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: Confirm
     const [registrationConfirmation, { isSuccess, error, isError, isLoading }] =
         useRegistrationConfirmationMutation()
 
-    // useEffect(() => {
-    //     registrationConfirmation({ confirmationCode: code }).then((res) => {
-    //         console.log('code', code)
-    //         console.log('response', res)
-    //     })
-    // }, [])
+    useEffect(() => {
+        if (code) {
+            registrationConfirmation({ confirmationCode: code }).then((res) => {
+                console.log('code', code)
+                console.log('response', res)
+            })
+        }
+    }, [code])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
-    const sendCode = () => {
-        return registrationConfirmation({ confirmationCode: code }).then((res) => {
-            console.log('code', code)
-            console.log('response', res)
-        })
-    }
-
     return (
         <div className={s.container}>
-            {/*{sendCode()}*/}
             <h1>{title}</h1>
             <p>{text}</p>
             {merge && (
