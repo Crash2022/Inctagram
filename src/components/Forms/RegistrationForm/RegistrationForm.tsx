@@ -71,7 +71,7 @@ export const RegistrationForm = () => {
     }
 
     const messageModalOKHandler = () => {
-        router.push('/login').then()
+        router.push('/auth/login').then()
     }
 
     useEffect(() => {
