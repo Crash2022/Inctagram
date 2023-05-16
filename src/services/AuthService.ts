@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {
     LoginPayloadType,
+    MeResponseType,
     RegistrationConfirmationPayloadType,
     RegistrationPayloadType
 } from '@/models/auth-types'
@@ -52,7 +53,7 @@ export const authAPI = createApi({
                 method: 'POST'
             })
         }),
-        me: build.query({
+        me: build.query<MeResponseType, any>({
             query: () => ({
                 url: '/auth/me'
             })

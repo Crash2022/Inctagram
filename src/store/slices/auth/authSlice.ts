@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { authAPI } from '@/shared/api/auth.api'
 import { createAppAsyncThunk } from '@/shared/utils/createAppAsyncThunk'
 import { AxiosError } from 'axios'
-import { LoginParamsType, RegistrationParamsType } from '@/models/auth-types'
+import { LoginPayloadType, RegistrationPayloadType } from '@/models/auth-types'
 
 interface AuthStateType {
     profile: any
@@ -39,7 +39,7 @@ const authSlice = createSlice<any, any>({
     }
 })
 
-export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, RegistrationParamsType>(
+export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, RegistrationPayloadType>(
     'auth/register',
     async (data, thunkAPI) => {
         try {
@@ -54,7 +54,7 @@ export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, Registratio
     }
 )
 
-export const login = createAppAsyncThunk<{ profile: any; isLoggedIn: boolean }, LoginParamsType>(
+export const login = createAppAsyncThunk<{ profile: any; isLoggedIn: boolean }, LoginPayloadType>(
     'auth/login',
     async (data, thunkAPI) => {
         try {

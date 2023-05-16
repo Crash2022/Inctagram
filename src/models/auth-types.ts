@@ -16,3 +16,9 @@ export interface LoginPayloadType {
 export interface PassRecoveryType {
     email: string
 }
+
+export interface MeResponseType {
+    userId: number
+    userName: string
+    email: string
+}

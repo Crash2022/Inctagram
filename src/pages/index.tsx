@@ -46,11 +46,17 @@ const Home: NextPageWithLayout = () => {
                 </div>
 
                 <div>
-                    {me ? (
-                        me
-                    ) : (
-                        <div style={{ marginTop: '40px' }}>!!! Вы не вошли в систему !!!</div>
-                    )}
+                    {/*{me ? (*/}
+                    {/*    me*/}
+                    {/*) : (*/}
+                    {/*    <div style={{ marginTop: '40px' }}>!!! Вы не вошли в систему !!!</div>*/}
+                    {/*)}*/}
+
+                    {/*{localStorage.getItem('accessToken') ? (*/}
+                    {/*    <div style={{ marginTop: '40px' }}>OK</div>*/}
+                    {/*) : (*/}
+                    {/*    <div style={{ marginTop: '40px' }}>!!! Вы не вошли в систему !!!</div>*/}
+                    {/*)}*/}
                 </div>
 
                 <div style={{ marginTop: '20px' }}>
@@ -60,20 +66,10 @@ const Home: NextPageWithLayout = () => {
                                 display: 'flex',
                                 width: '200px',
                                 flexDirection: 'column',
-                                gap: '20px',
-                                textAlign: 'center'
+                                gap: '20px'
                             }}
                         >
-                            <Button
-                                theme={'primary'}
-                                onClick={async () => {
-                                    await logout().then((res) => {
-                                        console.log('logout', res)
-                                    })
-                                }}
-                            >
-                                LogOut
-                            </Button>
+                            <Button theme={'primary'}>Button</Button>
                             <Button theme={'primaryWhite'}>Button</Button>
                             <Button theme={'outline'}>Button</Button>
                             <Button theme={'clear'}>Button</Button>
@@ -100,11 +96,10 @@ const Home: NextPageWithLayout = () => {
                             </Button>
                         </div>
                     </div>
+
                     <div
                         style={{
                             display: 'flex',
-                            width: '200px',
-                            flexDirection: 'column',
                             gap: '20px'
                         }}
                     >
@@ -113,6 +108,17 @@ const Home: NextPageWithLayout = () => {
                             href={'/auth/login'}
                             title={'ButtonLinkLogin'}
                         />
+                        <Button
+                            theme={'primary'}
+                            onClick={async () => {
+                                await logout().then((res) => {
+                                    console.log('logout', res)
+                                    localStorage.removeItem('accessToken')
+                                })
+                            }}
+                        >
+                            LogOut
+                        </Button>
                     </div>
                 </div>
 
