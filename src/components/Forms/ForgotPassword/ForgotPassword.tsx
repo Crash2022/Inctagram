@@ -10,23 +10,23 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { useSnackbar } from 'notistack'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { RegistrationParamsType } from '@/models/auth-types'
+import { RegistrationPayloadType } from '@/models/auth-types'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
 
 export const ForgotPassword = () => {
     // const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
-    const { router } = useRouter()
+    const router = useRouter()
 
-    const { control, handleSubmit } = useForm<RegistrationParamsType>({
+    const { control, handleSubmit } = useForm<RegistrationPayloadType>({
         defaultValues: {
             email: '',
             captcha: false
         }
     })
 
-    const onSubmit: SubmitHandler<RegistrationParamsType> = async (
-        data: RegistrationParamsType
+    const onSubmit: SubmitHandler<RegistrationPayloadType> = async (
+        data: RegistrationPayloadType
     ) => {
         console.log('submit', data)
         // await registration(data).then((res) => console.log(res))
