@@ -1,5 +1,9 @@
 import { instance } from '@/shared/api/api.instance'
-import { LoginPayloadType, PassRecoveryType, RegistrationPayloadType } from '@/models/auth-types'
+import {
+    LoginPayloadType,
+    PasswordRecoveryType,
+    RegistrationPayloadType
+} from '@/models/auth-types'
 
 export const authAPI = {
     register: async (arg: RegistrationPayloadType) => {
@@ -8,7 +12,7 @@ export const authAPI = {
     login: async (arg: LoginPayloadType) => {
         return await instance.post<ResponseType>('auth/login', arg)
     },
-    recoverPass: async (arg: PassRecoveryType) => {
+    recoverPass: async (arg: PasswordRecoveryType) => {
         return await instance.post<ResponseType>(
             'auth/password-recovery',
             { arg },

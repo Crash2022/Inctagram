@@ -18,6 +18,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { MessageModal } from '@/features/MessageModal/MessageModal'
+import { InctagramPath } from '@/shared/api/path'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')

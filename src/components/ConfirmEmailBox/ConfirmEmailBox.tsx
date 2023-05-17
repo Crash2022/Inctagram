@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { useSnackbar } from 'notistack'
+import { InctagramPath } from '@/shared/api/path'
 
 interface ConfirmEmailBoxType {
     title: string

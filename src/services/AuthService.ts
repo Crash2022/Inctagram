@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {
     LoginPayloadType,
     MeResponseType,
+    PasswordRecoveryType,
     RegistrationConfirmationPayloadType,
     RegistrationPayloadType
 } from '@/models/auth-types'
@@ -63,6 +64,13 @@ export const authAPI = createApi({
                     return headers
                 }
             })
+        }),
+        forgotPassword: build.mutation<any, PasswordRecoveryType>({
+            query: (payload: PasswordRecoveryType) => ({
+                url: '/auth/password-recovery',
+                method: 'POST',
+                body: payload
+            })
         })
     })
 })
@@ -72,7 +80,8 @@ export const {
     useRegistrationConfirmationMutation,
     useLoginMutation,
     useLogoutMutation,
-    useMeQuery
+    useMeQuery,
+    useForgotPasswordMutation
 } = authAPI
 
 // export const registerApiSlice = createApi({
