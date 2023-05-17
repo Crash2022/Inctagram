@@ -8,5 +8,9 @@
   "EnterEmail": "Enter your e-mail address and we will send you further instructions",
   "Robot": "I'm not a robot",
 
-  "Err_Yup_Required": "The field is required"
+  "Err_Yup_Required": "The field is required",
+
+  "EmailSent": "E-mail sent",
+  "HaveSent": "Please, check your email. We have sent a link to confirm your registration to ",
+  "MainButton": "OK"
 }

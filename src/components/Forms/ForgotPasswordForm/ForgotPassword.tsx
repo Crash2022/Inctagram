@@ -17,11 +17,13 @@ import { useForgotPasswordMutation } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { MessageModal } from '@/features/MessageModal/MessageModal'
 
 export const ForgotPasswordForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
     const router = useRouter()
+    const [open, setOpen] = useState<boolean>(false)
     const [forgotPassword, { error, isError, isLoading, isSuccess }] = useForgotPasswordMutation()
 
     const SignUpSchema = yup.object().shape({
@@ -45,21 +47,25 @@ export const ForgotPasswordForm = () => {
         console.log('submit', data)
         localStorage.setItem('email', control._getWatch('email'))
         if (!isSuccess) {
-            await forgotPassword(data).then((res) => console.log(res))
+            await forgotPassword(data).then((res) => {
+                console.log(res)
+                setOpen(true)
+            })
         }
         if (isSuccess) {
             data.recaptcha = true
-            await forgotPassword(data).then((res) => console.log(res))
+            await forgotPassword(data).then((res) => {
+                console.log(res)
+                setOpen(true)
+            })
         }
     }
 
+    const messageModalOKHandler = () => {
+        setOpen(false)
+    }
+
     useEffect(() => {
-        // if (isSuccess) {
-        //     enqueueSnackbar(/*error.data.messages[0].message*/ 'Письмо отправлено', {
-        //         variant: 'success',
-        //         autoHideDuration: 3000
-        //     })
-        // }
         if (isError)
             enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
                 variant: 'error',
@@ -71,6 +77,15 @@ export const ForgotPasswordForm = () => {
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <MessageModal
+                open={open}
+                setOpen={setOpen}
+                header={t('EmailSent')}
+                text={t('HaveSent') + control._getWatch('email')}
+                buttonTitleOK={t('MainButton')}
+                extraCallbackOK={messageModalOKHandler}
+            />
+
             <Title title={t('Forgot')} className={styles.title} />
             <div className={styles.inputContainer} style={{ marginBottom: '54px' }}>
                 <Controller
