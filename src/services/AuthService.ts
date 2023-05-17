@@ -42,6 +42,13 @@ export const authAPI = createApi({
                 body: payload
             })
         }),
+        registrationResendLink: build.mutation<any, { email: string }>({
+            query: (payload: { email: string }) => ({
+                url: '/auth/registration-email-resending',
+                method: 'POST',
+                body: payload
+            })
+        }),
         login: build.mutation<any, LoginPayloadType>({
             query: (payload: LoginPayloadType) => ({
                 url: '/auth/login',
@@ -80,6 +87,13 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: payload
             })
+        }),
+        recoveryCode: build.mutation<{ email: string }, { recoveryCode: string }>({
+            query: (payload: { recoveryCode: string }) => ({
+                url: '/auth/check-recovery-code',
+                method: 'POST',
+                body: payload
+            })
         })
     })
 })
@@ -87,6 +101,7 @@ export const authAPI = createApi({
 export const {
     useRegistrationMutation,
     useRegistrationConfirmationMutation,
+    useRegistrationResendLinkMutation,
     useLoginMutation,
     useLogoutMutation,
     useMeQuery,
