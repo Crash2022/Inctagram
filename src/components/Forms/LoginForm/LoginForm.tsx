@@ -37,8 +37,8 @@ export const LoginForm = () => {
             localStorage.setItem('accessToken', res.data.accessToken)
 
             // localStorage.setItem('userId', meData.userId.toString())
-            localStorage.setItem('userName', meData.userName)
-            localStorage.setItem('email', meData.email)
+            // localStorage.setItem('userName', meData.userName)
+            // localStorage.setItem('email', meData.email)
         })
     }
 

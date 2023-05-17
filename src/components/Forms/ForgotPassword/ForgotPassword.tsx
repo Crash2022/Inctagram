@@ -31,6 +31,7 @@ export const ForgotPassword = () => {
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
         console.log('submit', data)
+        localStorage.setItem('email', control._getWatch('email'))
         await forgotPassword(data).then((res) => console.log(res))
     }
 

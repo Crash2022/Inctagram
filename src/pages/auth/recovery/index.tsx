@@ -21,7 +21,7 @@ const CreateNewPassword = () => {
     const router = useRouter()
     const { code } = router.query
     const [newPassword, { isSuccess, error, isError, isLoading }] = useNewPasswordMutation()
-    const [open, setOpen] = useState<boolean>(false)
+    // const [open, setOpen] = useState<boolean>(false)
 
     const SignUpSchema = yup.object().shape({
         newPassword: yup
@@ -53,12 +53,19 @@ const CreateNewPassword = () => {
         await newPassword(data).then((res) => console.log(res))
     }
 
-    const messageModalOKHandler = () => {
-        router.push(InctagramPath.AUTH.CONFIRM_REGISTRATION).then()
-    }
+    // const messageModalOKHandler = () => {
+    //     localStorage.removeItem('email')
+    //     router.push(InctagramPath.AUTH.CONFIRM_REGISTRATION).then()
+    // }
 
     useEffect(() => {
-        if (isSuccess) setOpen(true)
+        if (isSuccess) {
+            enqueueSnackbar(/*error.data.messages[0].message*/ 'Пароль обновлён', {
+                variant: 'success',
+                autoHideDuration: 3000
+            })
+            router.push(InctagramPath.AUTH.LOGIN).then()
+        }
         if (isError)
             enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
                 variant: 'error',
@@ -66,20 +73,26 @@ const CreateNewPassword = () => {
             })
     }, [isSuccess, isError])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    // useEffect(() => {
+    //     localStorage.getItem('email')
+    // }, [])
 
-    console.log(code)
+    // if (typeof window !== 'undefined') {
+    //     localStorage.getItem('email')
+    // }
+
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-            <MessageModal
-                open={open}
-                setOpen={setOpen}
-                header={t('EmailSent')}
-                text={t('HaveSent')}
-                buttonTitleOK={t('MainButton')}
-                extraCallbackOK={messageModalOKHandler}
-            />
+            {/*<MessageModal*/}
+            {/*    open={open}*/}
+            {/*    setOpen={setOpen}*/}
+            {/*    header={t('EmailSent')}*/}
+            {/*    text={t('HaveSent')}*/}
+            {/*    buttonTitleOK={t('MainButton')}*/}
+            {/*    extraCallbackOK={messageModalOKHandler}*/}
+            {/*/>*/}
 
             <Title title={t('CreateNewPassword')} className={styles.title} />
 
