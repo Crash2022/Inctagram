@@ -14,6 +14,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { InctagramPath } from '@/shared/api/path'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
@@ -24,14 +25,23 @@ const Home: NextPageWithLayout = () => {
     // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
     // <div>{allPageData.title}</div> // вставить в разметку
 
+    const { data: meData } = useMeQuery()
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
 
     useEffect(() => {
-        if (localStorage.getItem('accessToken')) {
-            router.push('/profile').then()
+        if (meData) {
+            router.push(InctagramPath.PROFILE.PROFILE).then()
         } else {
-            router.push('/auth/login').then()
+            router.push(InctagramPath.AUTH.LOGIN).then()
         }
+
+        // if (localStorage.getItem('accessToken')) {
+        //     localStorage.setItem('userName', meData.userName)
+        //     localStorage.setItem('email', meData.email)
+        //     router.push('/profile').then()
+        // } else {
+        //     router.push('/auth/login').then()
+        // }
     }, [router])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />

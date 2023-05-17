@@ -159,7 +159,7 @@ export const RegistrationForm = () => {
                     {t('SignUp')}
                 </Button>
                 <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
-                <Link className={styles.link} href={'/login'}>
+                <Link className={styles.link} href={InctagramPath.AUTH.LOGIN}>
                     {' '}
                     {t('SignIn')}
                 </Link>

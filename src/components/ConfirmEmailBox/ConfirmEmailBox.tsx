@@ -70,7 +70,7 @@ export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: Confirm
                 <ButtonLink
                     className={s.button}
                     theme={'primary'}
-                    href={'/auth/login'}
+                    href={InctagramPath.AUTH.LOGIN}
                     title={buttonText}
                 />
             )}

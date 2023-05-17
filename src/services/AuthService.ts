@@ -55,7 +55,13 @@ export const authAPI = createApi({
         }),
         me: build.query<MeResponseType, void>({
             query: () => ({
-                url: '/auth/me'
+                url: '/auth/me',
+                prepareHeaders: (headers) => {
+                    const token = localStorage.getItem('accessToken')
+                    if (token) headers.set('authorization', `Bearer ${token}`)
+                    console.log(headers)
+                    return headers
+                }
             })
         })
     })

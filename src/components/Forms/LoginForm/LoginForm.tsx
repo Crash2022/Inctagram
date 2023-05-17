@@ -14,6 +14,7 @@ import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
+import { InctagramPath } from '@/shared/api/path'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -35,9 +36,9 @@ export const LoginForm = () => {
             console.log('login response', res)
             localStorage.setItem('accessToken', res.data.accessToken)
 
-            localStorage.setItem('userId', meData.userId.toString())
-            localStorage.setItem('userName', meData.userId)
-            localStorage.setItem('email', meData.userId)
+            // localStorage.setItem('userId', meData.userId.toString())
+            localStorage.setItem('userName', meData.userName)
+            localStorage.setItem('email', meData.email)
         })
     }
 
@@ -83,7 +84,7 @@ export const LoginForm = () => {
                 />
             </div>
 
-            <Link className={styles.forgot} href={'/forgot-password'}>
+            <Link className={styles.forgot} href={InctagramPath.AUTH.FORGOT_PASSWORD}>
                 {' '}
                 {t('ForgotPassword')}
             </Link>
@@ -93,7 +94,7 @@ export const LoginForm = () => {
                     {t('SignIn')}
                 </Button>
                 <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
-                <Link className={styles.link} href={'/registration'}>
+                <Link className={styles.link} href={InctagramPath.AUTH.REGISTRATION}>
                     {' '}
                     {t('SignUp')}
                 </Link>
