@@ -15,33 +15,51 @@ import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
 import { InctagramPath } from '@/shared/api/path'
 import { useForgotPasswordMutation } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 export const ForgotPasswordForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
     const router = useRouter()
-    const [forgotPassword, { isSuccess, error, isError, isLoading }] = useForgotPasswordMutation()
+    const [forgotPassword, { error, isError, isLoading, isSuccess }] = useForgotPasswordMutation()
 
-    const { control, handleSubmit } = useForm<PasswordRecoveryType>({
+    const SignUpSchema = yup.object().shape({
+        email: yup.string().required(t('Err_Yup_Required')),
+        recaptcha: yup.boolean().oneOf([true], t('Robot'))
+    })
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<PasswordRecoveryType>({
         defaultValues: {
             email: '',
             recaptcha: false
-        }
+        },
+        resolver: yupResolver(SignUpSchema)
     })
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
         console.log('submit', data)
         localStorage.setItem('email', control._getWatch('email'))
-        await forgotPassword(data).then((res) => console.log(res))
+        if (!isSuccess) {
+            await forgotPassword(data).then((res) => console.log(res))
+        }
+        if (isSuccess) {
+            data.recaptcha = true
+            await forgotPassword(data).then((res) => console.log(res))
+        }
     }
 
     useEffect(() => {
-        if (isSuccess) {
-            enqueueSnackbar(/*error.data.messages[0].message*/ 'Письмо отправлено', {
-                variant: 'success',
-                autoHideDuration: 3000
-            })
-        }
+        // if (isSuccess) {
+        //     enqueueSnackbar(/*error.data.messages[0].message*/ 'Письмо отправлено', {
+        //         variant: 'success',
+        //         autoHideDuration: 3000
+        //     })
+        // }
         if (isError)
             enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
                 variant: 'error',
@@ -59,34 +77,47 @@ export const ForgotPasswordForm = () => {
                     name='email'
                     control={control}
                     render={({ field }) => (
-                        <Input {...field} id={'Forgot_Email'} placeholder={t('Email')} />
+                        <Input
+                            {...field}
+                            id={'Forgot_Email'}
+                            placeholder={t('Email')}
+                            error={errors.email?.message}
+                        />
                     )}
                 />
                 <p>{t('EnterEmail')}</p>
             </div>
 
+            {isSuccess ? <div>{t('SendLinkSuccess')}</div> : ''}
+
             <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                {t('SendLink')}
+                {!isSuccess ? t('SendLink') : t('SendLinkAgain')}
             </Button>
             <Link className={styles.link} href={InctagramPath.AUTH.LOGIN}>
                 {t('BackToSignIn')}
             </Link>
 
-            <div className={styles.captcha}>
-                <div className={styles.checkboxBody}>
-                    <div>
-                        <Controller
-                            name='recaptcha'
-                            control={control}
-                            render={({ field }) => <Checkbox {...field} />}
-                        />
+            {!isSuccess ? (
+                <div className={styles.captcha}>
+                    <div className={styles.checkboxBody}>
+                        <div>
+                            <Controller
+                                name='recaptcha'
+                                control={control}
+                                render={({ field }) => (
+                                    <Checkbox {...field} error={errors.recaptcha?.message} />
+                                )}
+                            />
+                        </div>
+                        <label htmlFor={'recaptcha'}>{t('Robot')}</label>
+                        {/*<span>I&apos;m not a robot</span>*/}
                     </div>
-                    <div>{t('Robot')}</div>
-                    {/*<span>I&apos;m not a robot</span>*/}
-                </div>
 
-                <CaptchaIcon />
-            </div>
+                    <CaptchaIcon />
+                </div>
+            ) : (
+                ''
+            )}
         </form>
     )
 }

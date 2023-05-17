@@ -58,6 +58,7 @@ export const authAPI = createApi({
         me: build.query<MeResponseType, void>({
             query: () => ({
                 url: '/auth/me',
+                credentials: 'include',
                 prepareHeaders: (headers) => {
                     const token = localStorage.getItem('accessToken')
                     if (token) headers.set('authorization', `Bearer ${token}`)
