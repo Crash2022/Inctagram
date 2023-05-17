@@ -18,6 +18,11 @@ export interface PasswordRecoveryType {
     recaptcha: boolean
 }
 
+export interface NewPasswordType {
+    newPassword: string
+    recoveryCode: string
+}
+
 export interface MeResponseType {
     userId: number
     userName: string

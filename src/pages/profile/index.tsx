@@ -10,11 +10,13 @@ import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
 import { Button } from '@/shared/ui/Button/Button'
+import { useLogoutMutation } from '@/services/AuthService'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(10)
+    const [logout] = useLogoutMutation()
 
     if (isLoading) {
         return <LoaderScreen variant={'loader'} />
@@ -38,7 +40,17 @@ const Profile: NextPageWithLayout = () => {
                         <div className={cls.header_info}>
                             <div className={cls.info_control}>
                                 <div>Profile URL</div>
-                                <Button theme={'primaryWhite'}>{t('ProfileSettings')}</Button>
+                                <Button
+                                    theme={'primaryWhite'}
+                                    onClick={async () => {
+                                        await logout().then((res) => {
+                                            console.log('logout', res)
+                                            localStorage.removeItem('accessToken')
+                                        })
+                                    }}
+                                >
+                                    {t('ProfileSettings')}
+                                </Button>
                             </div>
                             <div className={cls.info_numbers}>
                                 <div className={cls.numbers_item}>

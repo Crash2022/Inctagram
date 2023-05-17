@@ -5,10 +5,12 @@ import { Button } from '@/shared/ui/Button/Button'
 import React from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { useNewPasswordMutation } from '@/services/AuthService'
 // import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
     const { t } = useTranslation('new-password')
+    const [newPassword, { isSuccess, error, isError, isLoading }] = useNewPasswordMutation()
 
     const { control, handleSubmit } = useForm<any>({
         defaultValues: {

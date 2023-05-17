@@ -10,14 +10,17 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { useSnackbar } from 'notistack'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { PasswordRecoveryType, RegistrationPayloadType } from '@/models/auth-types'
+import { PasswordRecoveryType } from '@/models/auth-types'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
 import { InctagramPath } from '@/shared/api/path'
+import { useForgotPasswordMutation } from '@/services/AuthService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 export const ForgotPassword = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
     const router = useRouter()
+    const [forgotPassword, { isSuccess, error, isError, isLoading }] = useForgotPasswordMutation()
 
     const { control, handleSubmit } = useForm<PasswordRecoveryType>({
         defaultValues: {
@@ -28,12 +31,24 @@ export const ForgotPassword = () => {
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
         console.log('submit', data)
-        // await registration(data).then((res) => console.log(res))
+        await forgotPassword(data).then((res) => console.log(res))
     }
 
-    // useEffect(() => {
-    //     enqueueSnackbar('Проверка снекбара', { variant: 'info', autoHideDuration: 2000 })
-    // }, [])
+    useEffect(() => {
+        if (isSuccess) {
+            enqueueSnackbar(/*error.data.messages[0].message*/ 'Письмо отправлено', {
+                variant: 'success',
+                autoHideDuration: 3000
+            })
+        }
+        if (isError)
+            enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
+                variant: 'error',
+                autoHideDuration: 3000
+            })
+    }, [isSuccess, isError])
+
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>

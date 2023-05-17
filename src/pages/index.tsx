@@ -25,8 +25,7 @@ const Home: NextPageWithLayout = () => {
     // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
     // <div>{allPageData.title}</div> // вставить в разметку
 
-    const { data: meData } = useMeQuery()
-    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+    const { data: meData, isLoading } = useMeQuery()
 
     useEffect(() => {
         if (meData) {
