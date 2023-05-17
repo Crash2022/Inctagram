@@ -86,7 +86,7 @@ export const LoginForm = () => {
 
             <Link className={styles.forgot} href={InctagramPath.AUTH.FORGOT_PASSWORD}>
                 {' '}
-                {t('ForgotPassword')}
+                {t('ForgotPasswordForm')}
             </Link>
 
             <div>

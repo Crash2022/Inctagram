@@ -59,7 +59,7 @@ const Home: NextPageWithLayout = () => {
                 {/*>*/}
                 {/*    <LinkA href={'/auth/registration'} text={t('Registration')} />*/}
                 {/*    <LinkA href={'/auth/login'} text={t('Login')} />*/}
-                {/*    <LinkA href={'/auth/forgot-password'} text={t('ForgotPassword')} />*/}
+                {/*    <LinkA href={'/auth/forgot-password'} text={t('ForgotPasswordForm')} />*/}
                 {/*    <LinkA href={'/profile'} text={t('Profile')} />*/}
                 {/*</div>*/}
 

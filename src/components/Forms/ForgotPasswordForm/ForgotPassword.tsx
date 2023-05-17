@@ -16,7 +16,7 @@ import { InctagramPath } from '@/shared/api/path'
 import { useForgotPasswordMutation } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
-export const ForgotPassword = () => {
+export const ForgotPasswordForm = () => {
     const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
     const router = useRouter()

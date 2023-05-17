@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { getLayout } from '@/components/Layout/Layout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
-import { ForgotPassword } from '@/components/Forms/ForgotPassword/ForgotPassword'
 import { NextPageWithLayout } from '@/pages/_app'
+import { ForgotPasswordForm } from '@/components/Forms/ForgotPasswordForm/ForgotPassword'
 
 const Forgot: NextPageWithLayout = () => {
     return (
@@ -13,7 +13,7 @@ const Forgot: NextPageWithLayout = () => {
             </Head>
 
             <FormWrapper marginTop={36}>
-                <ForgotPassword />
+                <ForgotPasswordForm />
             </FormWrapper>
         </>
     )
