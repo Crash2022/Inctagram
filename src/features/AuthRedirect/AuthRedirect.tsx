@@ -4,29 +4,23 @@ import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
 
 // вариант 1
-// const AuthRedirect = ({ children }: AuthRedirectProps) => {
+// const AuthRedirect = ({ children }) => {
 //     const router = useRouter()
 //     const { data: meData } = useMeQuery()
 //
-//     // useEffect(() => {
-//     //     if (!meData) router.push(InctagramPath.AUTH.LOGIN).then(
-//     //
-//     //     )
-//     // }, [])
+//     useEffect(() => {
+//         if (!meData) router.push(InctagramPath.AUTH.LOGIN).then()
+//     }, [])
 //
-//     if (!meData) {
-//         return router.push(InctagramPath.AUTH.LOGIN).then()
-//     } else {
-//         return <>{children}</>
-//     }
+//     return <>{children}</>
 // }
 
 // вариант 2
 // check if you are on the client (browser) or server
 const isBrowser = () => typeof window !== 'undefined'
 
-const AuthRedirect = ({ router, children }) => {
-    // identify authenticated user
+const AuthRedirect = ({ children }) => {
+    const router = useRouter()
     const { data: meData } = useMeQuery()
 
     let unprotectedRoutes = [
@@ -39,9 +33,11 @@ const AuthRedirect = ({ router, children }) => {
 
     let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1
 
-    if (isBrowser() && !meData && pathIsProtected) {
-        router.push(InctagramPath.AUTH.LOGIN).then()
-    }
+    useEffect(() => {
+        if (isBrowser() && !meData && pathIsProtected) {
+            router.push(InctagramPath.AUTH.LOGIN).then()
+        }
+    }, [])
 
     return children
 }

@@ -13,6 +13,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ni18nConfig } from '../../ni18n.config'
 import { appWithTranslation } from 'next-i18next'
 import { SnackbarProvider } from 'notistack'
+import AuthRedirect from '@/features/AuthRedirect/AuthRedirect'
+import { useRouter } from 'next/router'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -44,11 +46,13 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
                 `}
             </style>
             <Provider store={store}>
-                <SnackbarProvider maxSnack={2}>
-                    {/*<Suspense fallback={<div>...</div>}>*/}
-                    <Component {...pageProps} />
-                </SnackbarProvider>
-                {/*</Suspense>*/}
+                <AuthRedirect>
+                    <SnackbarProvider maxSnack={2}>
+                        {/*<Suspense fallback={<div>...</div>}>*/}
+                        <Component {...pageProps} />
+                        {/*</Suspense>*/}
+                    </SnackbarProvider>
+                </AuthRedirect>
             </Provider>
         </>
     )
