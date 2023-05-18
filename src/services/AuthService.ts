@@ -65,13 +65,20 @@ export const authAPI = createApi({
         me: build.query<MeResponseType, void>({
             query: () => ({
                 url: '/auth/me',
-                credentials: 'include',
-                prepareHeaders: (headers) => {
-                    const token = localStorage.getItem('accessToken')
-                    if (token) headers.set('authorization', `Bearer ${token}`)
-                    console.log(headers)
-                    return headers
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
+                // credentials: 'include',
+                // prepareHeaders: async (headers, { extra }) => {
+                //     try {
+                //         const token = localStorage.getItem('accessToken')
+                //         if (token) headers.set('authorization', `Bearer ${token}`)
+                //         console.log(headers)
+                //         return headers
+                //     } catch (error) {
+                //         console.log(error)
+                //     }
+                // }
             })
         }),
         forgotPassword: build.mutation<any, PasswordRecoveryType>({

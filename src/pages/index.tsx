@@ -33,14 +33,6 @@ const Home: NextPageWithLayout = () => {
         } else {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
-
-        // if (localStorage.getItem('accessToken')) {
-        //     localStorage.setItem('userName', meData.userName)
-        //     localStorage.setItem('email', meData.email)
-        //     router.push('/profile').then()
-        // } else {
-        //     router.push('/auth/login').then()
-        // }
     }, [router])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />

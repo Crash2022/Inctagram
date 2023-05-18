@@ -10,12 +10,16 @@ import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
 import { Button } from '@/shared/ui/Button/Button'
-import { useLogoutMutation } from '@/services/AuthService'
+import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
+import { useRouter } from 'next/router'
+import { InctagramPath } from '@/shared/api/path'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
+    const router = useRouter()
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(10)
+    const { data: meData } = useMeQuery()
     const [logout] = useLogoutMutation()
 
     if (isLoading) {
@@ -39,13 +43,14 @@ const Profile: NextPageWithLayout = () => {
                         </div>
                         <div className={cls.header_info}>
                             <div className={cls.info_control}>
-                                <div>Profile URL</div>
+                                <div>{meData && meData.userName}</div>
                                 <Button
                                     theme={'primaryWhite'}
                                     onClick={async () => {
                                         await logout().then((res) => {
                                             console.log('logout', res)
                                             localStorage.removeItem('accessToken')
+                                            router.push(InctagramPath.AUTH.LOGIN)
                                         })
                                     }}
                                 >
