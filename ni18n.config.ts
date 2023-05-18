@@ -4,5 +4,5 @@ import type { Ni18nOptions } from 'ni18n'
 // @ts-ignore
 export const ni18nConfig: Ni18nOptions = {
     supportedLngs: ['en', 'ru'],
-    ns: ['home', 'header', 'sidebar', 'login', 'registration', 'forgot', 'new-password', 'profile']
+    ns: ['home', 'header', 'sidebar']
 }

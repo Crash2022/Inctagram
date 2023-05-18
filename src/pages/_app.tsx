@@ -14,8 +14,6 @@ import { ni18nConfig } from '../../ni18n.config'
 import { appWithTranslation } from 'next-i18next'
 import { SnackbarProvider } from 'notistack'
 import AuthRedirect from '@/features/AuthRedirect/AuthRedirect'
-import { useRouter } from 'next/router'
-import { InctagramPath } from '@/shared/api/path'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
