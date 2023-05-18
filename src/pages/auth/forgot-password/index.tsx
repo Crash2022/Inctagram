@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { getLayout } from '@/components/Layout/Layout'
+import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { NextPageWithLayout } from '@/pages/_app'
 import { ForgotPasswordForm } from '@/components/Forms/ForgotPasswordForm/ForgotPassword'

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
-import { Title } from '@/components/Forms/components/Title'
+import { Title } from '@/components/Forms/Title/Title'
 import { Input } from '@/shared/ui/Input/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'

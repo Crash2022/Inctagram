@@ -1,7 +1,7 @@
 // import Head from 'next/head'
-// import { getLayout } from '@/components/Layout/Layout'
-// import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
-// import { CreateNewPasswordForm } from '@/components/Forms/CreateNewPasswordForm/CreateNewPasswordForm'
+// import { getLayout } from '@/Title/HeaderLayout/HeaderLayout'
+// import { FormWrapper } from '@/Title/Forms/FormWrapper/FormWrapper'
+// import { CreateNewPasswordForm } from '@/Title/Forms/CreateNewPasswordForm/CreateNewPasswordForm'
 //
 // const CreatePassword = () => {
 //     return (

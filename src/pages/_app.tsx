@@ -36,7 +36,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
     const getLayout = Component.getLayout ?? ((page) => page)
     const { store } = wrapper.useWrappedStore(pageProps)
-
     // const protectedRoutes = [InctagramPath.PROFILE.PROFILE]
 
     return getLayout(

@@ -29,7 +29,9 @@ const AuthRedirect = ({ children }) => {
         InctagramPath.AUTH.REGISTRATION,
         InctagramPath.AUTH.FORGOT_PASSWORD,
         InctagramPath.AUTH.CONFIRM_REGISTRATION,
-        InctagramPath.AUTH.CREATE_NEW_PASSWORD
+        InctagramPath.AUTH.CREATE_NEW_PASSWORD,
+        InctagramPath.AUTH.INVALID_LINK,
+        InctagramPath.AUTH.EXPIRED_LINK
     ]
 
     // let pathIsProtected = protectedRoutes.indexOf(router.pathname) !== -1

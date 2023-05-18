@@ -5,7 +5,9 @@ export const InctagramPath = {
         REGISTRATION: '/auth/registration',
         CONFIRM_REGISTRATION: '/auth/registration-confirmation',
         FORGOT_PASSWORD: '/auth/forgot-password',
-        CREATE_NEW_PASSWORD: '/auth/recovery'
+        CREATE_NEW_PASSWORD: '/auth/recovery',
+        INVALID_LINK: '/auth/invalid-link',
+        EXPIRED_LINK: '/auth/expired-link'
     },
     PROFILE: {
         PROFILE: '/profile'

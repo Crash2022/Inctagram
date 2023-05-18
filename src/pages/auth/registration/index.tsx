@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { getLayout } from '@/components/Layout/Layout'
+import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { RegistrationForm } from '@/components/Forms/RegistrationForm/RegistrationForm'
 import { NextPageWithLayout } from '@/pages/_app'

@@ -9,6 +9,7 @@ import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { InctagramPath } from '@/shared/api/path'
 
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
@@ -59,7 +60,11 @@ export const Header = () => {
                 <div
                     className={cls.auth}
                     // onClick={async () => {
-                    //     await logout()
+                    //     await logout().then((res) => {
+                    //         console.log('logout', res)
+                    //         localStorage.removeItem('accessToken')
+                    //         router.push(InctagramPath.AUTH.LOGIN)
+                    //     })
                     // }}
                 >
                     <div>{t('LogOut')}</div>
