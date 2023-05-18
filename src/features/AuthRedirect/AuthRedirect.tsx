@@ -36,12 +36,12 @@ const AuthRedirect = ({ children }) => {
     let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1
 
     useEffect(() => {
-        if (isBrowser() && !isLoading && !isAuthenticated && pathIsProtected) {
+        if (isBrowser() && !isLoading && !meData && pathIsProtected) {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
-    }, [isLoading, isAuthenticated, pathIsProtected])
+    }, [isLoading, meData, pathIsProtected])
 
-    if ((isLoading || !isAuthenticated) && pathIsProtected) {
+    if ((isLoading || !meData) && pathIsProtected) {
         return <LoaderScreen variant={'loader'} />
     }
 
