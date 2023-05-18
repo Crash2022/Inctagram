@@ -1,6 +1,8 @@
 @import '../../styles/mixins';
 
 .profilePage {
+    margin-bottom: 20px;
+
     .profilePage_header {
         @include flexBetween;
         gap: 40px;

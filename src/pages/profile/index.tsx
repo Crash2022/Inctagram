@@ -18,7 +18,7 @@ const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
     const router = useRouter()
 
-    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(10)
+    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
     const { data: meData } = useMeQuery()
     const [logout, { isLoading: logoutLoading }] = useLogoutMutation()
 
