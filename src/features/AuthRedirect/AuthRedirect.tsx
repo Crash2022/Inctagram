@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 // вариант 1
 // const AuthRedirect = ({ children }) => {
@@ -21,7 +22,7 @@ const isBrowser = () => typeof window !== 'undefined'
 
 const AuthRedirect = ({ children }) => {
     const router = useRouter()
-    const { data: meData } = useMeQuery()
+    const { data: meData, isLoading } = useMeQuery()
 
     let unprotectedRoutes = [
         InctagramPath.AUTH.LOGIN,
@@ -34,10 +35,14 @@ const AuthRedirect = ({ children }) => {
     let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1
 
     useEffect(() => {
-        if (isBrowser() && !meData && !localStorage.getItem('accessToken') && pathIsProtected) {
+        if (isBrowser() && !meData && pathIsProtected) {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
-    }, [])
+    }, [meData])
+
+    if ((isLoading || !meData) && pathIsProtected) {
+        return <LoaderScreen variant={'loader'} />
+    }
 
     return children
 }
