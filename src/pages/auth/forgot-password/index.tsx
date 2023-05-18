@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
+import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { NextPageWithLayout } from '@/pages/_app'
 import { ForgotPasswordForm } from '@/components/Forms/ForgotPasswordForm/ForgotPassword'
@@ -19,5 +19,5 @@ const Forgot: NextPageWithLayout = () => {
     )
 }
 
-Forgot.getLayout = getLayout
+Forgot.getLayout = getHeaderLayout
 export default Forgot

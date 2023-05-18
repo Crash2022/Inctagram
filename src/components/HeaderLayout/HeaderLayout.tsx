@@ -21,6 +21,6 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
     )
 }
 
-export const getLayout = (page: ReactElement) => {
+export const getHeaderLayout = (page: ReactElement) => {
     return <HeaderLayout>{page}</HeaderLayout>
 }

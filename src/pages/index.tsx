@@ -1,7 +1,7 @@
 import s from '@/styles/Home.module.scss'
 import LinkA from '@/shared/ui/LinkA/LinkA'
 import { NextPageWithLayout } from '@/pages/_app'
-import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
+import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
@@ -147,7 +147,7 @@ const Home: NextPageWithLayout = () => {
     )
 }
 
-Home.getLayout = getLayout
+Home.getLayout = getHeaderLayout
 export default Home
 
 // export async function getStaticProps({ locale }) {

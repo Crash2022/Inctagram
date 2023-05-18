@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
+import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
 import waitEmailLink from '../../../../public/assets/images/waitEmailLink.png'
 import { useTranslation } from 'react-i18next'
@@ -24,5 +24,5 @@ const ExpiredLink = () => {
     )
 }
 
-ExpiredLink.getLayout = getLayout
+ExpiredLink.getLayout = getHeaderLayout
 export default ExpiredLink

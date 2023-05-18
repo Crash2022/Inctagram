@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
+import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
 import congratulations from '../../../../public/assets/images/congratulations.png'
 import { useTranslation } from 'react-i18next'
@@ -24,5 +24,5 @@ const RegistrationConfirmation = () => {
     )
 }
 
-RegistrationConfirmation.getLayout = getLayout
+RegistrationConfirmation.getLayout = getHeaderLayout
 export default RegistrationConfirmation

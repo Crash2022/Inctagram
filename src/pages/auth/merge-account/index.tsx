@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 import mergeAccount from '../../../../public/assets/images/mergeAccount.png'
-import { getLayout } from '@/components/HeaderLayout/HeaderLayout'
+import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
 import { useTranslation } from 'react-i18next'
 
@@ -25,5 +25,5 @@ const MergeAccount = () => {
     )
 }
 
-MergeAccount.getLayout = getLayout
+MergeAccount.getLayout = getHeaderLayout
 export default MergeAccount
