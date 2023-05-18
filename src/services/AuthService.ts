@@ -94,6 +94,12 @@ export const authAPI = createApi({
                 method: 'POST',
                 body: payload
             })
+        }),
+        updateTokens: build.mutation<{ accessToken: string }, any>({
+            query: () => ({
+                url: '/auth/update-tokens',
+                method: 'POST'
+            })
         })
     })
 })
@@ -106,7 +112,9 @@ export const {
     useLogoutMutation,
     useMeQuery,
     useForgotPasswordMutation,
-    useNewPasswordMutation
+    useNewPasswordMutation,
+    useRecoveryCodeMutation,
+    useUpdateTokensMutation
 } = authAPI
 
 // export const registerApiSlice = createApi({
