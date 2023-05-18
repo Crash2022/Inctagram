@@ -21,18 +21,15 @@ export const CreateNewPasswordForm = () => {
     const router = useRouter()
     const { code } = router.query
     const [newPassword, { isSuccess, error, isError, isLoading }] = useNewPasswordMutation()
-    // const [open, setOpen] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false)
 
-    const SignUpSchema = yup.object().shape({
+    const NewPasswordSchema = yup.object().shape({
         newPassword: yup
             .string()
             .required(t('Err_Yup_Required'))
             .min(6, t('Err_Yup_Min'))
             .max(20, t('Err_Yup_Max')),
-        confirmPassword: yup
-            .string()
-            // .required(t('Err_Yup_Required'))
-            .oneOf([yup.ref('newPassword'), null], t('Err_Yup_FieldMatch'))
+        confirmPassword: yup.string().oneOf([yup.ref('newPassword'), null], t('Err_Yup_FieldMatch'))
     })
 
     const {
@@ -44,27 +41,24 @@ export const CreateNewPasswordForm = () => {
             newPassword: '',
             confirmPassword: ''
         },
-        resolver: yupResolver(SignUpSchema)
+        resolver: yupResolver(NewPasswordSchema)
     })
 
     const onSubmit: SubmitHandler<any> = async (data: any) => {
         console.log('submit', data)
         data.recoveryCode = code
-        await newPassword(data).then((res) => console.log(res))
+        await newPassword(data).then((res) => {
+            console.log(res)
+        })
     }
 
-    // const messageModalOKHandler = () => {
-    //     localStorage.removeItem('email')
-    //     router.push(InctagramPath.AUTH.CONFIRM_REGISTRATION).then()
-    // }
+    const messageModalOKHandler = () => {
+        router.push(InctagramPath.AUTH.LOGIN).then()
+    }
 
     useEffect(() => {
         if (isSuccess) {
-            enqueueSnackbar(/*error.data.messages[0].message*/ 'Пароль обновлён', {
-                variant: 'success',
-                autoHideDuration: 3000
-            })
-            router.push(InctagramPath.AUTH.LOGIN).then()
+            setOpen(true)
         }
         if (isError)
             enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
@@ -73,26 +67,18 @@ export const CreateNewPasswordForm = () => {
             })
     }, [isSuccess, isError])
 
-    // useEffect(() => {
-    //     localStorage.getItem('email')
-    // }, [])
-
-    // if (typeof window !== 'undefined') {
-    //     localStorage.getItem('email')
-    // }
-
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-            {/*<MessageModal*/}
-            {/*    open={open}*/}
-            {/*    setOpen={setOpen}*/}
-            {/*    header={t('EmailSent')}*/}
-            {/*    text={t('HaveSent')}*/}
-            {/*    buttonTitleOK={t('MainButton')}*/}
-            {/*    extraCallbackOK={messageModalOKHandler}*/}
-            {/*/>*/}
+            <MessageModal
+                open={open}
+                setOpen={setOpen}
+                header={t('PasswordUpdated')}
+                text={t('Message')}
+                buttonTitleOK={t('MainButton')}
+                extraCallbackOK={messageModalOKHandler}
+            />
 
             <Title title={t('CreateNewPassword')} className={styles.title} />
 

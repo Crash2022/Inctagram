@@ -31,14 +31,9 @@ export const RegistrationForm = () => {
         userName: yup
             .string()
             .required(t('Err_Yup_Required'))
-            .min(8, t('Err_Yup_Min'))
-            .max(20, t('Err_Yup_Max')),
-        email: yup
-            .string()
-            .required(t('Err_Yup_Required'))
-            .email(t('Err_Yup_Email'))
-            .min(8, t('Err_Yup_Min'))
-            .max(40, t('Err_Yup_Max')),
+            .min(6, t('Err_Yup_Min'))
+            .max(30, t('Err_Yup_Max')),
+        email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
         password: yup
             .string()
             .required(t('Err_Yup_Required'))

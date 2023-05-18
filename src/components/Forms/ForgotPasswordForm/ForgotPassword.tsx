@@ -26,7 +26,7 @@ export const ForgotPasswordForm = () => {
     const [open, setOpen] = useState<boolean>(false)
     const [forgotPassword, { error, isError, isLoading, isSuccess }] = useForgotPasswordMutation()
 
-    const SignUpSchema = yup.object().shape({
+    const ForgotSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')),
         recaptcha: yup.boolean().oneOf([true], t('Robot'))
     })
@@ -40,7 +40,7 @@ export const ForgotPasswordForm = () => {
             email: '',
             recaptcha: false
         },
-        resolver: yupResolver(SignUpSchema)
+        resolver: yupResolver(ForgotSchema)
     })
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
