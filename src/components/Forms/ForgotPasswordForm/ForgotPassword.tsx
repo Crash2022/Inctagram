@@ -17,7 +17,7 @@ import { useForgotPasswordMutation } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { MessageModal } from '@/features/MessageModal/MessageModal'
+import { MessageModal } from '@/components/MessageModal/MessageModal'
 
 export const ForgotPasswordForm = () => {
     const { enqueueSnackbar } = useSnackbar()

@@ -12,18 +12,16 @@ import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { RegistrationPayloadType } from '@/models/auth-types'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
-import { useSnackbar } from 'notistack'
 import { useEffect, useState } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { MessageModal } from '@/features/MessageModal/MessageModal'
+import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { InctagramPath } from '@/shared/api/path'
+import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
-    const { enqueueSnackbar } = useSnackbar()
-    const router = useRouter()
+
     const [open, setOpen] = useState<boolean>(false)
     const [registration, { isSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
@@ -67,17 +65,14 @@ export const RegistrationForm = () => {
     }
 
     const messageModalOKHandler = () => {
-        router.push('/auth/login').then()
+        setOpen(false)
     }
+
+    useErrorSnackbar(isError)
 
     useEffect(() => {
         if (isSuccess) setOpen(true)
-        if (isError)
-            enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
-    }, [isSuccess, isError])
+    }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 

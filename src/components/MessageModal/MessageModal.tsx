@@ -9,12 +9,13 @@ interface MessageModalProps {
     open: boolean
     setOpen: (value: boolean) => void
     header: string
-    text: string
+    text?: string
     extraButton?: boolean // модалка с двумя кнопками (+ нужен extraCallbackYES)
     extraCallbackYES?: () => void // функция для модалки с двумя кнопками
     buttonTitleOK: string // название кнопки для модалки с одной кнопкой
     extraCallbackOK?: () => void
     longButton?: boolean // одна кнопка на всю ширину (только стили)
+    children?: any
 }
 
 export const MessageModal = (props: MessageModalProps) => {
@@ -39,7 +40,8 @@ export const MessageModal = (props: MessageModalProps) => {
                         X
                     </div>
                 </div>
-                <div className={s.messageModal_title}>{props.text}</div>
+                {props.text ? <div className={s.messageModal_title}>{props.text}</div> : ''}
+                {props.children}
                 <div
                     className={clsx({
                         [s.messageModal_buttons]: !props.longButton,
