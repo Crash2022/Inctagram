@@ -20,95 +20,88 @@ const Profile: NextPageWithLayout = () => {
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(10)
     const { data: meData } = useMeQuery()
-    const [logout] = useLogoutMutation()
+    const [logout, { isLoading: logoutLoading }] = useLogoutMutation()
 
-    if (isLoading) {
-        return <LoaderScreen variant={'loader'} />
-    } else {
-        return (
-            <>
-                <Head>
-                    <title>Inctagram Index</title>
-                    <meta name='title' content='Index' />
-                </Head>
-                <div className={cls.profilePage}>
-                    <div className={cls.profilePage_header}>
-                        <div className={cls.header_photo}>
-                            <Image
-                                src={ProfilePhoto}
-                                alt={'profile-photo'}
-                                width={204}
-                                height={204}
-                            />
-                        </div>
-                        <div className={cls.header_info}>
-                            <div className={cls.info_control}>
-                                <div>{meData && meData.userName}</div>
-                                <Button
-                                    theme={'primaryWhite'}
-                                    onClick={async () => {
-                                        await logout().then((res) => {
-                                            console.log('logout', res)
-                                            localStorage.removeItem('accessToken')
-                                            router.push(InctagramPath.AUTH.LOGIN)
-                                        })
-                                    }}
-                                >
-                                    {t('ProfileSettings')}
-                                </Button>
-                            </div>
-                            <div className={cls.info_numbers}>
-                                <div className={cls.numbers_item}>
-                                    <div>2218</div>
-                                    <div>{t('Subscriptions')}</div>
-                                </div>
-                                <div className={cls.numbers_item}>
-                                    <div>2218</div>
-                                    <div>{t('Subscribers')}</div>
-                                </div>
-                                <div className={cls.numbers_item}>
-                                    <div>2218</div>
-                                    <div>{t('Publications')}</div>
-                                </div>
-                            </div>
-                            <div className={cls.info_description}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat.
-                            </div>
-                        </div>
+    if (isLoading || logoutLoading) return <LoaderScreen variant={'loader'} />
+
+    return (
+        <>
+            <Head>
+                <title>Inctagram Index</title>
+                <meta name='title' content='Index' />
+            </Head>
+            <div className={cls.profilePage}>
+                <div className={cls.profilePage_header}>
+                    <div className={cls.header_photo}>
+                        <Image src={ProfilePhoto} alt={'profile-photo'} width={204} height={204} />
                     </div>
-                    <div className={cls.profilePage_content}>
-                        <div className={cls.content_list}>
-                            {photos &&
-                                photos.map((photo) => {
-                                    return (
-                                        <div key={photo.id} className={cls.list_item}>
-                                            {/*{photo.title}*/}
-
-                                            {/*<Image*/}
-                                            {/*    src={photo.url}*/}
-                                            {/*    alt={'profile-photo'}*/}
-                                            {/*    width={234}*/}
-                                            {/*    height={234}*/}
-                                            {/*/>*/}
-
-                                            <img
-                                                src={photo.url}
-                                                alt='gallery-photo'
-                                                width={265}
-                                                height={265}
-                                            />
-                                        </div>
-                                    )
-                                })}
+                    <div className={cls.header_info}>
+                        <div className={cls.info_control}>
+                            <div>{meData && meData.userName}</div>
+                            <Button
+                                theme={'primaryWhite'}
+                                onClick={async () => {
+                                    await logout().then((res) => {
+                                        console.log('logout', res)
+                                        localStorage.removeItem('accessToken')
+                                        router.push(InctagramPath.AUTH.LOGIN)
+                                    })
+                                }}
+                            >
+                                {t('ProfileSettings')}
+                            </Button>
+                        </div>
+                        <div className={cls.info_numbers}>
+                            <div className={cls.numbers_item}>
+                                <div>2218</div>
+                                <div>{t('Subscriptions')}</div>
+                            </div>
+                            <div className={cls.numbers_item}>
+                                <div>2218</div>
+                                <div>{t('Subscribers')}</div>
+                            </div>
+                            <div className={cls.numbers_item}>
+                                <div>2218</div>
+                                <div>{t('Publications')}</div>
+                            </div>
+                        </div>
+                        <div className={cls.info_description}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo consequat.
                         </div>
                     </div>
                 </div>
-            </>
-        )
-    }
+                <div className={cls.profilePage_content}>
+                    <div className={cls.content_list}>
+                        {photos &&
+                            photos.map((photo) => {
+                                return (
+                                    <div key={photo.id} className={cls.list_item}>
+                                        {/*{photo.title}*/}
+
+                                        {/*<Image*/}
+                                        {/*    src={photo.url}*/}
+                                        {/*    alt={'profile-photo'}*/}
+                                        {/*    width={234}*/}
+                                        {/*    height={234}*/}
+                                        {/*/>*/}
+
+                                        <img
+                                            src={photo.url}
+                                            alt='gallery-photo'
+                                            width={265}
+                                            height={265}
+                                        />
+                                    </div>
+                                )
+                            })}
+                    </div>
+                </div>
+            </div>
+        </>
+    )
 }
 
 Profile.getLayout = getSidebarLayout
