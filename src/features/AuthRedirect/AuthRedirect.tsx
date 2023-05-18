@@ -22,7 +22,7 @@ const isBrowser = () => typeof window !== 'undefined'
 
 const AuthRedirect = ({ children }) => {
     const router = useRouter()
-    const { data: meData, isLoading } = useMeQuery()
+    const { data: meData, isLoading, isAuthenticated } = useMeQuery()
 
     let unprotectedRoutes = [
         InctagramPath.AUTH.LOGIN,
@@ -32,15 +32,16 @@ const AuthRedirect = ({ children }) => {
         InctagramPath.AUTH.CREATE_NEW_PASSWORD
     ]
 
+    // let pathIsProtected = protectedRoutes.indexOf(router.pathname) !== -1
     let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1
 
     useEffect(() => {
-        if (isBrowser() && !meData && pathIsProtected) {
+        if (isBrowser() && !isLoading && !isAuthenticated && pathIsProtected) {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
-    }, [meData])
+    }, [isLoading, isAuthenticated, pathIsProtected])
 
-    if ((isLoading || !meData) && pathIsProtected) {
+    if ((isLoading || !isAuthenticated) && pathIsProtected) {
         return <LoaderScreen variant={'loader'} />
     }
 

@@ -15,6 +15,7 @@ import { appWithTranslation } from 'next-i18next'
 import { SnackbarProvider } from 'notistack'
 import AuthRedirect from '@/features/AuthRedirect/AuthRedirect'
 import { useRouter } from 'next/router'
+import { InctagramPath } from '@/shared/api/path'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -35,6 +36,8 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
     const getLayout = Component.getLayout ?? ((page) => page)
     const { store } = wrapper.useWrappedStore(pageProps)
+
+    // const protectedRoutes = [InctagramPath.PROFILE.PROFILE]
 
     return getLayout(
         <>
