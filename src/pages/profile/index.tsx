@@ -38,16 +38,7 @@ const Profile: NextPageWithLayout = () => {
                     <div className={cls.header_info}>
                         <div className={cls.info_control}>
                             <div>{meData && meData.userName}</div>
-                            <Button
-                                theme={'primaryWhite'}
-                                onClick={async () => {
-                                    await logout().then((res) => {
-                                        console.log('logout', res)
-                                        localStorage.removeItem('accessToken')
-                                        router.push(InctagramPath.AUTH.LOGIN)
-                                    })
-                                }}
-                            >
+                            <Button theme={'primaryWhite'} onClick={() => {}}>
                                 {t('ProfileSettings')}
                             </Button>
                         </div>

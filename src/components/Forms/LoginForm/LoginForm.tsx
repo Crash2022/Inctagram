@@ -15,6 +15,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
 import { InctagramPath } from '@/shared/api/path'
+import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -35,21 +36,14 @@ export const LoginForm = () => {
         await login(submitData).then((res) => {
             console.log('login response', res)
             localStorage.setItem('accessToken', res.data.accessToken)
-
-            // localStorage.setItem('userId', meData.userId.toString())
-            // localStorage.setItem('userName', meData.userName)
-            // localStorage.setItem('email', meData.email)
         })
     }
 
+    useErrorSnackbar(isError)
+
     useEffect(() => {
-        if (isSuccess) router.push('/profile').then()
-        if (isError)
-            enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
-    }, [isSuccess, isError])
+        if (isSuccess) router.push(InctagramPath.PROFILE.PROFILE).then()
+    }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 

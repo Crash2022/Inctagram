@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react'
+import { PropsWithChildren, ReactElement, useEffect } from 'react'
 
 import cls from './SidebarLayout.module.scss'
 import Head from 'next/head'
@@ -12,9 +12,21 @@ import BookmarkIcon from './../../../public/assets/icons/bookmark-outline.svg'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
+import { InctagramPath } from '@/shared/api/path'
+import { useLogoutMutation } from '@/services/AuthService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { useRouter } from 'next/router'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
+    const router = useRouter()
+    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+
+    useEffect(() => {
+        if (isSuccess) router.push(InctagramPath.AUTH.LOGIN).then()
+    }, [isSuccess])
+
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <>
@@ -56,11 +68,20 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             </div>
                         </div>
                         <div className={cls.menuList_bottom}>
-                            <div className={cls.menuList_item}>
+                            <div
+                                className={cls.menuList_item}
+                                onClick={async () => {
+                                    await logout().then((res) => {
+                                        console.log('logout', res)
+                                        localStorage.removeItem('accessToken')
+                                        router.push(InctagramPath.AUTH.LOGIN)
+                                    })
+                                }}
+                            >
                                 <div>
                                     <LogoutIcon />
                                 </div>
-                                <LinkA href={'/'} text={t('LogOut')} />
+                                <div>{t('LogOut')}</div>
                             </div>
                         </div>
                     </div>
