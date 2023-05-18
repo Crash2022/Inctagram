@@ -34,7 +34,7 @@ const AuthRedirect = ({ children }) => {
     let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1
 
     useEffect(() => {
-        if (isBrowser() && !meData && pathIsProtected) {
+        if (isBrowser() && !meData && !localStorage.getItem('accessToken') && pathIsProtected) {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
     }, [])
