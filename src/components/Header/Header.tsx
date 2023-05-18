@@ -16,7 +16,7 @@ export const Header = () => {
     const { locale, locales, push } = useRouter()
     const router = useRouter()
     const [activeLang, setActiveLang] = useState<string>('en')
-    // const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
 
     // const toggleLanguage = (language: string): void => {
     //     setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
@@ -59,13 +59,13 @@ export const Header = () => {
 
                 <div
                     className={cls.auth}
-                    // onClick={async () => {
-                    //     await logout().then((res) => {
-                    //         console.log('logout', res)
-                    //         localStorage.removeItem('accessToken')
-                    //         router.push(InctagramPath.AUTH.LOGIN)
-                    //     })
-                    // }}
+                    onClick={async () => {
+                        await logout().then((res) => {
+                            console.log('logout', res)
+                            localStorage.removeItem('accessToken')
+                            router.push(InctagramPath.AUTH.LOGIN)
+                        })
+                    }}
                 >
                     <div>{t('LogOut')}</div>
                     <LogoutIcon />

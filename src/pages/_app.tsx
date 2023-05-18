@@ -38,7 +38,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     const { store } = wrapper.useWrappedStore(pageProps)
     // const protectedRoutes = [InctagramPath.PROFILE.PROFILE]
 
-    return getLayout(
+    return (
         <>
             <style jsx global>
                 {`
@@ -51,7 +51,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
                 <AuthRedirect>
                     <SnackbarProvider maxSnack={2}>
                         {/*<Suspense fallback={<div>...</div>}>*/}
-                        <Component {...pageProps} />
+                        {getLayout(<Component {...pageProps} />)}
                         {/*</Suspense>*/}
                     </SnackbarProvider>
                 </AuthRedirect>

@@ -22,7 +22,7 @@ const isBrowser = () => typeof window !== 'undefined'
 
 const AuthRedirect = ({ children }) => {
     const router = useRouter()
-    const { data: meData, isLoading, isAuthenticated } = useMeQuery()
+    const { data: meData, isLoading, isError, isAuthenticated } = useMeQuery()
 
     let unprotectedRoutes = [
         InctagramPath.AUTH.LOGIN,
@@ -50,8 +50,23 @@ const AuthRedirect = ({ children }) => {
     return children
 }
 
+// вариант 3
+// const AuthRedirect = ({ children }) => {
+//     const router = useRouter()
+//     const { data: meData, isLoading, isError } = useMeQuery()
+//
+//     useEffect(() => {
+//         if (isError && router.pathname !== InctagramPath.AUTH.LOGIN) {
+//             router.push(InctagramPath.AUTH.LOGIN).then()
+//         }
+//     }, [router, isError])
+//
+//     return <>{children}</>
+// }
+
 export default AuthRedirect
 
+// пример
 // import { appRoutes } from "../constants";
 // import { useAuthContext } from "../contexts";
 //
