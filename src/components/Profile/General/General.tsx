@@ -1,6 +1,7 @@
 import React from 'react'
 import cls from './General.module.scss'
 import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
+import DeletePhotoIcon from '../../../../public/assets/icons/delete-circle-fill.svg'
 import Image from 'next/image'
 import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'next-i18next'
@@ -45,6 +46,9 @@ export const General = () => {
             <div className={cls.general_photoBlock}>
                 <div className={cls.photo}>
                     <Image src={ProfilePhoto} alt={'profile-photo'} width={204} height={204} />
+                    <div className={cls.add_photo}>
+                        <DeletePhotoIcon width={30} height={30} />
+                    </div>
                 </div>
                 <Button theme={'outline'}>{t('AddPhoto')}</Button>
             </div>

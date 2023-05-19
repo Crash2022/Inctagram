@@ -3,11 +3,19 @@
 .profileSettings_general {
     display: flex;
     gap: 30px;
+    border-bottom: 1px solid var(--snippet-border);
 
     .general_photoBlock {
 
         .photo {
+            position: relative;
             margin-bottom: 20px;
+
+            .add_photo {
+                position: absolute;
+                top: 30px;
+                left: 175px;
+            }
 
             img {
                 border-radius: 50%;
@@ -16,7 +24,10 @@
     }
     .general_infoBlock {
         width: 100%;
-        @include divDefaultMarginBottom;
+
+        > div {
+            margin-bottom: 20px;
+        }
 
         .input {
 
