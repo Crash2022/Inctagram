@@ -12,6 +12,12 @@ import { Devices } from '@/components/Profile/Devices/Devices'
 import { Management } from '@/components/Profile/Management/Management'
 import { Payments } from '@/components/Profile/Payments/Payments'
 
+interface SectionsType {
+    id: number
+    title: string
+    isActive: boolean
+}
+
 const ProfileSettings: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-settings')
     // const router = useRouter()
@@ -19,7 +25,12 @@ const ProfileSettings: NextPageWithLayout = () => {
     // const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
     // const { data: meData } = useMeQuery()
 
-    // if (isLoading) return <LoaderScreen variant={'loader'} />
+    // const [sections, setSections] = useState<SectionsType[]>([
+    //     { id: 1, title: t('General'), isActive: true },
+    //     { id: 2, title: t('Devices'), isActive: false },
+    //     { id: 3, title: t('Management'), isActive: false },
+    //     { id: 4, title: t('Payments'), isActive: false }
+    // ])
 
     const [isGeneral, setIsGeneral] = useState<boolean>(true)
     const [isDevices, setIsDevices] = useState<boolean>(false)
@@ -39,6 +50,8 @@ const ProfileSettings: NextPageWithLayout = () => {
         setIsPayments(isPayments)
     }
 
+    // if (isLoading) return <LoaderScreen variant={'loader'} />
+
     return (
         <>
             <Head>
@@ -47,13 +60,27 @@ const ProfileSettings: NextPageWithLayout = () => {
             </Head>
             <div className={cls.profilePageSettings}>
                 <div className={cls.profileSettings_header}>
+                    {/*{sections.map((el) => {*/}
+                    {/*    return (*/}
+                    {/*        <div*/}
+                    {/*            key={el.id}*/}
+                    {/*            className={el.isActive ? cls.headerItem_active : cls.headerItem}*/}
+                    {/*            onClick={() => {*/}
+                    {/*                sections.filter((s) => (s.id === el.id ? el.isActive : ''))*/}
+                    {/*            }}*/}
+                    {/*        >*/}
+                    {/*            {el.title}*/}
+                    {/*        </div>*/}
+                    {/*    )*/}
+                    {/*})}*/}
+
                     <div
                         className={isGeneral ? cls.headerItem_active : cls.headerItem}
                         onClick={() => {
                             setSectionHandler(true, false, false, false)
                         }}
                     >
-                        General Information
+                        {t('General')}
                     </div>
                     <div
                         className={isDevices ? cls.headerItem_active : cls.headerItem}
@@ -61,7 +88,7 @@ const ProfileSettings: NextPageWithLayout = () => {
                             setSectionHandler(false, true, false, false)
                         }}
                     >
-                        Devices
+                        {t('Devices')}
                     </div>
                     <div
                         className={isManagement ? cls.headerItem_active : cls.headerItem}
@@ -69,7 +96,7 @@ const ProfileSettings: NextPageWithLayout = () => {
                             setSectionHandler(false, false, true, false)
                         }}
                     >
-                        Account Management
+                        {t('Management')}
                     </div>
                     <div
                         className={isPayments ? cls.headerItem_active : cls.headerItem}
@@ -77,10 +104,15 @@ const ProfileSettings: NextPageWithLayout = () => {
                             setSectionHandler(false, false, false, true)
                         }}
                     >
-                        My Payments
+                        {t('Payments')}
                     </div>
                 </div>
                 <div className={cls.profileSettings_content}>
+                    {/*{sections[0].isActive && <General />}*/}
+                    {/*{sections[1].isActive && <Devices />}*/}
+                    {/*{sections[2].isActive && <Management />}*/}
+                    {/*{sections[3].isActive && <Payments />}*/}
+
                     {isGeneral && <General />}
                     {isDevices && <Devices />}
                     {isManagement && <Management />}
