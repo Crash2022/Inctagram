@@ -16,6 +16,7 @@ type CustomTextareaPropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
     onEnter?: () => void
     error?: ReactNode
+    placeholder?: string
     helperText?: string
     divClassName?: string
     spanClassName?: string
@@ -27,6 +28,7 @@ export const Textarea: React.FC<CustomTextareaPropsType> = ({
     onKeyPress,
     onEnter,
     error,
+    placeholder,
     helperText, // error для Controlled InputUI (React Hook Forms)
     className,
     divClassName,
@@ -45,6 +47,7 @@ export const Textarea: React.FC<CustomTextareaPropsType> = ({
 
     return (
         <div className={finalTextareaDivWrapperClassName}>
+            <div className={s.placeholder}>{placeholder}</div>
             <textarea onChange={onChangeCallback} onKeyPress={onKeyPressCallback} {...restProps} />
         </div>
     )
