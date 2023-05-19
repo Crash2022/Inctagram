@@ -28,7 +28,7 @@ const ProfileSettings: NextPageWithLayout = () => {
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Settings' />
             </Head>
-            <div className={cls.profilePageSettings}>ProfileSettings</div>
+            <div className={cls.profilePageSettings}>ProfileSettings PUSH</div>
         </>
     )
 }
