@@ -19,7 +19,7 @@ const ProfileHome: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
     const router = useRouter()
 
-    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
+    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(12)
     const { data: meData } = useMeQuery()
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
