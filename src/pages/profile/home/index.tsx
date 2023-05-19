@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import cls from './Profile.module.scss'
+import cls from './ProfileHome.module.scss'
 import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
@@ -8,13 +8,15 @@ import { useTranslation } from 'next-i18next'
 import { useFetchUserProfileQuery } from '@/services/UserProfileService'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
+import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
 import { Button } from '@/shared/ui/Button/Button'
 import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
+import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
+import { InctagramPath } from '@/shared/api/path'
 
-const Profile: NextPageWithLayout = () => {
-    const { t } = useTranslation('profile')
+const ProfileHome: NextPageWithLayout = () => {
+    const { t } = useTranslation('profile-home')
     const router = useRouter()
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
@@ -26,9 +28,9 @@ const Profile: NextPageWithLayout = () => {
         <>
             <Head>
                 <title>Inctagram Index</title>
-                <meta name='title' content='Index' />
+                <meta name='title' content='Profile Home' />
             </Head>
-            <div className={cls.profilePage}>
+            <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
                     <div className={cls.header_photo}>
                         <Image src={ProfilePhoto} alt={'profile-photo'} width={204} height={204} />
@@ -36,9 +38,11 @@ const Profile: NextPageWithLayout = () => {
                     <div className={cls.header_info}>
                         <div className={cls.info_control}>
                             <div>{meData && meData.userName}</div>
-                            <Button theme={'primaryWhite'} onClick={() => {}}>
-                                {t('ProfileSettings')}
-                            </Button>
+                            <ButtonLink
+                                theme={'primaryWhite'}
+                                href={InctagramPath.PROFILE.SETTINGS}
+                                title={t('ProfileSettings')}
+                            />
                         </div>
                         <div className={cls.info_numbers}>
                             <div className={cls.numbers_item}>
@@ -70,9 +74,9 @@ const Profile: NextPageWithLayout = () => {
                                     <div key={photo.id} className={cls.list_item}>
                                         {/*<Image*/}
                                         {/*    src={photo.url}*/}
-                                        {/*    alt={'profile-photo'}*/}
-                                        {/*    width={234}*/}
-                                        {/*    height={234}*/}
+                                        {/*    alt={'gallery-photo'}*/}
+                                        {/*    width={265}*/}
+                                        {/*    height={265}*/}
                                         {/*/>*/}
 
                                         <img
@@ -91,5 +95,5 @@ const Profile: NextPageWithLayout = () => {
     )
 }
 
-Profile.getLayout = getSidebarLayout
-export default Profile
+ProfileHome.getLayout = getSidebarLayout
+export default ProfileHome

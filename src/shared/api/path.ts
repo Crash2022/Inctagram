@@ -10,6 +10,7 @@ export const InctagramPath = {
         EXPIRED_LINK: '/auth/expired-link'
     },
     PROFILE: {
-        PROFILE: '/profile'
+        HOME: '/profile/home',
+        SETTINGS: '/profile/settings'
     }
 }
