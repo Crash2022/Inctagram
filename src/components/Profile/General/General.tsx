@@ -57,7 +57,9 @@ export const General = () => {
                             <DeletePhotoIcon width={30} height={30} />
                         </div>
                     </div>
-                    <InputFile title={t('AddPhoto')} />
+                    <div className={cls.addPhoto_btn}>
+                        <InputFile title={t('AddPhoto')} />
+                    </div>
                 </div>
                 <div className={cls.general_infoBlock}>
                     <ControlledInput
