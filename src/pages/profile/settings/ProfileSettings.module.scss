@@ -1,3 +1,32 @@
-.profilePageSettings {
+@import '../../../styles/mixins';
 
+.profilePageSettings {
+    .profileSettings_header {
+        display: flex;
+        margin-bottom: 20px;
+
+        .headerItem {
+            @include h3-text-size;
+            padding: 4px 25px;
+            color: var(--dark-100);
+            border-bottom: 2px solid var(--dark-100);
+
+            &:hover {
+                cursor: pointer;
+                color: var(--primary-500);
+                border-bottom: 2px solid var(--primary-500);
+            }
+        }
+
+        .headerItem_active {
+            padding: 4px 25px;
+            @include h3-text-size;
+            color: var(--primary-500);
+            border-bottom: 2px solid var(--primary-500);
+        }
+    }
+
+    .profileSettings_content {
+
+    }
 }
