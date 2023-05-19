@@ -12,23 +12,35 @@ import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
 import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { useSnackbar } from 'notistack'
 import { useEffect } from 'react'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
+import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
-    const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
+
     const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
     const { data: meData } = useMeQuery()
 
-    const { control, handleSubmit } = useForm<LoginPayloadType>({
+    const LoginSchema = yup.object().shape({
+        email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
+        password: yup.string().required(t('Err_Yup_Required'))
+    })
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<LoginPayloadType>({
         defaultValues: {
             email: '',
             password: ''
-        }
+        },
+        resolver: yupResolver(LoginSchema)
     })
 
     const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {
@@ -36,14 +48,11 @@ export const LoginForm = () => {
         await login(submitData).then((res) => {
             console.log('login response', res)
             localStorage.setItem('accessToken', res.data.accessToken)
+            router.push(InctagramPath.PROFILE.PROFILE).then()
         })
     }
 
     useErrorSnackbar(isError)
-
-    useEffect(() => {
-        if (isSuccess) router.push(InctagramPath.PROFILE.PROFILE).then()
-    }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -57,24 +66,20 @@ export const LoginForm = () => {
             </div>
 
             <div className={styles.inputContainer}>
-                <Controller
-                    name='email'
+                <ControlledInput
+                    id={'Login_Email'}
+                    name={'email'}
+                    placeholder={t('Email')}
                     control={control}
-                    render={({ field }) => (
-                        <Input {...field} id={'Login_Email'} placeholder={t('Email')} />
-                    )}
+                    error={errors.email?.message}
                 />
-                <Controller
-                    name='password'
+                <ControlledInput
+                    id={'Login_Password'}
+                    name={'password'}
+                    placeholder={t('Password')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Login_Password'}
-                            placeholder={t('Password')}
-                            password
-                        />
-                    )}
+                    password
+                    error={errors.password?.message}
                 />
             </div>
 

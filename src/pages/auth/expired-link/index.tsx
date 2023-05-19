@@ -12,7 +12,7 @@ const ExpiredLink = () => {
         <>
             <Head>
                 <title>Inctagram - Expired link</title>
-                <meta name='title' content='Confirm' />
+                <meta name='title' content='Expired Link' />
             </Head>
             <ConfirmEmailBox
                 title={t('title')}

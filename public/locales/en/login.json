@@ -4,5 +4,8 @@
   "Email": "E-mail",
   "Password": "Password",
   "ForgotPassword": "Forgot Password?",
-  "HaveAccount": "Do you have an account?"
+  "HaveAccount": "Do you have an account?",
+
+  "Err_Yup_Required": "The field is required",
+  "Err_Yup_Email": "E-mail must be with @"
 }

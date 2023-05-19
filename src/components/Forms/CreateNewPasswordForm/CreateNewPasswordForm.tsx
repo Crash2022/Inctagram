@@ -13,6 +13,8 @@ import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { InctagramPath } from '@/shared/api/path'
+import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
+import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 // import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
@@ -28,7 +30,7 @@ export const CreateNewPasswordForm = () => {
             .string()
             .required(t('Err_Yup_Required'))
             .min(6, t('Err_Yup_Min'))
-            .max(20, t('Err_Yup_Max')),
+            .max(20, t('Err_Yup_Max_Password')),
         confirmPassword: yup.string().oneOf([yup.ref('newPassword'), null], t('Err_Yup_FieldMatch'))
     })
 
@@ -56,16 +58,13 @@ export const CreateNewPasswordForm = () => {
         router.push(InctagramPath.AUTH.LOGIN).then()
     }
 
+    useErrorSnackbar(isError)
+
     useEffect(() => {
         if (isSuccess) {
             setOpen(true)
         }
-        if (isError)
-            enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
-    }, [isSuccess, isError])
+    }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -83,31 +82,21 @@ export const CreateNewPasswordForm = () => {
             <Title title={t('CreateNewPassword')} className={styles.title} />
 
             <div className={styles.inputContainer}>
-                <Controller
-                    name='newPassword'
+                <ControlledInput
+                    id={'New_Password'}
+                    name={'newPassword'}
+                    password
+                    placeholder={t('Password')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'New_Password'}
-                            placeholder={t('Password')}
-                            password
-                            error={errors.newPassword?.message}
-                        />
-                    )}
+                    error={errors.newPassword?.message}
                 />
-                <Controller
-                    name='confirmPassword'
+                <ControlledInput
+                    id={'New_ConfirmPassword'}
+                    name={'confirmPassword'}
+                    password
+                    placeholder={t('ConfirmPassword')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'New_ConfirmPassword'}
-                            placeholder={t('ConfirmPassword')}
-                            password
-                            error={errors.confirmPassword?.message}
-                        />
-                    )}
+                    error={errors.confirmPassword?.message}
                 />
                 <p>{t('PasswordLength')}</p>
             </div>

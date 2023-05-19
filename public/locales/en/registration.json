@@ -7,9 +7,10 @@
   "ConfirmPassword": "Password Confirmation",
   "HaveAccount": "Do you have an account?",
 
-  "Err_Yup_Min": "Too short",
-  "Err_Yup_Max": "Too long",
-  "Err_Yup_Email": "Email must be a valid email",
+  "Err_Yup_Min": "Minimal length is 6 symbols",
+  "Err_Yup_Max_Name": "Maximum length is 30 symbols",
+  "Err_Yup_Max_Password": "Maximum length is 20 symbols",
+  "Err_Yup_Email": "E-mail must be with @",
   "Err_Yup_Required": "The field is required",
   "Err_Yup_FieldMatch": "Passwords must match",
 

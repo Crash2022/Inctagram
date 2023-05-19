@@ -1,6 +1,5 @@
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Title } from '@/components/Forms/Title/Title'
-import { Input } from '@/shared/ui/Input/Input'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
 import GoogleIcon from 'public/assets/icons/googleIcon.svg'
@@ -18,6 +17,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
+import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
@@ -30,13 +30,13 @@ export const RegistrationForm = () => {
             .string()
             .required(t('Err_Yup_Required'))
             .min(6, t('Err_Yup_Min'))
-            .max(30, t('Err_Yup_Max')),
+            .max(30, t('Err_Yup_Max_Name')),
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
         password: yup
             .string()
             .required(t('Err_Yup_Required'))
             .min(6, t('Err_Yup_Min'))
-            .max(20, t('Err_Yup_Max')),
+            .max(20, t('Err_Yup_Max_Password')),
         confirmPassword: yup
             .string()
             .required(t('Err_Yup_Required'))
@@ -94,55 +94,35 @@ export const RegistrationForm = () => {
             </div>
 
             <div className={styles.inputContainer}>
-                <Controller
-                    name='userName'
+                <ControlledInput
+                    id={'Reg_Username'}
+                    name={'userName'}
+                    placeholder={t('Username')}
                     control={control}
-                    render={({ field }: any) => (
-                        <Input
-                            {...field}
-                            id={'Reg_Username'}
-                            placeholder={t('Username')}
-                            error={errors.userName?.message}
-                        />
-                    )}
+                    error={errors.userName?.message}
                 />
-                <Controller
-                    name='email'
+                <ControlledInput
+                    id={'Reg_Email'}
+                    name={'email'}
+                    placeholder={t('Email')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Reg_Email'}
-                            placeholder={t('Email')}
-                            error={errors.email?.message}
-                        />
-                    )}
+                    error={errors.email?.message}
                 />
-                <Controller
-                    name='password'
+                <ControlledInput
+                    id={'Reg_Password'}
+                    name={'password'}
+                    password
+                    placeholder={t('Password')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Reg_Password'}
-                            placeholder={t('Password')}
-                            error={errors.password?.message}
-                            password
-                        />
-                    )}
+                    error={errors.password?.message}
                 />
-                <Controller
-                    name='confirmPassword'
+                <ControlledInput
+                    id={'Reg_ConfirmPassword'}
+                    name={'confirmPassword'}
+                    password
+                    placeholder={t('ConfirmPassword')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Reg_ConfirmPassword'}
-                            placeholder={t('ConfirmPassword')}
-                            error={errors.confirmPassword?.message}
-                            password
-                        />
-                    )}
+                    error={errors.confirmPassword?.message}
                 />
             </div>
             <div>

@@ -10,9 +10,8 @@ import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
 import { Button } from '@/shared/ui/Button/Button'
-import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
+import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-import { InctagramPath } from '@/shared/api/path'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile')
@@ -20,9 +19,8 @@ const Profile: NextPageWithLayout = () => {
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
     const { data: meData } = useMeQuery()
-    const [logout, { isLoading: logoutLoading }] = useLogoutMutation()
 
-    if (isLoading || logoutLoading) return <LoaderScreen variant={'loader'} />
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <>
@@ -70,8 +68,6 @@ const Profile: NextPageWithLayout = () => {
                             photos.map((photo) => {
                                 return (
                                     <div key={photo.id} className={cls.list_item}>
-                                        {/*{photo.title}*/}
-
                                         {/*<Image*/}
                                         {/*    src={photo.url}*/}
                                         {/*    alt={'profile-photo'}*/}

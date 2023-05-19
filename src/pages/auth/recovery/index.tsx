@@ -10,7 +10,7 @@ const CreateNewPassword: NextPageWithLayout = () => {
         <>
             <Head>
                 <title>Create New Password</title>
-                <meta name='title' content='Login' />
+                <meta name='title' content='Recovery Password' />
             </Head>
 
             <FormWrapper marginTop={36}>

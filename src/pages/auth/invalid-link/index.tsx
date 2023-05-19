@@ -12,7 +12,7 @@ const InvalidLink = () => {
         <>
             <Head>
                 <title>Inctagram - Invalid link</title>
-                <meta name='title' content='Confirm' />
+                <meta name='title' content='Invalid Link' />
             </Head>
             <ConfirmEmailBox
                 title={t('title')}

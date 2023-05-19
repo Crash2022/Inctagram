@@ -18,11 +18,11 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
+import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
+import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 
 export const ForgotPasswordForm = () => {
-    const { enqueueSnackbar } = useSnackbar()
     const { t } = useTranslation('forgot')
-    const router = useRouter()
     const [open, setOpen] = useState<boolean>(false)
     const [forgotPassword, { error, isError, isLoading, isSuccess }] = useForgotPasswordMutation()
 
@@ -65,13 +65,7 @@ export const ForgotPasswordForm = () => {
         setOpen(false)
     }
 
-    useEffect(() => {
-        if (isError)
-            enqueueSnackbar(/*error.data.messages[0].message*/ 'Ошибка сервера', {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
-    }, [isSuccess, isError])
+    useErrorSnackbar(isError)
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
@@ -88,17 +82,12 @@ export const ForgotPasswordForm = () => {
 
             <Title title={t('Forgot')} className={styles.title} />
             <div className={styles.inputContainer} style={{ marginBottom: '54px' }}>
-                <Controller
-                    name='email'
+                <ControlledInput
+                    id={'Forgot_Email'}
+                    name={'email'}
+                    placeholder={t('Email')}
                     control={control}
-                    render={({ field }) => (
-                        <Input
-                            {...field}
-                            id={'Forgot_Email'}
-                            placeholder={t('Email')}
-                            error={errors.email?.message}
-                        />
-                    )}
+                    error={errors.email?.message}
                 />
                 <p>{t('EnterEmail')}</p>
             </div>
@@ -125,7 +114,6 @@ export const ForgotPasswordForm = () => {
                             />
                         </div>
                         <label htmlFor={'recaptcha'}>{t('Robot')}</label>
-                        {/*<span>I&apos;m not a robot</span>*/}
                     </div>
 
                     <CaptchaIcon />
