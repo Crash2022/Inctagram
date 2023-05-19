@@ -29,7 +29,7 @@ const Home: NextPageWithLayout = () => {
 
     useEffect(() => {
         if (meData) {
-            router.push(InctagramPath.PROFILE.PROFILE).then()
+            router.push(InctagramPath.PROFILE.HOME).then()
         } else {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
