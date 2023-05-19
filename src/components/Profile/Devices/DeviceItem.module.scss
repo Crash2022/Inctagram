@@ -1,0 +1,23 @@
+@import '../../../styles/mixins';
+
+.item {
+    @include flexBetween;
+
+    .left {
+        display: flex;
+        gap: 12px;
+
+        .item_image {
+
+        }
+        .item_info {
+            @include divDefaultMarginBottom;
+        }
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+}
