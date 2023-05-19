@@ -1,0 +1,32 @@
+// вариант 2
+//.input_file {
+//    color: transparent;
+//}
+//.input_file::-webkit-file-upload-button {
+//    visibility: hidden;
+//}
+//.input_file::before {
+//    content: 'Select some files';
+//    color: black;
+//    display: inline-block;
+//    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+//    border: 1px solid #999;
+//    border-radius: 3px;
+//    padding: 5px 8px;
+//    outline: none;
+//    white-space: nowrap;
+//    -webkit-user-select: none;
+//    cursor: pointer;
+//    text-shadow: 1px 1px #fff;
+//    font-weight: 700;
+//    font-size: 10pt;
+//}
+//.input_file:hover::before {
+//    border-color: black;
+//}
+//.input_file:active {
+//    outline: 0;
+//}
+//.input_file:active::before {
+//    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+//}

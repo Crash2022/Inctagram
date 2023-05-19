@@ -15,6 +15,7 @@ import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
+import { InputFile } from '@/shared/ui/InputFile/InputFile'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -56,9 +57,7 @@ export const General = () => {
                             <DeletePhotoIcon width={30} height={30} />
                         </div>
                     </div>
-                    <Button divClassName={cls.addPhoto_btn} theme={'outline'}>
-                        {t('AddPhoto')}
-                    </Button>
+                    <InputFile title={t('AddPhoto')} />
                 </div>
                 <div className={cls.general_infoBlock}>
                     <ControlledInput
