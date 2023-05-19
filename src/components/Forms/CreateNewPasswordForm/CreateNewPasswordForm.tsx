@@ -19,7 +19,6 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 
 export const CreateNewPasswordForm = () => {
     const { t } = useTranslation('new-password')
-    const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
     const { code } = router.query
     const [newPassword, { isSuccess, error, isError, isLoading }] = useNewPasswordMutation()
@@ -83,17 +82,17 @@ export const CreateNewPasswordForm = () => {
 
             <div className={styles.inputContainer}>
                 <ControlledInput
+                    password
                     id={'New_Password'}
                     name={'newPassword'}
-                    password
                     placeholder={t('Password')}
                     control={control}
                     error={errors.newPassword?.message}
                 />
                 <ControlledInput
+                    password
                     id={'New_ConfirmPassword'}
                     name={'confirmPassword'}
-                    password
                     placeholder={t('ConfirmPassword')}
                     control={control}
                     error={errors.confirmPassword?.message}

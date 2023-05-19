@@ -42,7 +42,7 @@ export const ControlledInput = ({
                         {...field}
                         id={id}
                         type={type}
-                        password={password}
+                        password={password ? password : false}
                         placeholder={placeholder}
                         value={field.value}
                         onChange={(value) => {

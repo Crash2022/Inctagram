@@ -1,0 +1,25 @@
+@import '../../../styles/mixins';
+
+.profileSettings_general {
+    display: flex;
+    gap: 30px;
+
+    .general_photoBlock {
+
+        .photo {
+            margin-bottom: 20px;
+
+            img {
+                border-radius: 50%;
+            }
+        }
+    }
+    .general_infoBlock {
+        width: 100%;
+        @include divDefaultMarginBottom;
+
+        .input {
+
+        }
+    }
+}

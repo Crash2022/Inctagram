@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Photo } from '@/models/userProfileService-types'
+import { Photo } from '@/models/profile-types'
 
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',

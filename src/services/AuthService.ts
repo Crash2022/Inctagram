@@ -112,8 +112,8 @@ export const {
     useMeQuery,
     useForgotPasswordMutation,
     useNewPasswordMutation,
-    useRecoveryCodeMutation,
-    useUpdateTokensMutation
+    useRecoveryCodeMutation, // пока что не нужен
+    useUpdateTokensMutation // добавить в интерсептор
 } = authAPI
 
 // export const registerApiSlice = createApi({

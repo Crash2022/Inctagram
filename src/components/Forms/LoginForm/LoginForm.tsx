@@ -4,15 +4,14 @@ import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import GoogleIcon from 'public/assets/icons/googleIcon.svg'
 import GitIcon from 'public/assets/icons/gitIcon.svg'
 import { Title } from '@/components/Forms/Title/Title'
-import { Input } from '@/shared/ui/Input/Input'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
 import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { useEffect } from 'react'
+import React from 'react'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
@@ -74,11 +73,11 @@ export const LoginForm = () => {
                     error={errors.email?.message}
                 />
                 <ControlledInput
+                    password
                     id={'Login_Password'}
                     name={'password'}
                     placeholder={t('Password')}
                     control={control}
-                    password
                     error={errors.password?.message}
                 />
             </div>
