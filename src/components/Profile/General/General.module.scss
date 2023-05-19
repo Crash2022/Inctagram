@@ -1,0 +1,57 @@
+@import '../../../styles/mixins';
+
+.profileSettings_general {
+    .general_mainBlock {
+        display: flex;
+        gap: 30px;
+        border-bottom: 1px solid var(--snippet-border);
+        margin-bottom: var(--default-Large-Margin);
+
+        .general_photoBlock {
+            .photo {
+                position: relative;
+                margin-bottom: var(--default-Large-Margin);
+
+                .add_photo {
+                    position: absolute;
+                    top: 30px;
+                    left: 175px;
+                }
+
+                img {
+                    border-radius: 50%;
+                }
+            }
+            .addPhoto_btn {
+                button {
+                    height: 100%;
+                }
+            }
+        }
+
+        .general_infoBlock {
+            width: 100%;
+
+            > div {
+                margin-bottom: var(--default-Large-Margin);
+            }
+
+            .input {
+
+            }
+            .textarea {
+                width: 100%;
+                margin-bottom: 55px;
+
+                textarea {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .save_btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

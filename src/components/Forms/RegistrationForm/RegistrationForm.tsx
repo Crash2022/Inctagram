@@ -109,17 +109,17 @@ export const RegistrationForm = () => {
                     error={errors.email?.message}
                 />
                 <ControlledInput
+                    password
                     id={'Reg_Password'}
                     name={'password'}
-                    password
                     placeholder={t('Password')}
                     control={control}
                     error={errors.password?.message}
                 />
                 <ControlledInput
+                    password
                     id={'Reg_ConfirmPassword'}
                     name={'confirmPassword'}
-                    password
                     placeholder={t('ConfirmPassword')}
                     control={control}
                     error={errors.confirmPassword?.message}

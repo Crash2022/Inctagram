@@ -4,6 +4,7 @@
     .profileSettings_header {
         display: flex;
         margin-bottom: 20px;
+        text-align: center;
 
         .headerItem {
             @include h3-text-size;
