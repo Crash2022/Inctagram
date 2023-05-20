@@ -9,6 +9,7 @@ import HomeIcon from './../../../public/assets/icons/home-icon.svg'
 import AddIcon from './../../../public/assets/icons/add-icon.svg'
 import ProfileIcon from './../../../public/assets/icons/profile-icon.svg'
 import BookmarkIcon from './../../../public/assets/icons/bookmark-outline.svg'
+import Statistics from './../../../public/assets/icons/statistics.svg'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
@@ -21,6 +22,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const router = useRouter()
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+    const isPaid = true // исправить на динамический
 
     useEffect(() => {
         if (isSuccess) router.push(InctagramPath.AUTH.LOGIN).then()
@@ -46,26 +48,39 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 <div>
                                     <HomeIcon />
                                 </div>
-                                <LinkA href={'/'} text={t('Home')} />
+                                <LinkA href={InctagramPath.PROFILE.HOME} text={t('Home')} />
                             </div>
                             <div className={cls.menuList_item}>
                                 <div>
                                     <AddIcon />
                                 </div>
-                                <LinkA href={'/'} text={t('Add')} />
+                                <LinkA href={InctagramPath.PROFILE.HOME} text={t('Add')} />
                             </div>
                             <div className={cls.menuList_item}>
                                 <div>
                                     <ProfileIcon />
                                 </div>
-                                <LinkA href={'/'} text={t('Profile')} />
+                                <LinkA href={InctagramPath.PROFILE.HOME} text={t('Profile')} />
                             </div>
                             <div className={cls.menuList_item}>
                                 <div>
                                     <BookmarkIcon />
                                 </div>
-                                <LinkA href={'/'} text={t('Favorites')} />
+                                <LinkA href={InctagramPath.PROFILE.HOME} text={t('Favorites')} />
                             </div>
+                            {isPaid ? (
+                                <div className={cls.menuList_item}>
+                                    <div>
+                                        <Statistics />
+                                    </div>
+                                    <LinkA
+                                        href={InctagramPath.PROFILE.HOME}
+                                        text={t('Statistics')}
+                                    />
+                                </div>
+                            ) : (
+                                ''
+                            )}
                         </div>
                         <div className={cls.menuList_bottom}>
                             <div
