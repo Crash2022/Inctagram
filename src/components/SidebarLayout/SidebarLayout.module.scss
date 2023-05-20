@@ -23,13 +23,6 @@
             .menuList_top {
                 margin-bottom: 110px;
 
-                .menuList_item {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    //color: var(--primary-500);
-                    //font-weight: bold;
-                }
                 > div:not(:last-child) {
                     margin-bottom: 24px;
 
@@ -37,7 +30,35 @@
                         margin-bottom: 60px;
                     }
                 }
+
+                .menuList_item {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+
+                    .item_image {
+                        display: flex;
+                    }
+                    .link {
+                        &:hover {
+                            color: var(--primary-500);
+                        }
+                    }
+                }
+                .menuList_item_active {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+
+                    .item_image {
+                        display: flex;
+                    }
+                    .link {
+                        color: var(--primary-500);
+                    }
+                }
             }
+
             .menuList_bottom {
                 margin-bottom: 24px;
 
@@ -48,6 +69,16 @@
 
                     &:hover {
                         cursor: pointer;
+                    }
+
+                    .item_image {
+                        display: flex;
+                    }
+
+                    .link {
+                        &:hover {
+                            color: var(--primary-500);
+                        }
                     }
                 }
             }

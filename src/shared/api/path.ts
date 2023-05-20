@@ -11,6 +11,10 @@ export const InctagramPath = {
     },
     PROFILE: {
         HOME: '/profile/home',
-        SETTINGS: '/profile/settings'
+        ADD_POST: '/profile/add-post',
+        PROFILE: '/profile',
+        SETTINGS: '/profile/settings',
+        FAVORITES: '/profile/favorites',
+        STATISTICS: '/profile/favorites'
     }
 }

@@ -47,7 +47,7 @@ export const LoginForm = () => {
         await login(submitData).then((res) => {
             console.log('login response', res)
             localStorage.setItem('accessToken', res.data.accessToken)
-            router.push(InctagramPath.PROFILE.HOME).then()
+            router.push(InctagramPath.PROFILE.PROFILE).then()
         })
     }
 

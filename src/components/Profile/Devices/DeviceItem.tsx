@@ -26,7 +26,7 @@ export const DeviceItem = ({ isLogout }: DeviceItemProps) => {
 
             {isLogout ? (
                 <div className={cls.right}>
-                    <div>
+                    <div className={cls.right_icon}>
                         <LogoutIcon />
                     </div>
                     <div>{t('LogOut')}</div>
