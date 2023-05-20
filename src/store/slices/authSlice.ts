@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { authAPI } from '@/shared/api/auth.api'
+import { authApi } from '@/shared/api/auth-api'
 import { createAppAsyncThunk } from '@/shared/utils/createAppAsyncThunk'
 import { AxiosError } from 'axios'
 import { LoginPayloadType, RegistrationPayloadType } from '@/models/auth-types'
@@ -43,7 +43,7 @@ export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, Registratio
     'auth/register',
     async (data, thunkAPI) => {
         try {
-            await authAPI.register(data)
+            await authApi.register(data)
             return { isLoggedIn: true }
         } catch (err: any | AxiosError) {
             return thunkAPI.rejectWithValue({
@@ -58,7 +58,7 @@ export const login = createAppAsyncThunk<{ profile: any; isLoggedIn: boolean }, 
     'auth/login',
     async (data, thunkAPI) => {
         try {
-            const res = await authAPI.login(data)
+            const res = await authApi.login(data)
             return { profile: res.data, isLoggedIn: true }
         } catch (err: any | AxiosError) {
             return thunkAPI.rejectWithValue({
@@ -73,7 +73,7 @@ export const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
     'auth/logout',
     async (_, thunkAPI) => {
         try {
-            await authAPI.logout()
+            await authApi.logout()
             return { isLoggedIn: false }
         } catch (err: any | AxiosError) {
             return thunkAPI.rejectWithValue({
@@ -88,7 +88,7 @@ export const recoverPass = createAppAsyncThunk<{ isEmailSent: boolean }, any>(
     'auth/recoverPass',
     async (data, thunkAPI) => {
         try {
-            await authAPI.recoverPass(data)
+            await authApi.recoverPass(data)
             return { isEmailSent: true }
         } catch (err: any | AxiosError) {
             return thunkAPI.rejectWithValue({

@@ -1,15 +1,15 @@
 import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper, HYDRATE } from 'next-redux-wrapper'
-import { appReducer } from '@/store/slices/app/appSlice'
-import { authReducer } from '@/store/slices/auth/authSlice'
+import { appReducer } from '@/store/slices/appSlice'
+import { authReducer } from '@/store/slices/authSlice'
 import { userProfileAPI } from '@/services/UserProfileService'
-import { authAPI } from '@/services/AuthService'
+import { serviceAuthAPI } from '@/services/AuthService'
 
 const combinedReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
     [userProfileAPI.reducerPath]: userProfileAPI.reducer,
-    [authAPI.reducerPath]: authAPI.reducer
+    [serviceAuthAPI.reducerPath]: serviceAuthAPI.reducer
 })
 
 const reducer: typeof combinedReducer = (state, action: AnyAction) => {
@@ -25,7 +25,7 @@ export const makeStore = () =>
     configureStore({
         reducer,
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(userProfileAPI.middleware, authAPI.middleware)
+            getDefaultMiddleware().concat(userProfileAPI.middleware, serviceAuthAPI.middleware)
     })
 
 type Store = ReturnType<typeof makeStore>

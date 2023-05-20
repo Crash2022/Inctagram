@@ -53,23 +53,23 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     if (result.error && result.error.status === 401) {
         // try to get a new token
         const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
-        if (refreshResult) {
+        if (refreshResult.data) {
             // store the new token
             // api.dispatch(tokenReceived(refreshResult.data))
-            authAPI.me()
+            await serviceAuthAPI
 
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)
         } else {
             // api.dispatch(logout())
-            authAPI.logout()
+            await serviceAuthAPI.logout()
         }
     }
     return result
 }
 
-export const authAPI = createApi({
-    reducerPath: 'authAPI',
+export const serviceAuthAPI = createApi({
+    reducerPath: 'serviceAuthAPI',
     baseQuery: baseQueryWithReauth,
     endpoints: (build) => ({
         registration: build.mutation<any, RegistrationPayloadType>({
@@ -116,7 +116,7 @@ export const authAPI = createApi({
                 // prepareHeaders: async (headers, { extra }) => {
                 //     try {
                 //         const token = localStorage.getItem('accessToken')
-                //         if (token) headers.set('authorization', `Bearer ${token}`)
+                //         if (token) headers.set('Authorization', `Bearer ${token}`)
                 //         console.log(headers)
                 //         return headers
                 //     } catch (error) {
@@ -158,7 +158,7 @@ export const authAPI = createApi({
 export const {
     useRegistrationMutation,
     useRegistrationConfirmationMutation,
-    useRegistrationResendLinkMutation, // надо добавить в регистрацию
+    useRegistrationResendLinkMutation, // надо добавить в ошбику при регистрации
     useLoginMutation,
     useLogoutMutation,
     useMeQuery,
@@ -166,47 +166,4 @@ export const {
     useNewPasswordMutation,
     useRecoveryCodeMutation, // пока что не нужен
     useUpdateTokensMutation
-} = authAPI
-
-// export const registerApiSlice = createApi({
-//     reducerPath: 'register/api',
-//     baseQuery: fetchBaseQuery({
-//         baseUrl: BASE_URL,
-//         credentials: 'include'
-//     }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
-//     endpoints: builder => ({
-//         registerUser: builder.mutation<
-//             RegistrationResponseType,
-//             RegisterUserPayload
-//             >({
-//             query: (payload: RegisterUserPayload) => ({
-//                 url: 'auth/register',
-//                 method: 'POST',
-//                 body: payload
-//             })
-//         })
-//     })
-// })
-
-// export const loginApiSlice = createApi({
-//     reducerPath: 'login/api',
-//     baseQuery: fetchBaseQuery({
-//         baseUrl: BASE_URL,
-//         credentials: 'include'
-//     }) as BaseQueryFn<string | FetchArgs, unknown, FetchError, {}>,
-//     endpoints: builder => ({
-//         login: builder.mutation<UserLoggedInResponse, LoginPayload>({
-//             query: (payload: LoginPayload) => ({
-//                 url: 'auth/login',
-//                 method: 'POST',
-//                 body: payload
-//             }),
-//             async onQueryStarted(payload, { dispatch, queryFulfilled }) {
-//                 const res = await queryFulfilled
-//                 dispatch(setUserData(res.data))
-//             }
-//         })
-//     })
-// })
-//
-// export const { useLoginMutation } = loginApiSlice
+} = serviceAuthAPI
