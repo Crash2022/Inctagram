@@ -1,4 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+    BaseQueryFn,
+    createApi,
+    FetchArgs,
+    fetchBaseQuery,
+    FetchBaseQueryError
+} from '@reduxjs/toolkit/query/react'
 import {
     LoginPayloadType,
     MeResponseType,
@@ -12,12 +18,45 @@ import { baseURL } from '@/shared/api/baseURL'
 // import { Photo } from '@/models/userProfileService-types'
 
 // dotenv.config()
+
+// const myBaseQuery = fetchBaseQuery({
+//     baseUrl: baseURL,
+//     // Add your custom interceptor logic here
+//     prepareHeaders: (headers, { getState }) => {
+//         const token = getState().auth.token
+//         if (token) {
+//             headers.set('Authorization', `Bearer ${token}`)
+//         }
+//         return headers
+//     },
+// })
+
+// const baseQuery = fetchBaseQuery({ baseUrl: baseURL })
+// const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+//     args,
+//     api,
+//     extraOptions
+// ) => {
+//     let result = await baseQuery(args, api, extraOptions)
+//     if (result.error && result.error.status === 401) {
+//         // my logic here
+//         endpoints: (build) => ({
+//             updateTokens: build.mutation<{ accessToken: string }, any>({
+//                 query: () => ({
+//                     url: '/auth/registration',
+//                     method: 'POST'
+//                 })
+//             })
+//         })
+//     }
+//     return result
+// }
+
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
         // baseUrl: process.env.BASE_URL
         baseUrl: baseURL
-        // baseUrl: 'baseUrl'
     }),
     endpoints: (build) => ({
         registration: build.mutation<any, RegistrationPayloadType>({
@@ -100,6 +139,14 @@ export const authAPI = createApi({
                 method: 'POST'
             })
         })
+        // tokenRefresh: build.query<{ accessToken: string }, void>({
+        //     queryFn: async (arg, queryApi, extraOptions, baseQuery) => {
+        //         const response = await fetch(`/api/refresh`)
+        //         return response.ok
+        //             ? { data: await response.json() }
+        //             : { error: await response.json() }
+        //     }
+        // })
     })
 })
 
