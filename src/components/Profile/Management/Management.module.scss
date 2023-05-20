@@ -1,13 +1,13 @@
 .devices_mainBox {
-    .this_devices {
+    .account_types {
         .title {
             margin-bottom: 10px;
         }
         .contentBox {
             margin-bottom: 20px;
-        }
-        .terminate_btn {
-            text-align: right;
+            label:not(:last-child) {
+                margin-bottom: 20px;
+            }
         }
     }
 }
