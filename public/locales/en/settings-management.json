@@ -10,5 +10,8 @@
 
   "Error": "Error",
   "Failed": "Transaction failed, please try again",
-  "MainButton": "Back to payments"
+  "BackButton": "Back to payments",
+  "Success": "Success",
+  "Successful": "Payment was successful",
+  "OkButton": "OK"
 }

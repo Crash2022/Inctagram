@@ -13,7 +13,8 @@ type RadioCostsTypes = '10' | '50' | '100'
 export const Management = () => {
     const { t } = useTranslation('settings-management')
 
-    const [open, setOpen] = useState<boolean>(false)
+    const [openError, setOpenError] = useState<boolean>(false)
+    const [openSuccess, setOpenSuccess] = useState<boolean>(false)
 
     const radioAccountOptions = [t('Personal'), t('Business')]
     const [radioAccTypeButton, setRadioAccTypeButton] = useState<RadioAccountTypes>('Personal')
@@ -22,23 +23,39 @@ export const Management = () => {
     const [radioCostButton, setRadioCostButton] = useState<RadioCostsTypes>('10')
 
     // const isError = true
+    // const isSuccess = true
+
     // useEffect(() => {
-    //     if (isError) setOpen(true)
+    //     if (isError) setOpenError(true)
+    //     if (isSuccess) setOpenSuccess(true)
     // }, [])
 
-    const messageModalOKHandler = () => {
-        setOpen(false)
+    const messageModalErrorHandler = () => {
+        setOpenError(false)
+    }
+    const messageModalSuccessHandler = () => {
+        setOpenSuccess(false)
     }
 
     return (
         <div className={cls.devices_mainBox}>
             <MessageModal
-                open={open}
-                setOpen={setOpen}
+                open={openError}
+                setOpen={setOpenError}
                 header={t('Error')}
                 text={t('Failed')}
-                buttonTitleOK={t('MainButton')}
-                extraCallbackOK={messageModalOKHandler}
+                buttonTitleOK={t('BackButton')}
+                extraCallbackOK={messageModalErrorHandler}
+                longButton
+            />
+
+            <MessageModal
+                open={openSuccess}
+                setOpen={setOpenSuccess}
+                header={t('Success')}
+                text={t('Successful')}
+                buttonTitleOK={t('OkButton')}
+                extraCallbackOK={messageModalSuccessHandler}
                 longButton
             />
 
