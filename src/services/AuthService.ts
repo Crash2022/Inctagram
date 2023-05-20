@@ -31,6 +31,8 @@ import { baseURL } from '@/shared/api/baseURL'
 //     },
 // })
 
+// test commit
+
 // const baseQuery = fetchBaseQuery({ baseUrl: baseURL })
 // const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
 //     args,
