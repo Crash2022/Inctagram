@@ -14,52 +14,63 @@ import {
     RegistrationPayloadType
 } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
-// import dotenv from 'dotenv'
-// import { Photo } from '@/models/userProfileService-types'
 
-// dotenv.config()
-
-// const myBaseQuery = fetchBaseQuery({
-//     baseUrl: baseURL,
-//     // Add your custom interceptor logic here
-//     prepareHeaders: (headers, { getState }) => {
-//         const token = getState().auth.token
-//         if (token) {
-//             headers.set('Authorization', `Bearer ${token}`)
+// const axiosBaseQuery =
+//     (
+//         { baseUrl }: { baseUrl: string } = { baseUrl: '' }
+//     ): BaseQueryFn<
+//         {
+//             url: string
+//             method: AxiosRequestConfig['method']
+//             data?: AxiosRequestConfig['data']
+//             params?: AxiosRequestConfig['params']
+//         },
+//         unknown,
+//         unknown
+//     > =>
+//     async ({ url, method, data, params }) => {
+//         try {
+//             const result = await axios({ url: baseUrl + url, method, data, params })
+//             return { data: result.data }
+//         } catch (axiosError) {
+//             let err = axiosError as AxiosError
+//             return {
+//                 error: {
+//                     status: err.response?.status,
+//                     data: err.response?.data || err.message
+//                 }
+//             }
 //         }
-//         return headers
-//     },
-// })
-
-// test commit
-
-// const baseQuery = fetchBaseQuery({ baseUrl: baseURL })
-// const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-//     args,
-//     api,
-//     extraOptions
-// ) => {
-//     let result = await baseQuery(args, api, extraOptions)
-//     if (result.error && result.error.status === 401) {
-//         // my logic here
-//         endpoints: (build) => ({
-//             updateTokens: build.mutation<{ accessToken: string }, any>({
-//                 query: () => ({
-//                     url: '/auth/registration',
-//                     method: 'POST'
-//                 })
-//             })
-//         })
 //     }
-//     return result
-// }
+
+const baseQuery = fetchBaseQuery({ baseUrl: baseURL })
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+    args,
+    api,
+    extraOptions
+) => {
+    let result = await baseQuery(args, api, extraOptions)
+    if (result.error && result.error.status === 401) {
+        // try to get a new token
+        const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
+        if (refreshResult) {
+            // store the new token
+            // api.dispatch(tokenReceived(refreshResult.data))
+            authAPI.me()
+
+            // retry the initial query
+            result = await baseQuery(args, api, extraOptions)
+        } else {
+            // api.dispatch(logout())
+            authAPI.logout()
+        }
+    }
+    return result
+}
 
 export const authAPI = createApi({
     reducerPath: 'authAPI',
-    baseQuery: fetchBaseQuery({
-        // baseUrl: process.env.BASE_URL
-        baseUrl: baseURL
-    }),
+    baseQuery: baseQueryWithReauth,
     endpoints: (build) => ({
         registration: build.mutation<any, RegistrationPayloadType>({
             query: (payload: RegistrationPayloadType) => ({
@@ -141,28 +152,20 @@ export const authAPI = createApi({
                 method: 'POST'
             })
         })
-        // tokenRefresh: build.query<{ accessToken: string }, void>({
-        //     queryFn: async (arg, queryApi, extraOptions, baseQuery) => {
-        //         const response = await fetch(`/api/refresh`)
-        //         return response.ok
-        //             ? { data: await response.json() }
-        //             : { error: await response.json() }
-        //     }
-        // })
     })
 })
 
 export const {
     useRegistrationMutation,
     useRegistrationConfirmationMutation,
-    useRegistrationResendLinkMutation,
+    useRegistrationResendLinkMutation, // надо добавить в регистрацию
     useLoginMutation,
     useLogoutMutation,
     useMeQuery,
     useForgotPasswordMutation,
     useNewPasswordMutation,
     useRecoveryCodeMutation, // пока что не нужен
-    useUpdateTokensMutation // добавить в интерсептор
+    useUpdateTokensMutation
 } = authAPI
 
 // export const registerApiSlice = createApi({
