@@ -9,7 +9,6 @@ import {
 } from '@/models/auth-types'
 import { baseQueryWithReauth } from '@/shared/api/interceptor'
 
-// Auth Service
 export const serviceAuthAPI = createApi({
     reducerPath: 'serviceAuthAPI',
     baseQuery: baseQueryWithReauth,
