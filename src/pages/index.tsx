@@ -1,17 +1,11 @@
 import s from '@/styles/Home.module.scss'
-import LinkA from '@/shared/ui/LinkA/LinkA'
 import { NextPageWithLayout } from '@/pages/_app'
 import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
-import { Button } from '@/shared/ui/Button/Button'
-import { Input } from '@/shared/ui/Input/Input'
-import { SearchInput } from '@/shared/ui/SearchInput/SearchInput'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
-import { Textarea } from '@/shared/ui/Textarea/Textarea'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useMeQuery } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
@@ -29,11 +23,11 @@ const Home: NextPageWithLayout = () => {
 
     useEffect(() => {
         if (meData) {
-            router.push(InctagramPath.PROFILE.HOME).then()
+            router.push(InctagramPath.PROFILE.PROFILE).then()
         } else {
             router.push(InctagramPath.AUTH.LOGIN).then()
         }
-    }, [router])
+    }, [router, meData])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 

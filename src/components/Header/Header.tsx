@@ -59,7 +59,11 @@ export const Header = () => {
                                     // className={activeLang === l ? cls.active : ''}
                                 >
                                     {/*{l.toUpperCase()}*/}
-                                    {l === 'ru' ? <RuFlag width={40} /> : <UkFlag width={40} />}
+                                    {l === 'ru' ? (
+                                        <RuFlag width={50} height={40} />
+                                    ) : (
+                                        <UkFlag width={50} height={40} />
+                                    )}
                                 </div>
                             )
                         })}

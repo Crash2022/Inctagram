@@ -5,7 +5,8 @@
     height: var(--navbar-height);
     background-color: var(--header-color);
     color: var(--light-100);
-    @include large-text;
+    font-size: 20px;
+    //@include large-text;
 
     .header {
         max-width: var(--layout-width);

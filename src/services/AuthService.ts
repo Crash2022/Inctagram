@@ -15,34 +15,7 @@ import {
 } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
 
-// const axiosBaseQuery =
-//     (
-//         { baseUrl }: { baseUrl: string } = { baseUrl: '' }
-//     ): BaseQueryFn<
-//         {
-//             url: string
-//             method: AxiosRequestConfig['method']
-//             data?: AxiosRequestConfig['data']
-//             params?: AxiosRequestConfig['params']
-//         },
-//         unknown,
-//         unknown
-//     > =>
-//     async ({ url, method, data, params }) => {
-//         try {
-//             const result = await axios({ url: baseUrl + url, method, data, params })
-//             return { data: result.data }
-//         } catch (axiosError) {
-//             let err = axiosError as AxiosError
-//             return {
-//                 error: {
-//                     status: err.response?.status,
-//                     data: err.response?.data || err.message
-//                 }
-//             }
-//         }
-//     }
-
+// interceptor
 const baseQuery = fetchBaseQuery({ baseUrl: baseURL })
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
     args,
@@ -53,21 +26,25 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     if (result.error && result.error.status === 401) {
         // try to get a new token
         const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
-        if (refreshResult.data) {
+        if (refreshResult.data.accessToken) {
+            // if (refreshResult.data) {
             // store the new token
             // api.dispatch(tokenReceived(refreshResult.data))
-            await serviceAuthAPI
+
+            localStorage.setItem('accessToken', refreshResult.data.accessToken)
+            await serviceAuthAPI.endpoints.me()
 
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)
         } else {
             // api.dispatch(logout())
-            await serviceAuthAPI.logout()
+            await serviceAuthAPI.endpoints.logout()
         }
     }
     return result
 }
 
+// Auth Service
 export const serviceAuthAPI = createApi({
     reducerPath: 'serviceAuthAPI',
     baseQuery: baseQueryWithReauth,

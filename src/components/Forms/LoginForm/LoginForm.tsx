@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
 import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
@@ -23,7 +23,6 @@ export const LoginForm = () => {
     const router = useRouter()
 
     const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
-    const { data: meData } = useMeQuery()
 
     const LoginSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
