@@ -3,6 +3,8 @@ import cls from './Management.module.scss'
 import { ContentBox } from '@/shared/ui/ContentBox/ContentBox'
 import { useTranslation } from 'next-i18next'
 import { RadioButton } from '@/shared/ui/RadioButton/RadioButton'
+import PaypalIcon from '../../../../public/assets/icons/pay-paypal.svg'
+import StripeIcon from '../../../../public/assets/icons/pay-stripe.svg'
 
 type RadioAccountTypes = 'Personal' | 'Business'
 type RadioCostsTypes = '10' | '50' | '100'
@@ -29,16 +31,27 @@ export const Management = () => {
                 </ContentBox>
             </div>
             {radioAccTypeButton === 'Business' ? (
-                <div className={cls.account_types}>
-                    <div className={cls.title}>{t('Costs')}</div>
-                    <ContentBox divClassName={cls.contentBox}>
-                        <RadioButton
-                            options={radioCostsOptions}
-                            value={radioCostButton}
-                            onChangeOption={setRadioCostButton}
-                        />
-                    </ContentBox>
-                </div>
+                <>
+                    <div className={cls.account_types}>
+                        <div className={cls.title}>{t('Costs')}</div>
+                        <ContentBox divClassName={cls.contentBox}>
+                            <RadioButton
+                                options={radioCostsOptions}
+                                value={radioCostButton}
+                                onChangeOption={setRadioCostButton}
+                            />
+                        </ContentBox>
+                    </div>
+                    <div className={cls.pay_system}>
+                        <div>
+                            <PaypalIcon />
+                        </div>
+                        <div>{t('Or')}</div>
+                        <div>
+                            <StripeIcon />
+                        </div>
+                    </div>
+                </>
             ) : (
                 ''
             )}
