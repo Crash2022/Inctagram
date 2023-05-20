@@ -1,22 +1,22 @@
 import React from 'react'
 import Head from 'next/head'
-import cls from './ProfileHome.module.scss'
+import cls from './ProfileFavorites.module.scss'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 
-const ProfileHome: NextPageWithLayout = () => {
+const ProfileFavorites: NextPageWithLayout = () => {
     return (
         <>
             <Head>
                 <title>Inctagram Index</title>
-                <meta name='title' content='Profile Home' />
+                <meta name='title' content='Profile Favorites' />
             </Head>
-            <div className={cls.profilePageHome}>Profile Home</div>
+            <div className={cls.profilePageFavorites}>Profile Favorites</div>
         </>
     )
 }
 
-ProfileHome.getLayout = getSidebarLayout
-export default ProfileHome
+ProfileFavorites.getLayout = getSidebarLayout
+export default ProfileFavorites

@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import cls from './ProfileHome.module.scss'
+import cls from './Profile.module.scss'
 import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'

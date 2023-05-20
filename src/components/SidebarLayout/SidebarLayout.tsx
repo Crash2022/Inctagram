@@ -16,6 +16,7 @@ import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useRouter } from 'next/router'
+import { AddPostModal } from '@/components/AddPostModal/AddPostModal'
 
 interface MenuLinkType {
     id: number
@@ -29,26 +30,29 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const router = useRouter()
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
     const isPaid = true // исправить на динамическое значение
+    const [open, setOpen] = useState<boolean>(false)
 
-    const [menuLink, setMenuLink] = useState<MenuLinkType[]>([
-        { id: 1, icon: <HomeIcon />, href: InctagramPath.PROFILE.HOME, title: t('Home') },
-        { id: 2, icon: <AddIcon />, href: InctagramPath.PROFILE.ADD_POST, title: t('Add') },
-        { id: 3, icon: <ProfileIcon />, href: InctagramPath.PROFILE.PROFILE, title: t('Profile') },
-        {
-            id: 4,
-            icon: <BookmarkIcon />,
-            href: InctagramPath.PROFILE.FAVORITES,
-            title: t('Favorites')
-        }
-    ])
+    // const [menuLink, setMenuLink] = useState<MenuLinkType[]>([
+    //     { id: 1, icon: <HomeIcon />, href: InctagramPath.PROFILE.HOME, title: t('Home') },
+    //     { id: 2, icon: <AddIcon />, href: InctagramPath.PROFILE.ADD_POST, title: t('Add') },
+    //     { id: 3, icon: <ProfileIcon />, href: InctagramPath.PROFILE.PROFILE, title: t('Profile') },
+    //     {
+    //         id: 4,
+    //         icon: <BookmarkIcon />,
+    //         href: InctagramPath.PROFILE.FAVORITES,
+    //         title: t('Favorites')
+    //     }
+    // ])
+
+    const addPostHandler = () => {
+        setOpen(true)
+    }
 
     useEffect(() => {
         if (isSuccess) router.push(InctagramPath.AUTH.LOGIN).then()
     }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
-
-    console.log(router.pathname)
 
     return (
         <>
@@ -64,28 +68,103 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                 <nav>
                     <div className={cls.menuList}>
                         <div className={cls.menuList_top}>
-                            {menuLink.map((el) => {
-                                return (
-                                    <div
-                                        key={el.id}
-                                        className={
-                                            router.pathname === el.href
-                                                ? cls.menuList_item_active
-                                                : cls.menuList_item
-                                        }
-                                    >
-                                        <div className={cls.item_image}>{el.icon}</div>
-                                        <LinkA
-                                            href={el.href}
-                                            text={el.title}
-                                            className={cls.link}
-                                        />
-                                    </div>
-                                )
-                            })}
+                            {/*{menuLink.map((el) => {*/}
+                            {/*    return (*/}
+                            {/*        <div*/}
+                            {/*            key={el.id}*/}
+                            {/*            className={*/}
+                            {/*                router.pathname === el.href*/}
+                            {/*                    ? cls.menuList_item_active*/}
+                            {/*                    : cls.menuList_item*/}
+                            {/*            }*/}
+                            {/*        >*/}
+                            {/*            <div className={cls.item_image}>{el.icon}</div>*/}
+                            {/*            <LinkA*/}
+                            {/*                href={el.href}*/}
+                            {/*                text={el.title}*/}
+                            {/*                className={cls.link}*/}
+                            {/*            />*/}
+                            {/*        </div>*/}
+                            {/*    )*/}
+                            {/*})}*/}
+
+                            <div
+                                className={
+                                    router.pathname === InctagramPath.PROFILE.HOME
+                                        ? cls.menuList_item_active
+                                        : cls.menuList_item
+                                }
+                            >
+                                <div>
+                                    <HomeIcon />
+                                </div>
+                                <LinkA
+                                    href={InctagramPath.PROFILE.HOME}
+                                    text={t('Home')}
+                                    className={cls.link}
+                                />
+                            </div>
+
+                            <AddPostModal
+                                open={open}
+                                setOpen={setOpen}
+                                header={t('AddPhotoModal')}
+                            />
+
+                            <div className={cls.menuList_item}>
+                                <div>
+                                    <AddIcon />
+                                </div>
+                                <div className={cls.link} onClick={addPostHandler}>
+                                    {t('Add')}
+                                </div>
+                                {/*<LinkA*/}
+                                {/*    href={InctagramPath.PROFILE.ADD_POST}*/}
+                                {/*    text={t('Add')}*/}
+                                {/*    className={cls.link}*/}
+                                {/*/>*/}
+                            </div>
+                            <div
+                                className={
+                                    router.pathname === InctagramPath.PROFILE.PROFILE
+                                        ? cls.menuList_item_active
+                                        : cls.menuList_item
+                                }
+                            >
+                                <div>
+                                    <ProfileIcon />
+                                </div>
+                                <LinkA
+                                    href={InctagramPath.PROFILE.PROFILE}
+                                    text={t('Profile')}
+                                    className={cls.link}
+                                />
+                            </div>
+                            <div
+                                className={
+                                    router.pathname === InctagramPath.PROFILE.FAVORITES
+                                        ? cls.menuList_item_active
+                                        : cls.menuList_item
+                                }
+                            >
+                                <div>
+                                    <BookmarkIcon />
+                                </div>
+                                <LinkA
+                                    href={InctagramPath.PROFILE.FAVORITES}
+                                    text={t('Favorites')}
+                                    className={cls.link}
+                                />
+                            </div>
 
                             {isPaid ? (
-                                <div className={cls.menuList_item}>
+                                <div
+                                    className={
+                                        router.pathname === InctagramPath.PROFILE.STATISTICS
+                                            ? cls.menuList_item_active
+                                            : cls.menuList_item
+                                    }
+                                >
                                     <div className={cls.item_image}>
                                         <Statistics />
                                     </div>

@@ -15,6 +15,6 @@ export const InctagramPath = {
         PROFILE: '/profile',
         SETTINGS: '/profile/settings',
         FAVORITES: '/profile/favorites',
-        STATISTICS: '/profile/favorites'
+        STATISTICS: '/profile/statistics'
     }
 }
