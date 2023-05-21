@@ -16,7 +16,7 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
             </Head>
             <Header />
             <main className={cls.layoutContainer}>{children}</main>
-            <Footer />
+            {/*<Footer />*/}
         </>
     )
 }

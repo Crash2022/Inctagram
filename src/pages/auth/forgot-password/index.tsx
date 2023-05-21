@@ -12,7 +12,7 @@ const Forgot: NextPageWithLayout = () => {
                 <meta name='title' content='Forgot Password' />
             </Head>
 
-            <FormWrapper marginTop={36}>
+            <FormWrapper marginTop={96}>
                 <ForgotPasswordForm />
             </FormWrapper>
         </>

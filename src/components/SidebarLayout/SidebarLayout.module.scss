@@ -6,6 +6,7 @@
     margin: 0 auto;
     display: flex;
     flex: 1 1 auto;
+    padding-top: var(--navbar-height);
 
     nav {
         width: 220px;
@@ -94,6 +95,6 @@
     }
 
     @media (max-width: 390px) {
-        min-height: var(--default-Content-Height-Mobile);
+        //min-height: var(--default-Content-Height-Mobile);
     }
 }

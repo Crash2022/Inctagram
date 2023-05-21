@@ -3,8 +3,12 @@
 .footer {
     background-color: var(--header-color);
     height: var(--footer-height);
-
     display: none;
+
+    width: 390px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 
     @media(max-width: 390px) {
         display: block;
@@ -12,8 +16,12 @@
 
     .container {
         height: var(--footer-height);
-        @include defaultContainer;
-        @include flexBetween;
-        gap: 10px;
+
+        .items {
+            height: var(--footer-height);
+            @include flexBetween;
+            gap: 10px;
+            padding: 0 40px;
+        }
     }
 }

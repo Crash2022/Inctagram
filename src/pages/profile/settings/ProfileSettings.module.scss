@@ -11,6 +11,8 @@
             padding: 4px 25px;
             color: var(--dark-100);
             border-bottom: 2px solid var(--dark-100);
+            display: flex;
+            align-items: center;
 
             &:hover {
                 cursor: pointer;
@@ -24,6 +26,8 @@
             @include h3-text-size;
             color: var(--primary-500);
             border-bottom: 2px solid var(--primary-500);
+            display: flex;
+            align-items: center;
         }
     }
 

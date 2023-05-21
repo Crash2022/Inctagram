@@ -14,7 +14,7 @@
     border-radius: 2px;
 
     @media (max-width: 390px) {
-        @include defaultContainerHeightMobile;
+        //@include defaultContainerHeightMobile;
     }
 
 }

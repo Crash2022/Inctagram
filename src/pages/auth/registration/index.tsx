@@ -13,7 +13,7 @@ const Registration: NextPageWithLayout = () => {
                 <meta name='title' content='Registration' />
             </Head>
 
-            <FormWrapper marginTop={36}>
+            <FormWrapper marginTop={96}>
                 <RegistrationForm />
             </FormWrapper>
         </>

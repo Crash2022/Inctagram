@@ -6,7 +6,9 @@
     background-color: var(--header-color);
     color: var(--light-100);
     font-size: 20px;
-    //@include large-text;
+
+    width: 100%;
+    position: fixed;
 
     .header {
         max-width: var(--layout-width);

@@ -13,7 +13,7 @@ const Login: NextPageWithLayout = () => {
                 <meta name='title' content='Login' />
             </Head>
 
-            <FormWrapper marginTop={36}>
+            <FormWrapper marginTop={96}>
                 <LoginForm />
             </FormWrapper>
         </>
