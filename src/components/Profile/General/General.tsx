@@ -1,24 +1,45 @@
-import React from 'react'
+import React, {useState} from 'react'
 import cls from './General.module.scss'
 import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
 import DeletePhotoIcon from '../../../../public/assets/icons/delete-circle-fill.svg'
 import Image from 'next/image'
-import { Button } from '@/shared/ui/Button/Button'
-import { useTranslation } from 'next-i18next'
-import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import {Button} from '@/shared/ui/Button/Button'
+import {useTranslation} from 'next-i18next'
+import {ControlledInput} from '@/shared/ui/Controlled/ControlledInput'
 import * as yup from 'yup'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { UpdateUserProfile } from '@/models/profile-types'
-import { InctagramPath } from '@/shared/api/path'
-import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
+import {Controller, SubmitHandler, useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import {UpdateUserProfile} from '@/models/profile-types'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
-import { Input } from '@/shared/ui/Input/Input'
-import { Textarea } from '@/shared/ui/Textarea/Textarea'
-import { InputFile } from '@/shared/ui/InputFile/InputFile'
+import {Textarea} from '@/shared/ui/Textarea/Textarea'
+import {InputFile} from '@/shared/ui/InputFile/InputFile'
+import {useUploadPhotoMutation} from "@/services/UserProfileService";
 
 export const General = () => {
-    const { t } = useTranslation('settings-general')
+    const [uploadedImage, setUploadedImage] = useState<string | undefined>(ProfilePhoto);
+    const [uploadPhoto, {data: uploadResult, error: uploadError}] = useUploadPhotoMutation()
+
+    const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
+            const file = e.target.files[0];
+            if (file.size < 4000000) {
+                try {
+                    const uploadResponse = await uploadPhoto(file);
+
+                        console.log(uploadResponse.data);
+                    const photoUrl = uploadResponse.data[0]?.url;
+                    if(photoUrl)
+                        setUploadedImage(photoUrl);
+
+                } catch (error) {
+                    console.error("Error uploading file:", error);
+                }
+            }
+        }
+    };
+
+
+    const {t} = useTranslation('settings-general')
 
     const ProfileGeneralSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required'))
@@ -27,7 +48,7 @@ export const General = () => {
     const {
         control,
         handleSubmit,
-        formState: { errors }
+        formState: {errors}
     } = useForm<UpdateUserProfile>({
         defaultValues: {
             userName: '',
@@ -52,14 +73,16 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.photo}>
-                        <Image src={ProfilePhoto} alt={'profile-photo'} width={204} height={204} />
+                        <Image src={uploadedImage ?? ProfilePhoto} alt={'profile-photo'} width={204} height={204}/>
                         <div className={cls.add_photo}>
-                            <DeletePhotoIcon width={30} height={30} />
+                            <DeletePhotoIcon width={30} height={30}/>
                         </div>
                     </div>
                     <div className={cls.addPhoto_btn}>
-                        <InputFile title={t('AddPhoto')} />
+                        <InputFile title={t('AddPhoto')} onChange={handlePhotoUpload}/>
                     </div>
+                    {uploadError && <div>Error uploading photo: {uploadError.message}</div>}
+                    {uploadResult && <div>Successfully uploaded photo!</div>}
                 </div>
                 <div className={cls.general_infoBlock}>
                     <ControlledInput
@@ -115,7 +138,7 @@ export const General = () => {
                         <Controller
                             name={'aboutMe'}
                             control={control}
-                            render={({ field }: any) => (
+                            render={({field}: any) => (
                                 <Textarea
                                     {...field}
                                     placeholder={t('AboutMe')}
@@ -139,6 +162,8 @@ export const General = () => {
             >
                 {t('Save')}
             </Button>
+
         </form>
     )
 }
+

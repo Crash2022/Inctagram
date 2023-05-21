@@ -8,15 +8,15 @@ import {
     RegistrationPayloadType
 } from '@/models/auth-types'
 import { baseURL } from '@/shared/api/baseURL'
-// import dotenv from 'dotenv'
+import dotenv from 'dotenv'
 // import { Photo } from '@/models/userProfileService-types'
-
-// dotenv.config()
+console.log('ENV', process.env.NEXT_PUBLIC_USERNAME)
+ //dotenv.config()
 export const authAPI = createApi({
     reducerPath: 'authAPI',
     baseQuery: fetchBaseQuery({
         // baseUrl: process.env.BASE_URL
-        baseUrl: baseURL
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL
         // baseUrl: 'baseUrl'
     }),
     endpoints: (build) => ({
@@ -51,7 +51,10 @@ export const authAPI = createApi({
         logout: build.mutation({
             query: () => ({
                 url: '/auth/logout',
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
         }),
         me: build.query<MeResponseType, void>({

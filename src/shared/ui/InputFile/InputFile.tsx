@@ -6,15 +6,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string
     className?: string
     theme?: 'primary' | 'primaryWhite' | 'outline' | 'clear'
+    onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
-    const { theme = 'primary', className, title } = props
+    const { theme = 'primary', className, title , onChange} = props
 
     const inputRef = useRef<HTMLInputElement>(null)
 
     const selectFileHandler = () => {
-        inputRef && inputRef.current?.click()
+        inputRef?.current?.click()
     }
 
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +36,7 @@ export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
             <input
                 ref={inputRef}
                 type='file'
-                onChange={uploadHandler}
+                onChange={onChange ?? uploadHandler}
                 style={{ display: 'none' }}
             />
 
