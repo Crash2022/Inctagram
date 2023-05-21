@@ -4,10 +4,8 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator'
 import { Input } from '@/shared/ui/Input/Input'
 
 interface ControlledCustomInputProps {
-    id?: string
     name: string
     placeholder: string
-    type?: string
     password?: boolean
     control: UseFormReturn<any>
     rules?: Omit<
@@ -20,10 +18,8 @@ interface ControlledCustomInputProps {
 }
 
 export const ControlledInput = ({
-    id,
     name,
     placeholder,
-    type,
     password,
     control,
     rules,
@@ -40,8 +36,6 @@ export const ControlledInput = ({
                 render={({ field }: any) => (
                     <Input
                         {...field}
-                        id={id}
-                        type={type}
                         password={password ? password : false}
                         placeholder={placeholder}
                         value={field.value}

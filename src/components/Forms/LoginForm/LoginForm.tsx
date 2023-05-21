@@ -72,9 +72,10 @@ export const LoginForm = () => {
                     error={errors.email?.message}
                 />
                 <ControlledInput
-                    password
                     id={'Login_Password'}
                     name={'password'}
+                    type={'password'}
+                    password
                     placeholder={t('Password')}
                     control={control}
                     error={errors.password?.message}

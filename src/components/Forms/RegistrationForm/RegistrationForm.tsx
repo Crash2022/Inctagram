@@ -112,6 +112,7 @@ export const RegistrationForm = () => {
                     password
                     id={'Reg_Password'}
                     name={'password'}
+                    type={'password'}
                     placeholder={t('Password')}
                     control={control}
                     error={errors.password?.message}
@@ -120,6 +121,7 @@ export const RegistrationForm = () => {
                     password
                     id={'Reg_ConfirmPassword'}
                     name={'confirmPassword'}
+                    type={'password'}
                     placeholder={t('ConfirmPassword')}
                     control={control}
                     error={errors.confirmPassword?.message}

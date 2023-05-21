@@ -83,6 +83,7 @@ export const CreateNewPasswordForm = () => {
                     password
                     id={'New_Password'}
                     name={'newPassword'}
+                    type={'password'}
                     placeholder={t('Password')}
                     control={control}
                     error={errors.newPassword?.message}
@@ -91,6 +92,7 @@ export const CreateNewPasswordForm = () => {
                     password
                     id={'New_ConfirmPassword'}
                     name={'confirmPassword'}
+                    type={'password'}
                     placeholder={t('ConfirmPassword')}
                     control={control}
                     error={errors.confirmPassword?.message}

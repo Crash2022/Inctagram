@@ -13,7 +13,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { error, onEnter, placeholder, password, id, ...restProps } = props
+
     const [typeInput, setTypeInput] = useState<'password' | 'text'>(password ? 'password' : 'text')
+
     const onEnterHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             onEnter?.()
