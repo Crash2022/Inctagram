@@ -15,10 +15,10 @@ const ExpiredLink = () => {
                 <meta name='title' content='Expired Link' />
             </Head>
             <ConfirmEmailBox
-                title={t('title')}
-                text={t('text')}
+                title={t('Title')}
+                text={t('Text')}
                 src={waitEmailLink}
-                buttonText={t('resend')}
+                buttonText={t('Resend')}
             />
         </>
     )

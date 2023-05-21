@@ -1,12 +1,28 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
 import waitEmailLink from '../../../../public/assets/images/waitEmailLink.png'
 import { useTranslation } from 'react-i18next'
+import { useRegistrationResendLinkMutation } from '@/services/AuthService'
 
 const InvalidLink = () => {
     const { t } = useTranslation('invalid-link')
+
+    const [
+        registrationResendLink,
+        {
+            error: resendError,
+            isError: resendIsError,
+            isLoading: resendIsLoading,
+            isSuccess: resendIsSuccess
+        }
+    ] = useRegistrationResendLinkMutation()
+
+    let email
+    useEffect(() => {
+        email = localStorage.getItem('email')
+    }, [])
 
     return (
         <>
@@ -15,10 +31,14 @@ const InvalidLink = () => {
                 <meta name='title' content='Invalid Link' />
             </Head>
             <ConfirmEmailBox
-                title={t('title')}
-                text={t('text')}
+                title={t('Title')}
+                text={t('Text')}
                 src={waitEmailLink}
-                buttonText={t('resend')}
+                buttonText={t('Resend')}
+                resend={registrationResendLink}
+                email={email}
+                isLoading={resendIsLoading}
+                isSuccess={resendIsSuccess}
             />
         </>
     )

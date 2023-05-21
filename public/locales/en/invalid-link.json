@@ -1,5 +1,5 @@
 {
-  "title": "E-mail verification link invalid",
-  "text": "Looks like the verification link has expired. Not worry, we can send the link again",
-  "resend": "Resend link"
+  "Title": "E-mail verification link invalid",
+  "Text": "Looks like the verification link has expired. Not worry, we can send the link again",
+  "Resend": "Resend link"
 }

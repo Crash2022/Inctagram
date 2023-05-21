@@ -6,7 +6,7 @@ import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
 import { useTranslation } from 'react-i18next'
 
 const MergeAccount = () => {
-    const { t } = useTranslation('mergeAccount')
+    const { t } = useTranslation('merge-account')
 
     return (
         <>
@@ -15,8 +15,8 @@ const MergeAccount = () => {
                 <meta name='title' content='Confirm' />
             </Head>
             <ConfirmEmailBox
-                title={t('mergeAccount')}
-                text={t('text')}
+                title={t('MergeAccount')}
+                text={t('Text')}
                 src={mergeAccount}
                 buttonText={''}
                 merge={true}

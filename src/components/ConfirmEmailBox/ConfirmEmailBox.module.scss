@@ -1,12 +1,17 @@
 @import '../../styles/mixins';
 
 .container {
-  width: 30%;
-  height: 570px;
-  margin: 50px auto;
-  @include flexColumnBetween;
-  text-align: center;
-  .button {
-    min-width: 200px;
-  }
+    width: 400px;
+    height: 570px;
+    margin: 90px auto;
+    text-align: center;
+    @include flexColumnBetween;
+
+    .title {
+        @include h1-text-size;
+    }
+
+    .button {
+        min-width: 200px;
+    }
 }

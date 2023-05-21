@@ -99,12 +99,12 @@ export const serviceAuthAPI = createApi({
 export const {
     useRegistrationMutation,
     useRegistrationConfirmationMutation,
-    useRegistrationResendLinkMutation, // надо добавить в ошбику при регистрации
+    useRegistrationResendLinkMutation,
     useLoginMutation,
     useLogoutMutation,
     useMeQuery,
     useForgotPasswordMutation,
     useNewPasswordMutation,
     useRecoveryCodeMutation, // пока что не нужен
-    useUpdateTokensMutation
+    useUpdateTokensMutation // используется в интерсепторе
 } = serviceAuthAPI

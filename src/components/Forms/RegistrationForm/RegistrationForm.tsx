@@ -61,7 +61,10 @@ export const RegistrationForm = () => {
         submitData: RegistrationPayloadType
     ) => {
         console.log('submit registration', submitData)
-        await registration(submitData).then((res) => console.log(res))
+        await registration(submitData).then((res) => {
+            console.log(res)
+            localStorage.setItem('email', control._getWatch('email'))
+        })
     }
 
     const messageModalOKHandler = () => {

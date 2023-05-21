@@ -2,13 +2,9 @@ import Image, { StaticImageData } from 'next/image'
 import s from './ConfirmEmailBox.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
-import { useRouter } from 'next/router'
-import { useRegistrationConfirmationMutation } from '@/services/AuthService'
-import { useEffect } from 'react'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
-import { InctagramPath } from '@/shared/api/path'
-import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
+import React, { useEffect } from 'react'
+import { useSnackbar } from 'notistack'
 
 interface ConfirmEmailBoxType {
     title: string
@@ -16,50 +12,68 @@ interface ConfirmEmailBoxType {
     buttonText: string
     src: StaticImageData
     merge?: boolean
+    resend?: any
+    email?: string
+    isLoading?: boolean
+    isSuccess?: boolean
 }
 
-export const ConfirmEmailBox = ({ title, text, src, buttonText, merge }: ConfirmEmailBoxType) => {
-    const { t } = useTranslation('mergeAccount')
-    const router = useRouter()
-    const { code } = router.query
-
-    const [registrationConfirmation, { isSuccess, error, isError, isLoading }] =
-        useRegistrationConfirmationMutation()
+export const ConfirmEmailBox = ({
+    title,
+    text,
+    src,
+    buttonText,
+    merge,
+    resend,
+    email,
+    isLoading,
+    isSuccess
+}: ConfirmEmailBoxType) => {
+    const { t } = useTranslation('merge-account')
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
-        if (code) {
-            registrationConfirmation({ confirmationCode: code }).then((res) => {
-                console.log('code', code)
-                console.log('response', res)
+        if (isSuccess) {
+            enqueueSnackbar('Ссылка отправлена', {
+                variant: 'success',
+                autoHideDuration: 3000
             })
         }
-    }, [code])
-
-    useErrorSnackbar(isError)
+    }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <div className={s.container}>
-            <h1>{title}</h1>
+            <h1 className={s.title}>{title}</h1>
             <p>{text}</p>
             {merge && (
                 <>
                     <Button className={s.button} theme={'outline'}>
-                        {t('yes')}
+                        {t('Yes')}
                     </Button>
                     <Button className={s.button} theme={'outline'}>
-                        No
+                        {t('No')}
                     </Button>
                 </>
             )}
             {!merge && (
-                <ButtonLink
+                <Button
                     className={s.button}
                     theme={'primary'}
-                    href={InctagramPath.AUTH.LOGIN}
-                    title={buttonText}
-                />
+                    onClick={() => {
+                        resend(email)
+                        // localStorage.removeItem('email')
+                    }}
+                >
+                    {buttonText}
+                </Button>
+                // <ButtonLink
+                //     className={s.button}
+                //     theme={'primary'}
+                //     href={InctagramPath.AUTH.LOGIN}
+                //     title={buttonText}
+                // />
             )}
             <Image src={src} alt={'success-image'} />
         </div>
