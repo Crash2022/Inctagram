@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import cls from './General.module.scss'
 import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
 import DeletePhotoIcon from '../../../../public/assets/icons/delete-circle-fill.svg'
@@ -16,13 +16,34 @@ import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
+import { useGetProfileDataQuery } from '@/services/UserProfileService'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
 
+    const { data: profileData, error, isLoading, isError } = useGetProfileDataQuery()
+
     const ProfileGeneralSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required'))
     })
+
+    const [userName, setUserName] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
+    const [city, setCity] = useState<string>('')
+    const [dateOfBirth, setDateOfBirth] = useState<string>('')
+    const [aboutMe, setAboutMe] = useState<string>('')
+
+    useEffect(() => {
+        if (profileData) {
+            setUserName(profileData.userName)
+            setFirstName(profileData.firstName)
+            setLastName(profileData.lastName)
+            setCity(profileData.city)
+            setDateOfBirth(profileData.dateOfBirth)
+            setAboutMe(profileData.aboutMe)
+        }
+    }, [profileData])
 
     const {
         control,
@@ -30,12 +51,12 @@ export const General = () => {
         formState: { errors }
     } = useForm<UpdateUserProfile>({
         defaultValues: {
-            userName: '',
-            firstName: '',
-            lastName: '',
-            city: '',
-            dateOfBirth: '',
-            aboutMe: ''
+            userName,
+            firstName,
+            lastName,
+            city,
+            dateOfBirth,
+            aboutMe
         },
         resolver: yupResolver(ProfileGeneralSchema)
     })
@@ -69,6 +90,8 @@ export const General = () => {
                         placeholder={t('UserName')}
                         control={control}
                         error={errors.userName?.message}
+                        value={userName}
+                        onChangeValueCallBack={setUserName}
                     />
                     <ControlledInput
                         divClassName={cls.input}
@@ -103,14 +126,14 @@ export const General = () => {
                         error={errors.dateOfBirth?.message}
                     />
 
-                    {/*<ControlledInput*/}
-                    {/*    divClassName={cls.input}*/}
-                    {/*    id={'P_S_General_AboutMe'}*/}
-                    {/*    name={'aboutMe'}*/}
-                    {/*    placeholder={t('AboutMe')}*/}
-                    {/*    control={control}*/}
-                    {/*    error={errors.aboutMe?.message}*/}
-                    {/*/>*/}
+                    {/* <ControlledInput */}
+                    {/*    divClassName={cls.input} */}
+                    {/*    id={'P_S_General_AboutMe'} */}
+                    {/*    name={'aboutMe'} */}
+                    {/*    placeholder={t('AboutMe')} */}
+                    {/*    control={control} */}
+                    {/*    error={errors.aboutMe?.message} */}
+                    {/* /> */}
                     <div className={cls.textarea}>
                         <Controller
                             name={'aboutMe'}

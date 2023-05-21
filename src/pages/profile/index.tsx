@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
-import { useFetchUserProfileQuery } from '@/services/UserProfileService'
+import { useFetchUserProfileQuery } from '@/services/UserProfileServiceTestPictures'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
@@ -72,12 +72,12 @@ const Profile: NextPageWithLayout = () => {
                             photos.map((photo) => {
                                 return (
                                     <div key={photo.id} className={cls.list_item}>
-                                        {/*<Image*/}
-                                        {/*    src={photo.url}*/}
-                                        {/*    alt={'gallery-photo'}*/}
-                                        {/*    width={265}*/}
-                                        {/*    height={265}*/}
-                                        {/*/>*/}
+                                        {/* <Image */}
+                                        {/*    src={photo.url} */}
+                                        {/*    alt={'gallery-photo'} */}
+                                        {/*    width={265} */}
+                                        {/*    height={265} */}
+                                        {/* /> */}
 
                                         <img
                                             src={photo.url}

@@ -14,9 +14,10 @@ import { Payments } from '@/components/Profile/Payments/Payments'
 
 interface SectionsType {
     id: number
-    title: string
-    isActive: boolean
+    status: ProfileSettingStatusType
 }
+
+type ProfileSettingStatusType = 'General' | 'Devices' | 'Management' | 'Payments'
 
 const ProfileSettings: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-settings')
@@ -25,98 +26,48 @@ const ProfileSettings: NextPageWithLayout = () => {
     // const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
     // const { data: meData } = useMeQuery()
 
-    // const [sections, setSections] = useState<SectionsType[]>([
-    //     { id: 1, title: t('General'), isActive: true },
-    //     { id: 2, title: t('Devices'), isActive: false },
-    //     { id: 3, title: t('Management'), isActive: false },
-    //     { id: 4, title: t('Payments'), isActive: false }
-    // ])
+    const sections: SectionsType[] = [
+        { id: 1, status: 'General' },
+        { id: 2, status: 'Devices' },
+        { id: 3, status: 'Management' },
+        { id: 4, status: 'Payments' }
+    ]
 
-    const [isGeneral, setIsGeneral] = useState<boolean>(true)
-    const [isDevices, setIsDevices] = useState<boolean>(false)
-    const [isManagement, setIsManagement] = useState<boolean>(false)
-    const [isPayments, setIsPayments] = useState<boolean>(false)
-
-    // выбор раздела
-    const setSectionHandler = (
-        isGeneral: boolean,
-        isDevices: boolean,
-        isManagement: boolean,
-        isPayments: boolean
-    ) => {
-        setIsGeneral(isGeneral)
-        setIsDevices(isDevices)
-        setIsManagement(isManagement)
-        setIsPayments(isPayments)
-    }
+    const [settingStatus, setSettingStatus] = useState<ProfileSettingStatusType>('General')
 
     // if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <>
             <Head>
-                <title>Inctagram Index</title>
+                <title>Inctagram - Profile Setting</title>
                 <meta name='title' content='Profile Settings' />
             </Head>
             <div className={cls.profilePageSettings}>
                 <div className={cls.profileSettings_header}>
-                    {/*{sections.map((el) => {*/}
-                    {/*    return (*/}
-                    {/*        <div*/}
-                    {/*            key={el.id}*/}
-                    {/*            className={el.isActive ? cls.headerItem_active : cls.headerItem}*/}
-                    {/*            onClick={() => {*/}
-                    {/*                sections.filter((s) => (s.id === el.id ? el.isActive : ''))*/}
-                    {/*            }}*/}
-                    {/*        >*/}
-                    {/*            {el.title}*/}
-                    {/*        </div>*/}
-                    {/*    )*/}
-                    {/*})}*/}
-
-                    <div
-                        className={isGeneral ? cls.headerItem_active : cls.headerItem}
-                        onClick={() => {
-                            setSectionHandler(true, false, false, false)
-                        }}
-                    >
-                        {t('General')}
-                    </div>
-                    <div
-                        className={isDevices ? cls.headerItem_active : cls.headerItem}
-                        onClick={() => {
-                            setSectionHandler(false, true, false, false)
-                        }}
-                    >
-                        {t('Devices')}
-                    </div>
-                    <div
-                        className={isManagement ? cls.headerItem_active : cls.headerItem}
-                        onClick={() => {
-                            setSectionHandler(false, false, true, false)
-                        }}
-                    >
-                        {t('Management')}
-                    </div>
-                    <div
-                        className={isPayments ? cls.headerItem_active : cls.headerItem}
-                        onClick={() => {
-                            setSectionHandler(false, false, false, true)
-                        }}
-                    >
-                        {t('Payments')}
-                    </div>
+                    {sections.map((el) => {
+                        return (
+                            <div
+                                key={el.id}
+                                className={
+                                    el.status === settingStatus
+                                        ? cls.headerItem_active
+                                        : cls.headerItem
+                                }
+                                onClick={() => {
+                                    setSettingStatus(el.status)
+                                }}
+                            >
+                                {t(`${el.status}`)}
+                            </div>
+                        )
+                    })}
                 </div>
                 <div className={cls.profileSettings_content}>
-                    {/*{sections[0].isActive && <General />}*/}
-                    {/*{sections[1].isActive && <Devices />}*/}
-                    {/*{sections[2].isActive && <Management />}*/}
-                    {/*{sections[3].isActive && <Payments />}*/}
-
-                    {isGeneral && <General />}
-                    {isDevices && <Devices />}
-                    {isManagement && <Management />}
-                    {isPayments && <Payments />}
+                    {sections[0].status === settingStatus && <General />}
+                    {sections[1].status === settingStatus && <Devices />}
+                    {sections[2].status === settingStatus && <Management />}
+                    {sections[3].status === settingStatus && <Payments />}
                 </div>
             </div>
         </>
