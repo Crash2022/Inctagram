@@ -52,6 +52,10 @@ export const LoginForm = () => {
 
     useErrorSnackbar(isError)
 
+    // useEffect(() => {
+    //     if (isSuccess) router.push(InctagramPath.PROFILE.PROFILE).then()
+    // }, [isSuccess])
+
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
