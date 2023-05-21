@@ -16,56 +16,57 @@ import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
-import { useGetProfileDataQuery } from '@/services/UserProfileService'
+import { useGetProfileDataQuery, useSetProfileDataMutation } from '@/services/UserProfileService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { router } from 'next/client'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
 
-    const { data: profileData, error, isLoading, isError } = useGetProfileDataQuery()
+    const { data: profileData, isLoading } = useGetProfileDataQuery()
+    const [setProfile, { data: setProfileData, isError: isSetError, isLoading: isSetLoading }] =
+        useSetProfileDataMutation()
 
     const ProfileGeneralSchema = yup.object().shape({
-        email: yup.string().required(t('Err_Yup_Required'))
+        // email: yup.string().required(t('Err_Yup_Required'))
     })
-
-    const [userName, setUserName] = useState<string>('')
-    const [firstName, setFirstName] = useState<string>('')
-    const [lastName, setLastName] = useState<string>('')
-    const [city, setCity] = useState<string>('')
-    const [dateOfBirth, setDateOfBirth] = useState<string>('')
-    const [aboutMe, setAboutMe] = useState<string>('')
-
-    useEffect(() => {
-        if (profileData) {
-            setUserName(profileData.userName)
-            setFirstName(profileData.firstName)
-            setLastName(profileData.lastName)
-            setCity(profileData.city)
-            setDateOfBirth(profileData.dateOfBirth)
-            setAboutMe(profileData.aboutMe)
-        }
-    }, [profileData])
 
     const {
         control,
         handleSubmit,
+        setValue,
         formState: { errors }
     } = useForm<UpdateUserProfile>({
         defaultValues: {
-            userName,
-            firstName,
-            lastName,
-            city,
-            dateOfBirth,
-            aboutMe
+            userName: '',
+            firstName: '',
+            lastName: '',
+            city: '',
+            dateOfBirth: '',
+            aboutMe: ''
         },
         resolver: yupResolver(ProfileGeneralSchema)
     })
+    console.log(profileData)
+    useEffect(() => {
+        if (profileData) {
+            setValue('userName', profileData.userName)
+            setValue('firstName', profileData.firstName)
+            setValue('lastName', profileData.lastName)
+            setValue('city', profileData.city)
+            setValue('dateOfBirth', profileData.dateOfBirth)
+            setValue('aboutMe', profileData.aboutMe)
+        }
+    }, [profileData])
+
+    if (isLoading) return <LoaderScreen variant={'loader'} />
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
-        console.log('submit login', submitData)
-        // await login(submitData).then((res) => {
-        //     console.log('login response', res)
-        // })
+        console.log('submit profile', submitData)
+        await setProfile(submitData).then((res) => {
+            console.log('profile response', res)
+            router.push(InctagramPath.PROFILE.PROFILE).then()
+        })
     }
 
     return (
@@ -90,8 +91,6 @@ export const General = () => {
                         placeholder={t('UserName')}
                         control={control}
                         error={errors.userName?.message}
-                        value={userName}
-                        onChangeValueCallBack={setUserName}
                     />
                     <ControlledInput
                         divClassName={cls.input}

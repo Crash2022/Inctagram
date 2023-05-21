@@ -15,8 +15,6 @@ interface ControlledCustomInputProps {
     error?: any
     disabled?: boolean
     divClassName?: any
-    value?: string
-    onChangeValueCallBack?: (text: string) => void
 }
 
 export const ControlledInput = ({
@@ -27,9 +25,7 @@ export const ControlledInput = ({
     rules,
     error,
     disabled,
-    divClassName,
-    onChangeValueCallBack,
-    value
+    divClassName
 }: ControlledCustomInputProps) => {
     return (
         <div className={divClassName}>
@@ -42,11 +38,9 @@ export const ControlledInput = ({
                         {...field}
                         password={password || false}
                         placeholder={placeholder}
-                        value={value || field.value}
+                        value={field.value}
                         onChange={(value) => {
-                            onChangeValueCallBack
-                                ? onChangeValueCallBack(value.currentTarget.value)
-                                : field.onChange(value)
+                            field.onChange(value)
                         }}
                         error={error}
                         disabled={disabled || false}
