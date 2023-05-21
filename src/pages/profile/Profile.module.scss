@@ -18,18 +18,29 @@
 
             .info_control {
                 @include flexBetween;
+                gap: 20px;
 
                 > div:first-child {
                     @include bold-text-16;
                 }
+
+                .settings {
+                    height: 100%;
+                }
             }
             .info_numbers {
                 display: flex;
-                gap: 72px;
+                //gap: 72px;
+                flex-wrap: wrap;
+
+                > div:not(:last-child) {
+                    margin-right: 70px;
+                    padding-bottom: 20px;
+                }
 
                 .numbers_item {
                     > div:first-child {
-                        margin-bottom: 10px;
+                        margin-bottom: 5px;
                     }
                 }
             }

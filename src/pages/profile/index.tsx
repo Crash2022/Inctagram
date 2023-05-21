@@ -42,6 +42,7 @@ const Profile: NextPageWithLayout = () => {
                                 theme={'primaryWhite'}
                                 href={InctagramPath.PROFILE.SETTINGS}
                                 title={t('ProfileSettings')}
+                                className={cls.settings}
                             />
                         </div>
                         <div className={cls.info_numbers}>
