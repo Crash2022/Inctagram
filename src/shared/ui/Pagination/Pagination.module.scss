@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageItem {
+  min-height: 24px;
+
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+
+  background: transparent;
+  cursor: pointer;
+
+  transition: .2s ease;
+
+  &:hover {
+    border-color: var(--light-300);
+  }
+}
+
+.active {
+  color: var(--dark-900);
+
+  background: var(--light-100);
+}
+
+.disabled {
+  border-color: transparent;
+  color: var(--dark-100);
+  cursor: not-allowed;
+
+  &:hover {
+    border-color: transparent;
+  }
+}
+
