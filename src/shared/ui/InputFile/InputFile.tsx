@@ -6,10 +6,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string
     className?: string
     theme?: 'primary' | 'primaryWhite' | 'outline' | 'clear'
+    uploadFunction: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
-    const { theme = 'primary', className, title } = props
+    const { theme = 'primary', className, title, uploadFunction } = props
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -17,12 +18,12 @@ export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
         inputRef && inputRef.current?.click()
     }
 
-    const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length) {
-            const file = e.target.files[0]
-            console.log('file: ', file)
-        }
-    }
+    // const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //     if (e.target.files && e.target.files.length) {
+    //         const file = e.target.files[0]
+    //         console.log('file: ', file)
+    //     }
+    // }
 
     return (
         <label>
@@ -35,7 +36,7 @@ export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
             <input
                 ref={inputRef}
                 type='file'
-                onChange={uploadHandler}
+                onChange={uploadFunction}
                 style={{ display: 'none' }}
             />
 

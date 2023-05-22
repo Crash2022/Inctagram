@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import cls from './General.module.scss'
 import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
@@ -22,6 +22,7 @@ import {
 } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
+import { uploadHandler } from '@/shared/utils/uploadFile'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -58,8 +59,8 @@ export const General = () => {
             city: '',
             dateOfBirth: '',
             aboutMe: ''
-        },
-        resolver: yupResolver(ProfileGeneralSchema)
+        }
+        // resolver: yupResolver(ProfileGeneralSchema)
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
@@ -68,45 +69,42 @@ export const General = () => {
         console.log('profile response', res)
     }
 
-    const uploadAvatarHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length) {
-            const file = e.target.files[0]
-
-            if (file.size < 7000000) {
-                convertFileToBase64(file, async (file64: string) => {
-                    setAvatar(file64)
-                    const avatarResponse = await uploadAvatar(file64)
-                })
-            } else {
-                console.error('Error: ', 'Файл слишком большого размера')
-                enqueueSnackbar('Файл слишком большого размера', {
-                    variant: 'warning',
-                    autoHideDuration: 3000
-                })
-            }
-
-            // if (file.size < 4000000) {
-            //     try {
-            //         const uploadResponse = await uploadPhoto(file)
-            //
-            //         console.log(uploadResponse.data)
-            //         const photoUrl = uploadResponse.data[0]?.url
-            //         if (photoUrl) setUploadedImage(photoUrl)
-            //     } catch (error) {
-            //         console.error('Error uploading file:', error)
-            //     }
-            // }
-        }
+    const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        uploadHandler(event, setAvatar, async (file64) => {
+            uploadAvatar(file64)
+        })
     }
 
-    const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
-        const reader = new FileReader()
-        reader.onloadend = () => {
-            const file64 = reader.result as string
-            callBack(file64)
-        }
-        reader.readAsDataURL(file)
-    }
+    // const uploadAvatarHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     if (e.target.files && e.target.files.length) {
+    //         const file = e.target.files[0]
+    //
+    //         console.log('file', file)
+    //
+    //         if (file.size < 7000000) {
+    //             convertFileToBase64(file, async (file64: string) => {
+    //                 console.log('мы попали в загрузку')
+    //                 setAvatar(file64)
+    //                 const avatarResponse = await uploadAvatar(file64)
+    //             })
+    //         } else {
+    //             console.error('Error: ', 'Файл слишком большого размера')
+    //             enqueueSnackbar('Файл слишком большого размера', {
+    //                 variant: 'warning',
+    //                 autoHideDuration: 3000
+    //             })
+    //         }
+    //     }
+    // }
+    //
+    // const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
+    //     const reader = new FileReader()
+    //     reader.onloadend = () => {
+    //         const file64 = reader.result as string
+    //         callBack(file64)
+    //     }
+    //     reader.readAsDataURL(file)
+    // }
 
     useEffect(() => {
         if (profileData) {
@@ -117,12 +115,6 @@ export const General = () => {
             setValue('dateOfBirth', profileData.dateOfBirth)
             setValue('aboutMe', profileData.aboutMe)
         }
-
-        // if (profileData.avatars.length === 0) {
-        //     setAvatar(DefaultProfileAvatar)
-        // } else {
-        //     setAvatar(profileData.avatars[0].url)
-        // }
     }, [profileData])
 
     console.log('profileData', profileData)
@@ -137,26 +129,17 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <img
+                        <Image
                             src={
-                                profileData.avatars.length === 0
+                                profileData && profileData.avatars.length === 0
                                     ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
+                            // src={DefaultProfileAvatar}
                             alt={'profile-avatar'}
                             width={204}
                             height={204}
                         />
-                        {/*<Image*/}
-                        {/*    src={*/}
-                        {/*        profileData.avatars.length === 0*/}
-                        {/*            ? DefaultProfileAvatar*/}
-                        {/*            : profileData.avatars[0].url*/}
-                        {/*    }*/}
-                        {/*    alt={'profile-avatar'}*/}
-                        {/*    width={204}*/}
-                        {/*    height={204}*/}
-                        {/*/>*/}
                         <div
                             className={cls.delete_avatar}
                             onClick={async () => {
@@ -167,7 +150,7 @@ export const General = () => {
                         </div>
                     </div>
                     <div className={cls.addAvatar_btn}>
-                        <InputFile title={t('AddPhoto')} onChange={uploadAvatarHandler} />
+                        <InputFile title={t('AddPhoto')} uploadFunction={uploadAvatarHandler} />
                     </div>
                 </div>
                 <div className={cls.general_infoBlock}>
