@@ -44,11 +44,10 @@ export const CreateNewPasswordForm = () => {
     })
 
     const onSubmit: SubmitHandler<any> = async (data: any) => {
-        console.log('submit', data)
+        console.log('submit recovery', data)
         data.recoveryCode = code
-        await newPassword(data).then((res) => {
-            console.log(res)
-        })
+        const res = await newPassword(data)
+        console.log('recovery response', res)
     }
 
     const messageModalOKHandler = () => {

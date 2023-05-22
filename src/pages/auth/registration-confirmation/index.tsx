@@ -28,7 +28,7 @@ const RegistrationConfirmation = () => {
 
     useEffect(() => {
         if (isError) {
-            router.push(InctagramPath.AUTH.INVALID_LINK).then()
+            void router.push(InctagramPath.AUTH.INVALID_LINK)
         }
     }, [isError])
 

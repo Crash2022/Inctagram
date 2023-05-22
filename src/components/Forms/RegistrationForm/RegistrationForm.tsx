@@ -62,10 +62,9 @@ export const RegistrationForm = () => {
     ) => {
         console.log('submit registration', submitData)
 
-        await registration(submitData).then((res) => {
-            console.log(res)
-            localStorage.setItem('email', control._getWatch('email'))
-        })
+        const res = await registration(submitData)
+        console.log('registration response', res)
+        localStorage.setItem('email', control._getWatch('email'))
     }
 
     const messageModalOKHandler = () => {

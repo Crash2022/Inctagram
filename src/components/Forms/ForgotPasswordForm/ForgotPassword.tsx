@@ -44,17 +44,15 @@ export const ForgotPasswordForm = () => {
         console.log('submit', data)
         localStorage.setItem('email', control._getWatch('email'))
         if (!isSuccess) {
-            await forgotPassword(data).then((res) => {
-                console.log(res)
-                setOpen(true)
-            })
+            const res = await forgotPassword(data)
+            console.log('forgot response error', res)
+            setOpen(true)
         }
         if (isSuccess) {
             data.recaptcha = true
-            await forgotPassword(data).then((res) => {
-                console.log(res)
-                setOpen(true)
-            })
+            const res = await forgotPassword(data)
+            console.log('forgot response success', res)
+            setOpen(true)
         }
     }
 

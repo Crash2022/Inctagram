@@ -183,11 +183,10 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             <div
                                 className={cls.menuList_item}
                                 onClick={async () => {
-                                    await logout().then((res) => {
-                                        console.log('logout', res)
-                                        localStorage.removeItem('accessToken')
-                                        router.push(InctagramPath.AUTH.LOGIN)
-                                    })
+                                    const res = await logout()
+                                    console.log('logout', res)
+                                    localStorage.removeItem('accessToken')
+                                    await router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >
                                 <div className={cls.item_image}>
