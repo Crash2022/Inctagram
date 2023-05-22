@@ -51,14 +51,14 @@ export const General = () => {
         const res = await setProfile(submitData)
         console.log('profile response', res)
 
-        if (res.data == null) {
-            setValue('userName', profileData.userName)
-            setValue('firstName', profileData.firstName)
-            setValue('lastName', profileData.lastName)
-            setValue('city', profileData.city)
-            setValue('dateOfBirth', profileData.dateOfBirth)
-            setValue('aboutMe', profileData.aboutMe)
-        }
+        // if (res.data === null) {
+        //     setValue('userName', profileData.userName)
+        //     setValue('firstName', profileData.firstName)
+        //     setValue('lastName', profileData.lastName)
+        //     setValue('city', profileData.city)
+        //     setValue('dateOfBirth', profileData.dateOfBirth)
+        //     setValue('aboutMe', profileData.aboutMe)
+        // }
     }
 
     useEffect(() => {
@@ -72,10 +72,10 @@ export const General = () => {
         }
     }, [profileData])
 
+    console.log('profileData', profileData)
+
     if (isLoading) return <LoaderScreen variant={'loader'} />
     if (isSetLoading) return <LoaderScreen variant={'loader'} />
-
-    console.log(profileData)
 
     return (
         <form className={cls.profileSettings_general} onSubmit={handleSubmit(onSubmit)}>

@@ -5,6 +5,7 @@ import { baseURL } from '@/shared/api/baseURL'
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',
     baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
+    tagTypes: ['ProfileData'],
     endpoints: (build) => ({
         getProfileData: build.query<UserProfile, void>({
             query: () => ({
@@ -12,17 +13,19 @@ export const userProfileAPI = createApi({
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
-            })
+            }),
+            providesTags: (result) => ['ProfileData']
         }),
         setProfileData: build.mutation<any, UserProfile>({
             query: (payload: UserProfile) => ({
                 url: '/users/profile',
+                method: 'PUT',
+                body: payload,
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                },
-                method: 'PUT',
-                body: payload
-            })
+                }
+            }),
+            invalidatesTags: ['ProfileData']
         })
     })
 })

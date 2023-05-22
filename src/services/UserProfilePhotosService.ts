@@ -6,7 +6,7 @@ export const userProfilePhotosAPI = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
     endpoints: (build) => ({
         fetchUserProfilePhotos: build.query<Photo, number>({
-            query: (limit: number = 6) => ({
+            query: (limit: number = 12) => ({
                 url: 'photos',
                 params: {
                     _limit: limit
