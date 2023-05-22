@@ -29,3 +29,18 @@
 .col_price {
   text-align: center;
 }
+
+.controls {
+  margin-top: 36px;
+
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  .select_container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
