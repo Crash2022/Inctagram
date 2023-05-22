@@ -1,60 +1,60 @@
 .select {
-  border: 1px solid var(--dark-100);
-  border-radius: 2px;
-  outline: none;
-
-  font-size: 14px;
-
-  .currentValue {
-    color: var(--light-100);
-  }
-
-  .select_control {
-    min-height: 20px;
-    border: 1px solid transparent;
-
-    background-color: var(--dark-300);
-
-    &.select_focus {
-      border-color: var(--dark-100);
-
-      .arrow_container {
-        padding: 0 4px;
-      }
-    }
-  }
-
-  .separator {
-    opacity: 0;
-  }
-
-  .menu {
     border: 1px solid var(--dark-100);
-  }
+    border-radius: 2px;
+    outline: none;
 
-  .menu_list {
-    padding: 0;
-  }
+    font-size: 14px;
 
-  .option {
-    padding: 4px;
-  }
-
-  .option_active {
-    background: var(--dark-100);
-  }
-
-  .option_selected {
-    background: var(--dark-100);
-  }
-
-  .arrow_container {
-    padding: 0 4px;
-
-    div {
-      padding: 0;
+    .currentValue {
+        color: var(--light-100);
     }
-  }
+
+    .select_control {
+        min-height: 20px;
+        border: 1px solid transparent;
+
+        background-color: var(--dark-300);
+
+        &.select_focus {
+            border-color: var(--dark-100);
+
+            .arrow_container {
+                padding: 0 4px;
+            }
+        }
+    }
+
+    .separator {
+        opacity: 0;
+    }
+
+    .menu {
+        border: 1px solid var(--dark-100);
+    }
+
+    .menu_list {
+        padding: 0;
+    }
+
+    .option {
+        padding: 4px;
+    }
+
+    .option_active {
+        background: var(--dark-100);
+    }
+
+    .option_selected {
+        background: var(--dark-100);
+    }
+
+    .arrow_container {
+        padding: 0 4px;
+
+        div {
+            padding: 0;
+        }
+    }
 }
 
 
