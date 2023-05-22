@@ -7,16 +7,14 @@ import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'next-i18next'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import * as yup from 'yup'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { UpdateUserProfile } from '@/models/profile-types'
-import { InctagramPath } from '@/shared/api/path'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import { useGetProfileDataQuery, useSetProfileDataMutation } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { router } from 'next/client'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -47,7 +45,20 @@ export const General = () => {
         // resolver: yupResolver(ProfileGeneralSchema)
     })
 
-    console.log(profileData)
+    const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
+        console.log('submit profile', submitData)
+
+        await setProfile(submitData).then((res) => {
+            console.log('profile response', res)
+
+            setValue('userName', profileData.userName)
+            setValue('firstName', profileData.firstName)
+            setValue('lastName', profileData.lastName)
+            setValue('city', profileData.city)
+            setValue('dateOfBirth', profileData.dateOfBirth)
+            setValue('aboutMe', profileData.aboutMe)
+        })
+    }
 
     useEffect(() => {
         if (profileData) {
@@ -63,14 +74,7 @@ export const General = () => {
     if (isLoading) return <LoaderScreen variant={'loader'} />
     if (isSetLoading) return <LoaderScreen variant={'loader'} />
 
-    const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
-        console.log('submit profile', submitData)
-
-        await setProfile(submitData).then((res) => {
-            console.log('profile response', res)
-            // router.push(InctagramPath.PROFILE.PROFILE).then()
-        })
-    }
+    console.log(profileData)
 
     return (
         <form className={cls.profileSettings_general} onSubmit={handleSubmit(onSubmit)}>
