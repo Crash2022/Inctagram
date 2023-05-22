@@ -12,13 +12,13 @@ import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
-import { useFetchUserProfilePhotoQuery } from '@/services/UserProfilePhotosService'
+import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosService'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
     const router = useRouter()
 
-    const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotoQuery(12)
+    const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
     const { data: meData } = useMeQuery()
 
     if (isLoading) return <LoaderScreen variant={'loader'} />

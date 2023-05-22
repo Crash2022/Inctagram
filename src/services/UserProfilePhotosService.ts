@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Photo } from '@/models/profile-types'
 
-export const userProfilePhotoAPI = createApi({
-    reducerPath: 'userProfilePhotoAPI',
+export const userProfilePhotosAPI = createApi({
+    reducerPath: 'userProfilePhotosAPI',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
     endpoints: (build) => ({
         fetchUserProfile: build.query<Photo, number>({
@@ -16,4 +16,4 @@ export const userProfilePhotoAPI = createApi({
     })
 })
 
-export const { useFetchUserProfilePhotoQuery } = userProfilePhotoAPI
+export const { useFetchUserProfilePhotosQuery } = userProfilePhotosAPI
