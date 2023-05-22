@@ -49,7 +49,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     }
 
     useEffect(() => {
-        if (isSuccess) router.push(InctagramPath.AUTH.LOGIN).then()
+        if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
     }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />

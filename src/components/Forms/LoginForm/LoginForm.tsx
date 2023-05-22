@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import { useLoginMutation } from '@/services/AuthService'
+import { useLoginMutation, useMeQuery } from '@/services/AuthService'
 import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useEffect } from 'react'
@@ -22,7 +22,8 @@ export const LoginForm = () => {
     const { t } = useTranslation('login')
     const router = useRouter()
 
-    const [login, { data: loginData, isSuccess, error, isError, isLoading }] = useLoginMutation()
+    const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
+    const { data: meData, isMeLoading } = useMeQuery()
 
     const LoginSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
@@ -43,18 +44,13 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {
         console.log('submit login', submitData)
-        await login(submitData).then((res) => {
-            console.log('login response', res)
-            localStorage.setItem('accessToken', res.data.accessToken)
-            router.push(InctagramPath.PROFILE.PROFILE).then()
-        })
+        const res = await login(submitData)
+        console.log('login response', res)
+        localStorage.setItem('accessToken', res.data.accessToken)
+        if (!isError) await router.push(InctagramPath.PROFILE.PROFILE)
     }
 
     useErrorSnackbar(isError)
-
-    // useEffect(() => {
-    //     if (isSuccess) router.push(InctagramPath.PROFILE.PROFILE).then()
-    // }, [isSuccess])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
 

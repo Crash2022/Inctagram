@@ -52,7 +52,7 @@ export const CreateNewPasswordForm = () => {
     }
 
     const messageModalOKHandler = () => {
-        router.push(InctagramPath.AUTH.LOGIN).then()
+        void router.push(InctagramPath.AUTH.LOGIN)
     }
 
     useErrorSnackbar(isError)

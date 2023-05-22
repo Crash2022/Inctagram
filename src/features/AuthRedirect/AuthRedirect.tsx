@@ -39,7 +39,7 @@ const AuthRedirect = ({ children }) => {
 
     useEffect(() => {
         if (isBrowser() && !isLoading && !meData && pathIsProtected) {
-            router.push(InctagramPath.AUTH.LOGIN).then()
+            void router.push(InctagramPath.AUTH.LOGIN)
         }
     }, [isLoading, meData, pathIsProtected])
 
