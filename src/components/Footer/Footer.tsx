@@ -21,7 +21,7 @@ export const Footer = () => {
                 <div className={s.items}>
                     <div
                         onClick={() => {
-                            router.push(InctagramPath.PROFILE.HOME).then()
+                            void router.push(InctagramPath.PROFILE.HOME)
                         }}
                     >
                         <HomeIcon />
@@ -35,7 +35,7 @@ export const Footer = () => {
                     </div>
                     <div
                         onClick={() => {
-                            router.push(InctagramPath.PROFILE.PROFILE).then()
+                            void router.push(InctagramPath.PROFILE.PROFILE)
                         }}
                     >
                         <ProfileIcon />

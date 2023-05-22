@@ -39,7 +39,7 @@ export const Header = () => {
                 <div
                     className={cls.header_logo}
                     onClick={() => {
-                        router.push('/').then()
+                        void router.push('/')
                     }}
                 >
                     <Image src={LogoIcon} alt={'login-icon'} width={40} height={40} />

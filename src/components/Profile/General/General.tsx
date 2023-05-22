@@ -51,12 +51,14 @@ export const General = () => {
         await setProfile(submitData).then((res) => {
             console.log('profile response', res)
 
-            setValue('userName', profileData.userName)
-            setValue('firstName', profileData.firstName)
-            setValue('lastName', profileData.lastName)
-            setValue('city', profileData.city)
-            setValue('dateOfBirth', profileData.dateOfBirth)
-            setValue('aboutMe', profileData.aboutMe)
+            if (res.data == null) {
+                setValue('userName', profileData.userName)
+                setValue('firstName', profileData.firstName)
+                setValue('lastName', profileData.lastName)
+                setValue('city', profileData.city)
+                setValue('dateOfBirth', profileData.dateOfBirth)
+                setValue('aboutMe', profileData.aboutMe)
+            }
         })
     }
 
