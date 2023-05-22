@@ -17,6 +17,7 @@ import * as yup from 'yup'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import clsx from 'clsx'
 
 export const ForgotPasswordForm = () => {
     const { t } = useTranslation('forgot')
@@ -65,7 +66,7 @@ export const ForgotPasswordForm = () => {
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
             <MessageModal
                 open={open}
                 setOpen={setOpen}

@@ -18,6 +18,7 @@ import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import clsx from 'clsx'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
@@ -80,7 +81,7 @@ export const RegistrationForm = () => {
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
             <MessageModal
                 open={open}
                 setOpen={setOpen}

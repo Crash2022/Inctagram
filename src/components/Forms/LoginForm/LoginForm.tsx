@@ -17,6 +17,7 @@ import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import clsx from 'clsx'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -55,7 +56,7 @@ export const LoginForm = () => {
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
             <Title title={t('SignIn')} className={styles.title} />
 
             <div className={styles.imgBody}>

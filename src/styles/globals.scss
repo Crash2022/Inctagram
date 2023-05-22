@@ -36,9 +36,17 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
     -webkit-text-fill-color: #fff;
-    -webkit-box-shadow: 0 0 0 40rem var(--dark-500) inset;
+    -webkit-box-shadow: 0 0 0 40rem var(--contentBgColor) inset;
     transition: background-color 5000s ease-in-out 0s;
     caret-color: #fff;
+}
+
+.authForm {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 40rem var(--dark-500) inset;
+    }
 }
 
 body {

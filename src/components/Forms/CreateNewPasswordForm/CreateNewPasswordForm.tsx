@@ -13,6 +13,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import clsx from 'clsx'
 // import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
@@ -65,7 +66,7 @@ export const CreateNewPasswordForm = () => {
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
             <MessageModal
                 open={open}
                 setOpen={setOpen}

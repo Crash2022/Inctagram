@@ -23,10 +23,10 @@ export const General = () => {
     const [setProfile, { data: setProfileData, isError: isSetError, isLoading: isSetLoading }] =
         useSetProfileDataMutation()
 
-    // const ProfileGeneralSchema = yup.object().shape({
-    //     userName: yup.string().min(6, t('Err_Yup_Min')).max(30, t('Err_Yup_Max_Name')),
-    //     aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
-    // })
+    const ProfileGeneralSchema = yup.object().shape({
+        userName: yup.string().min(6, t('Err_Yup_Min')).max(30, t('Err_Yup_Max_Name')),
+        aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
+    })
 
     const {
         control,
@@ -41,8 +41,8 @@ export const General = () => {
             city: '',
             dateOfBirth: '',
             aboutMe: ''
-        }
-        // resolver: yupResolver(ProfileGeneralSchema)
+        },
+        resolver: yupResolver(ProfileGeneralSchema)
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {

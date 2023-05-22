@@ -43,11 +43,12 @@ export const Textarea: React.FC<CustomTextareaPropsType> = ({
         onEnter && e.key === 'Enter' && onEnter()
     }
 
-    const finalTextareaDivWrapperClassName = `${divClassName ? divClassName : s.textarea_wrapper}`
+    const finalTextareaDivWrapperClassName = `${divClassName || s.textarea_wrapper}`
 
     return (
         <div className={finalTextareaDivWrapperClassName}>
             <div className={s.placeholder}>{placeholder}</div>
+            {error && <span className={s.errorMessage}>{error}</span>}
             <textarea onChange={onChangeCallback} onKeyPress={onKeyPressCallback} {...restProps} />
         </div>
     )
