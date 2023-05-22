@@ -47,18 +47,8 @@ export const General = () => {
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
         console.log('submit profile', submitData)
-
         const res = await setProfile(submitData)
         console.log('profile response', res)
-
-        // if (res.data === null) {
-        //     setValue('userName', profileData.userName)
-        //     setValue('firstName', profileData.firstName)
-        //     setValue('lastName', profileData.lastName)
-        //     setValue('city', profileData.city)
-        //     setValue('dateOfBirth', profileData.dateOfBirth)
-        //     setValue('aboutMe', profileData.aboutMe)
-        // }
     }
 
     useEffect(() => {
