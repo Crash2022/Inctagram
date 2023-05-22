@@ -26,8 +26,46 @@ export const userProfileAPI = createApi({
                 }
             }),
             invalidatesTags: ['ProfileData']
+        }),
+        uploadAvatar: build.mutation<any, { file: string }>({
+            query: (payload: { file: string }) => ({
+                url: '/users/profile/avatar',
+                method: 'POST',
+                body: payload,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }),
+            invalidatesTags: ['ProfileData']
+
+            // query: (file) => {
+            //     let formData = new FormData()
+            //     formData.append('file', file)
+            //
+            //     return {
+            //         url: 'users/profile/avatar',
+            //         method: 'POST',
+            //         body: formData
+            //     }
+            // },
+            // invalidatesTags: ['ProfileData/photos']
+        }),
+        deleteAvatar: build.mutation<any, any>({
+            query: () => ({
+                url: '/users/profile/avatar',
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }),
+            invalidatesTags: ['ProfileData']
         })
     })
 })
 
-export const { useGetProfileDataQuery, useSetProfileDataMutation } = userProfileAPI
+export const {
+    useGetProfileDataQuery,
+    useSetProfileDataMutation,
+    useUploadAvatarMutation,
+    useDeleteAvatarMutation
+} = userProfileAPI
