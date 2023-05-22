@@ -6,5 +6,9 @@
   "City": "City",
   "DateOfBirth": "Date Of Birth",
   "AboutMe": "About Me",
-  "Save": "Save Changes"
+  "Save": "Save Changes",
+
+  "Err_Yup_Min": "Minimal length is 6 symbols",
+  "Err_Yup_Max_Name": "Maximum length is 30 symbols",
+  "Err_Yup_Max_AboutMe": "Maximum length is 200 symbols"
 }

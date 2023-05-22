@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import cls from './General.module.scss'
 import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
 import DeletePhotoIcon from '../../../../public/assets/icons/delete-circle-fill.svg'
@@ -11,9 +11,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { UpdateUserProfile } from '@/models/profile-types'
 import { InctagramPath } from '@/shared/api/path'
-import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
-import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import { useGetProfileDataQuery, useSetProfileDataMutation } from '@/services/UserProfileService'
@@ -27,9 +25,10 @@ export const General = () => {
     const [setProfile, { data: setProfileData, isError: isSetError, isLoading: isSetLoading }] =
         useSetProfileDataMutation()
 
-    const ProfileGeneralSchema = yup.object().shape({
-        // email: yup.string().required(t('Err_Yup_Required'))
-    })
+    // const ProfileGeneralSchema = yup.object().shape({
+    //     userName: yup.string().min(6, t('Err_Yup_Min')).max(30, t('Err_Yup_Max_Name')),
+    //     aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
+    // })
 
     const {
         control,
@@ -44,10 +43,12 @@ export const General = () => {
             city: '',
             dateOfBirth: '',
             aboutMe: ''
-        },
-        resolver: yupResolver(ProfileGeneralSchema)
+        }
+        // resolver: yupResolver(ProfileGeneralSchema)
     })
+
     console.log(profileData)
+
     useEffect(() => {
         if (profileData) {
             setValue('userName', profileData.userName)
@@ -60,12 +61,14 @@ export const General = () => {
     }, [profileData])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (isSetLoading) return <LoaderScreen variant={'loader'} />
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
         console.log('submit profile', submitData)
+
         await setProfile(submitData).then((res) => {
             console.log('profile response', res)
-            router.push(InctagramPath.PROFILE.PROFILE).then()
+            // router.push(InctagramPath.PROFILE.PROFILE).then()
         })
     }
 
@@ -124,15 +127,6 @@ export const General = () => {
                         control={control}
                         error={errors.dateOfBirth?.message}
                     />
-
-                    {/* <ControlledInput */}
-                    {/*    divClassName={cls.input} */}
-                    {/*    id={'P_S_General_AboutMe'} */}
-                    {/*    name={'aboutMe'} */}
-                    {/*    placeholder={t('AboutMe')} */}
-                    {/*    control={control} */}
-                    {/*    error={errors.aboutMe?.message} */}
-                    {/* /> */}
                     <div className={cls.textarea}>
                         <Controller
                             name={'aboutMe'}
