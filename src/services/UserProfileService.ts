@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Photo, UserProfile } from '@/models/profile-types'
-import { MeResponseType, RegistrationPayloadType } from '@/models/auth-types'
+import { UserProfile } from '@/models/profile-types'
 import { baseURL } from '@/shared/api/baseURL'
 
 export const userProfileAPI = createApi({

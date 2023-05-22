@@ -3,7 +3,7 @@ import { createWrapper, HYDRATE } from 'next-redux-wrapper'
 import { appReducer } from '@/store/slices/appSlice'
 import { authReducer } from '@/store/slices/authSlice'
 import { serviceAuthAPI } from '@/services/AuthService'
-import { userProfileAPITest } from '@/services/UserProfileServiceTestPictures'
+import { userProfileAPITest } from '@/services/UserProfilePhotosService'
 import { userProfileAPI } from '@/services/UserProfileService'
 
 const combinedReducer = combineReducers({

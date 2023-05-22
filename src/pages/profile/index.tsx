@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
-import { useFetchUserProfileQuery } from '@/services/UserProfileServiceTestPictures'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
@@ -13,12 +12,13 @@ import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
+import { useFetchUserProfilePhotoQuery } from '@/services/UserProfilePhotosService'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
     const router = useRouter()
 
-    const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(12)
+    const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotoQuery(12)
     const { data: meData } = useMeQuery()
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
