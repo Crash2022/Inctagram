@@ -34,7 +34,12 @@ export const General = () => {
         useSetProfileDataMutation()
     const [
         uploadAvatar,
-        { data: uploadAvatarResult, error: uploadAvatarError, isLoading: uploadAvatarIsLoading }
+        {
+            data: uploadAvatarResult,
+            error: uploadAvatarError,
+            isError: uploadAvatarIsError,
+            isLoading: uploadAvatarIsLoading
+        }
     ] = useUploadAvatarMutation()
     const [
         deleteAvatar,
@@ -70,6 +75,7 @@ export const General = () => {
     }
 
     const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log('upload')
         uploadHandler(event, setAvatar, async (file64) => {
             uploadAvatar(file64)
         })
@@ -117,6 +123,12 @@ export const General = () => {
         }
     }, [profileData])
 
+    useEffect(() => {
+        if (uploadAvatarIsError) {
+            console.log(uploadAvatarError)
+        }
+    }, [])
+
     console.log('profileData', profileData)
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
@@ -150,7 +162,8 @@ export const General = () => {
                         </div>
                     </div>
                     <div className={cls.addAvatar_btn}>
-                        <InputFile title={t('AddPhoto')} uploadFunction={uploadAvatarHandler} />
+                        {/*<InputFile title={t('AddPhoto')} uploadFunction={uploadAvatarHandler} />*/}
+                        <input type='file' onChange={uploadAvatarHandler} />
                     </div>
                 </div>
                 <div className={cls.general_infoBlock}>
