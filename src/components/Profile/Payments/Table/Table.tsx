@@ -1,5 +1,6 @@
 import React from 'react';
 import cls from "../Payments.module.scss";
+
 import {TableHead} from "@/components/Profile/Payments/Table/TableHead";
 import {TableBody} from "@/components/Profile/Payments/Table/TableBody";
 import {MockData} from "@/components/Profile/Payments/Payments";

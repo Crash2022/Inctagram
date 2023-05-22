@@ -1,29 +1,29 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {CustomSelect, Option} from "@/shared/ui/CustomSelect/CustomSelect";
 
 import cls from '../../Payments.module.scss';
+import {useTranslation} from "next-i18next";
 
-const options: Option[] = [
-  {label: '1', value: '1'},
-  {label: '5', value: '5'},
-  {label: '10', value: '10'},
-  {label: '20', value: '20'},
-]
-export const PaginationSelect = () => {
-  const [value, setValue] = useState(options[0])
+interface Props {
+  selectOptions: Option[];
+  onChangeItemsCount: (itemsCount: number) => void;
+  value: Option;
+}
+
+export const PaginationSelect = ({selectOptions, onChangeItemsCount, value}: Props) => {
+  const { t } = useTranslation('settings-payments')
 
   const handleChange = (value: Option) => {
-    console.log(value)
-    setValue(value);
+    onChangeItemsCount(Number(value.value))
   }
 
   return (
     <div className={cls.select_container}>
-      <p>Показать</p>
+      <p>{t('select.show')}</p>
       <div className={cls.select}>
-        <CustomSelect options={options} value={value} onChange={handleChange} />
+        <CustomSelect options={selectOptions} value={value} onChange={handleChange} />
       </div>
-      <p>на странице</p>
+      <p>{t('select.page')}</p>
     </div>
   );
 };

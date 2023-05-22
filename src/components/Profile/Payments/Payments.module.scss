@@ -17,13 +17,21 @@
 
 .row_col_4 {
   display: grid;
-  grid-template-columns: 130px 50px 130px 100px;
+  grid-template-columns: 100px 50px 130px 150px;
 
   justify-content: space-between;
 }
 
 .table_body {
   font-weight: 400;
+
+  .row {
+    border-bottom: 1px solid var(--dark-300);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
 .col_price {

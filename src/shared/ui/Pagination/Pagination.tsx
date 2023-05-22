@@ -40,6 +40,7 @@ export const Pagination = ({pageCount, currentPage, onChangePage, pageRangeDispl
       marginPagesDisplayed={marginPagesDisplayed}
       previousLabel={<span>&#8249;</span>}
       nextLabel={<span>&#8250;</span>}
+      forcePage={currentPage - 1}
       prevPageRel={currentPage === 0 ? null : 'prev'}
       onPageChange={handleChangePage}
     />
