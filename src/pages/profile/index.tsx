@@ -1,4 +1,3 @@
-import React from 'react'
 import Head from 'next/head'
 import cls from './Profile.module.scss'
 import Image from 'next/image'

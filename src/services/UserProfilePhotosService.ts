@@ -5,8 +5,8 @@ export const userProfilePhotosAPI = createApi({
     reducerPath: 'userProfilePhotosAPI',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
     endpoints: (build) => ({
-        fetchUserProfile: build.query<Photo, number>({
-            query: (limit: number = 10) => ({
+        fetchUserProfilePhotos: build.query<Photo, number>({
+            query: (limit: number = 12) => ({
                 url: 'photos',
                 params: {
                     _limit: limit
