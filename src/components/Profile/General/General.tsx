@@ -26,6 +26,7 @@ export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
     const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
+    const [isAvaBroken, setIsAvaBroken] = useState(false)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
     const [
@@ -109,6 +110,14 @@ export const General = () => {
         }
     }
 
+    const imageErrorHandler = () => {
+        setIsAvaBroken(true)
+        enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
+            variant: 'error',
+            autoHideDuration: 3000
+        })
+    }
+
     useEffect(() => {
         if (profileData) {
             setValue('userName', profileData.userName)
@@ -147,6 +156,7 @@ export const General = () => {
                             alt={'profile-avatar'}
                             width={204}
                             height={204}
+                            onError={imageErrorHandler}
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
