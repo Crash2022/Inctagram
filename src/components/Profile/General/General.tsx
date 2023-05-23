@@ -30,8 +30,10 @@ export const General = () => {
     const [avatar, setAvatar] = useState<string>('')
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
-    const [setProfile, { data: setProfileData, isError: isSetError, isLoading: isSetLoading }] =
-        useSetProfileDataMutation()
+    const [
+        setProfile,
+        { data: setProfileData, isError: isSetError, isLoading: setProfileIsLoading }
+    ] = useSetProfileDataMutation()
     const [
         uploadAvatar,
         {
@@ -64,8 +66,8 @@ export const General = () => {
             city: '',
             dateOfBirth: '',
             aboutMe: ''
-        }
-        // resolver: yupResolver(ProfileGeneralSchema)
+        },
+        resolver: yupResolver(ProfileGeneralSchema)
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
@@ -132,7 +134,7 @@ export const General = () => {
     console.log('profileData', profileData)
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
-    if (isSetLoading) return <LoaderScreen variant={'loader'} />
+    if (setProfileIsLoading) return <LoaderScreen variant={'loader'} />
     if (uploadAvatarIsLoading) return <LoaderScreen variant={'loader'} />
     if (deleteAvatarIsLoading) return <LoaderScreen variant={'loader'} />
 
@@ -147,7 +149,6 @@ export const General = () => {
                                     ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
-                            // src={DefaultProfileAvatar}
                             alt={'profile-avatar'}
                             width={204}
                             height={204}

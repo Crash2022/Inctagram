@@ -4,15 +4,21 @@ import { baseURL } from '@/shared/api/baseURL'
 
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: baseURL,
+        prepareHeaders: (headers) => {
+            headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
+            return headers
+        }
+    }),
     tagTypes: ['ProfileData'],
     endpoints: (build) => ({
         getProfileData: build.query<UserProfile, void>({
             query: () => ({
-                url: '/users/profile',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
+                url: '/users/profile'
+                // headers: {
+                //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                // }
             }),
             providesTags: (result) => ['ProfileData']
         }),
@@ -20,10 +26,7 @@ export const userProfileAPI = createApi({
             query: (payload: UserProfile) => ({
                 url: '/users/profile',
                 method: 'PUT',
-                body: payload,
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
+                body: payload
             }),
             invalidatesTags: ['ProfileData']
         }),
@@ -31,10 +34,7 @@ export const userProfileAPI = createApi({
             query: (payload: { file: string }) => ({
                 url: '/users/profile/avatar',
                 method: 'POST',
-                body: payload,
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
+                body: payload
             }),
             invalidatesTags: ['ProfileData']
 
@@ -53,10 +53,7 @@ export const userProfileAPI = createApi({
         deleteAvatar: build.mutation<any, any>({
             query: () => ({
                 url: '/users/profile/avatar',
-                method: 'DELETE',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
+                method: 'DELETE'
             }),
             invalidatesTags: ['ProfileData']
         })

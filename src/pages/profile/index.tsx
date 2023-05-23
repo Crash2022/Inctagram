@@ -20,10 +20,11 @@ const Profile: NextPageWithLayout = () => {
     const router = useRouter()
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
-    const { data: meData } = useMeQuery()
+    const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (profileDataIsLoading) return <LoaderScreen variant={'loader'} />
 
     return (
         <>
@@ -40,7 +41,7 @@ const Profile: NextPageWithLayout = () => {
                                     ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
-                            alt={'profile-photo'}
+                            alt={'profile-avatar'}
                             width={204}
                             height={204}
                         />
