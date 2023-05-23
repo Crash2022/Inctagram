@@ -161,6 +161,7 @@ export const General = () => {
                             width={204}
                             height={204}
                             onError={imageErrorHandler}
+                            priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />

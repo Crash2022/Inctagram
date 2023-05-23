@@ -23,6 +23,19 @@ const nextConfig = {
 
         return config
     },
+    // images: {
+    //     remotePatterns: [
+    //         {
+    //             protocol: 'https',
+    //             hostname: 'storage.yandexcloud.net',
+    //             port: '',
+    //             pathname: '/profile/**'
+    //         }
+    //     ]
+    // },
+    images: {
+        domains: ['storage.yandexcloud.net']
+    },
     i18n
     // i18n: {
     //     defaultLocale: 'en',
