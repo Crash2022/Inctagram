@@ -21,12 +21,11 @@ import {
 } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
-import { uploadImage } from '@/shared/utils/uploadFile'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const [userAvatar, setUserAvatar] = useState(DefaultProfileAvatar)
+    const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
     const [
@@ -75,66 +74,41 @@ export const General = () => {
         console.log('profile response', res)
     }
 
-    const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
         console.log('uploading avatar')
 
         if (event.target.files && event.target.files.length) {
             const file = event.target.files[0]
 
-            if (file && file.size < 7000000) {
+            if (file && file.size < 1000000) {
                 console.log('file', file)
                 setUserAvatar(URL.createObjectURL(file))
+
                 let formData = new FormData()
-                formData.append('avatarImage', file, file.name)
-                console.log('formData', formData)
-                uploadAvatar(formData)
+                formData.append('file', file)
+
+                await uploadAvatar(formData)
             } else {
-                console.error('Error: ', 'Файл слишком большого размера')
-                enqueueSnackbar('Файл слишком большого размера', {
-                    variant: 'warning',
+                enqueueSnackbar(t('Snackbar_LargeSizeAvatar'), {
+                    variant: 'error',
                     autoHideDuration: 3000
                 })
+                return
             }
         }
     }
 
-    // const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    //     console.log('upload')
-    //     uploadImage(event, setAvatar, async (file64) => {
-    //         uploadAvatar(file64)
-    //     })
-    // }
-
-    // const uploadAvatarHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     if (e.target.files && e.target.files.length) {
-    //         const file = e.target.files[0]
-    //
-    //         console.log('file', file)
-    //
-    //         if (file.size < 7000000) {
-    //             convertFileToBase64(file, async (file64: string) => {
-    //                 console.log('мы попали в загрузку')
-    //                 setAvatar(file64)
-    //                 const avatarResponse = await uploadAvatar(file64)
-    //             })
-    //         } else {
-    //             console.error('Error: ', 'Файл слишком большого размера')
-    //             enqueueSnackbar('Файл слишком большого размера', {
-    //                 variant: 'warning',
-    //                 autoHideDuration: 3000
-    //             })
-    //         }
-    //     }
-    // }
-    //
-    // const convertFileToBase64 = (file: File, callBack: (value: string) => void) => {
-    //     const reader = new FileReader()
-    //     reader.onloadend = () => {
-    //         const file64 = reader.result as string
-    //         callBack(file64)
-    //     }
-    //     reader.readAsDataURL(file)
-    // }
+    const deleteAvatarHandler = async () => {
+        if (profileData.avatars.length === 0) {
+            enqueueSnackbar(t('Snackbar_NoAvatar'), {
+                variant: 'info',
+                autoHideDuration: 3000
+            })
+            return
+        } else {
+            await deleteAvatar()
+        }
+    }
 
     useEffect(() => {
         if (profileData) {
@@ -165,7 +139,7 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <Image
+                        <img
                             src={
                                 profileData && profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
@@ -175,12 +149,7 @@ export const General = () => {
                             width={204}
                             height={204}
                         />
-                        <div
-                            className={cls.delete_avatar}
-                            onClick={async () => {
-                                await deleteAvatar()
-                            }}
-                        >
+                        <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
                         </div>
                     </div>

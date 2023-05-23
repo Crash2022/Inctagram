@@ -6,10 +6,8 @@ import { NextPageWithLayout } from '@/pages/_app'
 import { useTranslation } from 'next-i18next'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import ProfilePhoto from '../../../public/assets/images/profile-photo.jpg'
 import DefaultProfileAvatar from '../../../public/assets/images/default-avatar.png'
 import { useMeQuery } from '@/services/AuthService'
-import { useRouter } from 'next/router'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
 import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosService'
@@ -17,7 +15,6 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
-    const router = useRouter()
 
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
     const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
@@ -35,7 +32,7 @@ const Profile: NextPageWithLayout = () => {
             <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
                     <div className={cls.header_photo}>
-                        <Image
+                        <img
                             src={
                                 profileData && profileData.avatars.length === 0
                                     ? DefaultProfileAvatar

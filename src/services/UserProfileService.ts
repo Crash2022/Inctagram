@@ -27,28 +27,13 @@ export const userProfileAPI = createApi({
             }),
             invalidatesTags: ['ProfileData']
         }),
-        uploadAvatar: build.mutation<any, { file: string }>({
-            query: (payload: { file: string }) => ({
+        uploadAvatar: build.mutation<any, File>({
+            query: (payload: File) => ({
                 url: '/users/profile/avatar',
                 method: 'POST',
                 body: payload
-                // headers: {
-                //     'Content-Type': 'multipart/form-data'
-                // }
             }),
             invalidatesTags: ['ProfileData']
-
-            // query: (file) => {
-            //     let formData = new FormData()
-            //     formData.append('file', file)
-            //
-            //     return {
-            //         url: 'users/profile/avatar',
-            //         method: 'POST',
-            //         body: formData
-            //     }
-            // },
-            // invalidatesTags: ['ProfileData/photos']
         }),
         deleteAvatar: build.mutation<any, any>({
             query: () => ({

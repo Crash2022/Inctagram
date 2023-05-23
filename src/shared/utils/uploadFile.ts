@@ -1,5 +1,13 @@
 import { ChangeEvent } from 'react'
 
+// применение в компоненте
+// const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
+//     console.log('uploading')
+//     uploadImage(event, setAvatar, async (file64) => {
+//         uploadAvatar(file64)
+//     })
+// }
+
 // upload file
 export const uploadImage = (
     e: ChangeEvent<HTMLInputElement>,
