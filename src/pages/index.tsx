@@ -30,6 +30,7 @@ const Home: NextPageWithLayout = () => {
     }, [router, meData])
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (meData) void router.push(InctagramPath.PROFILE.PROFILE)
 
     return (
         <>

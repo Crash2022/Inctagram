@@ -32,17 +32,17 @@ const Profile: NextPageWithLayout = () => {
             <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
                     <div className={cls.header_photo}>
-                        <Image
+                        <img
                             src={
                                 profileData && profileData.avatars.length === 0
-                                    ? DefaultProfileAvatar
+                                    ? '/assets/images/default-avatar.png'
                                     : profileData.avatars[0].url
                             }
                             alt={'profile-avatar'}
-                            width={204}
-                            height={204}
-                            quality={100}
-                            priority
+                            width={'204px'}
+                            height={'204px'}
+                            // quality={100}
+                            // priority
                         />
                     </div>
                     <div className={cls.header_info}>

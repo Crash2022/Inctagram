@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from '@/shared/ui/Button/Button'
 import Link from 'next/link'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
@@ -11,20 +12,21 @@ import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
 import { LoginPayloadType } from '@/models/auth-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import React, { useEffect } from 'react'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import clsx from 'clsx'
+import { useSnackbar } from 'notistack'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
     const router = useRouter()
+    const { enqueueSnackbar } = useSnackbar()
 
     const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
-    const { data: meData, isMeLoading } = useMeQuery()
+    const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
 
     const LoginSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
@@ -45,14 +47,19 @@ export const LoginForm = () => {
 
     const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {
         console.log('submit login', submitData)
-        const res = await login(submitData)
-        console.log('login response', res)
-        localStorage.setItem('accessToken', res.data.accessToken)
-        if (!isError) await router.push(InctagramPath.PROFILE.PROFILE)
+
+        try {
+            const res = await login(submitData)
+            console.log('login response', res)
+            localStorage.setItem('accessToken', res.data.accessToken)
+            // await refetchMeData()
+            await router.push(InctagramPath.PROFILE.PROFILE)
+        } catch (error: any) {
+            console.log('login error', error)
+        }
     }
 
     useErrorSnackbar(isError)
-
     if (isLoading) return <LoaderScreen variant={'loader'} />
 
     return (

@@ -25,7 +25,8 @@ import { useSnackbar } from 'notistack'
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
+    const [userAvatar, setUserAvatar] = useState<string>('/assets/images/default-avatar.png')
+    // const [userAvatarTest, setUserAvatarTest] = useState<string>('/assets/images/default-avatar.png')
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
@@ -83,12 +84,25 @@ export const General = () => {
 
             if (file && file.size < 1000000) {
                 console.log('file', file)
-                setUserAvatar(URL.createObjectURL(file))
 
                 let formData = new FormData()
                 formData.append('file', file)
 
-                await uploadAvatar(formData)
+                try {
+                    await uploadAvatar(formData)
+                    // setUserAvatar2(URL.createObjectURL(file))
+                    setUserAvatar(
+                        profileData.avatars.length !== 0
+                            ? profileData.avatars[0].url
+                            : '/assets/images/default-avatar.png'
+                    )
+                    location.reload() // принудительная перезагрузка компоненты
+                } catch {
+                    enqueueSnackbar('ОШИБКА!', {
+                        variant: 'error',
+                        autoHideDuration: 3000
+                    })
+                }
             } else {
                 enqueueSnackbar(t('Snackbar_LargeSizeAvatar'), {
                     variant: 'error',
@@ -107,6 +121,7 @@ export const General = () => {
             return
         } else {
             await deleteAvatar()
+            setUserAvatar('/assets/images/default-avatar.png')
         }
     }
 
@@ -126,6 +141,12 @@ export const General = () => {
             setValue('city', profileData.city)
             setValue('dateOfBirth', profileData.dateOfBirth)
             setValue('aboutMe', profileData.aboutMe)
+
+            setUserAvatar(
+                profileData.avatars.length !== 0
+                    ? profileData.avatars[0].url
+                    : '/assets/images/default-avatar.png'
+            )
         }
     }, [profileData])
 
@@ -151,22 +172,34 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <Image
-                            src={
-                                profileData && profileData.avatars.length !== 0
-                                    ? profileData.avatars[0].url
-                                    : userAvatar
-                            }
+                        <img
+                            // src={
+                            //     profileData.avatars.length !== 0
+                            //         ? profileData.avatars[0].url
+                            //         : '/assets/images/default-avatar.png'
+                            // }
+                            src={userAvatar}
                             alt={'profile-avatar'}
-                            width={204}
-                            height={204}
+                            width={'204px'}
+                            height={'204px'}
                             onError={imageErrorHandler}
-                            quality={100}
-                            priority
+                            // quality={100}
+                            // priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
                         </div>
+                    </div>
+                    <div>
+                        <button
+                            onClick={() => {
+                                setUserAvatar2(
+                                    'https://i.pinimg.com/736x/db/f7/51/dbf75190938b676e9751753851da5f79.jpg'
+                                )
+                            }}
+                        >
+                            test
+                        </button>
                     </div>
                     <div className={cls.addAvatar_btn}>
                         <InputFile

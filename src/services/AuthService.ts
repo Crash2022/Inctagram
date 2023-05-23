@@ -12,6 +12,7 @@ import { baseQueryWithReauth } from '@/shared/api/interceptor'
 export const serviceAuthAPI = createApi({
     reducerPath: 'serviceAuthAPI',
     baseQuery: baseQueryWithReauth,
+    // tagTypes: ['AuthService'],
     endpoints: (build) => ({
         registration: build.mutation<any, RegistrationPayloadType>({
             query: (payload: RegistrationPayloadType) => ({
@@ -40,6 +41,7 @@ export const serviceAuthAPI = createApi({
                 method: 'POST',
                 body: payload
             })
+            // invalidatesTags: ['AuthService']
         }),
         logout: build.mutation({
             query: () => ({
@@ -53,18 +55,8 @@ export const serviceAuthAPI = createApi({
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
-                // credentials: 'include',
-                // prepareHeaders: async (headers, { extra }) => {
-                //     try {
-                //         const token = localStorage.getItem('accessToken')
-                //         if (token) headers.set('Authorization', `Bearer ${token}`)
-                //         console.log(headers)
-                //         return headers
-                //     } catch (error) {
-                //         console.log(error)
-                //     }
-                // }
             })
+            // providesTags: (result) => ['AuthService']
         }),
         forgotPassword: build.mutation<any, PasswordRecoveryType>({
             query: (payload: PasswordRecoveryType) => ({

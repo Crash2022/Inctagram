@@ -4,6 +4,7 @@ import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { LoginForm } from '@/components/Forms/LoginForm/LoginForm'
 import { NextPageWithLayout } from '@/pages/_app'
+import Image from 'next/image'
 
 const Login: NextPageWithLayout = () => {
     return (
