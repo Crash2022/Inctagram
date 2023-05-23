@@ -6,38 +6,40 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string
     className?: string
     theme?: 'primary' | 'primaryWhite' | 'outline' | 'clear'
-    uploadFunction: (event: ChangeEvent<HTMLInputElement>) => void
+    onChangeUpload: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
-    const { theme = 'primary', className, title, uploadFunction } = props
+    const { theme = 'primary', className, title, id, onChangeUpload, ...restProps } = props
 
-    const inputRef = useRef<HTMLInputElement>(null)
-
-    const selectFileHandler = () => {
-        inputRef && inputRef.current?.click()
-    }
-
-    // const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if (e.target.files && e.target.files.length) {
-    //         const file = e.target.files[0]
-    //         console.log('file: ', file)
-    //     }
+    // const inputRef = useRef<HTMLInputElement>(null)
+    //
+    // const selectFileHandler = () => {
+    //     inputRef && inputRef.current?.click()
+    //     // inputRef.current.value = ''
     // }
 
     return (
         <label>
-            <button
+            {/*<button*/}
+            {/*    className={clsx(cls.button, [className, cls[theme]])}*/}
+            {/*    onClick={selectFileHandler}*/}
+            {/*>*/}
+            {/*    {title}*/}
+            {/*</button>*/}
+            <span
                 className={clsx(cls.button, [className, cls[theme]])}
-                onClick={selectFileHandler}
+                style={{ display: 'block' }}
             >
                 {title}
-            </button>
+            </span>
             <input
-                ref={inputRef}
+                id={id}
+                // ref={inputRef}
                 type='file'
-                onChange={uploadFunction}
+                onChange={onChangeUpload}
                 style={{ display: 'none' }}
+                {...restProps}
             />
 
             {/*вариант 2*/}

@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import cls from './General.module.scss'
+import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
 import DeletePhotoIcon from '../../../../public/assets/icons/delete-circle-red.svg'
 import Image from 'next/image'
@@ -10,7 +11,6 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { UpdateUserProfile } from '@/models/profile-types'
-import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import {
@@ -139,7 +139,7 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <img
+                        <Image
                             src={
                                 profileData && profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
@@ -154,8 +154,11 @@ export const General = () => {
                         </div>
                     </div>
                     <div className={cls.addAvatar_btn}>
-                        {/*<InputFile title={t('AddPhoto')} uploadFunction={uploadAvatarHandler} />*/}
-                        <input type='file' onChange={uploadAvatarHandler} />
+                        <InputFile
+                            id={'Upload_Avatar'}
+                            title={t('AddPhoto')}
+                            onChangeUpload={uploadAvatarHandler}
+                        />
                     </div>
                 </div>
                 <div className={cls.general_infoBlock}>
