@@ -41,6 +41,8 @@ const Profile: NextPageWithLayout = () => {
                             alt={'profile-avatar'}
                             width={204}
                             height={204}
+                            quality={100}
+                            priority
                         />
                     </div>
                     <div className={cls.header_info}>

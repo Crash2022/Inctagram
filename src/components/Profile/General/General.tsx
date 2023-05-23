@@ -84,6 +84,7 @@ export const General = () => {
             if (file && file.size < 1000000) {
                 console.log('file', file)
                 setUserAvatar(URL.createObjectURL(file))
+                // setUserAvatar(file.name)
 
                 let formData = new FormData()
                 formData.append('file', file)
@@ -161,7 +162,8 @@ export const General = () => {
                             width={204}
                             height={204}
                             onError={imageErrorHandler}
-                            // priority
+                            quality={100}
+                            priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
