@@ -29,7 +29,7 @@ export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
             {/*</button>*/}
             <span
                 className={clsx(cls.button, [className, cls[theme]])}
-                style={{ display: 'block' }}
+                style={{ display: 'block', height: '100%', minWidth: '200px' }}
             >
                 {title}
             </span>

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import cls from './General.module.scss'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
@@ -93,7 +93,6 @@ export const General = () => {
                     variant: 'error',
                     autoHideDuration: 3000
                 })
-                return
             }
         }
     }
@@ -139,7 +138,7 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <Image
+                        <img
                             src={
                                 profileData && profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
