@@ -26,12 +26,12 @@ import { uploadImage } from '@/shared/utils/uploadFile'
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const [avatar, setAvatar] = useState<string>('')
+    const [userAvatar, setUserAvatar] = useState(DefaultProfileAvatar)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
     const [
-        setProfile,
-        { data: setProfileData, isError: isSetError, isLoading: setProfileIsLoading }
+        setProfileData,
+        { data: setProfileDataResponse, isError: isSetError, isLoading: setProfileIsLoading }
     ] = useSetProfileDataMutation()
     const [
         uploadAvatar,
@@ -71,16 +71,39 @@ export const General = () => {
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
         console.log('submit profile', submitData)
-        const res = await setProfile(submitData)
+        const res = await setProfileData(submitData)
         console.log('profile response', res)
     }
 
     const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('upload')
-        uploadImage(event, setAvatar, async (file64) => {
-            uploadAvatar(file64)
-        })
+        console.log('uploading avatar')
+
+        if (event.target.files && event.target.files.length) {
+            const file = event.target.files[0]
+
+            if (file && file.size < 7000000) {
+                console.log('file', file)
+                setUserAvatar(URL.createObjectURL(file))
+                let formData = new FormData()
+                formData.append('avatarImage', file, file.name)
+                console.log('formData', formData)
+                uploadAvatar(formData)
+            } else {
+                console.error('Error: ', 'Файл слишком большого размера')
+                enqueueSnackbar('Файл слишком большого размера', {
+                    variant: 'warning',
+                    autoHideDuration: 3000
+                })
+            }
+        }
     }
+
+    // const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     console.log('upload')
+    //     uploadImage(event, setAvatar, async (file64) => {
+    //         uploadAvatar(file64)
+    //     })
+    // }
 
     // const uploadAvatarHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     if (e.target.files && e.target.files.length) {
@@ -144,9 +167,9 @@ export const General = () => {
                     <div className={cls.avatar}>
                         <Image
                             src={
-                                profileData && profileData.avatars.length === 0
-                                    ? DefaultProfileAvatar
-                                    : profileData.avatars[0].url
+                                profileData && profileData.avatars.length !== 0
+                                    ? profileData.avatars[0].url
+                                    : userAvatar
                             }
                             alt={'profile-avatar'}
                             width={204}
