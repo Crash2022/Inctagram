@@ -90,7 +90,7 @@ export const General = () => {
 
                 try {
                     await uploadAvatar(formData)
-                    // setUserAvatar2(URL.createObjectURL(file))
+                    // setUserAvatar(URL.createObjectURL(file))
                     setUserAvatar(
                         profileData.avatars.length !== 0
                             ? profileData.avatars[0].url
@@ -189,17 +189,6 @@ export const General = () => {
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
                         </div>
-                    </div>
-                    <div>
-                        <button
-                            onClick={() => {
-                                setUserAvatar2(
-                                    'https://i.pinimg.com/736x/db/f7/51/dbf75190938b676e9751753851da5f79.jpg'
-                                )
-                            }}
-                        >
-                            test
-                        </button>
                     </div>
                     <div className={cls.addAvatar_btn}>
                         <InputFile
