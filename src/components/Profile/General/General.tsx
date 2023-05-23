@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import cls from './General.module.scss'
-import ProfilePhoto from '../../../../public/assets/images/profile-photo.jpg'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
 import DeletePhotoIcon from '../../../../public/assets/icons/delete-circle-red.svg'
 import Image from 'next/image'
@@ -22,7 +21,7 @@ import {
 } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
-import { uploadHandler } from '@/shared/utils/uploadFile'
+import { uploadImage } from '@/shared/utils/uploadFile'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -78,7 +77,7 @@ export const General = () => {
 
     const uploadAvatarHandler = (event: ChangeEvent<HTMLInputElement>) => {
         console.log('upload')
-        uploadHandler(event, setAvatar, async (file64) => {
+        uploadImage(event, setAvatar, async (file64) => {
             uploadAvatar(file64)
         })
     }

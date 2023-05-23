@@ -16,9 +16,6 @@ export const userProfileAPI = createApi({
         getProfileData: build.query<UserProfile, void>({
             query: () => ({
                 url: '/users/profile'
-                // headers: {
-                //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                // }
             }),
             providesTags: (result) => ['ProfileData']
         }),
@@ -35,6 +32,9 @@ export const userProfileAPI = createApi({
                 url: '/users/profile/avatar',
                 method: 'POST',
                 body: payload
+                // headers: {
+                //     'Content-Type': 'multipart/form-data'
+                // }
             }),
             invalidatesTags: ['ProfileData']
 

@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
 // upload file
-export const uploadHandler = (
+export const uploadImage = (
     e: ChangeEvent<HTMLInputElement>,
     setFunction: (file64: string) => void,
     extraFunction?: (file64: string) => void
