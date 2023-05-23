@@ -84,7 +84,6 @@ export const General = () => {
             if (file && file.size < 1000000) {
                 console.log('file', file)
                 setUserAvatar(URL.createObjectURL(file))
-                // setUserAvatar(file.name)
 
                 let formData = new FormData()
                 formData.append('file', file)
