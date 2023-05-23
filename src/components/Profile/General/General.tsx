@@ -138,7 +138,7 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <img
+                        <Image
                             src={
                                 profileData && profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
