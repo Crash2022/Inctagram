@@ -132,6 +132,10 @@ export const General = () => {
     useEffect(() => {
         if (uploadAvatarIsError) {
             console.log(uploadAvatarError)
+            enqueueSnackbar(t('Snackbar_UploadAvatarError'), {
+                variant: 'error',
+                autoHideDuration: 3000
+            })
         }
     }, [])
 
