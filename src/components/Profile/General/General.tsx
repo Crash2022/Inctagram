@@ -93,7 +93,7 @@ export const General = () => {
 
                 try {
                     await uploadAvatar(formData)
-                    setUserAvatar(URL.createObjectURL(file))
+                    // setUserAvatar(URL.createObjectURL(file))
                     await router.push(InctagramPath.PROFILE.PROFILE)
 
                     // setUserAvatar(
