@@ -48,6 +48,10 @@
             }
             .inputDate {
                 width: 218px;
+
+                input {
+                    font-family: inherit;
+                }
             }
             .textarea {
                 width: 100%;
