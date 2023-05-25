@@ -21,6 +21,8 @@ import {
 } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
+import { Input } from '@/shared/ui/Input/Input'
+import Datepicker from '@/shared/ui/Datepicker/Datepicker'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -53,11 +55,19 @@ export const General = () => {
         aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
     })
 
+    const dateTest = new Date()
+    const month =
+        dateTest.getMonth() + 1 < 10 ? `0${dateTest.getMonth() + 1}` : `${dateTest.getMonth() + 1}`
+    const day = dateTest.getDate() < 10 ? `0${dateTest.getDate()}` : `${dateTest.getDate()}`
+    const fullDate = `${dateTest.getFullYear()}-${month}-${day}`
+    console.log(fullDate)
+
     const {
         control,
         handleSubmit,
         setValue,
-        formState: { errors }
+        formState: { errors },
+        watch
     } = useForm<UpdateUserProfile>({
         defaultValues: {
             userName: '',
@@ -69,6 +79,7 @@ export const General = () => {
         },
         resolver: yupResolver(ProfileGeneralSchema)
     })
+    watch(['dateOfBirth'])
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
         console.log('submit profile', submitData)
@@ -85,7 +96,7 @@ export const General = () => {
             if (file && file.size < 1000000) {
                 console.log('file', file)
 
-                let formData = new FormData()
+                const formData = new FormData()
                 formData.append('file', file)
 
                 try {
@@ -118,7 +129,6 @@ export const General = () => {
                 variant: 'info',
                 autoHideDuration: 3000
             })
-            return
         } else {
             await deleteAvatar()
             setUserAvatar('/assets/images/default-avatar.png')
@@ -139,7 +149,7 @@ export const General = () => {
             setValue('firstName', profileData.firstName)
             setValue('lastName', profileData.lastName)
             setValue('city', profileData.city)
-            setValue('dateOfBirth', profileData.dateOfBirth)
+            setValue('dateOfBirth', profileData.dateOfBirth.slice(0, 10))
             setValue('aboutMe', profileData.aboutMe)
 
             setUserAvatar(
@@ -231,13 +241,28 @@ export const General = () => {
                         control={control}
                         error={errors.city?.message}
                     />
-                    <ControlledInput
-                        divClassName={cls.input}
-                        id={'P_S_General_DateOfBirth'}
-                        name={'dateOfBirth'}
-                        placeholder={t('DateOfBirth')}
+                    <Datepicker
+                        name='dateOfBirth'
                         control={control}
-                        error={errors.dateOfBirth?.message}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'Enter Date of birth'
+                            }
+                        }}
+                        render={({ field }: any) => (
+                            <Input
+                                type={'date'}
+                                {...field}
+                                placeholder={t('DateOfBirth')}
+                                error={errors.dateOfBirth?.message}
+                                value={field.value}
+                                onChange={(value) => {
+                                    field.onChange(value)
+                                }}
+                                max={fullDate}
+                            />
+                        )}
                     />
                     <div className={cls.textarea}>
                         <Controller
