@@ -139,7 +139,10 @@ export const General = () => {
             setValue('firstName', profileData.firstName)
             setValue('lastName', profileData.lastName)
             setValue('city', profileData.city)
-            setValue('dateOfBirth', profileData.dateOfBirth.slice(0, 10))
+            setValue(
+                'dateOfBirth',
+                profileData.dateOfBirth !== null ? profileData.dateOfBirth.slice(0, 10) : ''
+            )
             setValue('aboutMe', profileData.aboutMe)
 
             setUserAvatar(
