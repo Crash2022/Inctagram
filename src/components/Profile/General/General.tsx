@@ -239,7 +239,7 @@ export const General = () => {
                         error={errors.city?.message}
                     />
                     <ControlledInput
-                        divClassName={cls.input}
+                        divClassName={cls.inputDate}
                         id={'P_S_General_DateOfBirth'}
                         name={'dateOfBirth'}
                         placeholder={t('DateOfBirth')}
