@@ -22,12 +22,14 @@ import {
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
+import { useRouter } from 'next/router'
+import { InctagramPath } from '@/shared/api/path'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
+    const router = useRouter()
     const [userAvatar, setUserAvatar] = useState<string>('/assets/images/default-avatar.png')
-    // const [userAvatarTest, setUserAvatarTest] = useState<string>('/assets/images/default-avatar.png')
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
@@ -91,13 +93,15 @@ export const General = () => {
 
                 try {
                     await uploadAvatar(formData)
-                    // setUserAvatar(URL.createObjectURL(file))
-                    setUserAvatar(
-                        profileData.avatars.length !== 0
-                            ? profileData.avatars[0].url
-                            : '/assets/images/default-avatar.png'
-                    )
-                    location.reload() // принудительная перезагрузка компоненты
+                    setUserAvatar(URL.createObjectURL(file))
+                    await router.push(InctagramPath.PROFILE.PROFILE)
+
+                    // setUserAvatar(
+                    //     profileData.avatars.length !== 0
+                    //         ? profileData.avatars[0].url
+                    //         : '/assets/images/default-avatar.png'
+                    // )
+                    // location.reload() // принудительная перезагрузка компоненты
                 } catch {
                     enqueueSnackbar('ОШИБКА!', {
                         variant: 'error',
@@ -145,11 +149,11 @@ export const General = () => {
             )
             setValue('aboutMe', profileData.aboutMe)
 
-            setUserAvatar(
-                profileData.avatars.length !== 0
-                    ? profileData.avatars[0].url
-                    : '/assets/images/default-avatar.png'
-            )
+            // setUserAvatar(
+            //     profileData.avatars.length !== 0
+            //         ? profileData.avatars[0].url
+            //         : '/assets/images/default-avatar.png'
+            // )
         }
     }, [profileData])
 
@@ -175,19 +179,19 @@ export const General = () => {
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
                     <div className={cls.avatar}>
-                        <img
-                            // src={
-                            //     profileData.avatars.length !== 0
-                            //         ? profileData.avatars[0].url
-                            //         : '/assets/images/default-avatar.png'
-                            // }
-                            src={userAvatar}
+                        <Image
+                            src={
+                                profileData.avatars.length !== 0
+                                    ? profileData.avatars[0].url
+                                    : '/assets/images/default-avatar.png'
+                            }
+                            // src={userAvatar}
                             alt={'profile-avatar'}
-                            width={'204px'}
-                            height={'204px'}
+                            width={204}
+                            height={204}
                             onError={imageErrorHandler}
-                            // quality={100}
-                            // priority
+                            quality={100}
+                            priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
