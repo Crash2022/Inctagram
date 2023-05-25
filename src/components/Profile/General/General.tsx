@@ -103,7 +103,7 @@ export const General = () => {
                     // )
                     // location.reload() // принудительная перезагрузка компоненты
                 } catch {
-                    enqueueSnackbar('ОШИБКА!', {
+                    enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
                         variant: 'error',
                         autoHideDuration: 3000
                     })
