@@ -21,8 +21,7 @@ import {
 } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
-import { Input } from '@/shared/ui/Input/Input'
-import Datepicker from '@/shared/ui/Datepicker/Datepicker'
+import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -55,19 +54,11 @@ export const General = () => {
         aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
     })
 
-    const dateTest = new Date()
-    const month =
-        dateTest.getMonth() + 1 < 10 ? `0${dateTest.getMonth() + 1}` : `${dateTest.getMonth() + 1}`
-    const day = dateTest.getDate() < 10 ? `0${dateTest.getDate()}` : `${dateTest.getDate()}`
-    const fullDate = `${dateTest.getFullYear()}-${month}-${day}`
-    console.log(fullDate)
-
     const {
         control,
         handleSubmit,
         setValue,
-        formState: { errors },
-        watch
+        formState: { errors }
     } = useForm<UpdateUserProfile>({
         defaultValues: {
             userName: '',
@@ -79,7 +70,6 @@ export const General = () => {
         },
         resolver: yupResolver(ProfileGeneralSchema)
     })
-    watch(['dateOfBirth'])
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
         console.log('submit profile', submitData)
@@ -241,28 +231,15 @@ export const General = () => {
                         control={control}
                         error={errors.city?.message}
                     />
-                    <Datepicker
-                        name='dateOfBirth'
+                    <ControlledInput
+                        divClassName={cls.input}
+                        id={'P_S_General_DateOfBirth'}
+                        name={'dateOfBirth'}
+                        placeholder={t('DateOfBirth')}
                         control={control}
-                        rules={{
-                            required: {
-                                value: true,
-                                message: 'Enter Date of birth'
-                            }
-                        }}
-                        render={({ field }: any) => (
-                            <Input
-                                type={'date'}
-                                {...field}
-                                placeholder={t('DateOfBirth')}
-                                error={errors.dateOfBirth?.message}
-                                value={field.value}
-                                onChange={(value) => {
-                                    field.onChange(value)
-                                }}
-                                max={fullDate}
-                            />
-                        )}
+                        error={errors.dateOfBirth?.message}
+                        type={'date'}
+                        max={profileDate}
                     />
                     <div className={cls.textarea}>
                         <Controller

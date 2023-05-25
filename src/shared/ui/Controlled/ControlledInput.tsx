@@ -15,6 +15,8 @@ interface ControlledCustomInputProps {
     error?: any
     disabled?: boolean
     divClassName?: any
+    type?: string
+    max?: string
 }
 
 export const ControlledInput = ({
@@ -25,7 +27,9 @@ export const ControlledInput = ({
     rules,
     error,
     disabled,
-    divClassName
+    divClassName,
+    type,
+    max
 }: ControlledCustomInputProps) => {
     return (
         <div className={divClassName}>
@@ -44,6 +48,8 @@ export const ControlledInput = ({
                         }}
                         error={error}
                         disabled={disabled || false}
+                        type={type}
+                        max={max}
                         // error={!!control.formState.errors[name]}
                         // helperText={control.formState.errors[name]?.message}
                     />
