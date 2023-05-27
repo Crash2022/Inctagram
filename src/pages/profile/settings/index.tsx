@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import cls from './ProfileSettings.module.scss'
-import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { General } from '@/components/Profile/General/General'
 import { Devices } from '@/components/Profile/Devices/Devices'
 import { Management } from '@/components/Profile/Management/Management'
@@ -14,28 +12,22 @@ import { Payments } from '@/components/Profile/Payments/Payments'
 
 interface SectionsType {
     id: number
-    status: ProfileSettingStatusType
+    menu: ProfileSettingsMenuType
 }
 
-type ProfileSettingStatusType = 'General' | 'Devices' | 'Management' | 'Payments'
+type ProfileSettingsMenuType = 'General' | 'Devices' | 'Management' | 'Payments'
 
 const ProfileSettings: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-settings')
-    // const router = useRouter()
-
-    // const { data: photos, error, isLoading, isError } = useFetchUserProfileQuery(9)
-    // const { data: meData } = useMeQuery()
 
     const sections: SectionsType[] = [
-        { id: 1, status: 'General' },
-        { id: 2, status: 'Devices' },
-        { id: 3, status: 'Management' },
-        { id: 4, status: 'Payments' }
+        { id: 1, menu: 'General' },
+        { id: 2, menu: 'Devices' },
+        { id: 3, menu: 'Management' },
+        { id: 4, menu: 'Payments' }
     ]
 
-    const [settingStatus, setSettingStatus] = useState<ProfileSettingStatusType>('General')
-
-    // if (isLoading) return <LoaderScreen variant={'loader'} />
+    const [settingsMenu, setSettingsMenu] = useState<ProfileSettingsMenuType>('General')
 
     return (
         <>
@@ -50,24 +42,24 @@ const ProfileSettings: NextPageWithLayout = () => {
                             <div
                                 key={el.id}
                                 className={
-                                    el.status === settingStatus
+                                    el.menu === settingsMenu
                                         ? cls.headerItem_active
                                         : cls.headerItem
                                 }
                                 onClick={() => {
-                                    setSettingStatus(el.status)
+                                    setSettingsMenu(el.menu)
                                 }}
                             >
-                                {t(`${el.status}`)}
+                                {t(`${el.menu}`)}
                             </div>
                         )
                     })}
                 </div>
                 <div className={cls.profileSettings_content}>
-                    {sections[0].status === settingStatus && <General />}
-                    {sections[1].status === settingStatus && <Devices />}
-                    {sections[2].status === settingStatus && <Management />}
-                    {sections[3].status === settingStatus && <Payments />}
+                    {sections[0].menu === settingsMenu && <General />}
+                    {sections[1].menu === settingsMenu && <Devices />}
+                    {sections[2].menu === settingsMenu && <Management />}
+                    {sections[3].menu === settingsMenu && <Payments />}
                 </div>
             </div>
         </>
