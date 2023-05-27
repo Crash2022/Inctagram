@@ -80,28 +80,7 @@ export const General = () => {
         console.log('profile response', res)
     }
 
-    // const reloadImg = (url) => {
-    //     fetch(url, {
-    //         cache: 'reload',
-    //         mode: 'no-cors'
-    //     })
-    //         .then(() =>
-    //             document.body
-    //                 .querySelectorAll(`img[src='${url}']`)
-    //                 .forEach((img) => (img.src = url))
-    //         )
-    //         .catch((e) => console.log('reloadImg error', e))
-    // }
-
-    // const refreshCachedImage = (imgId: string) => {
-    //     const img = document.getElementById(imgId)
-    //     img.src = img.src // trick browser into reload
-    //     console.log('img.src', img.src)
-    // }
-
     const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('uploading avatar')
-
         if (event.target.files && event.target.files.length) {
             const file = event.target.files[0]
 
@@ -113,12 +92,6 @@ export const General = () => {
 
                 try {
                     await uploadAvatar(formData)
-
-                    // refreshCachedImage('User_Avatar')
-                    // reloadImg(
-                    //     `https://storage.yandexcloud.net/users-inctagram/users/${profileData.id}/avatar/images-192x192`
-                    // )
-
                     setUserAvatar(URL.createObjectURL(file))
                     // await router.push(InctagramPath.PROFILE.PROFILE)
 
@@ -205,7 +178,7 @@ export const General = () => {
         <form className={cls.profileSettings_general} onSubmit={handleSubmit(onSubmit)}>
             <div className={cls.general_mainBlock}>
                 <div className={cls.general_photoBlock}>
-                    <div className={cls.avatar}>
+                    <div className={cls.avatar} id={'Avatar_Div'}>
                         <Image
                             src={
                                 profileData.avatars.length !== 0
