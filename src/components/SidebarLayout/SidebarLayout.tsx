@@ -185,7 +185,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 onClick={async () => {
                                     const res = await logout()
                                     console.log('logout', res)
-                                    // localStorage.removeItem('accessToken')
+                                    localStorage.removeItem('accessToken')
                                     await router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >
