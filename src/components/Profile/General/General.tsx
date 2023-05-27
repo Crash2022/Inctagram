@@ -24,12 +24,13 @@ import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
 import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
+import { baseURL } from '@/shared/api/baseURL'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
-    const [userAvatar, setUserAvatar] = useState<string>('/assets/images/default-avatar.png')
+    const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery()
@@ -79,6 +80,25 @@ export const General = () => {
         console.log('profile response', res)
     }
 
+    // const reloadImg = (url) => {
+    //     fetch(url, {
+    //         cache: 'reload',
+    //         mode: 'no-cors'
+    //     })
+    //         .then(() =>
+    //             document.body
+    //                 .querySelectorAll(`img[src='${url}']`)
+    //                 .forEach((img) => (img.src = url))
+    //         )
+    //         .catch((e) => console.log('reloadImg error', e))
+    // }
+
+    // const refreshCachedImage = (imgId: string) => {
+    //     const img = document.getElementById(imgId)
+    //     img.src = img.src // trick browser into reload
+    //     console.log('img.src', img.src)
+    // }
+
     const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
         console.log('uploading avatar')
 
@@ -93,14 +113,21 @@ export const General = () => {
 
                 try {
                     await uploadAvatar(formData)
-                    // setUserAvatar(URL.createObjectURL(file))
-                    await router.push(InctagramPath.PROFILE.PROFILE)
+
+                    // refreshCachedImage('User_Avatar')
+                    // reloadImg(
+                    //     `https://storage.yandexcloud.net/users-inctagram/users/${profileData.id}/avatar/images-192x192`
+                    // )
+
+                    setUserAvatar(URL.createObjectURL(file))
+                    // await router.push(InctagramPath.PROFILE.PROFILE)
 
                     // setUserAvatar(
                     //     profileData.avatars.length !== 0
                     //         ? profileData.avatars[0].url
                     //         : '/assets/images/default-avatar.png'
                     // )
+
                     // location.reload() // принудительная перезагрузка компоненты
                 } catch {
                     enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
@@ -125,7 +152,7 @@ export const General = () => {
             })
         } else {
             await deleteAvatar()
-            setUserAvatar('/assets/images/default-avatar.png')
+            setUserAvatar(DefaultProfileAvatar)
         }
     }
 
@@ -167,7 +194,7 @@ export const General = () => {
         }
     }, [])
 
-    console.log('profileData', profileData)
+    // console.log('profileData', profileData)
 
     if (isLoading) return <LoaderScreen variant={'loader'} />
     if (setProfileIsLoading) return <LoaderScreen variant={'loader'} />
@@ -183,10 +210,10 @@ export const General = () => {
                             src={
                                 profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
-                                    : '/assets/images/default-avatar.png'
+                                    : DefaultProfileAvatar
                             }
-                            // src={userAvatar}
                             alt={'profile-avatar'}
+                            id={'User_Avatar'}
                             width={204}
                             height={204}
                             onError={imageErrorHandler}

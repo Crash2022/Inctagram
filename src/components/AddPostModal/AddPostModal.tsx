@@ -40,7 +40,11 @@ export const AddPostModal = (props: AddPostModalProps) => {
                         <ImageIcon width={48} height={48} />
                     </div>
                     <div className={cls.content_addButton}>
-                        <InputFile title={t('AddPhotoButton')} />
+                        <InputFile
+                            id={'Upload_Photo'}
+                            title={t('AddPhotoButton')}
+                            onChangeUpload={() => {}}
+                        />
                     </div>
                 </div>
             </div>

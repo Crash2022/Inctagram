@@ -35,7 +35,7 @@ const Profile: NextPageWithLayout = () => {
                         <Image
                             src={
                                 profileData && profileData.avatars.length === 0
-                                    ? '/assets/images/default-avatar.png'
+                                    ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
                             alt={'profile-avatar'}
