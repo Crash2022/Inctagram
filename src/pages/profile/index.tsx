@@ -14,8 +14,31 @@ import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosServ
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { profileApi } from '@/shared/api/profile-api'
 import { Photo } from '@/models/profile-types'
+// import dynamic from 'next/dynamic'
 
-export const getStaticProps = async () => {
+// пример LazyLoading
+// const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
+
+// export const getStaticProps = async () => {
+//     const photos = await profileApi.getProfilePhotos()
+//
+//     if (!photos) {
+//         return {
+//             notFound: true
+//         }
+//     }
+//
+//     return {
+//         props: {
+//             photos
+//         },
+//         revalidate: 100 // перезапрос данных через указанное время (в секундах)
+//     }
+// }
+
+export const getServerSideProps = async ({ res }) => {
+    // перезапрос данных через указанное время stale-while-revalidate (в секундах)
+    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
     const photos = await profileApi.getProfilePhotos()
 
     if (!photos) {
