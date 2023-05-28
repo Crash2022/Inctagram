@@ -12,15 +12,54 @@ import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
 import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosService'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
+import { profileApi } from '@/shared/api/profile-api'
+import { Photo } from '@/models/profile-types'
 
-const Profile: NextPageWithLayout = () => {
+export const getStaticProps = async () => {
+    const photos = await profileApi.getProfilePhotos()
+
+    if (!photos) {
+        return {
+            notFound: true
+        }
+    }
+
+    return {
+        props: {
+            photos
+        }
+    }
+}
+
+// export const getServerSideProps = async () => {
+//     const photos = await profileApi.getProfilePhotos()
+//
+//     if (!photos) {
+//         return {
+//             notFound: true
+//         }
+//     }
+//
+//     return {
+//         props: {
+//             photos
+//         }
+//     }
+// }
+
+type ProfileProps = {
+    photos: Photo[]
+}
+
+const Profile: NextPageWithLayout = (props: ProfileProps) => {
     const { t } = useTranslation('profile-home')
 
-    const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
+    const { photos } = props
+    // const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
     const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    // if (isLoading) return <LoaderScreen variant={'loader'} />
     if (profileDataIsLoading) return <LoaderScreen variant={'loader'} />
 
     return (
@@ -83,12 +122,12 @@ const Profile: NextPageWithLayout = () => {
                             photos.map((photo) => {
                                 return (
                                     <div key={photo.id} className={cls.list_item}>
-                                        {/* <Image */}
-                                        {/*    src={photo.url} */}
-                                        {/*    alt={'gallery-photo'} */}
-                                        {/*    width={265} */}
-                                        {/*    height={265} */}
-                                        {/* /> */}
+                                        {/*<Image*/}
+                                        {/*    src={photo.url}*/}
+                                        {/*    alt={'gallery-photo'}*/}
+                                        {/*    width={265}*/}
+                                        {/*    height={265}*/}
+                                        {/*/>*/}
 
                                         <img
                                             src={photo.url}
@@ -96,6 +135,8 @@ const Profile: NextPageWithLayout = () => {
                                             width={265}
                                             height={265}
                                         />
+
+                                        {/*{photo.title}*/}
                                     </div>
                                 )
                             })}
