@@ -47,6 +47,17 @@ export const getServerSideProps = async ({ res }) => {
         }
     }
 
+    // данные из стора можно достать с помощью wrapper.useWrappedStore
+    // чтобы не было "морганий" страницы, если роут защищён
+    // if (!me) {
+    //     return {
+    //         redirect: {
+    //             destination: '/login',
+    //             permanent: false
+    //         }
+    //     }
+    // }
+
     return {
         props: {
             photos
