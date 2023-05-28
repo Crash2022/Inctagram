@@ -22,7 +22,7 @@ const authSlice = createSlice<any, any>({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(registration.fulfilled, (state, action) => {
                 state.isLoggedIn = action.payload.isLoggedIn
             })
             .addCase(login.fulfilled, (state, action) => {
@@ -33,17 +33,17 @@ const authSlice = createSlice<any, any>({
                 state.isLoggedIn = action.payload.isLoggedIn
                 state.profile = null
             })
-            .addCase(recoverPass.fulfilled, (state, action) => {
+            .addCase(forgotPassword.fulfilled, (state, action) => {
                 state.isEmailSent = action.payload.isEmailSent
             })
     }
 })
 
-export const register = createAppAsyncThunk<{ isLoggedIn: boolean }, RegistrationPayloadType>(
+export const registration = createAppAsyncThunk<{ isLoggedIn: boolean }, RegistrationPayloadType>(
     'auth/register',
     async (data, thunkAPI) => {
         try {
-            await authApi.register(data)
+            await authApi.registration(data)
             return { isLoggedIn: true }
         } catch (err: any | AxiosError) {
             return thunkAPI.rejectWithValue({
@@ -84,11 +84,11 @@ export const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
     }
 )
 
-export const recoverPass = createAppAsyncThunk<{ isEmailSent: boolean }, any>(
+export const forgotPassword = createAppAsyncThunk<{ isEmailSent: boolean }, any>(
     'auth/recoverPass',
     async (data, thunkAPI) => {
         try {
-            await authApi.recoverPass(data)
+            await authApi.forgotPassword(data)
             return { isEmailSent: true }
         } catch (err: any | AxiosError) {
             return thunkAPI.rejectWithValue({

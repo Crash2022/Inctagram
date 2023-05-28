@@ -31,22 +31,6 @@ export const getStaticProps = async () => {
     }
 }
 
-// export const getServerSideProps = async () => {
-//     const photos = await profileApi.getProfilePhotos()
-//
-//     if (!photos) {
-//         return {
-//             notFound: true
-//         }
-//     }
-//
-//     return {
-//         props: {
-//             photos
-//         }
-//     }
-// }
-
 type ProfileProps = {
     photos: Photo[]
 }

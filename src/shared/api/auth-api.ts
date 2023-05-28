@@ -2,12 +2,19 @@ import { instance } from '@/shared/api/api-instance'
 import {
     LoginPayloadType,
     PasswordRecoveryType,
+    RegistrationConfirmationPayloadType,
     RegistrationPayloadType
 } from '@/models/auth-types'
 
 export const authApi = {
-    register: async (arg: RegistrationPayloadType) => {
+    registration: async (arg: RegistrationPayloadType) => {
         return await instance.post<ResponseType>('auth/registration', arg)
+    },
+    registrationConfirmation: async (arg: RegistrationConfirmationPayloadType) => {
+        return await instance.post<ResponseType>('auth/registration-confirmation', arg)
+    },
+    registrationResendLink: async (arg: { email: string }) => {
+        return await instance.post<ResponseType>('auth/registration-email-resending', arg)
     },
     login: async (arg: LoginPayloadType) => {
         return await instance.post<ResponseType>('auth/login', arg)
@@ -18,7 +25,7 @@ export const authApi = {
     me: async () => {
         return await instance.get<ResponseType>('auth/me')
     },
-    recoverPass: async (arg: PasswordRecoveryType) => {
+    forgotPassword: async (arg: PasswordRecoveryType) => {
         return await instance.post<ResponseType>(
             'auth/password-recovery',
             { arg },
