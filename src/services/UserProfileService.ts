@@ -17,9 +17,6 @@ export const userProfileAPI = createApi({
             query: () => ({
                 url: '/users/profile'
             }),
-            // headers: {
-            //     'Cache-control': 'no-store'
-            // },
             providesTags: (result) => ['ProfileData']
         }),
         setProfileData: build.mutation<any, UserProfile>({
