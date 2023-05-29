@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import cls from './Profile.module.scss'
+import s from '../../shared/ui/DottedMenu/DottedMenu.module.scss'
 import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
@@ -14,8 +15,10 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { profileApi } from '@/shared/api/profile-api'
 import { Photo } from '@/models/profile-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import React from 'react'
+import React, { useState } from 'react'
 import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
+import EditIcon from '../../../public/assets/icons/edit-icon.svg'
+import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -73,6 +76,26 @@ import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
+
+    // для DottedMenu
+    const [menuItems, setMenuItems] = useState([
+        {
+            id: 1,
+            icon: EditIcon,
+            title: 'Edit Post',
+            func: () => {
+                alert('Edit Post')
+            }
+        },
+        {
+            id: 2,
+            icon: TrashIcon,
+            title: 'Delete Post',
+            func: () => {
+                alert('Delete Post')
+            }
+        }
+    ])
 
     // const { photos } = props
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
@@ -134,7 +157,8 @@ const Profile: NextPageWithLayout = () => {
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo consequat.
                         </div>
-                        <DottedMenu />
+
+                        <DottedMenu menuItems={menuItems} />
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>

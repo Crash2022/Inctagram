@@ -1,40 +1,47 @@
-import React, { type FC } from 'react'
-import { useTranslation } from 'react-i18next'
+import React from 'react'
+import { useComponentVisible } from '@/shared/hooks/useComponentVisible'
+import cls from './DottedMenu.module.scss'
 
-interface DottedMenuProps {
-    className?: string
+interface PostDottedMenuProps {
+    menuItems: any[]
 }
 
-export const DottedMenu: FC<DottedMenuProps> = ({ className = '' }) => {
-    const { t } = useTranslation()
-
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-    const open = Boolean(anchorEl)
-
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget)
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
+export const DottedMenu = ({ menuItems }: PostDottedMenuProps) => {
+    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
 
     return (
-        <>
-            <button
-                // id='basic-button'
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup='true'
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
+        <div className={cls.dottedMenu}>
+            <div
+                className={cls.dottedMenu_icon}
+                onClick={() => {
+                    setIsComponentVisible(!isComponentVisible)
+                }}
             >
-                Dotted
-            </button>
-
-            <div className={className} open={open} onClose={handleClose}>
-                <div onClick={() => {}}>Edit</div>
-                <div onClick={() => {}}>Delete</div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
-        </>
+            {isComponentVisible ? (
+                <div className={cls.dottedMenu_list} ref={ref}>
+                    {menuItems.map((item) => {
+                        const onClickHandler = () => {
+                            item.func()
+                            setIsComponentVisible(false)
+                        }
+
+                        return (
+                            <div key={item.id} className={cls.list_item} onClick={onClickHandler}>
+                                <div>
+                                    <item.icon />
+                                </div>
+                                <div>{item.title}</div>
+                            </div>
+                        )
+                    })}
+                </div>
+            ) : (
+                ''
+            )}
+        </div>
     )
 }
