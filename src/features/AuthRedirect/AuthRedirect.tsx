@@ -44,7 +44,7 @@ const AuthRedirect = ({ children }) => {
     }, [isLoading, meData, pathIsProtected])
 
     if ((isLoading || !meData) && pathIsProtected) {
-        return <LoaderScreen variant={'loader'} />
+        return <LoaderScreen variant={'circle'} />
     }
 
     return children

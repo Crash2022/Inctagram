@@ -11,14 +11,14 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { RegistrationPayloadType } from '@/models/auth-types'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
-import { useEffect, useState } from 'react'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import React, { useEffect, useState } from 'react'
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
@@ -72,13 +72,12 @@ export const RegistrationForm = () => {
         setOpen(false)
     }
 
-    useErrorSnackbar(isError)
-
     useEffect(() => {
         if (isSuccess) setOpen(true)
     }, [isSuccess])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    useErrorSnackbar(isError)
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>

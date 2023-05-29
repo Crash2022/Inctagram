@@ -9,11 +9,11 @@ import * as yup from 'yup'
 import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 // import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
@@ -55,15 +55,14 @@ export const CreateNewPasswordForm = () => {
         void router.push(InctagramPath.AUTH.LOGIN)
     }
 
-    useErrorSnackbar(isError)
-
     useEffect(() => {
         if (isSuccess) {
             setOpen(true)
         }
     }, [isSuccess])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    useErrorSnackbar(isError)
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>

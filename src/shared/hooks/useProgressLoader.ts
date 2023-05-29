@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import NProgress from 'nprogress'
 
-export const useLoader = () => {
+export const useProgressLoader = () => {
     const router = useRouter()
 
     useEffect(() => {

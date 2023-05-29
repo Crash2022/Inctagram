@@ -11,7 +11,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
 import { LoginPayloadType } from '@/models/auth-types'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
@@ -19,6 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import clsx from 'clsx'
 import { useSnackbar } from 'notistack'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -60,7 +60,7 @@ export const LoginForm = () => {
     }
 
     useErrorSnackbar(isError)
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>

@@ -7,13 +7,13 @@
     opacity: 0;
     pointer-events: none;
     z-index: -100;
-    color: var(--inverted-primary-color);
+    //color: var(--inverted-primary-color);
 }
 
-.Modal.dark {
-    --bg-color: #090949;
-    --primary-color: #04ff04;
-}
+//.Modal.dark {
+//    --bg-color: #090949;
+//    --primary-color: #04ff04;
+//}
 
 .overlay {
     width: 100%;
@@ -27,8 +27,9 @@
 .content {
     padding: 20px;
     border-radius: 12px;
-    background: var(--bg-color);
-    transition: 0.3s transform;
+    //background: var(--bg-color);
+    //transition: 0.3s transform;
+    transition: 0.5s opacity;
     transform: scale(0.5);
     max-width: 60%;
 }
@@ -40,11 +41,13 @@
 
     .content {
         transform: scale(1);
+        opacity: 1;
     }
 }
 
 .isClosing {
     .content {
-        transform: scale(0.2);
+        //transform: scale(0.2);
+        opacity: 0.1;
     }
 }

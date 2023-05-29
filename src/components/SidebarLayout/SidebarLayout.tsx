@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
+import React, { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
 import cls from './SidebarLayout.module.scss'
 import Head from 'next/head'
 import { Header } from '../Header/Header'
@@ -14,9 +14,9 @@ import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
 import { useTranslation } from 'next-i18next'
 import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useRouter } from 'next/router'
 import { AddPostModal } from '@/components/AddPostModal/AddPostModal'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface MenuLinkType {
     id: number
@@ -52,7 +52,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
     }, [isSuccess])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    // useLoader(isLoading)
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>

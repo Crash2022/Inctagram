@@ -19,12 +19,10 @@ import {
     useSetProfileDataMutation,
     useUploadAvatarMutation
 } from '@/services/UserProfileService'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
 import { useRouter } from 'next/router'
-import { InctagramPath } from '@/shared/api/path'
-import { baseURL } from '@/shared/api/baseURL'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -169,10 +167,10 @@ export const General = () => {
 
     // console.log('profileData', profileData)
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
-    if (setProfileIsLoading) return <LoaderScreen variant={'loader'} />
-    if (uploadAvatarIsLoading) return <LoaderScreen variant={'loader'} />
-    if (deleteAvatarIsLoading) return <LoaderScreen variant={'loader'} />
+    if (isLoading) return <LoaderScreen variant={'circle'} />
+    if (setProfileIsLoading) return <LoaderScreen variant={'circle'} />
+    if (uploadAvatarIsLoading) return <LoaderScreen variant={'circle'} />
+    if (deleteAvatarIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <form className={cls.profileSettings_general} onSubmit={handleSubmit(onSubmit)}>

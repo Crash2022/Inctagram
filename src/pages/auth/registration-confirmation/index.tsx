@@ -6,8 +6,8 @@ import congratulations from '../../../../public/assets/images/congratulations.pn
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { useRegistrationConfirmationMutation } from '@/services/AuthService'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { InctagramPath } from '@/shared/api/path'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 const RegistrationConfirmation = () => {
     const { t } = useTranslation('congratulations')
@@ -32,7 +32,7 @@ const RegistrationConfirmation = () => {
         }
     }, [isError])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>

@@ -5,7 +5,6 @@ import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import DefaultProfileAvatar from '../../../public/assets/images/default-avatar.png'
 import { useMeQuery } from '@/services/AuthService'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
@@ -14,6 +13,8 @@ import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosServ
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { profileApi } from '@/shared/api/profile-api'
 import { Photo } from '@/models/profile-types'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import React from 'react'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -36,49 +37,48 @@ import { Photo } from '@/models/profile-types'
 //     }
 // }
 
-export const getServerSideProps = async ({ res }) => {
-    // перезапрос данных через указанное время stale-while-revalidate (в секундах)
-    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
-    const photos = await profileApi.getProfilePhotos()
+// export const getServerSideProps = async ({ res }) => {
+//     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
+//     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
+//     const photos = await profileApi.getProfilePhotos()
+//
+//     if (!photos) {
+//         return {
+//             notFound: true
+//         }
+//     }
+//
+//     // данные из стора можно достать с помощью wrapper.useWrappedStore
+//     // чтобы не было "морганий" страницы, если роут защищён
+//     // if (!me) {
+//     //     return {
+//     //         redirect: {
+//     //             destination: '/login',
+//     //             permanent: false
+//     //         }
+//     //     }
+//     // }
+//
+//     return {
+//         props: {
+//             photos
+//         }
+//     }
+// }
+//
+// type ProfileProps = {
+//     photos: Photo[]
+// }
 
-    if (!photos) {
-        return {
-            notFound: true
-        }
-    }
-
-    // данные из стора можно достать с помощью wrapper.useWrappedStore
-    // чтобы не было "морганий" страницы, если роут защищён
-    // if (!me) {
-    //     return {
-    //         redirect: {
-    //             destination: '/login',
-    //             permanent: false
-    //         }
-    //     }
-    // }
-
-    return {
-        props: {
-            photos
-        }
-    }
-}
-
-type ProfileProps = {
-    photos: Photo[]
-}
-
-const Profile: NextPageWithLayout = (props: ProfileProps) => {
+const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
 
-    const { photos } = props
-    // const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
+    // const { photos } = props
+    const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
     const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
-    // if (isLoading) return <LoaderScreen variant={'loader'} />
-    if (profileDataIsLoading) return <LoaderScreen variant={'loader'} />
+    if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>
@@ -95,11 +95,12 @@ const Profile: NextPageWithLayout = (props: ProfileProps) => {
                                     ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
+                            // src={DefaultProfileAvatar}
                             alt={'profile-avatar'}
                             width={204}
                             height={204}
                             quality={100}
-                            priority
+                            // priority
                         />
                     </div>
                     <div className={cls.header_info}>

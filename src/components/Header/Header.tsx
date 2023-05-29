@@ -1,26 +1,27 @@
 import cls from './Header.module.scss'
 import Image from 'next/image'
 import LogoIcon from '../../../public/assets/images/logo.png'
-import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
-import LoginIcon from './../../../public/assets/icons/login-icon.svg'
+// import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
+// import LoginIcon from './../../../public/assets/icons/login-icon.svg'
 import RuFlag from './../../../public/assets/icons/flag-ru.svg'
 import UkFlag from './../../../public/assets/icons/flag-uk.svg'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
 import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { InctagramPath } from '@/shared/api/path'
+// import { useState } from 'react'
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// import { InctagramPath } from '@/shared/api/path'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import React from 'react'
 
 export const Header = () => {
     const { t, i18n } = useTranslation('header')
     const { locale, locales, push } = useRouter()
     const router = useRouter()
-    const [activeLang, setActiveLang] = useState<string>('en')
-    const { data: meData } = useMeQuery()
-    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+    // const [activeLang, setActiveLang] = useState<string>('en')
+    const { data: meData, isLoading } = useMeQuery()
+    // const [logout, { isSuccess, error, isError, isLoading: logoutIsLoading }] = useLogoutMutation()
 
     // const toggleLanguage = (language: string): void => {
     //     setActiveLang(activeLang === 'ru' ? 'en' : 'ru')
@@ -31,7 +32,7 @@ export const Header = () => {
         push('/', undefined, { locale: l }).then()
     }
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <header className={cls.headerWrapper}>

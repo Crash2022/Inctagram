@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { ReactElement, Suspense } from 'react'
 import { NextPage } from 'next'
-import { useLoader } from '@/shared/hooks/useLoader'
+import { useProgressLoader } from '@/shared/hooks/useProgressLoader'
 import '../styles/nprogress.css'
 import { appWithI18Next } from 'ni18n'
 import { wrapper } from '@/store/store'
@@ -30,7 +30,7 @@ type AppPropsWithLayout = AppProps & {
 }
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
-    useLoader()
+    useProgressLoader()
 
     const getLayout = Component.getLayout ?? ((page) => page)
     const { store } = wrapper.useWrappedStore(pageProps)

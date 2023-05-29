@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useMeQuery } from '@/services/AuthService'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 const Home: NextPageWithLayout = () => {
     const { t } = useTranslation('home')
@@ -29,8 +29,8 @@ const Home: NextPageWithLayout = () => {
         }
     }, [router, meData])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
     if (meData) void router.push(InctagramPath.PROFILE.PROFILE)
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>

@@ -2,9 +2,9 @@ import Image, { StaticImageData } from 'next/image'
 import s from './ConfirmEmailBox.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useEffect } from 'react'
 import { useSnackbar } from 'notistack'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface ConfirmEmailBoxType {
     title: string
@@ -41,7 +41,7 @@ export const ConfirmEmailBox = ({
         }
     }, [isSuccess])
 
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <div className={s.container}>

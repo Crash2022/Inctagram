@@ -11,7 +11,6 @@ import { PasswordRecoveryType } from '@/models/auth-types'
 import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
 import { InctagramPath } from '@/shared/api/path'
 import { useForgotPasswordMutation } from '@/services/AuthService'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
@@ -62,8 +61,7 @@ export const ForgotPasswordForm = () => {
     }
 
     useErrorSnackbar(isError)
-
-    if (isLoading) return <LoaderScreen variant={'loader'} />
+    useErrorSnackbar(isError)
 
     return (
         <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
