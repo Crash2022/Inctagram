@@ -15,6 +15,7 @@ import { profileApi } from '@/shared/api/profile-api'
 import { Photo } from '@/models/profile-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React from 'react'
+import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -133,6 +134,7 @@ const Profile: NextPageWithLayout = () => {
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo consequat.
                         </div>
+                        <DottedMenu />
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>
