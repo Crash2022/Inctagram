@@ -189,7 +189,7 @@ export const General = () => {
                             height={204}
                             onError={imageErrorHandler}
                             quality={100}
-                            priority
+                            // priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon width={30} height={30} />
