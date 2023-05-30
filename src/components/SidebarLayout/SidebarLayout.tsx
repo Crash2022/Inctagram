@@ -22,9 +22,11 @@ import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPos
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
 import { PhotoFiltersContent } from '@/components/AddPost/PhotoFiltersContent/PhotoFiltersContent'
+import { useSnackbar } from 'notistack'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
+    const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
 
@@ -38,6 +40,12 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const [isPhotoFiltersModalOpen, setIsPhotoFiltersModalOpen] = useState<boolean>(false)
 
     const goFromAddToCropModalHandler = () => {
+        if (!isPhotoUploaded) {
+            enqueueSnackbar(/*error.data.messages[0].message*/ t('Error'), {
+                variant: 'error',
+                autoHideDuration: 3000
+            })
+        }
         setIsCropImageModalOpen(true)
         setIsAddPostOpen(false)
     }
@@ -123,7 +131,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
                                 headerTitle={'Crop_HeaderTitle'}
-                                children={<ImageCropContent />}
+                                children={<ImageCropContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromCropToAddPhotoModalHandler}
