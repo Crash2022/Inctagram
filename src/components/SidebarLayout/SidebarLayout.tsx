@@ -104,8 +104,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             </div>
 
                             <AddPostModal
-                                open={isAddPostOpen}
-                                setOpen={setIsAddPostOpen}
+                                isAddPostOpen={isAddPostOpen}
+                                setIsAddPostOpen={setIsAddPostOpen}
                                 header={t('AddPhotoModal')}
                             />
 

@@ -9,8 +9,8 @@ import Image from 'next/image'
 import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
 
 interface AddPostModalProps {
-    open: boolean
-    setOpen: (value: boolean) => void
+    isAddPostOpen: boolean
+    setIsAddPostOpen: (value: boolean) => void
     header: string
     extraCallback?: () => void
     children?: any
@@ -34,6 +34,8 @@ export const AddPostModal = (props: AddPostModalProps) => {
                 const formData = new FormData()
                 formData.append('file', file)
                 setPostPhoto(URL.createObjectURL(file))
+                // props.setOpen(false)
+                // setIsCropImageModalOpen(true)
 
                 // try {
                 //     // setPostPhoto(URL.createObjectURL(file))
@@ -71,9 +73,9 @@ export const AddPostModal = (props: AddPostModalProps) => {
 
     return (
         <CustomModal
-            open={props.open}
+            open={props.isAddPostOpen}
             onClose={() => {
-                props.setOpen(false)
+                props.setIsAddPostOpen(false)
             }}
         >
             <ImageCropModal
@@ -81,16 +83,26 @@ export const AddPostModal = (props: AddPostModalProps) => {
                 setOpen={setIsCropImageModalOpen}
                 header={t('Crop_HeaderTitle')}
             />
+
             <div className={cls.addPostModal_mainBox}>
                 <div className={cls.addPostModal_header}>
-                    <div>{props.header}</div>
+                    <div className={cls.header_title}>{props.header}</div>
+                    {/*<div*/}
+                    {/*    className={cls.header_cancel}*/}
+                    {/*    onClick={() => {*/}
+                    {/*        props.setOpen(false)*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    X*/}
+                    {/*</div>*/}
                     <div
-                        className={cls.header_cancel}
+                        className={cls.header_next}
                         onClick={() => {
-                            props.setOpen(false)
+                            setIsCropImageModalOpen(true)
+                            // props.setIsAddPostOpen(false)
                         }}
                     >
-                        X
+                        {t('Next')}
                     </div>
                 </div>
                 <div className={cls.addPostModal_content}>

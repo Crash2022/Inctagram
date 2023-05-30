@@ -16,9 +16,20 @@
         @include h1-text-size;
         @include flexBetween;
 
+        .header_title {
+            pointer-events: none;
+        }
         .header_cancel {
             &:hover {
                 cursor: pointer;
+            }
+        }
+        .header_next {
+            //color: var(--primary-500);
+
+            &:hover {
+                cursor: pointer;
+                color: var(--primary-500);
             }
         }
     }
