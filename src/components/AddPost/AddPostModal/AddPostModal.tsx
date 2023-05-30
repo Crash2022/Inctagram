@@ -9,11 +9,12 @@ import Image from 'next/image'
 import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
 
 interface AddPostModalProps {
-    isAddPostOpen: boolean
-    setIsAddPostOpen: (value: boolean) => void
+    open: boolean
+    setOpen: (value: boolean) => void
     header: string
-    extraCallback?: () => void
-    children?: any
+    // extraCallback?: () => void
+    // children?: any
+    setIsCropImageModalOpen: (value: boolean) => void
 }
 
 export const AddPostModal = (props: AddPostModalProps) => {
@@ -22,7 +23,7 @@ export const AddPostModal = (props: AddPostModalProps) => {
 
     const [postPhoto, setPostPhoto] = useState<string>('')
     const [isAvaBroken, setIsAvaBroken] = useState<boolean>(false)
-    const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
+    // const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
 
     const uploadPhotoHandler = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length) {
@@ -73,20 +74,20 @@ export const AddPostModal = (props: AddPostModalProps) => {
 
     return (
         <CustomModal
-            open={props.isAddPostOpen}
+            open={props.open}
             onClose={() => {
-                props.setIsAddPostOpen(false)
+                props.setOpen(false)
             }}
         >
-            <ImageCropModal
-                open={isCropImageModalOpen}
-                setOpen={setIsCropImageModalOpen}
-                header={t('Crop_HeaderTitle')}
-            />
+            {/*<ImageCropModal*/}
+            {/*    open={isCropImageModalOpen}*/}
+            {/*    setOpen={setIsCropImageModalOpen}*/}
+            {/*    header={t('Crop_HeaderTitle')}*/}
+            {/*/>*/}
 
             <div className={cls.addPostModal_mainBox}>
                 <div className={cls.addPostModal_header}>
-                    <div className={cls.header_title}>{props.header}</div>
+                    <div className={cls.header_title}>{t(props.header)}</div>
                     {/*<div*/}
                     {/*    className={cls.header_cancel}*/}
                     {/*    onClick={() => {*/}
@@ -98,8 +99,8 @@ export const AddPostModal = (props: AddPostModalProps) => {
                     <div
                         className={cls.header_next}
                         onClick={() => {
-                            setIsCropImageModalOpen(true)
-                            // props.setIsAddPostOpen(false)
+                            props.setIsCropImageModalOpen(true)
+                            props.setOpen(false)
                         }}
                     >
                         {t('Next')}

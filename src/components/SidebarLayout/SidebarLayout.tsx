@@ -32,6 +32,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
     const isPaid = true // исправить на динамическое значение
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
+    const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
 
     // const [menuLink, setMenuLink] = useState<MenuLinkType[]>([
     //     { id: 1, icon: <HomeIcon />, href: InctagramPath.PROFILE.HOME, title: t('Home') },
@@ -49,7 +50,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
     }, [isSuccess])
 
-    // useLoader(isLoading)
     if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
@@ -104,9 +104,16 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             </div>
 
                             <AddPostModal
-                                isAddPostOpen={isAddPostOpen}
+                                open={isAddPostOpen}
+                                setOpen={setIsAddPostOpen}
+                                header={'AddPost_HeaderTitle'}
+                                setIsCropImageModalOpen={setIsCropImageModalOpen}
+                            />
+                            <ImageCropModal
+                                open={isCropImageModalOpen}
+                                setOpen={setIsCropImageModalOpen}
+                                header={'Crop_HeaderTitle'}
                                 setIsAddPostOpen={setIsAddPostOpen}
-                                header={t('AddPhotoModal')}
                             />
 
                             <div className={cls.menuList_item}>

@@ -7,6 +7,7 @@ interface ImageCropModalProps {
     open: boolean
     setOpen: (value: boolean) => void
     header: string
+    setIsAddPostOpen: (value: boolean) => void
 }
 
 export const ImageCropModal = (props: ImageCropModalProps) => {
@@ -25,11 +26,12 @@ export const ImageCropModal = (props: ImageCropModalProps) => {
                         className={cls.header_button}
                         onClick={() => {
                             props.setOpen(false)
+                            props.setIsAddPostOpen(true)
                         }}
                     >
                         {'<'}
                     </div>
-                    <div className={cls.header_title}>{props.header}</div>
+                    <div className={cls.header_title}>{t(props.header)}</div>
                     <div className={cls.header_button}>{t('Next')}</div>
                 </div>
                 <div className={cls.imageCropModal_content}>Content</div>

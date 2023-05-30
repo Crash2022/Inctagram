@@ -1,4 +1,5 @@
 {
+  "AddPost_HeaderTitle": "Add photo",
   "AddPhotoButton": "Select from PC",
   "Snackbar_LargeImageSize": "The file size must be less than 1 Mb",
   "Snackbar_ErrorImage": "The file is damaged, please try another one",
