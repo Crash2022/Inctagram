@@ -1,3 +1,31 @@
 .photoFiltersModal_content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    overflow: hidden;
 
+    .content_image {
+
+    }
+    .content_filters {
+        width: 100%;
+        border: 1px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+
+        .filter_item {
+            .item_image {
+                border: 1px solid white;
+                width: 100px;
+                height: 100px;
+            }
+            .item_title {
+                text-align: center;
+            }
+        }
+    }
 }

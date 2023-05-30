@@ -44,8 +44,10 @@ import { PostContent } from '@/components/PostModal/PostContent/PostContent'
 
 // export const getServerSideProps = async ({ res }) => {
 //     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
-//     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
+//     // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
 //     const photos = await profileApi.getProfilePhotos()
+//
+//     // console.log(photos, 'backend')
 //
 //     if (!photos) {
 //         return {
@@ -70,7 +72,7 @@ import { PostContent } from '@/components/PostModal/PostContent/PostContent'
 //         }
 //     }
 // }
-//
+
 // type ProfileProps = {
 //     photos: Photo[]
 // }
@@ -172,9 +174,9 @@ const Profile: NextPageWithLayout = () => {
                 <div className={cls.profilePage_content}>
                     <div className={cls.content_list}>
                         {photos &&
-                            photos.map((photo) => {
+                            photos.map((photo, index) => {
                                 return (
-                                    <div key={photo.id} className={cls.list_item}>
+                                    <div key={index} className={cls.list_item}>
                                         {/*<Image*/}
                                         {/*    src={photo.url}*/}
                                         {/*    alt={'gallery-photo'}*/}
@@ -191,8 +193,6 @@ const Profile: NextPageWithLayout = () => {
                                                 setOpenModal(true)
                                             }}
                                         />
-
-                                        {/*{photo.title}*/}
                                     </div>
                                 )
                             })}

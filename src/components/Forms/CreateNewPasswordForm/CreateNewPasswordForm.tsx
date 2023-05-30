@@ -14,6 +14,7 @@ import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 // import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
@@ -65,45 +66,47 @@ export const CreateNewPasswordForm = () => {
     if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
-        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
-            <MessageModal
-                open={open}
-                setOpen={setOpen}
-                header={t('PasswordUpdated')}
-                text={t('Message')}
-                buttonTitleOK={t('MainButton')}
-                extraCallbackOK={messageModalOKHandler}
-            />
-
-            <Title title={t('CreateNewPassword')} className={styles.title} />
-
-            <div className={styles.inputContainer}>
-                <ControlledInput
-                    password
-                    id={'New_Password'}
-                    name={'newPassword'}
-                    type={'password'}
-                    placeholder={t('Password')}
-                    control={control}
-                    error={errors.newPassword?.message}
+        <FormWrapper marginTop={96}>
+            <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
+                <MessageModal
+                    open={open}
+                    setOpen={setOpen}
+                    header={t('PasswordUpdated')}
+                    text={t('Message')}
+                    buttonTitleOK={t('MainButton')}
+                    extraCallbackOK={messageModalOKHandler}
                 />
-                <ControlledInput
-                    password
-                    id={'New_ConfirmPassword'}
-                    name={'confirmPassword'}
-                    type={'password'}
-                    placeholder={t('ConfirmPassword')}
-                    control={control}
-                    error={errors.confirmPassword?.message}
-                />
-                <p>{t('PasswordLength')}</p>
-            </div>
 
-            <div style={{ marginTop: '72px' }}>
-                <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                    {t('CreateNewPassword')}
-                </Button>
-            </div>
-        </form>
+                <Title title={t('CreateNewPassword')} className={styles.title} />
+
+                <div className={styles.inputContainer}>
+                    <ControlledInput
+                        password
+                        id={'New_Password'}
+                        name={'newPassword'}
+                        type={'password'}
+                        placeholder={t('Password')}
+                        control={control}
+                        error={errors.newPassword?.message}
+                    />
+                    <ControlledInput
+                        password
+                        id={'New_ConfirmPassword'}
+                        name={'confirmPassword'}
+                        type={'password'}
+                        placeholder={t('ConfirmPassword')}
+                        control={control}
+                        error={errors.confirmPassword?.message}
+                    />
+                    <p>{t('PasswordLength')}</p>
+                </div>
+
+                <div style={{ marginTop: '72px' }}>
+                    <Button className={styles.btn} theme={'primary'} type={'submit'}>
+                        {t('CreateNewPassword')}
+                    </Button>
+                </div>
+            </form>
+        </FormWrapper>
     )
 }

@@ -17,13 +17,12 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import clsx from 'clsx'
-import { useSnackbar } from 'notistack'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
     const router = useRouter()
-    const { enqueueSnackbar } = useSnackbar()
 
     const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
     const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
@@ -63,48 +62,50 @@ export const LoginForm = () => {
     if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
-        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
-            <Title title={t('SignIn')} className={styles.title} />
+        <FormWrapper marginTop={96}>
+            <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
+                <Title title={t('SignIn')} className={styles.title} />
 
-            <div className={styles.imgBody}>
-                <GoogleIcon />
-                <GitIcon />
-            </div>
+                <div className={styles.imgBody}>
+                    <GoogleIcon />
+                    <GitIcon />
+                </div>
 
-            <div className={styles.inputContainer}>
-                <ControlledInput
-                    id={'Login_Email'}
-                    name={'email'}
-                    placeholder={t('Email')}
-                    control={control}
-                    error={errors.email?.message}
-                />
-                <ControlledInput
-                    id={'Login_Password'}
-                    name={'password'}
-                    type={'password'}
-                    password
-                    placeholder={t('Password')}
-                    control={control}
-                    error={errors.password?.message}
-                />
-            </div>
+                <div className={styles.inputContainer}>
+                    <ControlledInput
+                        id={'Login_Email'}
+                        name={'email'}
+                        placeholder={t('Email')}
+                        control={control}
+                        error={errors.email?.message}
+                    />
+                    <ControlledInput
+                        id={'Login_Password'}
+                        name={'password'}
+                        type={'password'}
+                        password
+                        placeholder={t('Password')}
+                        control={control}
+                        error={errors.password?.message}
+                    />
+                </div>
 
-            <Link className={styles.forgot} href={InctagramPath.AUTH.FORGOT_PASSWORD}>
-                {' '}
-                {t('ForgotPassword')}
-            </Link>
-
-            <div>
-                <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                    {t('SignIn')}
-                </Button>
-                <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
-                <Link className={styles.link} href={InctagramPath.AUTH.REGISTRATION}>
+                <Link className={styles.forgot} href={InctagramPath.AUTH.FORGOT_PASSWORD}>
                     {' '}
-                    {t('SignUp')}
+                    {t('ForgotPassword')}
                 </Link>
-            </div>
-        </form>
+
+                <div>
+                    <Button className={styles.btn} theme={'primary'} type={'submit'}>
+                        {t('SignIn')}
+                    </Button>
+                    <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
+                    <Link className={styles.link} href={InctagramPath.AUTH.REGISTRATION}>
+                        {' '}
+                        {t('SignUp')}
+                    </Link>
+                </div>
+            </form>
+        </FormWrapper>
     )
 }

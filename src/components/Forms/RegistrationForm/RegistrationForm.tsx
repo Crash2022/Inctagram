@@ -19,6 +19,7 @@ import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
@@ -80,67 +81,69 @@ export const RegistrationForm = () => {
     if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
-        <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
-            <MessageModal
-                open={open}
-                setOpen={setOpen}
-                header={t('EmailSent')}
-                text={t('HaveSent') + control._getWatch('email')}
-                buttonTitleOK={t('MainButton')}
-                extraCallbackOK={messageModalOKHandler}
-            />
-            <Title title={t('SignUp')} className={styles.title} />
+        <FormWrapper marginTop={96}>
+            <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
+                <MessageModal
+                    open={open}
+                    setOpen={setOpen}
+                    header={t('EmailSent')}
+                    text={t('HaveSent') + control._getWatch('email')}
+                    buttonTitleOK={t('MainButton')}
+                    extraCallbackOK={messageModalOKHandler}
+                />
+                <Title title={t('SignUp')} className={styles.title} />
 
-            <div className={styles.imgBody}>
-                <GoogleIcon />
-                <GitIcon />
-            </div>
+                <div className={styles.imgBody}>
+                    <GoogleIcon />
+                    <GitIcon />
+                </div>
 
-            <div className={styles.inputContainer}>
-                <ControlledInput
-                    id={'Reg_Username'}
-                    name={'userName'}
-                    placeholder={t('Username')}
-                    control={control}
-                    error={errors.userName?.message}
-                />
-                <ControlledInput
-                    id={'Reg_Email'}
-                    name={'email'}
-                    placeholder={t('Email')}
-                    control={control}
-                    error={errors.email?.message}
-                />
-                <ControlledInput
-                    password
-                    id={'Reg_Password'}
-                    name={'password'}
-                    type={'password'}
-                    placeholder={t('Password')}
-                    control={control}
-                    error={errors.password?.message}
-                />
-                <ControlledInput
-                    password
-                    id={'Reg_ConfirmPassword'}
-                    name={'confirmPassword'}
-                    type={'password'}
-                    placeholder={t('ConfirmPassword')}
-                    control={control}
-                    error={errors.confirmPassword?.message}
-                />
-            </div>
-            <div>
-                <Button className={styles.btn} theme={'primary'} type={'submit'}>
-                    {t('SignUp')}
-                </Button>
-                <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
-                <Link className={styles.link} href={InctagramPath.AUTH.LOGIN}>
-                    {' '}
-                    {t('SignIn')}
-                </Link>
-            </div>
-        </form>
+                <div className={styles.inputContainer}>
+                    <ControlledInput
+                        id={'Reg_Username'}
+                        name={'userName'}
+                        placeholder={t('Username')}
+                        control={control}
+                        error={errors.userName?.message}
+                    />
+                    <ControlledInput
+                        id={'Reg_Email'}
+                        name={'email'}
+                        placeholder={t('Email')}
+                        control={control}
+                        error={errors.email?.message}
+                    />
+                    <ControlledInput
+                        password
+                        id={'Reg_Password'}
+                        name={'password'}
+                        type={'password'}
+                        placeholder={t('Password')}
+                        control={control}
+                        error={errors.password?.message}
+                    />
+                    <ControlledInput
+                        password
+                        id={'Reg_ConfirmPassword'}
+                        name={'confirmPassword'}
+                        type={'password'}
+                        placeholder={t('ConfirmPassword')}
+                        control={control}
+                        error={errors.confirmPassword?.message}
+                    />
+                </div>
+                <div>
+                    <Button className={styles.btn} theme={'primary'} type={'submit'}>
+                        {t('SignUp')}
+                    </Button>
+                    <h3 className={styles.subtitle}>{t('HaveAccount')}</h3>
+                    <Link className={styles.link} href={InctagramPath.AUTH.LOGIN}>
+                        {' '}
+                        {t('SignIn')}
+                    </Link>
+                </div>
+            </form>
+        </FormWrapper>
     )
 }
 
