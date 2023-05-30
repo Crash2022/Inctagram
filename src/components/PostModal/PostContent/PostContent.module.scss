@@ -1,0 +1,167 @@
+@import '../../../styles/mixins';
+
+.postModal_mainBox {
+  @include defaultModalStyle;
+  display: flex;
+  width: 984px;
+  height: 564px;
+  background-color: var(--dark-300);
+
+  .postModal_image {
+    width: 50%;
+    background-color: green;
+  }
+
+  .postModal_items {
+    width: 50%;
+
+    .header {
+      width: 100%;
+      border-bottom: 1px solid gray;
+      padding: 10px 20px;
+
+      .headerTitle {
+        @include flexBetween;
+      }
+
+      .profileData {
+        @include flexCenter;
+
+        .userAvatar {
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        .userName {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .commentsBlock {
+      padding: 10px 20px;
+      border-bottom: 1px solid gray;
+      height: 55%;
+      overflow-y: scroll;
+
+      .commentBlock {
+        @include flexCenter;
+        margin: 20px 0;
+
+        .userAvatar {
+        }
+
+        .commentItems {
+          margin-left: 20px;
+
+          .comment {
+            width: 85%;
+
+            .commentText {
+              font-size: 14px;
+              opacity: 0.8;
+            }
+
+            .commentUserName {
+
+            }
+          }
+
+          .commentSubText {
+            margin-top: 5px;
+            font-size: 10px;
+            opacity: 0.5;
+
+            .commentDate, .answerButton, .commentLikeCount {
+              margin-right: 10px;
+            }
+
+            .answerButton {
+              cursor: pointer;
+            }
+          }
+        }
+
+        .likeButton {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .likesBlock {
+      border-bottom: 1px solid gray;
+      padding: 10px 20px;
+
+      .buttonItems {
+        @include flexBetween;
+
+        .firstButtonBlock {
+          display: flex;
+
+          .bigLikeButton {
+            margin-right: 20px;
+            cursor: pointer;
+          }
+
+          .sendButton {
+            cursor: pointer;
+          }
+        }
+
+        .secondButtonBlock {
+          .addToFavorite {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .likesCountBlock {
+        padding: 10px 0 5px 0;
+
+        .avatarsLikers {
+          display: flex;
+          align-items: center;
+          position: relative;
+
+          .firstAvatar {
+            z-index: 3;
+          }
+
+          .secondAvatar {
+            position: absolute;
+            left: 20px;
+            z-index: 2;
+          }
+
+          .thirdAvatar {
+            position: absolute;
+            left: 40px;
+            z-index: 1;
+          }
+
+          .likesCount {
+            margin-left: 60px;
+            font-size: 14px;
+          }
+        }
+
+        .postDate {
+          padding-top: 5px;
+          font-size: 12px;
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .addComentBlock {
+      @include flexBetween;
+      padding: 0 20px;
+      .input {
+        width: 80%;
+      }
+      .button {
+        padding-top: 15px;
+      }
+    }
+  }
+}
