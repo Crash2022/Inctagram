@@ -9,14 +9,10 @@ import { useSnackbar } from 'notistack'
 interface AddPostContentProps {
     postPhoto: string
     setPostPhoto: (photo: string) => void
-    setIsPhotoUploaded: (value: boolean) => void
+    // setIsPhotoUploaded: (value: boolean) => void
 }
 
-export const AddPostContent = ({
-    postPhoto,
-    setPostPhoto,
-    setIsPhotoUploaded
-}: AddPostContentProps) => {
+export const AddPostContent = ({ postPhoto, setPostPhoto }: AddPostContentProps) => {
     const { t } = useTranslation('add-post-modal')
     const { enqueueSnackbar } = useSnackbar()
 

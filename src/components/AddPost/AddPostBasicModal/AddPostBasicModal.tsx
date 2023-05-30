@@ -67,7 +67,7 @@ export const AddPostBasicModal = ({
                             className={cls.header_button}
                             theme={'clear'}
                             onClick={nextFunc && nextFunc}
-                            disabled={!isPhotoUploaded}
+                            // disabled={!isPhotoUploaded}
                         >
                             {t('Next')}
                         </Button>
