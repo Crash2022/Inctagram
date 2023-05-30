@@ -18,6 +18,8 @@ import React, { useState } from 'react'
 import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
 import EditIcon from '../../../public/assets/icons/edit-icon.svg'
 import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
+import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
+import { PostContent } from '@/components/PostModal/PostContent/PostContent'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -76,6 +78,8 @@ import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
 
+    const [openModal, setOpenModal] = useState<boolean>(false)
+
     // для DottedMenu
     // const [menuItems, setMenuItems] = useState([
     //     {
@@ -106,6 +110,12 @@ const Profile: NextPageWithLayout = () => {
 
     return (
         <>
+            <PostBasicModal
+                open={openModal}
+                setOpen={setOpenModal}
+                headerTitle={'AddPost_HeaderTitle'}
+                children={<PostContent />}
+            />
             <Head>
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
@@ -177,6 +187,9 @@ const Profile: NextPageWithLayout = () => {
                                             alt='gallery-photo'
                                             width={265}
                                             height={265}
+                                            onClick={() => {
+                                                setOpenModal(true)
+                                            }}
                                         />
 
                                         {/*{photo.title}*/}
