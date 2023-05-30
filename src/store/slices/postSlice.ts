@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AddPostPhotosType } from '@/models/post-types'
 
 interface PostStateType {
-    photos: AddPostPhotosType[]
+    photos: string[]
     description: string
 }
 
