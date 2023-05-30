@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import cls from './Profile.module.scss'
-import s from '../../shared/ui/DottedMenu/DottedMenu.module.scss'
 import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
 // import { useTranslation } from 'react-i18next'
@@ -12,8 +11,8 @@ import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
 import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosService'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
-import { profileApi } from '@/shared/api/profile-api'
-import { Photo } from '@/models/profile-types'
+// import { profileApi } from '@/shared/api/profile-api'
+// import { Photo } from '@/models/profile-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useState } from 'react'
 import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
@@ -78,24 +77,25 @@ const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
 
     // для DottedMenu
-    const [menuItems, setMenuItems] = useState([
-        {
-            id: 1,
-            icon: EditIcon,
-            title: 'EditPost',
-            func: () => {
-                alert('Edit Post')
-            }
-        },
-        {
-            id: 2,
-            icon: TrashIcon,
-            title: 'DeletePost',
-            func: () => {
-                alert('Delete Post')
-            }
-        }
-    ])
+    // const [menuItems, setMenuItems] = useState([
+    //     {
+    //         id: 1,
+    //         icon: EditIcon,
+    //         title: 'EditPost',
+    //         func: () => {
+    //             alert('Edit Post')
+    //         }
+    //     },
+    //     {
+    //         id: 2,
+    //         icon: TrashIcon,
+    //         title: 'DeletePost',
+    //         func: () => {
+    //             alert('Delete Post')
+    //         }
+    //     }
+    // ])
+    // <DottedMenu menuItems={menuItems} />
 
     // const { photos } = props
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
@@ -157,8 +157,6 @@ const Profile: NextPageWithLayout = () => {
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                             commodo consequat.
                         </div>
-
-                        <DottedMenu menuItems={menuItems} />
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>
