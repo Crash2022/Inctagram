@@ -82,7 +82,7 @@ const Profile: NextPageWithLayout = () => {
         {
             id: 1,
             icon: EditIcon,
-            title: 'Edit Post',
+            title: 'EditPost',
             func: () => {
                 alert('Edit Post')
             }
@@ -90,7 +90,7 @@ const Profile: NextPageWithLayout = () => {
         {
             id: 2,
             icon: TrashIcon,
-            title: 'Delete Post',
+            title: 'DeletePost',
             func: () => {
                 alert('Delete Post')
             }

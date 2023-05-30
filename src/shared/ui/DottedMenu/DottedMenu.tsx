@@ -1,12 +1,14 @@
 import React from 'react'
 import { useComponentVisible } from '@/shared/hooks/useComponentVisible'
 import cls from './DottedMenu.module.scss'
+import { useTranslation } from 'next-i18next'
 
 interface PostDottedMenuProps {
     menuItems: any[]
 }
 
 export const DottedMenu = ({ menuItems }: PostDottedMenuProps) => {
+    const { t } = useTranslation('dotted-menu')
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
 
     return (
@@ -34,7 +36,7 @@ export const DottedMenu = ({ menuItems }: PostDottedMenuProps) => {
                                 <div>
                                     <item.icon />
                                 </div>
-                                <div>{item.title}</div>
+                                <div>{t(item.title)}</div>
                             </div>
                         )
                     })}
