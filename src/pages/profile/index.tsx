@@ -15,9 +15,9 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 // import { Photo } from '@/models/profile-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useState } from 'react'
-import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
-import EditIcon from '../../../public/assets/icons/edit-icon.svg'
-import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
+// import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
+// import EditIcon from '../../../public/assets/icons/edit-icon.svg'
+// import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -42,8 +42,10 @@ import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 
 // export const getServerSideProps = async ({ res }) => {
 //     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
-//     res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
+//     // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
 //     const photos = await profileApi.getProfilePhotos()
+//
+//     // console.log(photos, 'backend')
 //
 //     if (!photos) {
 //         return {
@@ -68,7 +70,7 @@ import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 //         }
 //     }
 // }
-//
+
 // type ProfileProps = {
 //     photos: Photo[]
 // }
@@ -162,9 +164,9 @@ const Profile: NextPageWithLayout = () => {
                 <div className={cls.profilePage_content}>
                     <div className={cls.content_list}>
                         {photos &&
-                            photos.map((photo) => {
+                            photos.map((photo, index) => {
                                 return (
-                                    <div key={photo.id} className={cls.list_item}>
+                                    <div key={index} className={cls.list_item}>
                                         {/*<Image*/}
                                         {/*    src={photo.url}*/}
                                         {/*    alt={'gallery-photo'}*/}
@@ -178,8 +180,6 @@ const Profile: NextPageWithLayout = () => {
                                             width={265}
                                             height={265}
                                         />
-
-                                        {/*{photo.title}*/}
                                     </div>
                                 )
                             })}
