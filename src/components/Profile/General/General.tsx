@@ -107,7 +107,7 @@ export const General = () => {
                     })
                 }
             } else {
-                enqueueSnackbar(t('Snackbar_LargeSizeAvatar'), {
+                enqueueSnackbar(t('Snackbar_LargeImageSize'), {
                     variant: 'error',
                     autoHideDuration: 3000
                 })
@@ -129,7 +129,7 @@ export const General = () => {
 
     const imageErrorHandler = () => {
         setIsAvaBroken(true)
-        enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
+        enqueueSnackbar(t('Snackbar_ErrorImage'), {
             variant: 'error',
             autoHideDuration: 3000
         })
@@ -158,7 +158,7 @@ export const General = () => {
     useEffect(() => {
         if (uploadAvatarIsError) {
             console.log(uploadAvatarError)
-            enqueueSnackbar(t('Snackbar_UploadAvatarError'), {
+            enqueueSnackbar(t('Snackbar_UploadImageError'), {
                 variant: 'error',
                 autoHideDuration: 3000
             })

@@ -1,3 +1,8 @@
 {
-  "AddPhotoButton": "Выбрать файл с ПК"
+  "AddPhotoButton": "Выбрать файл с ПК",
+  "Snackbar_LargeImageSize": "Файл не должен превышать размер 1 Мб",
+  "Snackbar_ErrorImage": "Файл повреждён, попробуйте загрузить другой",
+
+  "Crop_HeaderTitle": "Кадрирование",
+  "Next": "Далее"
 }

@@ -15,22 +15,23 @@ import { useTranslation } from 'next-i18next'
 import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-import { AddPostModal } from '@/components/AddPostModal/AddPostModal'
+import { AddPostModal } from '@/components/AddPost/AddPostModal/AddPostModal'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
 
-interface MenuLinkType {
-    id: number
-    icon: any
-    href: string
-    title: any
-}
+// interface MenuLinkType {
+//     id: number
+//     icon: any
+//     href: string
+//     title: any
+// }
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const router = useRouter()
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
     const isPaid = true // исправить на динамическое значение
-    const [open, setOpen] = useState<boolean>(false)
+    const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
 
     // const [menuLink, setMenuLink] = useState<MenuLinkType[]>([
     //     { id: 1, icon: <HomeIcon />, href: InctagramPath.PROFILE.HOME, title: t('Home') },
@@ -43,10 +44,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     //         title: t('Favorites')
     //     }
     // ])
-
-    const addPostHandler = () => {
-        setOpen(true)
-    }
 
     useEffect(() => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
@@ -107,8 +104,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             </div>
 
                             <AddPostModal
-                                open={open}
-                                setOpen={setOpen}
+                                open={isAddPostOpen}
+                                setOpen={setIsAddPostOpen}
                                 header={t('AddPhotoModal')}
                             />
 
@@ -116,14 +113,14 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 <div>
                                     <AddIcon />
                                 </div>
-                                <div className={cls.link} onClick={addPostHandler}>
+                                <div
+                                    className={cls.link}
+                                    onClick={() => {
+                                        setIsAddPostOpen(true)
+                                    }}
+                                >
                                     {t('Add')}
                                 </div>
-                                {/*<LinkA*/}
-                                {/*    href={InctagramPath.PROFILE.ADD_POST}*/}
-                                {/*    text={t('Add')}*/}
-                                {/*    className={cls.link}*/}
-                                {/*/>*/}
                             </div>
                             <div
                                 className={

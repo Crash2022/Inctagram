@@ -1,9 +1,11 @@
-@import '../../styles/mixins';
+@import '../../../styles/mixins';
 
 .addPostModal_mainBox {
     @include defaultModalStyle;
     @include flexColumn;
-    width: 350px;
+    //width: 350px;
+    width: 492px;
+    height: 564px;
     background-color: var(--dark-300);
 
     .addPostModal_header {
@@ -22,7 +24,7 @@
     }
     .addPostModal_content {
         @include flexColumn;
-        margin-bottom: 50px;
+        margin: 50px 0;
 
         .content_image {
             @include flexCenter;

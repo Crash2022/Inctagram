@@ -9,9 +9,9 @@
   "Save": "Save Changes",
 
   "Snackbar_NoAvatar": "You have no uploaded avatar for profile yet",
-  "Snackbar_LargeSizeAvatar": "The file size must be less than 1 Mb",
-  "Snackbar_ErrorAvatar": "The file is damaged, please try another one",
-  "Snackbar_UploadAvatarError": "Server error while uploading. Please try again",
+  "Snackbar_LargeImageSize": "The file size must be less than 1 Mb",
+  "Snackbar_ErrorImage": "The file is damaged, please try another one",
+  "Snackbar_UploadImageError": "Server error while uploading. Please try again",
 
   "Err_Yup_Min": "Minimal length is 6 symbols",
   "Err_Yup_Max_Name": "Maximum length is 30 symbols",
