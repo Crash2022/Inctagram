@@ -100,6 +100,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 />
                             </div>
 
+                            {/*модалка для добавления фото*/}
                             <AddPostBasicModal
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
@@ -117,6 +118,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 isPhotoUploaded={isPhotoUploaded}
                             />
 
+                            {/*модалка для кадрирования фото*/}
                             <AddPostBasicModal
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
@@ -128,11 +130,12 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={goFromCropToPhotoFiltersModalHandler}
                             />
 
+                            {/*модалка для фильтров фото*/}
                             <AddPostBasicModal
                                 open={isPhotoFiltersModalOpen}
                                 setOpen={setIsPhotoFiltersModalOpen}
                                 headerTitle={'Filters_HeaderTitle'}
-                                children={<PhotoFiltersContent />}
+                                children={<PhotoFiltersContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromPhotoFiltersToCropModalHandler}
@@ -140,6 +143,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 modalWidth={'900'}
                             />
 
+                            {/*вариант с разными модалками*/}
                             {/*<AddPostModal*/}
                             {/*    open={isAddPostOpen}*/}
                             {/*    setOpen={setIsAddPostOpen}*/}
