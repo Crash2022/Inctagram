@@ -5,5 +5,7 @@
   "Snackbar_ErrorImage": "The file is damaged, please try another one",
 
   "Crop_HeaderTitle": "Cropping",
-  "Next": "Next"
+  "Next": "Next",
+
+  "Filters_HeaderTitle": "Filters"
 }

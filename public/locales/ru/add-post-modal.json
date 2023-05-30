@@ -5,5 +5,7 @@
   "Snackbar_ErrorImage": "Файл повреждён, попробуйте загрузить другой",
 
   "Crop_HeaderTitle": "Кадрирование",
-  "Next": "Далее"
+  "Next": "Далее",
+
+  "Filters_HeaderTitle": "Фильтры"
 }

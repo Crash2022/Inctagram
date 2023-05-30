@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import cls from './AddPostBasicModal.module.scss'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/shared/ui/Button/Button'
 
 interface AddPostBasicModalProps {
     open: boolean
     setOpen: (value: boolean) => void
-    children: any
+    children: ReactElement
     headerTitle: string
     isPrevious?: boolean
     isNext?: boolean
     isCancelBtn?: boolean
     prevFunc?: () => void
     nextFunc?: () => void
+    modalWidth?: string
+    isPhotoUploaded?: boolean
 }
 
 export const AddPostBasicModal = ({
@@ -24,7 +27,9 @@ export const AddPostBasicModal = ({
     isNext,
     isCancelBtn,
     prevFunc,
-    nextFunc
+    nextFunc,
+    modalWidth,
+    isPhotoUploaded
 }: AddPostBasicModalProps) => {
     const { t } = useTranslation('add-post-modal')
 
@@ -35,7 +40,10 @@ export const AddPostBasicModal = ({
                 setOpen(false)
             }}
         >
-            <div className={cls.addPostModal_mainBox}>
+            <div
+                className={cls.addPostModal_mainBox}
+                style={{ width: modalWidth ? `${modalWidth}px` : '' }}
+            >
                 <div className={cls.addPostModal_header}>
                     {isPrevious ? (
                         <div className={cls.header_button} onClick={prevFunc && prevFunc}>
@@ -47,10 +55,22 @@ export const AddPostBasicModal = ({
 
                     <div className={cls.header_title}>{t(headerTitle)}</div>
 
+                    {/*{isNext ? (*/}
+                    {/*    <div className={cls.header_button} onClick={nextFunc && nextFunc}>*/}
+                    {/*        {t('Next')}*/}
+                    {/*    </div>*/}
+                    {/*) : (*/}
+                    {/*    ''*/}
+                    {/*)}*/}
                     {isNext ? (
-                        <div className={cls.header_button} onClick={nextFunc && nextFunc}>
+                        <Button
+                            className={cls.header_button}
+                            theme={'clear'}
+                            onClick={nextFunc && nextFunc}
+                            disabled={!isPhotoUploaded}
+                        >
                             {t('Next')}
-                        </div>
+                        </Button>
                     ) : (
                         ''
                     )}

@@ -21,26 +21,46 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
+import { PhotoFiltersContent } from '@/components/AddPost/PhotoFiltersContent/PhotoFiltersContent'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const router = useRouter()
     const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+
     const isPaid = true // исправить на динамическое значение
+
+    const [postPhoto, setPostPhoto] = useState<string>('')
+    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
     const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
+    const [isPhotoFiltersModalOpen, setIsPhotoFiltersModalOpen] = useState<boolean>(false)
 
-    const goCropModalHandler = () => {
+    const goFromAddToCropModalHandler = () => {
         setIsCropImageModalOpen(true)
         setIsAddPostOpen(false)
     }
 
-    const goAddPhotoModalHandler = () => {
+    const goFromCropToAddPhotoModalHandler = () => {
         setIsCropImageModalOpen(false)
         setIsAddPostOpen(true)
     }
-    const goFilterModalHandler = () => {
-        alert('filter')
+
+    const goFromCropToPhotoFiltersModalHandler = () => {
+        setIsPhotoFiltersModalOpen(true)
+        setIsCropImageModalOpen(false)
+    }
+
+    const goFromPhotoFiltersToCropModalHandler = () => {
+        setIsPhotoFiltersModalOpen(false)
+        setIsCropImageModalOpen(true)
+    }
+
+    const goFromPhotoFiltersToPublicationModalHandler = () => {
+        alert('go publication')
+        // setIsPhotoFiltersModalOpen(false)
+        // setIsCropImageModalOpen(true) // заменить на другую модалку
     }
 
     useEffect(() => {
@@ -84,10 +104,17 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
                                 headerTitle={'AddPost_HeaderTitle'}
-                                children={<AddPostContent />}
+                                children={
+                                    <AddPostContent
+                                        postPhoto={postPhoto}
+                                        setPostPhoto={setPostPhoto}
+                                        setIsPhotoUploaded={setIsPhotoUploaded}
+                                    />
+                                }
                                 isNext={true}
                                 // isCancelBtn={true}
-                                nextFunc={goCropModalHandler}
+                                nextFunc={goFromAddToCropModalHandler}
+                                isPhotoUploaded={isPhotoUploaded}
                             />
 
                             <AddPostBasicModal
@@ -97,8 +124,20 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 children={<ImageCropContent />}
                                 isPrevious={true}
                                 isNext={true}
-                                prevFunc={goAddPhotoModalHandler}
-                                nextFunc={goFilterModalHandler}
+                                prevFunc={goFromCropToAddPhotoModalHandler}
+                                nextFunc={goFromCropToPhotoFiltersModalHandler}
+                            />
+
+                            <AddPostBasicModal
+                                open={isPhotoFiltersModalOpen}
+                                setOpen={setIsPhotoFiltersModalOpen}
+                                headerTitle={'Filters_HeaderTitle'}
+                                children={<PhotoFiltersContent />}
+                                isPrevious={true}
+                                isNext={true}
+                                prevFunc={goFromPhotoFiltersToCropModalHandler}
+                                nextFunc={goFromPhotoFiltersToPublicationModalHandler}
+                                modalWidth={'900'}
                             />
 
                             {/*<AddPostModal*/}
