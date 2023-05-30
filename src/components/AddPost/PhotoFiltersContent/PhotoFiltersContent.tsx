@@ -15,11 +15,11 @@ export const PhotoFiltersContent = () => {
                     <div className={cls.item_title}>title</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
+                    <div className={cls.item_image}>2</div>
                     <div className={cls.item_title}>title</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
+                    <div className={cls.item_image}>3</div>
                     <div className={cls.item_title}>title</div>
                 </div>
                 <div className={cls.filter_item}>
