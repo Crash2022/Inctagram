@@ -15,16 +15,12 @@ import { useTranslation } from 'next-i18next'
 import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-import { AddPostModal } from '@/components/AddPost/AddPostModal/AddPostModal'
+// import { AddPostModal } from '@/components/AddPost/AddPostModal/AddPostModal'
+// import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
-
-// interface MenuLinkType {
-//     id: number
-//     icon: any
-//     href: string
-//     title: any
-// }
+import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
+import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
+import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
@@ -34,17 +30,18 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
     const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
 
-    // const [menuLink, setMenuLink] = useState<MenuLinkType[]>([
-    //     { id: 1, icon: <HomeIcon />, href: InctagramPath.PROFILE.HOME, title: t('Home') },
-    //     { id: 2, icon: <AddIcon />, href: InctagramPath.PROFILE.ADD_POST, title: t('Add') },
-    //     { id: 3, icon: <ProfileIcon />, href: InctagramPath.PROFILE.PROFILE, title: t('Profile') },
-    //     {
-    //         id: 4,
-    //         icon: <BookmarkIcon />,
-    //         href: InctagramPath.PROFILE.FAVORITES,
-    //         title: t('Favorites')
-    //     }
-    // ])
+    const goCropModalHandler = () => {
+        setIsCropImageModalOpen(true)
+        setIsAddPostOpen(false)
+    }
+
+    const goAddPhotoModalHandler = () => {
+        setIsCropImageModalOpen(false)
+        setIsAddPostOpen(true)
+    }
+    const goFilterModalHandler = () => {
+        alert('filter')
+    }
 
     useEffect(() => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
@@ -66,26 +63,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                 <nav>
                     <div className={cls.menuList}>
                         <div className={cls.menuList_top}>
-                            {/*{menuLink.map((el) => {*/}
-                            {/*    return (*/}
-                            {/*        <div*/}
-                            {/*            key={el.id}*/}
-                            {/*            className={*/}
-                            {/*                router.pathname === el.href*/}
-                            {/*                    ? cls.menuList_item_active*/}
-                            {/*                    : cls.menuList_item*/}
-                            {/*            }*/}
-                            {/*        >*/}
-                            {/*            <div className={cls.item_image}>{el.icon}</div>*/}
-                            {/*            <LinkA*/}
-                            {/*                href={el.href}*/}
-                            {/*                text={el.title}*/}
-                            {/*                className={cls.link}*/}
-                            {/*            />*/}
-                            {/*        </div>*/}
-                            {/*    )*/}
-                            {/*})}*/}
-
                             <div
                                 className={
                                     router.pathname === InctagramPath.PROFILE.HOME
@@ -103,18 +80,39 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 />
                             </div>
 
-                            <AddPostModal
+                            <AddPostBasicModal
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
-                                header={'AddPost_HeaderTitle'}
-                                setIsCropImageModalOpen={setIsCropImageModalOpen}
+                                headerTitle={'AddPost_HeaderTitle'}
+                                children={<AddPostContent />}
+                                isNext={true}
+                                // isCancelBtn={true}
+                                nextFunc={goCropModalHandler}
                             />
-                            <ImageCropModal
+
+                            <AddPostBasicModal
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
-                                header={'Crop_HeaderTitle'}
-                                setIsAddPostOpen={setIsAddPostOpen}
+                                headerTitle={'Crop_HeaderTitle'}
+                                children={<ImageCropContent />}
+                                isPrevious={true}
+                                isNext={true}
+                                prevFunc={goAddPhotoModalHandler}
+                                nextFunc={goFilterModalHandler}
                             />
+
+                            {/*<AddPostModal*/}
+                            {/*    open={isAddPostOpen}*/}
+                            {/*    setOpen={setIsAddPostOpen}*/}
+                            {/*    headerTitle={'AddPost_HeaderTitle'}*/}
+                            {/*    setIsCropImageModalOpen={setIsCropImageModalOpen}*/}
+                            {/*/>*/}
+                            {/*<ImageCropModal*/}
+                            {/*    open={isCropImageModalOpen}*/}
+                            {/*    setOpen={setIsCropImageModalOpen}*/}
+                            {/*    headerTitle={'Crop_HeaderTitle'}*/}
+                            {/*    setIsAddPostOpen={setIsAddPostOpen}*/}
+                            {/*/>*/}
 
                             <div className={cls.menuList_item}>
                                 <div>

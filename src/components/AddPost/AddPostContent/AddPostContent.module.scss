@@ -1,0 +1,22 @@
+@import '../../../styles/mixins';
+
+.addPostModal_content {
+    @include flexColumn;
+    margin: 50px 0;
+
+    .content_image {
+        @include flexCenter;
+        width: 220px;
+        height: 220px;
+        background-color: var(--header-color);
+        margin-bottom: 50px;
+    }
+    .content_addButton {
+        width: 100%;
+
+        button {
+            width: 220px;
+            height: 100%;
+        }
+    }
+}
