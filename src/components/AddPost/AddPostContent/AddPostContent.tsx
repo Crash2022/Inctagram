@@ -29,7 +29,7 @@ export const AddPostContent = ({ postPhoto, setPostPhoto }: AddPostContentProps)
                 const formData = new FormData()
                 formData.append('file', file)
                 setPostPhoto(URL.createObjectURL(file))
-                setIsPhotoUploaded(true)
+                // setIsPhotoUploaded(true)
             } else {
                 enqueueSnackbar(t('Snackbar_LargeImageSize'), {
                     variant: 'error',
