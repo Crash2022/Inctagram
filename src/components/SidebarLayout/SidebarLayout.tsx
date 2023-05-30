@@ -32,6 +32,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
 
     const isPaid = true // исправить на динамическое значение
 
+    // const [postPhoto, setPostPhoto] = useState<string[]>([])
     const [postPhoto, setPostPhoto] = useState<string>('')
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
 

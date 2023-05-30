@@ -1,10 +1,12 @@
 import React, { ChangeEvent, useState } from 'react'
 import cls from './AddPostContent.module.scss'
 import ImageIcon from '../../../../public/assets/icons/img-icon.svg'
+import LoadingGif from '../../../../public/assets/images/isLoading.gif'
 import Image from 'next/image'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'notistack'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface AddPostContentProps {
     postPhoto: string
@@ -66,6 +68,7 @@ export const AddPostContent = ({
                         onError={imageErrorHandler}
                         quality={100}
                         // priority
+                        // loader={ImageIcon}
                     />
                 )}
             </div>
@@ -74,6 +77,9 @@ export const AddPostContent = ({
                     id={'Upload_Photo'}
                     title={t('AddPhotoButton')}
                     onChangeUpload={uploadPhotoHandler}
+                    // name={postPhoto!}
+                    // multiple
+                    accept={'image/*'}
                 />
             </div>
         </div>
