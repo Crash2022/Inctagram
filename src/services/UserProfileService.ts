@@ -51,3 +51,4 @@ export const {
     useUploadAvatarMutation,
     useDeleteAvatarMutation
 } = userProfileAPI
+

@@ -1,12 +1,9 @@
-// Import necessary components and icons
 import React, { useState, useEffect } from 'react';
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal';
 import cls from "./PublicationModal.module.scss";
 import { useTranslation } from 'react-i18next';
-import ArrowBackIcon from '../../../public/assets/icons/back-arrow.svg';
-import LocationIcon from '../../../public/assets/icons/location.svg';
+import Image from 'next/image';
 import axios from 'axios';
-
 
 interface PublicationModalProps {
     open: boolean;
@@ -45,7 +42,14 @@ export const PublicationModal = (props: PublicationModalProps) => {
         >
             <div className={cls.publicationModal_mainBox}>
                 <div className={cls.publicationModal_header}>
-                    <img src={ArrowBackIcon} alt="Back" onClick={handleClose} />
+                    <div onClick={handleClose}>
+                        <Image
+                            src="/assets/icons/back-arrow.svg"
+                            alt="Back-arrow"
+                            width={50} //replace this with your actual width
+                            height={50} //replace this with your actual height
+                        />
+                    </div>
                     <div>Publication</div>
                     <div
                         className={cls.header_publish}
@@ -69,7 +73,12 @@ export const PublicationModal = (props: PublicationModalProps) => {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                         <div className={cls.content_location}>
-                            <img src={LocationIcon} alt="Location" />
+                            <Image
+                                src="/assets/icons/location.svg"
+                                alt="Location"
+                                width={50} //replace this with your actual width
+                                height={50} //replace this with your actual height
+                            />
                             Add location
                         </div>
                     </div>

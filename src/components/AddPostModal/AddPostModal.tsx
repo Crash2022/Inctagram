@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal';
 import cls from './AddPostModal.module.scss';
 import { useTranslation } from 'react-i18next';
 import { InputFile } from '@/shared/ui/InputFile/InputFile';
 import ImageIcon from '../../../public/assets/icons/img-icon.svg';
-import { PublicationModal } from '../../components/PublicationModal/PublicationModal'; // Ensure the path is correct
+import { PublicationModal } from '../../components/PublicationModal/PublicationModal';
+import {useState} from "react"; // Ensure the path is correct
 
 interface AddPostModalProps {
     open: boolean;

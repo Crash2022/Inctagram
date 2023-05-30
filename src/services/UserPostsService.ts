@@ -1,7 +1,8 @@
+/*
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const apiSlice = createApi({
-    reducerPath: 'api',
+export const userPostsAPI = createApi({
+    reducerPath: 'userPostsAPI',
     baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
     endpoints: (builder) => ({
         uploadImage: builder.mutation({
@@ -27,4 +28,5 @@ export const apiSlice = createApi({
     }),
 });
 
-export const { useUploadImageMutation, useCreatePostMutation } = apiSlice;
+export const { useUploadImageMutation, useCreatePostMutation } = userPostsAPI;
+*/
