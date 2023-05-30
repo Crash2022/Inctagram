@@ -5,10 +5,12 @@ import { authReducer } from '@/store/slices/authSlice'
 import { serviceAuthAPI } from '@/services/AuthService'
 import { userProfilePhotosAPI } from '@/services/UserProfilePhotosService'
 import { userProfileAPI } from '@/services/UserProfileService'
+import { postReducer } from '@/store/slices/postSlice'
 
 const combinedReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
+    post: postReducer,
     [userProfilePhotosAPI.reducerPath]: userProfilePhotosAPI.reducer,
     [serviceAuthAPI.reducerPath]: serviceAuthAPI.reducer,
     [userProfileAPI.reducerPath]: userProfileAPI.reducer

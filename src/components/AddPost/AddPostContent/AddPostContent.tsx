@@ -9,10 +9,14 @@ import { useSnackbar } from 'notistack'
 interface AddPostContentProps {
     postPhoto: string
     setPostPhoto: (photo: string) => void
-    // setIsPhotoUploaded: (value: boolean) => void
+    setIsPhotoUploaded: (value: boolean) => void
 }
 
-export const AddPostContent = ({ postPhoto, setPostPhoto }: AddPostContentProps) => {
+export const AddPostContent = ({
+    postPhoto,
+    setPostPhoto,
+    setIsPhotoUploaded
+}: AddPostContentProps) => {
     const { t } = useTranslation('add-post-modal')
     const { enqueueSnackbar } = useSnackbar()
 
@@ -29,7 +33,7 @@ export const AddPostContent = ({ postPhoto, setPostPhoto }: AddPostContentProps)
                 const formData = new FormData()
                 formData.append('file', file)
                 setPostPhoto(URL.createObjectURL(file))
-                // setIsPhotoUploaded(true)
+                setIsPhotoUploaded(true)
             } else {
                 enqueueSnackbar(t('Snackbar_LargeImageSize'), {
                     variant: 'error',

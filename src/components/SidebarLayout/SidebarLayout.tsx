@@ -31,7 +31,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const isPaid = true // исправить на динамическое значение
 
     const [postPhoto, setPostPhoto] = useState<string>('')
-    // const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
 
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
     const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
@@ -108,13 +108,13 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                     <AddPostContent
                                         postPhoto={postPhoto}
                                         setPostPhoto={setPostPhoto}
-                                        // setIsPhotoUploaded={setIsPhotoUploaded}
+                                        setIsPhotoUploaded={setIsPhotoUploaded}
                                     />
                                 }
-                                isNext={true}
+                                isNextForUpload={true}
                                 // isCancelBtn={true}
                                 nextFunc={goFromAddToCropModalHandler}
-                                // isPhotoUploaded={isPhotoUploaded}
+                                isPhotoUploaded={isPhotoUploaded}
                             />
 
                             <AddPostBasicModal

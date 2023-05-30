@@ -11,11 +11,12 @@ interface AddPostBasicModalProps {
     headerTitle: string
     isPrevious?: boolean
     isNext?: boolean
+    isNextForUpload?: boolean
+    isPhotoUploaded?: boolean
     isCancelBtn?: boolean
     prevFunc?: () => void
     nextFunc?: () => void
     modalWidth?: string
-    isPhotoUploaded?: boolean
 }
 
 export const AddPostBasicModal = ({
@@ -25,11 +26,12 @@ export const AddPostBasicModal = ({
     headerTitle,
     isPrevious,
     isNext,
+    isNextForUpload,
+    isPhotoUploaded,
     isCancelBtn,
     prevFunc,
     nextFunc,
-    modalWidth,
-    isPhotoUploaded
+    modalWidth
 }: AddPostBasicModalProps) => {
     const { t } = useTranslation('add-post-modal')
 
@@ -55,19 +57,24 @@ export const AddPostBasicModal = ({
 
                     <div className={cls.header_title}>{t(headerTitle)}</div>
 
-                    {/*{isNext ? (*/}
-                    {/*    <div className={cls.header_button} onClick={nextFunc && nextFunc}>*/}
-                    {/*        {t('Next')}*/}
-                    {/*    </div>*/}
-                    {/*) : (*/}
-                    {/*    ''*/}
-                    {/*)}*/}
+                    {isNextForUpload ? (
+                        <Button
+                            className={cls.header_button}
+                            theme={'clear'}
+                            onClick={nextFunc && nextFunc}
+                            disabled={!isPhotoUploaded}
+                        >
+                            {t('Next')}
+                        </Button>
+                    ) : (
+                        ''
+                    )}
+
                     {isNext ? (
                         <Button
                             className={cls.header_button}
                             theme={'clear'}
                             onClick={nextFunc && nextFunc}
-                            // disabled={!isPhotoUploaded}
                         >
                             {t('Next')}
                         </Button>
