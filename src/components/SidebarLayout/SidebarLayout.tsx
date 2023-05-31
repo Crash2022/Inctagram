@@ -223,11 +223,11 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                         <div className={cls.menuList_bottom}>
                             <div
                                 className={cls.menuList_item}
-                                onClick={async () => {
-                                    const res = await logout()
-                                    console.log('logout', res)
+                                onClick={() => {
+                                    logout()
+                                    // console.log('logout', res)
                                     localStorage.removeItem('accessToken')
-                                    await router.push(InctagramPath.AUTH.LOGIN)
+                                    void router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >
                                 <div className={cls.item_image}>
