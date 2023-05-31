@@ -1,12 +1,10 @@
 import React, { ChangeEvent, useState } from 'react'
 import cls from './AddPostContent.module.scss'
 import ImageIcon from '../../../../public/assets/icons/img-icon.svg'
-import LoadingGif from '../../../../public/assets/images/isLoading.gif'
 import Image from 'next/image'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'notistack'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface AddPostContentProps {
     postPhoto: string
@@ -22,7 +20,6 @@ export const AddPostContent = ({
     const { t } = useTranslation('add-post-modal')
     const { enqueueSnackbar } = useSnackbar()
 
-    // const [postPhoto, setPostPhoto] = useState<string>('')
     const [isAvaBroken, setIsAvaBroken] = useState<boolean>(false)
 
     const uploadPhotoHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +50,10 @@ export const AddPostContent = ({
         })
     }
 
+    // const myLoader=({src})=>{
+    //     return `${API}/user/photo/${blog.postedBy.username}`;
+    // }
+
     return (
         <div className={cls.addPostModal_content}>
             <div className={cls.content_image}>
@@ -68,7 +69,7 @@ export const AddPostContent = ({
                         onError={imageErrorHandler}
                         quality={100}
                         // priority
-                        // loader={ImageIcon}
+                        // loader={myLoader}
                     />
                 )}
             </div>
