@@ -113,43 +113,53 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
                                 headerTitle={'AddPost_HeaderTitle'}
-                                children={
-                                    <AddPostContent
-                                        postPhoto={postPhoto}
-                                        setPostPhoto={setPostPhoto}
-                                        setIsPhotoUploaded={setIsPhotoUploaded}
-                                    />
-                                }
+                                // children={
+                                //     <AddPostContent
+                                //         postPhoto={postPhoto}
+                                //         setPostPhoto={setPostPhoto}
+                                //         setIsPhotoUploaded={setIsPhotoUploaded}
+                                //     />
+                                // }
                                 isNextForUpload={true}
                                 // isCancelBtn={true}
                                 nextFunc={goFromAddToCropModalHandler}
                                 isPhotoUploaded={isPhotoUploaded}
-                            />
+                            >
+                                <AddPostContent
+                                    postPhoto={postPhoto}
+                                    setPostPhoto={setPostPhoto}
+                                    setIsPhotoUploaded={setIsPhotoUploaded}
+                                />
+                            </AddPostBasicModal>
 
                             {/* модалка для кадрирования фото */}
                             <AddPostBasicModal
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
                                 headerTitle={'Crop_HeaderTitle'}
-                                children={<ImageCropContent postPhoto={postPhoto} />}
+                                // children={<ImageCropContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromCropToAddPhotoModalHandler}
                                 nextFunc={goFromCropToPhotoFiltersModalHandler}
-                            />
+                            >
+                                <ImageCropContent postPhoto={postPhoto} />
+                            </AddPostBasicModal>
 
                             {/* модалка для фильтров фото */}
                             <AddPostBasicModal
                                 open={isPhotoFiltersModalOpen}
                                 setOpen={setIsPhotoFiltersModalOpen}
                                 headerTitle={'Filters_HeaderTitle'}
-                                children={<PhotoFiltersContent postPhoto={postPhoto} />}
+                                // children={<PhotoFiltersContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromPhotoFiltersToCropModalHandler}
                                 nextFunc={goFromPhotoFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
-                            />
+                            >
+                                <PhotoFiltersContent postPhoto={postPhoto} />
+                            </AddPostBasicModal>
 
                             {/* вариант с разными модалками */}
                             {/* <AddPostModal */}
