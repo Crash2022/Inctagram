@@ -23,11 +23,11 @@ import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
 import { useRouter } from 'next/router'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ControlledTextarea } from '@/shared/ui/Controlled/ControlledTextarea'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const router = useRouter()
     const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
@@ -246,23 +246,13 @@ export const General = () => {
                         type={'date'}
                         max={profileDate}
                     />
-                    <div className={cls.textarea}>
-                        <Controller
-                            name={'aboutMe'}
-                            control={control}
-                            render={({ field }: any) => (
-                                <Textarea
-                                    {...field}
-                                    placeholder={t('AboutMe')}
-                                    value={field.value}
-                                    onChange={(value) => {
-                                        field.onChange(value)
-                                    }}
-                                    error={errors.aboutMe?.message}
-                                />
-                            )}
-                        />
-                    </div>
+                    <ControlledTextarea
+                        divClassName={cls.textarea}
+                        name={'aboutMe'}
+                        placeholder={t('AboutMe')}
+                        control={control}
+                        error={errors.aboutMe?.message}
+                    />
                 </div>
             </div>
 

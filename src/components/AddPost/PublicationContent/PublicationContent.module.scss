@@ -9,8 +9,34 @@
     .content_image {
 
     }
-    .content_publication {
 
+    .content_publication {
+        width: 100%;
+        margin-top: 20px;
+
+        .publication_info {
+            .info_header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .header_avatar {
+
+                }
+                .header_userName {
+
+                }
+            }
+            .info_textarea {
+
+            }
+        }
+        .publication_addLocation {
+
+        }
+        .publication_location {
+
+        }
     }
 }
 
