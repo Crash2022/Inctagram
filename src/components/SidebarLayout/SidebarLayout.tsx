@@ -113,13 +113,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
                                 headerTitle={'AddPost_HeaderTitle'}
-                                // children={
-                                //     <AddPostContent
-                                //         postPhoto={postPhoto}
-                                //         setPostPhoto={setPostPhoto}
-                                //         setIsPhotoUploaded={setIsPhotoUploaded}
-                                //     />
-                                // }
                                 isNextForUpload={true}
                                 // isCancelBtn={true}
                                 nextFunc={goFromAddToCropModalHandler}
@@ -137,7 +130,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
                                 headerTitle={'Crop_HeaderTitle'}
-                                // children={<ImageCropContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromCropToAddPhotoModalHandler}
@@ -151,7 +143,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 open={isPhotoFiltersModalOpen}
                                 setOpen={setIsPhotoFiltersModalOpen}
                                 headerTitle={'Filters_HeaderTitle'}
-                                // children={<PhotoFiltersContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromPhotoFiltersToCropModalHandler}
@@ -160,20 +151,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             >
                                 <PhotoFiltersContent postPhoto={postPhoto} />
                             </AddPostBasicModal>
-
-                            {/* вариант с разными модалками */}
-                            {/* <AddPostModal */}
-                            {/*    open={isAddPostOpen} */}
-                            {/*    setOpen={setIsAddPostOpen} */}
-                            {/*    headerTitle={'AddPost_HeaderTitle'} */}
-                            {/*    setIsCropImageModalOpen={setIsCropImageModalOpen} */}
-                            {/* /> */}
-                            {/* <ImageCropModal */}
-                            {/*    open={isCropImageModalOpen} */}
-                            {/*    setOpen={setIsCropImageModalOpen} */}
-                            {/*    headerTitle={'Crop_HeaderTitle'} */}
-                            {/*    setIsAddPostOpen={setIsAddPostOpen} */}
-                            {/* /> */}
 
                             <div className={cls.menuList_item}>
                                 <div>
