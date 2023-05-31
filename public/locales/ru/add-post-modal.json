@@ -4,8 +4,15 @@
   "Snackbar_LargeImageSize": "Файл не должен превышать размер 1 Мб",
   "Snackbar_ErrorImage": "Файл повреждён, попробуйте загрузить другой",
 
-  "Crop_HeaderTitle": "Кадрирование",
   "Next": "Далее",
+
+  "Crop_HeaderTitle": "Кадрирование",
+  "Zoom": "Масштаб",
+  "Rotation": "Поворот",
+  "Original": "Оригинал",
+  "1to1": "1:1",
+  "3to2": "3:2",
+  "16to9": "16:9",
 
   "Filters_HeaderTitle": "Фильтры"
 }

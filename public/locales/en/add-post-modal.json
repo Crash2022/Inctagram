@@ -4,8 +4,15 @@
   "Snackbar_LargeImageSize": "The file size must be less than 1 Mb",
   "Snackbar_ErrorImage": "The file is damaged, please try another one",
 
-  "Crop_HeaderTitle": "Cropping",
   "Next": "Next",
+
+  "Crop_HeaderTitle": "Cropping",
+  "Zoom": "Zoom",
+  "Rotation": "Rotation",
+  "Original": "Original",
+  "1to1": "1:1",
+  "3to2": "3:2",
+  "16to9": "16:9",
 
   "Filters_HeaderTitle": "Filters"
 }

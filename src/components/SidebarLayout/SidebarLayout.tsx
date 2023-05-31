@@ -20,7 +20,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
-import { PhotoFiltersContent } from '@/components/AddPost/PhotoFiltersContent/PhotoFiltersContent'
+import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
 import { useSnackbar } from 'notistack'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
@@ -41,7 +41,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
 
     const goFromAddToCropModalHandler = () => {
         if (!isPhotoUploaded) {
-            enqueueSnackbar(/*error.data.messages[0].message*/ t('Error'), {
+            enqueueSnackbar(/* error.data.messages[0].message */ t('Error'), {
                 variant: 'error',
                 autoHideDuration: 3000
             })
@@ -108,62 +108,49 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 />
                             </div>
 
-                            {/*модалка для добавления фото*/}
+                            {/* модалка для добавления фото */}
                             <AddPostBasicModal
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
                                 headerTitle={'AddPost_HeaderTitle'}
-                                children={
-                                    <AddPostContent
-                                        postPhoto={postPhoto}
-                                        setPostPhoto={setPostPhoto}
-                                        setIsPhotoUploaded={setIsPhotoUploaded}
-                                    />
-                                }
                                 isNextForUpload={true}
                                 // isCancelBtn={true}
                                 nextFunc={goFromAddToCropModalHandler}
                                 isPhotoUploaded={isPhotoUploaded}
-                            />
+                            >
+                                <AddPostContent
+                                    postPhoto={postPhoto}
+                                    setPostPhoto={setPostPhoto}
+                                    setIsPhotoUploaded={setIsPhotoUploaded}
+                                />
+                            </AddPostBasicModal>
 
-                            {/*модалка для кадрирования фото*/}
+                            {/* модалка для кадрирования фото */}
                             <AddPostBasicModal
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
                                 headerTitle={'Crop_HeaderTitle'}
-                                children={<ImageCropContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromCropToAddPhotoModalHandler}
                                 nextFunc={goFromCropToPhotoFiltersModalHandler}
-                            />
+                            >
+                                <ImageCropContent postPhoto={postPhoto} />
+                            </AddPostBasicModal>
 
-                            {/*модалка для фильтров фото*/}
+                            {/* модалка для фильтров фото */}
                             <AddPostBasicModal
                                 open={isPhotoFiltersModalOpen}
                                 setOpen={setIsPhotoFiltersModalOpen}
                                 headerTitle={'Filters_HeaderTitle'}
-                                children={<PhotoFiltersContent postPhoto={postPhoto} />}
                                 isPrevious={true}
                                 isNext={true}
                                 prevFunc={goFromPhotoFiltersToCropModalHandler}
                                 nextFunc={goFromPhotoFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
-                            />
-
-                            {/*вариант с разными модалками*/}
-                            {/*<AddPostModal*/}
-                            {/*    open={isAddPostOpen}*/}
-                            {/*    setOpen={setIsAddPostOpen}*/}
-                            {/*    headerTitle={'AddPost_HeaderTitle'}*/}
-                            {/*    setIsCropImageModalOpen={setIsCropImageModalOpen}*/}
-                            {/*/>*/}
-                            {/*<ImageCropModal*/}
-                            {/*    open={isCropImageModalOpen}*/}
-                            {/*    setOpen={setIsCropImageModalOpen}*/}
-                            {/*    headerTitle={'Crop_HeaderTitle'}*/}
-                            {/*    setIsAddPostOpen={setIsAddPostOpen}*/}
-                            {/*/>*/}
+                            >
+                                <ImageFiltersContent postPhoto={postPhoto} />
+                            </AddPostBasicModal>
 
                             <div className={cls.menuList_item}>
                                 <div>
