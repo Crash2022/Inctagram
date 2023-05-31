@@ -14,13 +14,15 @@
 
 .controls {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
-    width: 50%;
+    /*width: 50%;*/
+    width: 43%;
     transform: translateX(-50%);
     height: 40px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .controls:hover input[type='range']::-webkit-slider-thumb {
@@ -44,6 +46,7 @@
     /*border-bottom: 5px solid #fff;*/
     /*background: #3f51b5;*/
     width: 100%;
+    display: flex;
 }
 
 .zoom_range::-moz-range-thumb {
