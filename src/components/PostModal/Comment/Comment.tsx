@@ -41,8 +41,8 @@ export const Comment = (props: CommentPropsType) => {
 }
 
 interface CommentPropsType {
-    your: boolean
-    desc: boolean
+    your?: boolean
+    desc?: boolean
     avatar: any
     userName: string
     text: string

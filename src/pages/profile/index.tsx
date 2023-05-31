@@ -19,7 +19,8 @@ import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
 import EditIcon from '../../../public/assets/icons/edit-icon.svg'
 import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
-import { PostContent } from '@/components/PostModal/PostContent/PostContent'
+import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
+import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -108,6 +109,8 @@ const Profile: NextPageWithLayout = () => {
     const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
+    const [update, setUpdate] = useState<boolean>(false)
+
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
@@ -116,7 +119,7 @@ const Profile: NextPageWithLayout = () => {
                 open={openModal}
                 setOpen={setOpenModal}
                 headerTitle={'AddPost_HeaderTitle'}
-                children={<PostContent />}
+                children={<PostMain update={update} setUpdate={setUpdate} />}
             />
             <Head>
                 <title>Inctagram Index</title>
@@ -177,12 +180,12 @@ const Profile: NextPageWithLayout = () => {
                             photos.map((photo, index) => {
                                 return (
                                     <div key={index} className={cls.list_item}>
-                                        {/*<Image*/}
-                                        {/*    src={photo.url}*/}
-                                        {/*    alt={'gallery-photo'}*/}
-                                        {/*    width={265}*/}
-                                        {/*    height={265}*/}
-                                        {/*/>*/}
+                                        {/* <Image */}
+                                        {/*    src={photo.url} */}
+                                        {/*    alt={'gallery-photo'} */}
+                                        {/*    width={265} */}
+                                        {/*    height={265} */}
+                                        {/* /> */}
 
                                         <img
                                             src={photo.url}

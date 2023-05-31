@@ -1,33 +1,30 @@
 import cls from './PostContent.module.scss'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
-import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
-import React, { useState } from 'react'
+import DefaultProfileAvatar from '../../../../../public/assets/images/default-avatar.png'
 import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
 
-import EditIcon from '../../../../public/assets/icons/edit-icon.svg'
-import TrashIcon from '../../../../public/assets/icons/trash-icon.svg'
-import RedLike from '../../../../public/assets/icons/red-like.svg'
-import Like from '../../../../public/assets/icons/like.svg'
-import Send from '../../../../public/assets/icons/send.svg'
-import AddToFavorite from '../../../../public/assets/icons/addToFavorite1.svg'
+import EditIcon from '../../../../../public/assets/icons/edit-icon.svg'
+import TrashIcon from '../../../../../public/assets/icons/trash-icon.svg'
+import Like from '../../../../../public/assets/icons/like.svg'
+import Send from '../../../../../public/assets/icons/send.svg'
+import AddToFavorite from '../../../../../public/assets/icons/addToFavorite1.svg'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { useForm } from 'react-hook-form'
-import { LoginPayloadType } from '@/models/auth-types'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from '@/shared/ui/Button/Button'
 import { Comment } from '@/components/PostModal/Comment/Comment'
+import { PostUpdatedPropsType } from '@/components/PostModal/PostMain/PostUpdate/PostUpdate'
 
-export const PostContent = () => {
+export const PostContent = ({ setUpdate }: PostUpdatedPropsType) => {
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
-    const [menuItems, setMenuItems] = useState([
+    const menuItems = [
         {
             id: 1,
             icon: EditIcon,
             title: 'EditPost',
             func: () => {
-                alert('Edit Post')
+                setUpdate(true)
             }
         },
         {
@@ -38,17 +35,14 @@ export const PostContent = () => {
                 alert('Delete Post')
             }
         }
-    ])
+    ]
 
     const {
         control,
         handleSubmit,
         formState: { errors }
-    } = useForm<LoginPayloadType>({
-        defaultValues: {
-            email: '',
-            password: ''
-        }
+    } = useForm<>({
+        defaultValues: {}
     })
 
     return (
@@ -95,8 +89,6 @@ export const PostContent = () => {
                             likeCount={0}
                         />
                         <Comment
-                            your={false}
-                            desc={false}
                             avatar={DefaultProfileAvatar}
                             userName={'test user Name'}
                             text={
@@ -107,8 +99,6 @@ export const PostContent = () => {
                             likeCount={3}
                         />
                         <Comment
-                            your={false}
-                            desc={false}
                             avatar={DefaultProfileAvatar}
                             userName={'test user Name'}
                             text={

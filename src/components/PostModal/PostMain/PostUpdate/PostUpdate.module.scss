@@ -1,0 +1,85 @@
+@import '../../../../styles/mixins';
+
+.postModal_mainBox {
+  @include defaultModalStyle;
+  width: 984px;
+  height: 564px;
+  background-color: var(--dark-300);
+
+  .updatePostModal_header {
+    width: 100%;
+    @include flexBetween;
+    padding: 10px 20px;
+    border-bottom: 1px solid gray;
+
+    .modal_headerTitle {
+      font-size: 20px;
+    }
+
+    .closeButton {
+      button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .updatePostModal_body {
+    height: 92%;
+    display: flex;
+
+    .postModal_image {
+      width: 50%;
+      background-color: green;
+    }
+
+    .postModal_items {
+      width: 50%;
+
+      .header {
+        width: 100%;
+        padding: 10px 20px;
+
+        .headerTitle {
+          @include flexBetween;
+        }
+
+        .profileData {
+          @include flexCenter;
+
+          .userAvatar {
+            border-radius: 50%;
+            overflow: hidden;
+          }
+
+          .userName {
+            margin-left: 20px;
+          }
+        }
+      }
+      .updateDesc {
+        padding: 10px 20px;
+        @include flexColumnOnlyBetween;
+        height: 85%;
+        .textAreaBlock {
+          .description {
+            font-size: 12px;
+            opacity: 0.7;
+          }
+          .lettersCount {
+            text-align: right;
+            font-size: 10px;
+            opacity: 0.7;
+            padding-top: 5px;
+          }
+        }
+        .buttonBlock {
+          @include flexEnd;
+        }
+      }
+    }
+  }
+}
+
