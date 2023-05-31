@@ -15,9 +15,9 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 // import { Photo } from '@/models/profile-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useState } from 'react'
-import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
-import EditIcon from '../../../public/assets/icons/edit-icon.svg'
-import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
+// import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
+// import EditIcon from '../../../public/assets/icons/edit-icon.svg'
+// import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { PostContent } from '@/components/PostModal/PostContent/PostContent'
 // import dynamic from 'next/dynamic'
@@ -105,7 +105,7 @@ const Profile: NextPageWithLayout = () => {
 
     // const { photos } = props
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
-    const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
+    const { data: meData } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
@@ -116,8 +116,10 @@ const Profile: NextPageWithLayout = () => {
                 open={openModal}
                 setOpen={setOpenModal}
                 headerTitle={'AddPost_HeaderTitle'}
-                children={<PostContent />}
-            />
+            >
+                <PostContent />
+            </PostBasicModal>
+
             <Head>
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
@@ -177,12 +179,12 @@ const Profile: NextPageWithLayout = () => {
                             photos.map((photo, index) => {
                                 return (
                                     <div key={index} className={cls.list_item}>
-                                        {/*<Image*/}
-                                        {/*    src={photo.url}*/}
-                                        {/*    alt={'gallery-photo'}*/}
-                                        {/*    width={265}*/}
-                                        {/*    height={265}*/}
-                                        {/*/>*/}
+                                        {/* <Image */}
+                                        {/*    src={photo.url} */}
+                                        {/*    alt={'gallery-photo'} */}
+                                        {/*    width={265} */}
+                                        {/*    height={265} */}
+                                        {/* /> */}
 
                                         <img
                                             src={photo.url}

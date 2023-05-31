@@ -1,7 +1,8 @@
+@import '../../../styles/mixins';
+
 .photoFiltersModal_content {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    @include flexOnlyBetween;
     gap: 40px;
     overflow: hidden;
 
@@ -11,9 +12,7 @@
     .content_filters {
         width: 100%;
         border: 1px solid white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexCenter;
         gap: 25px;
         flex-wrap: wrap;
 

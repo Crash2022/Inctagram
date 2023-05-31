@@ -11,6 +11,7 @@ interface AddPostBasicModalProps {
     headerTitle: string
     isPrevious?: boolean
     isNext?: boolean
+    nextButtonTitle: string
     isNextForUpload?: boolean
     isPhotoUploaded?: boolean
     isCancelBtn?: boolean
@@ -26,6 +27,7 @@ export const AddPostBasicModal = ({
     headerTitle,
     isPrevious,
     isNext,
+    nextButtonTitle,
     isNextForUpload,
     isPhotoUploaded,
     isCancelBtn,
@@ -64,7 +66,8 @@ export const AddPostBasicModal = ({
                             onClick={nextFunc && nextFunc}
                             disabled={!isPhotoUploaded}
                         >
-                            {t('Next')}
+                            {/* {t('Next')} */}
+                            {t(nextButtonTitle)}
                         </Button>
                     ) : (
                         ''
@@ -76,7 +79,8 @@ export const AddPostBasicModal = ({
                             theme={'clear'}
                             onClick={nextFunc && nextFunc}
                         >
-                            {t('Next')}
+                            {/* {t('Next')} */}
+                            {t(nextButtonTitle)}
                         </Button>
                     ) : (
                         ''
