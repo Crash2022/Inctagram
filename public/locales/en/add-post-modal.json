@@ -18,5 +18,6 @@
 
   "Publication_HeaderTitle": "Publication",
   "Publish": "Publish",
-  "Description": "Description"
+  "Description": "Description",
+  "DescriptionLimit": "Description limit must be less 500 symbols"
 }

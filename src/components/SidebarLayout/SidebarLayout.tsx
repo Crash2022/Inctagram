@@ -15,8 +15,6 @@ import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { useSnackbar } from 'notistack'
-// import { AddPostModal } from '@/components/AddPost/AddPostModal/AddPostModal'
-// import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
@@ -36,6 +34,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     // const [postPhoto, setPostPhoto] = useState<string[]>([])
     const [postPhoto, setPostPhoto] = useState<string>('')
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+    const [description, setDescription] = useState<string>('')
+    const [descriptionError, setDescriptionError] = useState<string>('')
 
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
     const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
@@ -66,18 +66,19 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         setIsImageFiltersModalOpen(false)
         setIsCropImageModalOpen(true)
     }
+
     const goFromPhotoFiltersToPublicationModalHandler = () => {
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)
     }
-
     const goFromPublicationModalToFiltersHandler = () => {
         setIsPublicationModalOpen(false)
         setIsImageFiltersModalOpen(true)
     }
+
     const publicationHandler = () => {
         alert('publish')
-        // request here
+        // requests here
     }
 
     useEffect(() => {
@@ -176,7 +177,13 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={publicationHandler}
                                 modalWidth={'900'}
                             >
-                                <PublicationContent postPhoto={postPhoto} />
+                                <PublicationContent
+                                    postPhoto={postPhoto}
+                                    description={description}
+                                    setDescription={setDescription}
+                                    descriptionError={descriptionError}
+                                    setDescriptionError={setDescriptionError}
+                                />
                             </AddPostBasicModal>
 
                             <div className={cls.menuList_item}>

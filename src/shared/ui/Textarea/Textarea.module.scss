@@ -39,9 +39,9 @@
 }
 
 .errorMessage {
-    position: absolute;
+    //position: absolute;
     color: var(--danger-500);
-    left: 0;
-    top: 135px;
+    //left: 0;
+    //top: 135px;
     @include regular-text-16;
 }

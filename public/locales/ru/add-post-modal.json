@@ -18,5 +18,6 @@
 
   "Publication_HeaderTitle": "Публикация",
   "Publish": "Опубликовать",
-  "Description": "Описание публикации"
+  "Description": "Описание публикации",
+  "DescriptionLimit": "Превышено количество символов"
 }

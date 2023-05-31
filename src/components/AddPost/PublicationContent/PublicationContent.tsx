@@ -1,21 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import cls from './PublicationContent.module.scss'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
-// import { ControlledTextarea } from '@/shared/ui/Controlled/ControlledTextarea'
 
 interface PublicationContentProps {
     postPhoto: string
+    description: string
+    setDescription: (value: string) => void
+    descriptionError: string
+    setDescriptionError: (value: string) => void
 }
 
-export const PublicationContent = ({ postPhoto }: PublicationContentProps) => {
+export const PublicationContent = ({
+    postPhoto,
+    description,
+    setDescription,
+    descriptionError,
+    setDescriptionError
+}: PublicationContentProps) => {
     const { t } = useTranslation('add-post-modal')
     const { data: profileData } = useGetProfileDataQuery()
 
-    const [description, setDescription] = useState<string>('')
+    useEffect(() => {
+        if (description.length > 500) {
+            setDescriptionError(t('DescriptionLimit'))
+        } else {
+            setDescriptionError('')
+        }
+    }, [description])
 
     return (
         <div className={cls.publicationModal_content}>
@@ -43,20 +58,13 @@ export const PublicationContent = ({ postPhoto }: PublicationContentProps) => {
                         </div>
                     </div>
                     <div className={cls.info_textarea}>
-                        {/* <ControlledTextarea */}
-                        {/*    divClassName={cls.description} */}
-                        {/*    name={'description'} */}
-                        {/*    placeholder={t('Description')} */}
-                        {/*    control={control} */}
-                        {/*    error={errors.description?.message} */}
-                        {/* /> */}
-
                         <Textarea
                             placeholder={t('Description')}
                             value={description}
                             onChange={(e) => {
                                 setDescription(e.currentTarget.value)
                             }}
+                            error={descriptionError}
                         />
                         <div className={cls.textarea_length}>{description.length} / 500</div>
                     </div>
@@ -65,33 +73,5 @@ export const PublicationContent = ({ postPhoto }: PublicationContentProps) => {
                 <div className={cls.publication_location}>Location</div>
             </div>
         </div>
-
-        // <div className={cls.publicationModal_mainBox}>
-        //     <div className={cls.publicationModal_content}>
-        //         <div className={cls.content_image}>
-        //             <img src={props.selectedImage} alt='Selected' />
-        //         </div>
-        //         <div className={cls.content_right}>
-        //             {userAvatar && <img src={userAvatar} alt='User Avatar' />}
-        //             <div className={cls.content_description}>Add publication description</div>
-        //             <textarea
-        //                 className={cls.content_textArea}
-        //                 value={description}
-        //                 onChange={(e) => {
-        //                     setDescription(e.target.value)
-        //                 }}
-        //             />
-        //             <div className={cls.content_location}>
-        //                 <Image
-        //                     src='/assets/icons/location.svg'
-        //                     alt='Location'
-        //                     width={50}
-        //                     height={50}
-        //                 />
-        //                 Add location
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
