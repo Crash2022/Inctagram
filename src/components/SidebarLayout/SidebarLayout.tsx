@@ -27,6 +27,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
+
     const [logout, { isSuccess, isLoading }] = useLogoutMutation()
 
     const isPaid = true // исправить на динамическое значение
@@ -37,7 +38,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
 
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
     const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
-    const [isPhotoFiltersModalOpen, setIsPhotoFiltersModalOpen] = useState<boolean>(false)
+    const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
 
     const goFromAddToCropModalHandler = () => {
         if (!isPhotoUploaded) {
@@ -56,12 +57,12 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     }
 
     const goFromCropToPhotoFiltersModalHandler = () => {
-        setIsPhotoFiltersModalOpen(true)
+        setIsImageFiltersModalOpen(true)
         setIsCropImageModalOpen(false)
     }
 
     const goFromPhotoFiltersToCropModalHandler = () => {
-        setIsPhotoFiltersModalOpen(false)
+        setIsImageFiltersModalOpen(false)
         setIsCropImageModalOpen(true)
     }
 
@@ -140,8 +141,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
 
                             {/* модалка для фильтров фото */}
                             <AddPostBasicModal
-                                open={isPhotoFiltersModalOpen}
-                                setOpen={setIsPhotoFiltersModalOpen}
+                                open={isImageFiltersModalOpen}
+                                setOpen={setIsImageFiltersModalOpen}
                                 headerTitle={'Filters_HeaderTitle'}
                                 isPrevious={true}
                                 isNext={true}
@@ -224,8 +225,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             <div
                                 className={cls.menuList_item}
                                 onClick={() => {
-                                    logout()
-                                    // console.log('logout', res)
+                                    logout().then((res) => console.log(res))
                                     localStorage.removeItem('accessToken')
                                     void router.push(InctagramPath.AUTH.LOGIN)
                                 }}
