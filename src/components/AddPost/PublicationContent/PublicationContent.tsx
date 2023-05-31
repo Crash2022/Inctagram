@@ -58,6 +58,7 @@ export const PublicationContent = ({ postPhoto }: PublicationContentProps) => {
                                 setDescription(e.currentTarget.value)
                             }}
                         />
+                        <div className={cls.textarea_length}>{description.length} / 500</div>
                     </div>
                 </div>
                 <div className={cls.publication_addLocation}>Add Location</div>
