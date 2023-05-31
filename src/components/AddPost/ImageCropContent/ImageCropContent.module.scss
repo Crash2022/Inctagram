@@ -3,6 +3,7 @@
     /*overflow: hidden;*/
 }
 
+// контейнер
 .crop_container {
     position: absolute;
     top: 63px;
@@ -12,15 +13,12 @@
     overflow: hidden;
 }
 
-.controls_wrapper {
-    //background-color: gray;
-}
-
+// инпуты
 .controls {
     position: absolute;
     bottom: 10px;
     left: 50%;
-    /*width: 50%;*/
+    //width: 50%;
     width: 47%;
     transform: translateX(-50%);
     height: 40px;
@@ -81,6 +79,7 @@
     transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
+// соотношение сторон
 .aspect {
     position: absolute;
     left: 15px;
@@ -147,22 +146,3 @@
         height: 18px;
     }
 }
-//.item_1to1_img {
-//    width: 18px;
-//    height: 18px;
-//    border: 1px solid white;
-//    border-radius: 2px;
-//}
-//.item_3to2_img {
-//    width: 24px;
-//    height: 16px;
-//    border: 1px solid white;
-//    border-radius: 2px;
-//}
-//.item_16to9_img {
-//    width: 32px;
-//    height: 18px;
-//    border: 1px solid white;
-//    border-radius: 2px;
-//}
-

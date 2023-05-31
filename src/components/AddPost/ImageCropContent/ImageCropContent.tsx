@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { SVGProps, useCallback, useState } from 'react'
 import cls from './ImageCropContent.module.scss'
 import Cropper from 'react-easy-crop'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ interface AspectMenuTypes {
     id: number
     aspect: number
     title: string
-    icon: any
+    icon: React.FC<SVGProps<SVGSVGElement>>
 }
 
 export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {

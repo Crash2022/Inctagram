@@ -27,7 +27,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
-    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+    const [logout, { isSuccess, isLoading }] = useLogoutMutation()
 
     const isPaid = true // исправить на динамическое значение
 
