@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
-import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import cls from './AddPostBasicModal.module.scss'
+import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/ui/Button/Button'
 

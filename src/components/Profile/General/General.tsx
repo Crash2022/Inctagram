@@ -116,7 +116,7 @@ export const General = () => {
     }
 
     const deleteAvatarHandler = async () => {
-        if (profileData.avatars.length === 0) {
+        if (profileData && profileData.avatars.length === 0) {
             enqueueSnackbar(t('Snackbar_NoAvatar'), {
                 variant: 'info',
                 autoHideDuration: 3000
@@ -179,7 +179,7 @@ export const General = () => {
                     <div className={cls.avatar} id={'Avatar_Div'}>
                         <Image
                             src={
-                                profileData.avatars.length !== 0
+                                profileData && profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
                                     : DefaultProfileAvatar
                             }
@@ -192,7 +192,7 @@ export const General = () => {
                             // priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
-                            <DeletePhotoIcon width={30} height={30} />
+                            <DeletePhotoIcon />
                         </div>
                     </div>
                     <div className={cls.addAvatar_btn}>

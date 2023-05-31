@@ -58,7 +58,7 @@ export const AddPostContent = ({
         <div className={cls.addPostModal_content}>
             <div className={cls.content_image}>
                 {postPhoto === '' ? (
-                    <ImageIcon width={48} height={48} />
+                    <ImageIcon />
                 ) : (
                     <Image
                         src={postPhoto}
