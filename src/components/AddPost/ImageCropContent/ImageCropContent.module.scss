@@ -21,7 +21,7 @@
     bottom: 10px;
     left: 50%;
     /*width: 50%;*/
-    width: 45%;
+    width: 47%;
     transform: translateX(-50%);
     height: 40px;
     display: flex;
@@ -104,8 +104,12 @@
     bottom: 90px;
     background-color: var(--dark-300);
     width: 156px;
-    height: 152px;
+    //height: 152px; // для 4-х элементов
+    height: 120px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .aspectMenu_item {
@@ -133,22 +137,32 @@
     }
 }
 
-.item_1to1_img {
-    width: 18px;
-    height: 18px;
-    border: 1px solid white;
-    border-radius: 2px;
+.item_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 18px;
+        height: 18px;
+    }
 }
-.item_3to2_img {
-    width: 24px;
-    height: 16px;
-    border: 1px solid white;
-    border-radius: 2px;
-}
-.item_16to9_img {
-    width: 32px;
-    height: 18px;
-    border: 1px solid white;
-    border-radius: 2px;
-}
+//.item_1to1_img {
+//    width: 18px;
+//    height: 18px;
+//    border: 1px solid white;
+//    border-radius: 2px;
+//}
+//.item_3to2_img {
+//    width: 24px;
+//    height: 16px;
+//    border: 1px solid white;
+//    border-radius: 2px;
+//}
+//.item_16to9_img {
+//    width: 32px;
+//    height: 18px;
+//    border: 1px solid white;
+//    border-radius: 2px;
+//}
 

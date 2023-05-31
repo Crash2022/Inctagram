@@ -3,10 +3,20 @@ import cls from './ImageCropContent.module.scss'
 import Cropper from 'react-easy-crop'
 import { useTranslation } from 'react-i18next'
 import ExpandScale from '../../../../public/assets/icons/expand-scale.svg'
-import ImageIcon24 from '../../../../public/assets/icons/img-icon24.svg'
+// import ImageIcon24 from '../../../../public/assets/icons/img-icon24.svg'
+import SquareIcon from '../../../../public/assets/icons/rectangle-square.svg'
+import RectangleIcon32 from '../../../../public/assets/icons/rectangle-2.svg'
+import RectangleIcon169 from '../../../../public/assets/icons/rectangle-1.svg'
 
 interface ImageCropContentProps {
     postPhoto: string
+}
+
+interface AspectMenuTypes {
+    id: number
+    aspect: number
+    title: string
+    icon: any
 }
 
 export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
@@ -16,7 +26,14 @@ export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
     const [zoom, setZoom] = useState<number>(1)
     const [rotation, setRotation] = useState<number>(0)
     const [aspect, setAspect] = useState<number>(1 / 1)
-    const [aspectMenu, setAspectMenu] = useState<boolean>(false)
+
+    const [isAspectMenuShow, setIsAspectMenuShow] = useState<boolean>(false)
+    const aspectMenu: AspectMenuTypes[] = [
+        // { id: 1, aspect: 1 / 1, title: 'Original', icon: ImageIcon24 },
+        { id: 2, aspect: 1 / 1, title: '1to1', icon: SquareIcon },
+        { id: 3, aspect: 3 / 2, title: '3to2', icon: RectangleIcon32 },
+        { id: 4, aspect: 16 / 9, title: '16to9', icon: RectangleIcon169 }
+    ]
 
     const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
         console.log(croppedArea, croppedAreaPixels)
@@ -38,47 +55,28 @@ export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
                 />
             </div>
 
-            {aspectMenu ? (
+            {isAspectMenuShow ? (
                 <div className={cls.aspectMenu}>
-                    <div className={cls.aspectMenu_item}>
-                        <div>{t('Original')}</div>
-                        <div>
-                            <ImageIcon24 />
-                        </div>
-                    </div>
-                    <div
-                        className={
-                            aspect === 1 / 1 ? cls.aspectMenu_item_active : cls.aspectMenu_item
-                        }
-                        onClick={() => {
-                            setAspect(1 / 1)
-                        }}
-                    >
-                        <div>{t('1to1')}</div>
-                        <div className={cls.item_1to1_img}></div>
-                    </div>
-                    <div
-                        className={
-                            aspect === 3 / 2 ? cls.aspectMenu_item_active : cls.aspectMenu_item
-                        }
-                        onClick={() => {
-                            setAspect(3 / 2)
-                        }}
-                    >
-                        <div>{t('3to2')}</div>
-                        <div className={cls.item_3to2_img}></div>
-                    </div>
-                    <div
-                        className={
-                            aspect === 16 / 9 ? cls.aspectMenu_item_active : cls.aspectMenu_item
-                        }
-                        onClick={() => {
-                            setAspect(16 / 9)
-                        }}
-                    >
-                        <div>{t('16to9')}</div>
-                        <div className={cls.item_16to9_img}></div>
-                    </div>
+                    {aspectMenu.map((menu) => {
+                        return (
+                            <div
+                                key={menu.id}
+                                className={
+                                    menu.aspect === aspect
+                                        ? cls.aspectMenu_item_active
+                                        : cls.aspectMenu_item
+                                }
+                                onClick={() => {
+                                    setAspect(menu.aspect)
+                                }}
+                            >
+                                <div>{t(menu.title)}</div>
+                                <div className={cls.item_img}>
+                                    {<menu.icon width={24} height={24} />}
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
             ) : (
                 ''
@@ -87,7 +85,7 @@ export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
             <div
                 className={cls.aspect}
                 onClick={() => {
-                    setAspectMenu(!aspectMenu)
+                    setIsAspectMenuShow(!isAspectMenuShow)
                 }}
             >
                 <ExpandScale />
