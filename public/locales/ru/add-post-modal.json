@@ -14,5 +14,10 @@
   "3to2": "3:2",
   "16to9": "16:9",
 
-  "Filters_HeaderTitle": "Фильтры"
+  "Filters_HeaderTitle": "Фильтры",
+
+  "Publication_HeaderTitle": "Публикация",
+  "Publish": "Опубликовать",
+  "Description": "Описание публикации",
+  "DescriptionLimit": "Превышено количество символов"
 }

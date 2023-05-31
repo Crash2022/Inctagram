@@ -2,7 +2,6 @@ import Head from 'next/head'
 import cls from './Profile.module.scss'
 import Image from 'next/image'
 import { NextPageWithLayout } from '@/pages/_app'
-// import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import DefaultProfileAvatar from '../../../public/assets/images/default-avatar.png'
@@ -11,16 +10,13 @@ import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
 import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosService'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
-// import { profileApi } from '@/shared/api/profile-api'
-// import { Photo } from '@/models/profile-types'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useState } from 'react'
-import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
-import EditIcon from '../../../public/assets/icons/edit-icon.svg'
-import TrashIcon from '../../../public/assets/icons/trash-icon.svg'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
-import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
-import { PostMain } from '@/components/PostModal/PostMain/PostMain'
+import { PostContent } from '@/components/PostModal/PostContent/PostContent'
+import { Photo } from '@/models/profile-types'
+// import { profileApi } from '@/shared/api/profile-api'
+// import { Photo } from '@/models/profile-types'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -83,33 +79,10 @@ const Profile: NextPageWithLayout = () => {
 
     const [openModal, setOpenModal] = useState<boolean>(false)
 
-    // для DottedMenu
-    // const [menuItems, setMenuItems] = useState([
-    //     {
-    //         id: 1,
-    //         icon: EditIcon,
-    //         title: 'EditPost',
-    //         func: () => {
-    //             alert('Edit Post')
-    //         }
-    //     },
-    //     {
-    //         id: 2,
-    //         icon: TrashIcon,
-    //         title: 'DeletePost',
-    //         func: () => {
-    //             alert('Delete Post')
-    //         }
-    //     }
-    // ])
-    // <DottedMenu menuItems={menuItems} />
-
     // const { photos } = props
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
-    const { data: meData, isLoading: meDataIsLoading } = useMeQuery()
+    const { data: meData } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
-
-    const [update, setUpdate] = useState<boolean>(false)
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
 
@@ -119,8 +92,10 @@ const Profile: NextPageWithLayout = () => {
                 open={openModal}
                 setOpen={setOpenModal}
                 headerTitle={'AddPost_HeaderTitle'}
-                children={<PostMain update={update} setUpdate={setUpdate} />}
-            />
+            >
+                <PostContent />
+            </PostBasicModal>
+
             <Head>
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
@@ -144,7 +119,7 @@ const Profile: NextPageWithLayout = () => {
                     </div>
                     <div className={cls.header_info}>
                         <div className={cls.info_control}>
-                            <div>{meData && meData.userName}</div>
+                            <div>{meData?.userName}</div>
                             <ButtonLink
                                 theme={'primaryWhite'}
                                 href={InctagramPath.PROFILE.SETTINGS}
@@ -177,9 +152,9 @@ const Profile: NextPageWithLayout = () => {
                 <div className={cls.profilePage_content}>
                     <div className={cls.content_list}>
                         {photos &&
-                            photos.map((photo, index) => {
+                            photos.map((photo: Photo) => {
                                 return (
-                                    <div key={index} className={cls.list_item}>
+                                    <div key={photo.id} className={cls.list_item}>
                                         {/* <Image */}
                                         {/*    src={photo.url} */}
                                         {/*    alt={'gallery-photo'} */}

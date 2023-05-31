@@ -53,11 +53,17 @@
             }
             .textarea {
                 width: 100%;
-                margin-bottom: 65px;
+                //margin-bottom: 65px;
+                margin-bottom: 0;
 
                 textarea {
                     width: 100%;
                 }
+            }
+            .textarea_length {
+                @include small-text-12;
+                color: var(--light-900);
+                text-align: right;
             }
         }
     }

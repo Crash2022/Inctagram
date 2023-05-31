@@ -14,14 +14,13 @@ import { useTranslation } from 'next-i18next'
 import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-// import { AddPostModal } from '@/components/AddPost/AddPostModal/AddPostModal'
-// import { ImageCropModal } from '@/components/AddPost/ImageCropModal/ImageCropModal'
+import { useSnackbar } from 'notistack'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
 import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
-import { useSnackbar } from 'notistack'
+import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
@@ -35,10 +34,13 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     // const [postPhoto, setPostPhoto] = useState<string[]>([])
     const [postPhoto, setPostPhoto] = useState<string>('')
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+    const [description, setDescription] = useState<string>('')
+    const [descriptionError, setDescriptionError] = useState<string>('')
 
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
     const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
     const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
+    const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
     const goFromAddToCropModalHandler = () => {
         if (!isPhotoUploaded) {
@@ -55,7 +57,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         setIsCropImageModalOpen(false)
         setIsAddPostOpen(true)
     }
-
     const goFromCropToPhotoFiltersModalHandler = () => {
         setIsImageFiltersModalOpen(true)
         setIsCropImageModalOpen(false)
@@ -67,9 +68,17 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     }
 
     const goFromPhotoFiltersToPublicationModalHandler = () => {
-        alert('go publication')
-        // setIsPhotoFiltersModalOpen(false)
-        // setIsCropImageModalOpen(true) // заменить на другую модалку
+        setIsImageFiltersModalOpen(false)
+        setIsPublicationModalOpen(true)
+    }
+    const goFromPublicationModalToFiltersHandler = () => {
+        setIsPublicationModalOpen(false)
+        setIsImageFiltersModalOpen(true)
+    }
+
+    const publicationHandler = () => {
+        alert('publish')
+        // requests here
     }
 
     useEffect(() => {
@@ -115,6 +124,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 setOpen={setIsAddPostOpen}
                                 headerTitle={'AddPost_HeaderTitle'}
                                 isNextForUpload={true}
+                                nextButtonTitle={'Next'}
                                 // isCancelBtn={true}
                                 nextFunc={goFromAddToCropModalHandler}
                                 isPhotoUploaded={isPhotoUploaded}
@@ -133,6 +143,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 headerTitle={'Crop_HeaderTitle'}
                                 isPrevious={true}
                                 isNext={true}
+                                nextButtonTitle={'Next'}
                                 prevFunc={goFromCropToAddPhotoModalHandler}
                                 nextFunc={goFromCropToPhotoFiltersModalHandler}
                             >
@@ -146,11 +157,33 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 headerTitle={'Filters_HeaderTitle'}
                                 isPrevious={true}
                                 isNext={true}
+                                nextButtonTitle={'Next'}
                                 prevFunc={goFromPhotoFiltersToCropModalHandler}
                                 nextFunc={goFromPhotoFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
                             >
                                 <ImageFiltersContent postPhoto={postPhoto} />
+                            </AddPostBasicModal>
+
+                            {/* модалка для публикации */}
+                            <AddPostBasicModal
+                                open={isPublicationModalOpen}
+                                setOpen={setIsPublicationModalOpen}
+                                headerTitle={'Publication_HeaderTitle'}
+                                isPrevious={true}
+                                isNext={true}
+                                nextButtonTitle={'Publish'}
+                                prevFunc={goFromPublicationModalToFiltersHandler}
+                                nextFunc={publicationHandler}
+                                modalWidth={'900'}
+                            >
+                                <PublicationContent
+                                    postPhoto={postPhoto}
+                                    description={description}
+                                    setDescription={setDescription}
+                                    descriptionError={descriptionError}
+                                    setDescriptionError={setDescriptionError}
+                                />
                             </AddPostBasicModal>
 
                             <div className={cls.menuList_item}>
@@ -225,7 +258,9 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             <div
                                 className={cls.menuList_item}
                                 onClick={() => {
-                                    logout().then((res) => console.log(res))
+                                    logout().then((res) => {
+                                        console.log(res)
+                                    })
                                     localStorage.removeItem('accessToken')
                                     void router.push(InctagramPath.AUTH.LOGIN)
                                 }}

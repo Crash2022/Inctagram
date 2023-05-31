@@ -1,12 +1,11 @@
 import React from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { RegisterOptions } from 'react-hook-form/dist/types/validator'
-import { Input } from '@/shared/ui/Input/Input'
+import { Textarea } from '@/shared/ui/Textarea/Textarea'
 
-interface ControlledCustomInputProps {
+interface ControlledCustomTextareaProps {
     name: string
     placeholder: string
-    password?: boolean
     control: UseFormReturn<any>
     rules?: Omit<
         RegisterOptions<any, any>,
@@ -15,22 +14,17 @@ interface ControlledCustomInputProps {
     error?: any
     disabled?: boolean
     divClassName?: any
-    type?: string
-    max?: string
 }
 
-export const ControlledInput = ({
+export const ControlledTextarea = ({
     name,
     placeholder,
-    password,
     control,
     rules,
     error,
     disabled,
-    divClassName,
-    type,
-    max
-}: ControlledCustomInputProps) => {
+    divClassName
+}: ControlledCustomTextareaProps) => {
     return (
         <div className={divClassName}>
             <Controller
@@ -38,9 +32,8 @@ export const ControlledInput = ({
                 control={control}
                 rules={rules}
                 render={({ field }: any) => (
-                    <Input
+                    <Textarea
                         {...field}
-                        password={password ?? false}
                         placeholder={placeholder}
                         value={field.value}
                         onChange={(value) => {
@@ -48,10 +41,6 @@ export const ControlledInput = ({
                         }}
                         error={error}
                         disabled={disabled ?? false}
-                        type={type}
-                        max={max}
-                        // error={!!control.formState.errors[name]}
-                        // helperText={control.formState.errors[name]?.message}
                     />
                 )}
             />

@@ -9,9 +9,8 @@ import { useTranslation } from 'next-i18next'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { UpdateUserProfile } from '@/models/profile-types'
-import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import {
     useDeleteAvatarMutation,
@@ -21,13 +20,12 @@ import {
 } from '@/services/UserProfileService'
 import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
-import { useRouter } from 'next/router'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ControlledTextarea } from '@/shared/ui/Controlled/ControlledTextarea'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const router = useRouter()
     const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
@@ -59,6 +57,7 @@ export const General = () => {
         control,
         handleSubmit,
         setValue,
+        watch,
         formState: { errors }
     } = useForm<UpdateUserProfile>({
         defaultValues: {
@@ -79,7 +78,7 @@ export const General = () => {
     }
 
     const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length) {
+        if (event.target.files?.length) {
             const file = event.target.files[0]
 
             if (file && file.size < 1000000) {
@@ -246,23 +245,14 @@ export const General = () => {
                         type={'date'}
                         max={profileDate}
                     />
-                    <div className={cls.textarea}>
-                        <Controller
-                            name={'aboutMe'}
-                            control={control}
-                            render={({ field }: any) => (
-                                <Textarea
-                                    {...field}
-                                    placeholder={t('AboutMe')}
-                                    value={field.value}
-                                    onChange={(value) => {
-                                        field.onChange(value)
-                                    }}
-                                    error={errors.aboutMe?.message}
-                                />
-                            )}
-                        />
-                    </div>
+                    <ControlledTextarea
+                        divClassName={cls.textarea}
+                        name={'aboutMe'}
+                        placeholder={t('AboutMe')}
+                        control={control}
+                        error={errors.aboutMe?.message}
+                    />
+                    <div className={cls.textarea_length}>{watch('aboutMe').length} / 200</div>
                 </div>
             </div>
 
@@ -271,6 +261,7 @@ export const General = () => {
                 className={styles.btn}
                 theme={'primary'}
                 type={'submit'}
+                disabled={watch('aboutMe').length > 200}
             >
                 {t('Save')}
             </Button>

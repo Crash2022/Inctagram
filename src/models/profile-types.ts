@@ -7,15 +7,6 @@ export interface Photo {
     thumbnailUrl: string
 }
 
-export interface UpdateUserProfile {
-    userName: string
-    firstName: string
-    lastName: string
-    city: string
-    dateOfBirth: string
-    aboutMe: string
-}
-
 export interface UserProfile {
     id: number
     userName: string
@@ -25,6 +16,15 @@ export interface UserProfile {
     dateOfBirth: string
     aboutMe: string
     avatars: UserAvatar[]
+}
+
+export interface UpdateUserProfile {
+    userName: string
+    firstName: string
+    lastName: string
+    city: string
+    dateOfBirth: string
+    aboutMe: string
 }
 
 export interface UserAvatar {
