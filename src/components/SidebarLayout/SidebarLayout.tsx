@@ -20,7 +20,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
-import { PhotoFiltersContent } from '@/components/AddPost/PhotoFiltersContent/PhotoFiltersContent'
+import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
 import { useSnackbar } from 'notistack'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
@@ -149,7 +149,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={goFromPhotoFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
                             >
-                                <PhotoFiltersContent postPhoto={postPhoto} />
+                                <ImageFiltersContent postPhoto={postPhoto} />
                             </AddPostBasicModal>
 
                             <div className={cls.menuList_item}>

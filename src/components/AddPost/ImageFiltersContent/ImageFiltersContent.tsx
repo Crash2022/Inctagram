@@ -1,12 +1,12 @@
 import React from 'react'
-import cls from './PhotoFiltersContent.module.scss'
+import cls from './ImageFiltersContent.module.scss'
 import Image from 'next/image'
 
 interface PhotoFiltersContentProps {
     postPhoto: string
 }
 
-export const PhotoFiltersContent = ({ postPhoto }: PhotoFiltersContentProps) => {
+export const ImageFiltersContent = ({ postPhoto }: PhotoFiltersContentProps) => {
     return (
         <div className={cls.photoFiltersModal_content}>
             <div className={cls.content_image}>
