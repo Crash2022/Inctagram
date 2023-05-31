@@ -41,7 +41,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
 
     const goFromAddToCropModalHandler = () => {
         if (!isPhotoUploaded) {
-            enqueueSnackbar(/*error.data.messages[0].message*/ t('Error'), {
+            enqueueSnackbar(/* error.data.messages[0].message */ t('Error'), {
                 variant: 'error',
                 autoHideDuration: 3000
             })
@@ -108,7 +108,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 />
                             </div>
 
-                            {/*модалка для добавления фото*/}
+                            {/* модалка для добавления фото */}
                             <AddPostBasicModal
                                 open={isAddPostOpen}
                                 setOpen={setIsAddPostOpen}
@@ -126,7 +126,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 isPhotoUploaded={isPhotoUploaded}
                             />
 
-                            {/*модалка для кадрирования фото*/}
+                            {/* модалка для кадрирования фото */}
                             <AddPostBasicModal
                                 open={isCropImageModalOpen}
                                 setOpen={setIsCropImageModalOpen}
@@ -138,7 +138,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={goFromCropToPhotoFiltersModalHandler}
                             />
 
-                            {/*модалка для фильтров фото*/}
+                            {/* модалка для фильтров фото */}
                             <AddPostBasicModal
                                 open={isPhotoFiltersModalOpen}
                                 setOpen={setIsPhotoFiltersModalOpen}
@@ -151,19 +151,19 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 modalWidth={'900'}
                             />
 
-                            {/*вариант с разными модалками*/}
-                            {/*<AddPostModal*/}
-                            {/*    open={isAddPostOpen}*/}
-                            {/*    setOpen={setIsAddPostOpen}*/}
-                            {/*    headerTitle={'AddPost_HeaderTitle'}*/}
-                            {/*    setIsCropImageModalOpen={setIsCropImageModalOpen}*/}
-                            {/*/>*/}
-                            {/*<ImageCropModal*/}
-                            {/*    open={isCropImageModalOpen}*/}
-                            {/*    setOpen={setIsCropImageModalOpen}*/}
-                            {/*    headerTitle={'Crop_HeaderTitle'}*/}
-                            {/*    setIsAddPostOpen={setIsAddPostOpen}*/}
-                            {/*/>*/}
+                            {/* вариант с разными модалками */}
+                            {/* <AddPostModal */}
+                            {/*    open={isAddPostOpen} */}
+                            {/*    setOpen={setIsAddPostOpen} */}
+                            {/*    headerTitle={'AddPost_HeaderTitle'} */}
+                            {/*    setIsCropImageModalOpen={setIsCropImageModalOpen} */}
+                            {/* /> */}
+                            {/* <ImageCropModal */}
+                            {/*    open={isCropImageModalOpen} */}
+                            {/*    setOpen={setIsCropImageModalOpen} */}
+                            {/*    headerTitle={'Crop_HeaderTitle'} */}
+                            {/*    setIsAddPostOpen={setIsAddPostOpen} */}
+                            {/* /> */}
 
                             <div className={cls.menuList_item}>
                                 <div>
