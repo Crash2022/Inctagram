@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { LoginPayloadType } from '@/models/auth-types'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from '@/shared/ui/Button/Button'
+import { Comment } from '@/components/PostModal/Comment/Comment'
 
 export const PostContent = () => {
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
@@ -77,140 +78,46 @@ export const PostContent = () => {
                         </div>
                     </div>
                     <div className={cls.commentsBlock}>
-                        <div className={cls.commentBlock}>
-                            <div className={cls.userAvatar}>
-                                <Image
-                                    src={DefaultProfileAvatar}
-                                    alt={'user-avatar'}
-                                    width={35}
-                                    height={35}
-                                    quality={100}
-                                />
-                            </div>
-                            <div className={cls.commentItems}>
-                                <div className={cls.comment}>
-                                    <span className={cls.commentUserName}>Test user name</span>{' '}
-                                    <span className={cls.commentText}>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Dolor, nesciunt?
-                                    </span>
-                                </div>
-                                <div className={cls.commentSubText}>
-                                    <span className={cls.commentDate}>2 hours ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cls.commentBlock}>
-                            <div className={cls.userAvatar}>
-                                <Image
-                                    src={DefaultProfileAvatar}
-                                    alt={'user-avatar'}
-                                    width={35}
-                                    height={35}
-                                    quality={100}
-                                />
-                            </div>
-                            <div className={cls.commentItems}>
-                                <div className={cls.comment}>
-                                    <span className={cls.commentUserName}>Test user name</span>{' '}
-                                    <span className={cls.commentText}>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Dolor, nesciunt?
-                                    </span>
-                                </div>
-                                <div className={cls.commentSubText}>
-                                    <span className={cls.commentDate}>2 hours ago</span>
-                                    <span className={cls.answerButton}>Answer</span>
-                                </div>
-                            </div>
-                            <div className={cls.likeButton}>
-                                <Like width={20} height={20} />
-                            </div>
-                        </div>
-                        <div className={cls.commentBlock}>
-                            <div className={cls.userAvatar}>
-                                <Image
-                                    src={DefaultProfileAvatar}
-                                    alt={'user-avatar'}
-                                    width={35}
-                                    height={35}
-                                    quality={100}
-                                />
-                            </div>
-                            <div className={cls.commentItems}>
-                                <div className={cls.comment}>
-                                    <span className={cls.commentUserName}>Test user name</span>{' '}
-                                    <span className={cls.commentText}>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Dolor, nesciunt?
-                                    </span>
-                                </div>
-                                <div className={cls.commentSubText}>
-                                    <span className={cls.commentDate}>2 hours ago</span>
-                                    <span className={cls.answerButton}>Answer</span>
-                                    <span className={cls.commentLikeCount}>Like: 1</span>
-                                </div>
-                            </div>
-                            <div className={cls.likeButton}>
-                                <RedLike width={20} height={20} />
-                            </div>
-                        </div>
-                        <div className={cls.commentBlock}>
-                            <div className={cls.userAvatar}>
-                                <Image
-                                    src={DefaultProfileAvatar}
-                                    alt={'user-avatar'}
-                                    width={35}
-                                    height={35}
-                                    quality={100}
-                                />
-                            </div>
-                            <div className={cls.commentItems}>
-                                <div className={cls.comment}>
-                                    <span className={cls.commentUserName}>Test user name</span>{' '}
-                                    <span className={cls.commentText}>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Dolor, nesciunt?
-                                    </span>
-                                </div>
-                                <div className={cls.commentSubText}>
-                                    <span className={cls.commentDate}>2 hours ago</span>
-                                    <span className={cls.answerButton}>Answer</span>
-                                    <span className={cls.commentLikeCount}>Like: 1</span>
-                                </div>
-                            </div>
-                            <div className={cls.likeButton}>
-                                <RedLike width={20} height={20} />
-                            </div>
-                        </div>
-                        <div className={cls.commentBlock}>
-                            <div className={cls.userAvatar}>
-                                <Image
-                                    src={DefaultProfileAvatar}
-                                    alt={'user-avatar'}
-                                    width={35}
-                                    height={35}
-                                    quality={100}
-                                />
-                            </div>
-                            <div className={cls.commentItems}>
-                                <div className={cls.comment}>
-                                    <span className={cls.commentUserName}>Test user name</span>{' '}
-                                    <span className={cls.commentText}>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Dolor, nesciunt?
-                                    </span>
-                                </div>
-                                <div className={cls.commentSubText}>
-                                    <span className={cls.commentDate}>2 hours ago</span>
-                                    <span className={cls.answerButton}>Answer</span>
-                                    <span className={cls.commentLikeCount}>Like: 1</span>
-                                </div>
-                            </div>
-                            <div className={cls.likeButton}>
-                                <RedLike width={20} height={20} />
-                            </div>
-                        </div>
+                        <Comment
+                            your
+                            desc
+                            avatar={
+                                profileData && profileData.avatars.length === 0
+                                    ? DefaultProfileAvatar
+                                    : profileData.avatars[0].url
+                            }
+                            userName={'test user Name'}
+                            text={
+                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
+                            }
+                            date={'2 hours age'}
+                            likeButton={false}
+                            likeCount={0}
+                        />
+                        <Comment
+                            your={false}
+                            desc={false}
+                            avatar={DefaultProfileAvatar}
+                            userName={'test user Name'}
+                            text={
+                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
+                            }
+                            date={'2 hours age'}
+                            likeButton={true}
+                            likeCount={3}
+                        />
+                        <Comment
+                            your={false}
+                            desc={false}
+                            avatar={DefaultProfileAvatar}
+                            userName={'test user Name'}
+                            text={
+                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
+                            }
+                            date={'2 hours age'}
+                            likeButton={false}
+                            likeCount={4}
+                        />
                     </div>
                     <div className={cls.likesBlock}>
                         <div className={cls.buttonItems}>
