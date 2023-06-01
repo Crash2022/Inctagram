@@ -3,10 +3,14 @@ import { CroppedAreaType } from '@/models/image-crop-types'
 import { getCroppedImg } from '@/shared/utils/getCroppedImg'
 import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
+import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
 
 export const useCropImage = () => {
     const { t } = useTranslation('add-post-modal')
     const { enqueueSnackbar } = useSnackbar()
+
+    const [createPost, { isLoading: postIsLoading }] = useCreatePostMutation()
+    const [uploadImageToPost, { isLoading: imageIsLoading }] = useUploadImageToPostMutation()
 
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
 
@@ -76,9 +80,27 @@ export const useCropImage = () => {
     }
 
     // опубликовать пост
-    const publicationHandler = () => {
-        alert('publish')
-        // requests here
+    const publicationHandler = async () => {
+        const trimValue = description.trim()
+
+        if (trimValue && trimValue.length <= 500) {
+            try {
+                const publish = await createPost({ description })
+                console.log('publish', publish)
+
+                if (croppedImageFile !== null) {
+                    const uploadImage = await uploadImageToPost(croppedImageFile)
+                    console.log('uploadImage', uploadImage)
+                }
+            } catch (error) {
+                console.log('publicationHandler error', error)
+            }
+        } else {
+            enqueueSnackbar(t('Snackbar_EmptyDescription'), {
+                variant: 'error',
+                autoHideDuration: 3000
+            })
+        }
     }
 
     return {

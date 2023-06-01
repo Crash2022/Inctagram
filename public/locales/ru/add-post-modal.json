@@ -20,5 +20,6 @@
   "Publication_HeaderTitle": "Публикация",
   "Publish": "Опубликовать",
   "Description": "Описание публикации",
-  "DescriptionLimit": "Превышено количество символов"
+  "DescriptionLimit": "Превышено количество символов",
+  "Snackbar_EmptyDescription": "Заполните поле с описанием"
 }
