@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
+import React, { PropsWithChildren, ReactElement, useEffect } from 'react'
 import cls from './SidebarLayout.module.scss'
 import Head from 'next/head'
 import { Header } from '../Header/Header'
@@ -20,91 +20,49 @@ import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostConte
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
 import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
 import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
-import { CroppedAreaType } from '@/models/image-crop-types'
-import { useSnackbar } from 'notistack'
-import { getCroppedImg } from '@/shared/utils/getCroppedImg'
+import { useCropImage } from '@/shared/hooks/useCropImage'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
-    const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
 
     const [logout, { isSuccess, isLoading }] = useLogoutMutation()
 
     const isPaid = true // исправить на динамическое значение
 
-    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
-
-    const [croppedImageFile, setCroppedImageFile] = useState(null)
-    const [postImage, setPostImage] = useState<string>('')
-    const [croppedImage, setCroppedImage] = useState<string>('')
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
-    const [rotation, setRotation] = useState<number>(0)
-
-    const [description, setDescription] = useState<string>('')
-    const [descriptionError, setDescriptionError] = useState<string>('')
-
-    const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
-    const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
-    const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
-    const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
-
-    // перейти к кадрированию изображения
-    const goFromAddToCropModalHandler = () => {
-        if (!isPhotoUploaded) {
-            enqueueSnackbar(t('Snackbar_ImageNotUploaded'), {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
-            return
-        }
-        setIsCropImageModalOpen(true)
-        setIsAddPostOpen(false)
-    }
-
-    const goFromCropToAddPhotoModalHandler = () => {
-        setIsCropImageModalOpen(false)
-        setIsAddPostOpen(true)
-    }
-
-    // перейти к фильтрам
-    const goFromCropToPhotoFiltersModalHandler = async () => {
-        // получение кадрированного изображения
-        try {
-            const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
-            setCroppedImage(await url)
-            setCroppedImageFile(await file) // возможно нужно будет для создания поста ?!
-            // console.log('crop url', url)
-            // console.log('crop file', file)
-        } catch (e) {
-            console.error('crop error', e)
-        }
-
-        // переход в другую модалку
-        setIsImageFiltersModalOpen(true)
-        setIsCropImageModalOpen(false)
-    }
-
-    const goFromPhotoFiltersToCropModalHandler = () => {
-        setIsImageFiltersModalOpen(false)
-        setIsCropImageModalOpen(true)
-    }
-
-    // перейти к публикации
-    const goFromPhotoFiltersToPublicationModalHandler = () => {
-        setIsImageFiltersModalOpen(false)
-        setIsPublicationModalOpen(true)
-    }
-    const goFromPublicationModalToFiltersHandler = () => {
-        setIsPublicationModalOpen(false)
-        setIsImageFiltersModalOpen(true)
-    }
-
-    // опубликовать пост
-    const publicationHandler = () => {
-        alert('publish')
-        // requests here
-    }
+    const {
+        isPhotoUploaded,
+        setIsPhotoUploaded,
+        // croppedImageFile,
+        // setCroppedImageFile,
+        postImage,
+        setPostImage,
+        croppedImage,
+        // setCroppedImage,
+        // croppedAreaPixels,
+        setCroppedAreaPixels,
+        rotation,
+        setRotation,
+        description,
+        setDescription,
+        descriptionError,
+        setDescriptionError,
+        isAddPostOpen,
+        setIsAddPostOpen,
+        isCropImageModalOpen,
+        setIsCropImageModalOpen,
+        isImageFiltersModalOpen,
+        setIsImageFiltersModalOpen,
+        isPublicationModalOpen,
+        setIsPublicationModalOpen,
+        goFromAddToCropModalHandler,
+        goFromCropToAddPhotoModalHandler,
+        goFromCropToPhotoFiltersModalHandler,
+        goFromPhotoFiltersToCropModalHandler,
+        goFromPhotoFiltersToPublicationModalHandler,
+        goFromPublicationModalToFiltersHandler,
+        publicationHandler
+    } = useCropImage()
 
     useEffect(() => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
@@ -159,7 +117,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                     postImage={postImage}
                                     setPostImage={setPostImage}
                                     setIsPhotoUploaded={setIsPhotoUploaded}
-                                    // setImageFile={setImageFile}
                                 />
                             </AddPostBasicModal>
 

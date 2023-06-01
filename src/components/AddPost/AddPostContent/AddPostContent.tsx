@@ -10,7 +10,6 @@ interface AddPostContentProps {
     postImage: string
     setPostImage: (photo: string) => void
     setIsPhotoUploaded: (value: boolean) => void
-    // setImageFile: (value: any) => void
 }
 
 export const AddPostContent = ({
@@ -33,7 +32,6 @@ export const AddPostContent = ({
                 const formData = new FormData()
                 formData.append('file', file)
                 setPostImage(URL.createObjectURL(file))
-                // setImageFile(file)
                 setIsPhotoUploaded(true)
 
                 // apply rotation if needed (getCroppedImg.ts)

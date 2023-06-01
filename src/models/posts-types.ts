@@ -14,11 +14,21 @@ export interface AddPostsResponse {
     createdAt: string
     updatedAt: string
 }
-
 export interface GetPostsResponse {
     totalCount: number
     pagesCount: number
     page: number
     pageSize: number
     items: AddPostsResponse[]
+}
+export interface UploadPostImage {
+    images: [
+        {
+            url: string
+            width: number
+            height: number
+            fileSize: number
+            uploadId: string
+        }
+    ]
 }

@@ -3,6 +3,7 @@
   "AddPhotoButton": "Выбрать изображение",
   "Snackbar_LargeImageSize": "Файл не должен превышать размер 1 Мб",
   "Snackbar_ErrorImage": "Файл повреждён, попробуйте загрузить другой",
+  "Snackbar_ImageNotUploaded": "Пожалуйста выберите файл",
 
   "Next": "Далее",
 

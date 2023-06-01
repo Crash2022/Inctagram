@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { baseURL } from '@/shared/api/baseURL'
-import { GetPostsResponse, AddPostsResponse } from '@/models/posts-types'
+import { GetPostsResponse, AddPostsResponse, UploadPostImage } from '@/models/posts-types'
 
 export const userPostsAPI = createApi({
     reducerPath: 'userPostsAPI',
@@ -13,47 +13,56 @@ export const userPostsAPI = createApi({
     }),
     tagTypes: ['UserPosts'],
     endpoints: (build) => ({
-        getUserPostById: build.query<AddPostsResponse, any>({
+        getUserPostById: build.query<AddPostsResponse, number>({
             query: (postId: number) => ({
-                url: `/user/posts/p/${postId}`
+                url: `/posts/p/${postId}`
             }),
             providesTags: (result) => ['UserPosts']
         }),
-        getUserPosts: build.query<GetPostsResponse, any>({
+        getUserPosts: build.query<GetPostsResponse, number>({
             query: (userId: number) => ({
-                url: `/user/posts/${userId}`
+                url: `/posts/${userId}`
             }),
             providesTags: (result) => ['UserPosts']
         }),
-        createPost: build.mutation<any, { description: string }>({
+        createPost: build.mutation<AddPostsResponse, { description: string }>({
             query: (payload: { description: string }) => ({
-                url: `/user/posts`,
+                url: `/posts`,
                 method: 'POST',
                 body: payload
-            })
+            }),
+            invalidatesTags: ['UserPosts']
         }),
-        uploadImageToPost: build.mutation<any, FormData>({
+        uploadImageToPost: build.mutation<UploadPostImage, FormData>({
             query: (payload: FormData) => ({
-                url: `/user/posts/image`,
+                url: `/posts/image`,
                 method: 'POST',
                 body: payload
-            })
+            }),
+            invalidatesTags: ['UserPosts']
         }),
-        deletePost: build.mutation<any, any>({
+        deletePost: build.mutation<any, number>({
             query: (postId: number) => ({
-                url: `/user/posts/${postId}`,
+                url: `/posts/${postId}`,
                 method: 'DELETE'
             }),
             invalidatesTags: ['UserPosts']
+        }),
+        deletePostImage: build.mutation<any, string>({
+            query: (uploadId: string) => ({
+                url: `/posts/image/${uploadId}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['UserPosts']
+        }),
+        updatePost: build.mutation<any, { description: string; postId: number }>({
+            query: (payload: { description: string; postId: number }) => ({
+                url: `/user/posts/${payload.postId}`,
+                method: 'PUT',
+                body: payload.description
+            }),
+            invalidatesTags: ['UserPosts']
         })
-        // надо исправить
-        // updatePost: build.mutation<any, any>({
-        //     query: (payload: { description: string }) => ({
-        //         url: `/user/posts/${postId}`,
-        //         method: 'PUT',
-        //         body: payload
-        //     })
-        // })
     })
 })
 
@@ -62,6 +71,7 @@ export const {
     useGetUserPostsQuery,
     useCreatePostMutation,
     useUploadImageToPostMutation,
-    useDeletePostMutation
-    // useUpdatePostMutation
+    useDeletePostMutation,
+    useDeletePostImageMutation,
+    useUpdatePostMutation
 } = userPostsAPI
