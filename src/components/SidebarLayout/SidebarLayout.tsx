@@ -35,7 +35,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
 
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
 
-    // const [imageFile, setImageFile] = useState(null)
+    const [croppedImageFile, setCroppedImageFile] = useState(null)
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
@@ -73,7 +73,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         try {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
             setCroppedImage(await url)
-            // setImageFile(await file)
+            setCroppedImageFile(await file) // возможно нужно будет для создания поста ?!
             // console.log('crop url', url)
             // console.log('crop file', file)
         } catch (e) {

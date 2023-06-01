@@ -45,14 +45,15 @@ export const userPostsAPI = createApi({
                 method: 'DELETE'
             }),
             invalidatesTags: ['UserPosts']
-        }),
-        updatePost: build.mutation<any, any>({
-            query: (payload: { description: string }) => ({
-                url: `/user/posts/${postId}`,
-                method: 'PUT',
-                body: payload
-            })
         })
+        // надо исправить
+        // updatePost: build.mutation<any, any>({
+        //     query: (payload: { description: string }) => ({
+        //         url: `/user/posts/${postId}`,
+        //         method: 'PUT',
+        //         body: payload
+        //     })
+        // })
     })
 })
 
@@ -61,6 +62,6 @@ export const {
     useGetUserPostsQuery,
     useCreatePostMutation,
     useUploadImageToPostMutation,
-    useDeletePostMutation,
-    useUpdatePostMutation
+    useDeletePostMutation
+    // useUpdatePostMutation
 } = userPostsAPI
