@@ -3,7 +3,7 @@
 .photoFiltersModal_content {
     width: 100%;
     @include flexOnlyBetween;
-    gap: 40px;
+    gap: 20px;
     overflow: hidden;
 
     .content_image {
@@ -15,10 +15,11 @@
     }
     .content_filters {
         width: 100%;
-        border: 1px solid white;
-        @include flexCenter;
-        gap: 25px;
+        //border: 1px solid white;
+        @include flexBetween;
+        gap: 10px;
         flex-wrap: wrap;
+        padding-right: 20px;
 
         .filter_item {
             .item_image {
