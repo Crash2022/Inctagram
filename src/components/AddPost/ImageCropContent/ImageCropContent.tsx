@@ -19,13 +19,24 @@ interface AspectMenuTypes {
     icon: React.FC<SVGProps<SVGSVGElement>>
 }
 
+interface CropType {
+    x: number
+    y: number
+}
+interface CroppedAreaType extends CropType {
+    height: number
+    width: number
+}
+
 export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
     const { t } = useTranslation('add-post-modal')
 
-    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
     const [zoom, setZoom] = useState<number>(1)
     const [rotation, setRotation] = useState<number>(0)
     const [aspect, setAspect] = useState<number>(1 / 1)
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
+    const [croppedImage, setCroppedImage] = useState(null)
 
     const [isAspectMenuShow, setIsAspectMenuShow] = useState<boolean>(false)
     const aspectMenu: AspectMenuTypes[] = [
@@ -35,9 +46,14 @@ export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
         { id: 4, aspect: 16 / 9, title: '16to9', icon: RectangleIcon169 }
     ]
 
-    const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
-        console.log(croppedArea, croppedAreaPixels)
-    }, [])
+    const onCropComplete = useCallback(
+        (croppedArea: CroppedAreaType, croppedAreaPixels: CroppedAreaType) => {
+            // console.log('croppedArea', croppedArea)
+            // console.log('croppedAreaPixels', croppedAreaPixels)
+            setCroppedAreaPixels(croppedAreaPixels)
+        },
+        []
+    )
 
     return (
         <div className={cls.imageCropModal_content}>

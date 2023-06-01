@@ -66,6 +66,7 @@ export const AddPostContent = ({
                         // id={'Post_Photo'}
                         width={220}
                         height={220}
+                        // fill
                         onError={imageErrorHandler}
                         quality={100}
                         // priority

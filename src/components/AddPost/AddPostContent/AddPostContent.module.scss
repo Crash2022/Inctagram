@@ -10,6 +10,10 @@
         height: 220px;
         background-color: var(--header-color);
         margin-bottom: 50px;
+
+        img {
+            object-fit: contain;
+        }
     }
     .content_addButton {
         width: 100%;
