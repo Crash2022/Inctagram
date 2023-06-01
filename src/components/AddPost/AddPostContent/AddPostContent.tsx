@@ -7,14 +7,14 @@ import { useTranslation } from 'react-i18next'
 import { useSnackbar } from 'notistack'
 
 interface AddPostContentProps {
-    postPhoto: string
-    setPostPhoto: (photo: string) => void
+    postImage: string
+    setPostImage: (photo: string) => void
     setIsPhotoUploaded: (value: boolean) => void
 }
 
 export const AddPostContent = ({
-    postPhoto,
-    setPostPhoto,
+    postImage,
+    setPostImage,
     setIsPhotoUploaded
 }: AddPostContentProps) => {
     const { t } = useTranslation('add-post-modal')
@@ -23,7 +23,7 @@ export const AddPostContent = ({
     const [isAvaBroken, setIsAvaBroken] = useState<boolean>(false)
 
     const uploadPhotoHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length) {
+        if (event.target.files?.length) {
             const file = event.target.files[0]
 
             if (file && file.size < 1000000) {
@@ -31,7 +31,7 @@ export const AddPostContent = ({
 
                 const formData = new FormData()
                 formData.append('file', file)
-                setPostPhoto(URL.createObjectURL(file))
+                setPostImage(URL.createObjectURL(file))
                 setIsPhotoUploaded(true)
             } else {
                 enqueueSnackbar(t('Snackbar_LargeImageSize'), {
@@ -57,11 +57,11 @@ export const AddPostContent = ({
     return (
         <div className={cls.addPostModal_content}>
             <div className={cls.content_image}>
-                {postPhoto === '' ? (
+                {postImage === '' ? (
                     <ImageIcon />
                 ) : (
                     <Image
-                        src={postPhoto}
+                        src={postImage}
                         alt={'post-photo'}
                         // id={'Post_Photo'}
                         width={220}

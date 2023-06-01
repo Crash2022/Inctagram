@@ -7,7 +7,7 @@ import DefaultProfileAvatar from '../../../../public/assets/images/default-avata
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 
 interface PublicationContentProps {
-    postPhoto: string
+    postImage: string
     description: string
     setDescription: (value: string) => void
     descriptionError: string
@@ -15,7 +15,7 @@ interface PublicationContentProps {
 }
 
 export const PublicationContent = ({
-    postPhoto,
+    postImage,
     description,
     setDescription,
     descriptionError,
@@ -35,7 +35,7 @@ export const PublicationContent = ({
     return (
         <div className={cls.publicationModal_content}>
             <div className={cls.content_image}>
-                <Image src={postPhoto} alt={'post-photo'} width={500} height={500} />
+                <Image src={postImage} alt={'post-photo'} width={500} height={500} />
             </div>
             <div className={cls.content_publication}>
                 <div className={cls.publication_info}>

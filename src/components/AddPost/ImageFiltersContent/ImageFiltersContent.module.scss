@@ -7,7 +7,11 @@
     overflow: hidden;
 
     .content_image {
+        border: 1px solid var(--snippet-border);
 
+        img {
+            object-fit: contain;
+        }
     }
     .content_filters {
         width: 100%;

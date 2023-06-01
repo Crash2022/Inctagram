@@ -9,7 +9,9 @@ import RectangleIcon32 from '../../../../public/assets/icons/rectangle-2.svg'
 import RectangleIcon169 from '../../../../public/assets/icons/rectangle-1.svg'
 
 interface ImageCropContentProps {
-    postPhoto: string
+    postImage: string
+    croppedImage: string
+    setCroppedImage: (image: string) => void
 }
 
 interface AspectMenuTypes {
@@ -28,7 +30,11 @@ interface CroppedAreaType extends CropType {
     width: number
 }
 
-export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
+export const ImageCropContent = ({
+    postImage,
+    croppedImage,
+    setCroppedImage
+}: ImageCropContentProps) => {
     const { t } = useTranslation('add-post-modal')
 
     const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
@@ -36,7 +42,6 @@ export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
     const [rotation, setRotation] = useState<number>(0)
     const [aspect, setAspect] = useState<number>(1 / 1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
-    const [croppedImage, setCroppedImage] = useState(null)
 
     const [isAspectMenuShow, setIsAspectMenuShow] = useState<boolean>(false)
     const aspectMenu: AspectMenuTypes[] = [
@@ -59,7 +64,7 @@ export const ImageCropContent = ({ postPhoto }: ImageCropContentProps) => {
         <div className={cls.imageCropModal_content}>
             <div className={cls.crop_container}>
                 <Cropper
-                    image={postPhoto}
+                    image={postImage}
                     crop={crop}
                     zoom={zoom}
                     rotation={rotation}

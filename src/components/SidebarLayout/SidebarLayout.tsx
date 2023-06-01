@@ -32,7 +32,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const isPaid = true // исправить на динамическое значение
 
     // const [postPhoto, setPostPhoto] = useState<string[]>([])
-    const [postPhoto, setPostPhoto] = useState<string>('')
+    const [postImage, setPostImage] = useState<string>('')
+    const [croppedImage, setCroppedImage] = useState<string>('')
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
     const [description, setDescription] = useState<string>('')
     const [descriptionError, setDescriptionError] = useState<string>('')
@@ -43,12 +44,12 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
     const goFromAddToCropModalHandler = () => {
-        if (!isPhotoUploaded) {
-            enqueueSnackbar(/* error.data.messages[0].message */ t('Error'), {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
-        }
+        // if (!isPhotoUploaded) {
+        //     enqueueSnackbar(/* error.data.messages[0].message */ t('Snackbar_ImageNotUploaded'), {
+        //         variant: 'error',
+        //         autoHideDuration: 3000
+        //     })
+        // }
         setIsCropImageModalOpen(true)
         setIsAddPostOpen(false)
     }
@@ -130,8 +131,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 isPhotoUploaded={isPhotoUploaded}
                             >
                                 <AddPostContent
-                                    postPhoto={postPhoto}
-                                    setPostPhoto={setPostPhoto}
+                                    postImage={postImage}
+                                    setPostImage={setPostImage}
                                     setIsPhotoUploaded={setIsPhotoUploaded}
                                 />
                             </AddPostBasicModal>
@@ -147,7 +148,11 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 prevFunc={goFromCropToAddPhotoModalHandler}
                                 nextFunc={goFromCropToPhotoFiltersModalHandler}
                             >
-                                <ImageCropContent postPhoto={postPhoto} />
+                                <ImageCropContent
+                                    postImage={postImage}
+                                    croppedImage={croppedImage}
+                                    setCroppedImage={setCroppedImage}
+                                />
                             </AddPostBasicModal>
 
                             {/* модалка для фильтров фото */}
@@ -162,7 +167,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={goFromPhotoFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
                             >
-                                <ImageFiltersContent postPhoto={postPhoto} />
+                                <ImageFiltersContent postImage={postImage} />
                             </AddPostBasicModal>
 
                             {/* модалка для публикации */}
@@ -178,7 +183,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 modalWidth={'900'}
                             >
                                 <PublicationContent
-                                    postPhoto={postPhoto}
+                                    postImage={postImage}
                                     description={description}
                                     setDescription={setDescription}
                                     descriptionError={descriptionError}
