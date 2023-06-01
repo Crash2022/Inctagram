@@ -6,6 +6,7 @@ import { serviceAuthAPI } from '@/services/AuthService'
 import { userProfilePhotosAPI } from '@/services/UserProfilePhotosService'
 import { userProfileAPI } from '@/services/UserProfileService'
 import { postReducer } from '@/store/slices/postSlice'
+import { userPostsAPI } from '@/services/UserPostsService'
 
 const combinedReducer = combineReducers({
     app: appReducer,
@@ -13,7 +14,8 @@ const combinedReducer = combineReducers({
     post: postReducer,
     [userProfilePhotosAPI.reducerPath]: userProfilePhotosAPI.reducer,
     [serviceAuthAPI.reducerPath]: serviceAuthAPI.reducer,
-    [userProfileAPI.reducerPath]: userProfileAPI.reducer
+    [userProfileAPI.reducerPath]: userProfileAPI.reducer,
+    [userPostsAPI.reducerPath]: userPostsAPI.reducer
 })
 
 const reducer: typeof combinedReducer = (state, action: AnyAction) => {
@@ -32,7 +34,8 @@ export const makeStore = () =>
             getDefaultMiddleware().concat(
                 userProfilePhotosAPI.middleware,
                 serviceAuthAPI.middleware,
-                userProfileAPI.middleware
+                userProfileAPI.middleware,
+                userPostsAPI.middleware
             )
     })
 
