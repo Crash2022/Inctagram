@@ -1,6 +1,7 @@
 import React from 'react'
 import cls from './ImageFiltersContent.module.scss'
 import Image from 'next/image'
+// import NoImage from '../../../../public/assets/images/no-image-01.png'
 
 interface PhotoFiltersContentProps {
     croppedImage: string

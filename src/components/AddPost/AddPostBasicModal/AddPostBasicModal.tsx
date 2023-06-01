@@ -59,19 +59,20 @@ export const AddPostBasicModal = ({
 
                     <div className={cls.header_title}>{t(headerTitle)}</div>
 
-                    {isNextForUpload ? (
-                        <Button
-                            className={cls.header_button}
-                            theme={'clear'}
-                            onClick={nextFunc && nextFunc}
-                            disabled={!isPhotoUploaded}
-                        >
-                            {/* {t('Next')} */}
-                            {t(nextButtonTitle)}
-                        </Button>
-                    ) : (
-                        ''
-                    )}
+                    {/* вараиант с отключением кнопки */}
+                    {/* {isNextForUpload ? ( */}
+                    {/*    <Button */}
+                    {/*        className={cls.header_button} */}
+                    {/*        theme={'clear'} */}
+                    {/*        onClick={nextFunc && nextFunc} */}
+                    {/*        // disabled={!isPhotoUploaded} */}
+                    {/*    > */}
+                    {/*        /!* {t('Next')} *!/ */}
+                    {/*        {t(nextButtonTitle)} */}
+                    {/*    </Button> */}
+                    {/* ) : ( */}
+                    {/*    '' */}
+                    {/* )} */}
 
                     {isNext ? (
                         <Button

@@ -11,7 +11,6 @@ import { CroppedAreaType, CropType } from '@/models/image-crop-types'
 
 interface ImageCropContentProps {
     postImage: string
-    croppedAreaPixels: CroppedAreaType | null
     setCroppedAreaPixels: (area: CroppedAreaType) => void
     rotation: number
     setRotation: (value: number) => void
@@ -26,7 +25,6 @@ interface AspectMenuTypes {
 
 export const ImageCropContent = ({
     postImage,
-    croppedAreaPixels,
     setCroppedAreaPixels,
     rotation,
     setRotation
@@ -35,21 +33,18 @@ export const ImageCropContent = ({
 
     const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
     const [zoom, setZoom] = useState<number>(1)
-    // const [rotation, setRotation] = useState<number>(0)
-    const [aspect, setAspect] = useState<number>(1 / 1)
+    const [aspect, setAspect] = useState<number>(1)
 
     const [isAspectMenuShow, setIsAspectMenuShow] = useState<boolean>(false)
     const aspectMenu: AspectMenuTypes[] = [
         // { id: 1, aspect: 1 / 1, title: 'Original', icon: ImageIcon24 },
-        { id: 2, aspect: 1 / 1, title: '1to1', icon: SquareIcon },
+        { id: 2, aspect: 1, title: '1to1', icon: SquareIcon },
         { id: 3, aspect: 3 / 2, title: '3to2', icon: RectangleIcon32 },
         { id: 4, aspect: 16 / 9, title: '16to9', icon: RectangleIcon169 }
     ]
 
     const onCropComplete = useCallback(
         (croppedArea: CroppedAreaType, croppedAreaPixels: CroppedAreaType) => {
-            // console.log('croppedArea', croppedArea)
-            // console.log('croppedAreaPixels', croppedAreaPixels)
             setCroppedAreaPixels(croppedAreaPixels)
         },
         []
