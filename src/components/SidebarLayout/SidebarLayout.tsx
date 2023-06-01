@@ -14,27 +14,30 @@ import { useTranslation } from 'next-i18next'
 import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-import { useSnackbar } from 'notistack'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
 import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
 import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
 import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
+import { CroppedAreaType } from '@/models/image-crop-types'
+import { getCroppedImg } from '@/shared/utils/getCroppedImg'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
-    const { enqueueSnackbar } = useSnackbar()
     const router = useRouter()
 
     const [logout, { isSuccess, isLoading }] = useLogoutMutation()
 
     const isPaid = true // исправить на динамическое значение
 
-    // const [postPhoto, setPostPhoto] = useState<string[]>([])
+    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
-    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
+    const [rotation, setRotation] = useState<number>(0)
+
     const [description, setDescription] = useState<string>('')
     const [descriptionError, setDescriptionError] = useState<string>('')
 
@@ -43,6 +46,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
     const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
+    // перейти к кадрированию изображения
     const goFromAddToCropModalHandler = () => {
         // if (!isPhotoUploaded) {
         //     enqueueSnackbar(/* error.data.messages[0].message */ t('Snackbar_ImageNotUploaded'), {
@@ -58,7 +62,13 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         setIsCropImageModalOpen(false)
         setIsAddPostOpen(true)
     }
+
+    // перейти к фильтрам
     const goFromCropToPhotoFiltersModalHandler = () => {
+        // получение кадрированного изображения
+        const newCroppedImage = getCroppedImg(postImage, croppedAreaPixels, rotation)
+        setCroppedImage(newCroppedImage)
+
         setIsImageFiltersModalOpen(true)
         setIsCropImageModalOpen(false)
     }
@@ -68,6 +78,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         setIsCropImageModalOpen(true)
     }
 
+    // перейти к публикации
     const goFromPhotoFiltersToPublicationModalHandler = () => {
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)
@@ -77,6 +88,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         setIsImageFiltersModalOpen(true)
     }
 
+    // опубликовать пост
     const publicationHandler = () => {
         alert('publish')
         // requests here
@@ -150,8 +162,12 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             >
                                 <ImageCropContent
                                     postImage={postImage}
-                                    croppedImage={croppedImage}
-                                    setCroppedImage={setCroppedImage}
+                                    // croppedImage={croppedImage}
+                                    // setCroppedImage={setCroppedImage}
+                                    croppedAreaPixels={croppedAreaPixels}
+                                    setCroppedAreaPixels={setCroppedAreaPixels}
+                                    rotation={rotation}
+                                    setRotation={setRotation}
                                 />
                             </AddPostBasicModal>
 
@@ -167,7 +183,10 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={goFromPhotoFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
                             >
-                                <ImageFiltersContent postImage={postImage} />
+                                <ImageFiltersContent
+                                    // postImage={postImage}
+                                    croppedImage={croppedImage}
+                                />
                             </AddPostBasicModal>
 
                             {/* модалка для публикации */}
@@ -183,7 +202,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 modalWidth={'900'}
                             >
                                 <PublicationContent
-                                    postImage={postImage}
+                                    // postImage={postImage}
+                                    croppedImage={croppedImage}
                                     description={description}
                                     setDescription={setDescription}
                                     descriptionError={descriptionError}

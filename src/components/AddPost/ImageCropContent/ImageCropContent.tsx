@@ -7,11 +7,14 @@ import ExpandScale from '../../../../public/assets/icons/expand-scale.svg'
 import SquareIcon from '../../../../public/assets/icons/rectangle-square.svg'
 import RectangleIcon32 from '../../../../public/assets/icons/rectangle-2.svg'
 import RectangleIcon169 from '../../../../public/assets/icons/rectangle-1.svg'
+import { CroppedAreaType, CropType } from '@/models/image-crop-types'
 
 interface ImageCropContentProps {
     postImage: string
-    croppedImage: string
-    setCroppedImage: (image: string) => void
+    croppedAreaPixels: CroppedAreaType | null
+    setCroppedAreaPixels: (area: CroppedAreaType) => void
+    rotation: number
+    setRotation: (value: number) => void
 }
 
 interface AspectMenuTypes {
@@ -21,27 +24,19 @@ interface AspectMenuTypes {
     icon: React.FC<SVGProps<SVGSVGElement>>
 }
 
-interface CropType {
-    x: number
-    y: number
-}
-interface CroppedAreaType extends CropType {
-    height: number
-    width: number
-}
-
 export const ImageCropContent = ({
     postImage,
-    croppedImage,
-    setCroppedImage
+    croppedAreaPixels,
+    setCroppedAreaPixels,
+    rotation,
+    setRotation
 }: ImageCropContentProps) => {
     const { t } = useTranslation('add-post-modal')
 
     const [crop, setCrop] = useState<CropType>({ x: 0, y: 0 })
     const [zoom, setZoom] = useState<number>(1)
-    const [rotation, setRotation] = useState<number>(0)
+    // const [rotation, setRotation] = useState<number>(0)
     const [aspect, setAspect] = useState<number>(1 / 1)
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
 
     const [isAspectMenuShow, setIsAspectMenuShow] = useState<boolean>(false)
     const aspectMenu: AspectMenuTypes[] = [

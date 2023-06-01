@@ -3,14 +3,14 @@ import cls from './ImageFiltersContent.module.scss'
 import Image from 'next/image'
 
 interface PhotoFiltersContentProps {
-    postImage: string
+    croppedImage: string
 }
 
-export const ImageFiltersContent = ({ postImage }: PhotoFiltersContentProps) => {
+export const ImageFiltersContent = ({ croppedImage }: PhotoFiltersContentProps) => {
     return (
         <div className={cls.photoFiltersModal_content}>
             <div className={cls.content_image}>
-                <Image src={postImage} alt={'post-photo'} width={500} height={500} />
+                <Image src={croppedImage} alt={'post-photo'} width={500} height={500} />
             </div>
             <div className={cls.content_filters}>
                 <div className={cls.filter_item}>
