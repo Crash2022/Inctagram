@@ -20,7 +20,7 @@ import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostConte
 import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
 import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
 import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
-import { useCropImage } from '@/shared/hooks/useCropImage'
+import { useAddPost } from '@/shared/hooks/useAddPost'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
@@ -64,7 +64,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         publicationHandler,
         postIsLoading,
         imageIsLoading
-    } = useCropImage()
+    } = useAddPost()
 
     useEffect(() => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)

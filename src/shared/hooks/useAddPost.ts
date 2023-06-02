@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
 
-export const useCropImage = () => {
+export const useAddPost = () => {
     const { t } = useTranslation('add-post-modal')
     const { enqueueSnackbar } = useSnackbar()
 
