@@ -30,7 +30,6 @@
             }
             .info_numbers {
                 display: flex;
-                //gap: 72px;
                 flex-wrap: wrap;
 
                 > div:not(:last-child) {
@@ -52,12 +51,15 @@
     .profilePage_content {
         .content_list {
             display: flex;
-            //justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
 
             .list_item {
-
+                img {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

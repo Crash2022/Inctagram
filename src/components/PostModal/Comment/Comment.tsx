@@ -1,9 +1,19 @@
 import React from 'react'
 import cls from '@/components/PostModal/Comment/Comment.module.scss'
 import Image from 'next/image'
-import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
 import Like from '../../../../public/assets/icons/like.svg'
 import RedLike from '../../../../public/assets/icons/red-like.svg'
+
+interface CommentPropsType {
+    your?: boolean
+    desc?: boolean
+    avatar: any
+    userName: string
+    text: string
+    date: string
+    likeButton: boolean
+    likeCount: number
+}
 
 export const Comment = (props: CommentPropsType) => {
     return (
@@ -38,15 +48,4 @@ export const Comment = (props: CommentPropsType) => {
             </div>
         </div>
     )
-}
-
-interface CommentPropsType {
-    your?: boolean
-    desc?: boolean
-    avatar: any
-    userName: string
-    text: string
-    date: string
-    likeButton: boolean
-    likeCount: number
 }

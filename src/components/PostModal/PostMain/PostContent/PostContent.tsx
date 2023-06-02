@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import DefaultProfileAvatar from '../../../../../public/assets/images/default-avatar.png'
 import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
-
 import EditIcon from '../../../../../public/assets/icons/edit-icon.svg'
 import TrashIcon from '../../../../../public/assets/icons/trash-icon.svg'
 import Like from '../../../../../public/assets/icons/like.svg'
@@ -13,9 +12,13 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Comment } from '@/components/PostModal/Comment/Comment'
-import { PostUpdatedPropsType } from '@/components/PostModal/PostMain/PostUpdate/PostUpdate'
+import { useTranslation } from 'react-i18next'
+interface PostContentProps {
+    setUpdate?: (update: boolean) => void
+}
+export const PostContent = ({ setUpdate }: PostContentProps) => {
+    const { t } = useTranslation('post-modal')
 
-export const PostContent = ({ setUpdate }: PostUpdatedPropsType) => {
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
     const menuItems = [
@@ -41,7 +44,7 @@ export const PostContent = ({ setUpdate }: PostUpdatedPropsType) => {
         control,
         handleSubmit,
         formState: { errors }
-    } = useForm<>({
+    } = useForm<any>({
         defaultValues: {}
     })
 
@@ -66,7 +69,7 @@ export const PostContent = ({ setUpdate }: PostUpdatedPropsType) => {
                                         quality={100}
                                     />
                                 </div>
-                                <div className={cls.userName}>{profileData.userName}</div>
+                                <div className={cls.userName}>{profileData?.userName}</div>
                             </div>
                             <DottedMenu menuItems={menuItems} />
                         </div>
@@ -154,7 +157,7 @@ export const PostContent = ({ setUpdate }: PostUpdatedPropsType) => {
                                         quality={100}
                                     />
                                 </div>
-                                <span className={cls.likesCount}>2243 "Like"</span>
+                                <span className={cls.likesCount}>2243 {t('Likes')}</span>
                             </div>
                             <div className={cls.postDate}>July 3, 2021</div>
                         </div>
@@ -163,13 +166,13 @@ export const PostContent = ({ setUpdate }: PostUpdatedPropsType) => {
                         <div className={cls.input}>
                             <ControlledInput
                                 name={'add-comment'}
-                                placeholder={'Add a Comment'}
+                                placeholder={t('AddComment')}
                                 control={control}
                             />
                         </div>
                         <div className={cls.button}>
                             <Button type={'submit'} theme={'clear'}>
-                                Publish
+                                {t('Publish')}
                             </Button>
                         </div>
                     </form>

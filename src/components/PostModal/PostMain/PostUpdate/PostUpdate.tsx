@@ -1,29 +1,27 @@
+import React from 'react'
 import cls from './PostUpdate.module.scss'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import DefaultProfileAvatar from '../../../../../public/assets/images/default-avatar.png'
-import React, { useState } from 'react'
-import { DottedMenu } from '@/shared/ui/DottedMenu/DottedMenu'
-
-import EditIcon from '../../../../../public/assets/icons/edit-icon.svg'
-import TrashIcon from '../../../../../public/assets/icons/trash-icon.svg'
-import Like from '../../../../../public/assets/icons/like.svg'
-import Send from '../../../../../public/assets/icons/send.svg'
-import AddToFavorite from '../../../../../public/assets/icons/addToFavorite1.svg'
-import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
-import { Comment } from '@/components/PostModal/Comment/Comment'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
+import { useTranslation } from 'react-i18next'
+
+interface PostUpdatedPropsType {
+    setUpdate: (update: boolean) => void
+}
 
 export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
+    const { t } = useTranslation('post-modal')
+
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
     const {
         control,
         handleSubmit,
         formState: { errors }
-    } = useForm<>({
+    } = useForm<any>({
         defaultValues: {}
     })
 
@@ -99,8 +97,4 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
             </div>
         </>
     )
-}
-
-export interface PostUpdatedPropsType {
-    setUpdate: (update: boolean) => void
 }

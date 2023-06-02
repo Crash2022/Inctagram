@@ -1,8 +1,8 @@
 @import '../../../styles/mixins';
 
 .postModal_mainBox {
-  @include defaultModalStyle;
-  min-width: 984px;
-  min-height: 564px;
-  background-color: var(--dark-300);
+    @include defaultModalStyle;
+    min-width: 984px;
+    min-height: 564px;
+    background-color: var(--dark-300);
 }

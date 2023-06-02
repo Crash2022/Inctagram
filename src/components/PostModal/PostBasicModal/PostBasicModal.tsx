@@ -1,36 +1,13 @@
 import React, { ReactElement } from 'react'
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
-import { useTranslation } from 'react-i18next'
 
-interface AddPostBasicModalProps {
+interface PostBasicModalProps {
     open: boolean
     setOpen: (value: boolean) => void
     children: ReactElement
-    headerTitle: string
-    isPrevious?: boolean
-    isNext?: boolean
-    isCancelBtn?: boolean
-    prevFunc?: () => void
-    nextFunc?: () => void
-    modalWidth?: string
-    isPhotoUploaded?: boolean
 }
 
-export const PostBasicModal = ({
-    open,
-    setOpen,
-    children,
-    headerTitle,
-    isPrevious,
-    isNext,
-    isCancelBtn,
-    prevFunc,
-    nextFunc,
-    modalWidth,
-    isPhotoUploaded
-}: AddPostBasicModalProps) => {
-    const { t } = useTranslation('add-post-modal')
-
+export const PostBasicModal = ({ open, setOpen, children }: PostBasicModalProps) => {
     return (
         <CustomModal
             open={open}

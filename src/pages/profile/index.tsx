@@ -77,7 +77,7 @@ import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostCon
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
 
-    const [openModal, setOpenModal] = useState<boolean>(false)
+    const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 
     // const { photos } = props
     const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
@@ -88,11 +88,7 @@ const Profile: NextPageWithLayout = () => {
 
     return (
         <>
-            <PostBasicModal
-                open={openModal}
-                setOpen={setOpenModal}
-                headerTitle={'AddPost_HeaderTitle'}
-            >
+            <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
                 <PostContent />
             </PostBasicModal>
 
@@ -168,7 +164,7 @@ const Profile: NextPageWithLayout = () => {
                                             width={265}
                                             height={265}
                                             onClick={() => {
-                                                setOpenModal(true)
+                                                setOpenPostModal(true)
                                             }}
                                         />
                                     </div>
