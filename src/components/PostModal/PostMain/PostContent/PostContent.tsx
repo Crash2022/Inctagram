@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Comment } from '@/components/PostModal/Comment/Comment'
 import { useTranslation } from 'react-i18next'
+
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
 }

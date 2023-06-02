@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 interface PostUpdatedPropsType {
     setUpdate: (update: boolean) => void
 }
-
 export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
     const { t } = useTranslation('post-modal')
 
