@@ -8,7 +8,7 @@ import { useSnackbar } from 'notistack'
 
 interface AddPostContentProps {
     postImage: string
-    setPostImage: (photo: string) => void
+    setPostImage: (image: string) => void
     setIsPhotoUploaded: (value: boolean) => void
 }
 

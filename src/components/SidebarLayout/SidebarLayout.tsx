@@ -38,7 +38,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         postImage,
         setPostImage,
         croppedImage,
-        // setCroppedImage,
+        setCroppedImage,
         // croppedAreaPixels,
         setCroppedAreaPixels,
         rotation,
@@ -62,8 +62,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         goFromImageFiltersToPublicationModalHandler,
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
-        postIsLoading,
-        imageIsLoading
+        postIsLoading
+        // imageIsLoading
     } = useAddPost()
 
     useEffect(() => {
@@ -153,7 +153,10 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextFunc={goFromImageFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
                             >
-                                <ImageFiltersContent croppedImage={croppedImage} />
+                                <ImageFiltersContent
+                                    croppedImage={croppedImage}
+                                    setCroppedImage={setCroppedImage}
+                                />
                             </AddPostBasicModal>
 
                             {/* модалка для публикации */}

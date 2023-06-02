@@ -54,7 +54,6 @@ export const useAddPost = () => {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
             setCroppedImage(await url)
             setCroppedImageFile(await file) // возможно нужно будет для создания поста ?!
-            console.log('url crop', url)
         } catch (e) {
             console.error('crop error', e)
         }
