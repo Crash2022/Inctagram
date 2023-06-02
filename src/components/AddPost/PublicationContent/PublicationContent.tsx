@@ -10,9 +10,9 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 interface PublicationContentProps {
     croppedImage: string
     description: string
-    setDescription: (value: string) => void
+    setDescription: (text: string) => void
     descriptionError: string
-    setDescriptionError: (value: string) => void
+    setDescriptionError: (text: string) => void
     postIsLoading: boolean
 }
 

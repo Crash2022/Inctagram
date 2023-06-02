@@ -5,18 +5,26 @@ import Image from 'next/image'
 
 interface PhotoFiltersContentProps {
     croppedImage: string
+    croppedImageForFilter: string
+    setCroppedImageForFilter: (image: string) => void
     applyClarendonFilter: () => void
 }
 
 export const ImageFiltersContent = ({
     croppedImage,
+    croppedImageForFilter,
+    setCroppedImageForFilter,
     applyClarendonFilter
 }: PhotoFiltersContentProps) => {
+    // const filters = [
+    //     { id: 1, title: 'Clarendon', img: '', func: () => {} }
+    // ]
+
     return (
         <div className={cls.photoFiltersModal_content}>
             <div className={cls.content_image}>
                 <Image
-                    src={croppedImage}
+                    src={croppedImageForFilter}
                     alt={'post-photo'}
                     id={'CroppedImageForFilter'}
                     width={500}
@@ -24,41 +32,46 @@ export const ImageFiltersContent = ({
                 />
             </div>
             <div className={cls.content_filters}>
+                <div
+                    className={cls.filter_item}
+                    onClick={() => {
+                        setCroppedImageForFilter(croppedImage)
+                    }}
+                >
+                    <div className={cls.item_image}>1</div>
+                    <div className={cls.item_title}>Normal</div>
+                </div>
                 <div className={cls.filter_item} onClick={applyClarendonFilter}>
-                    <div className={cls.item_image}></div>
+                    <div className={cls.item_image}>2</div>
                     <div className={cls.item_title}>Clarendon</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>2</div>
-                    <div className={cls.item_title}>title</div>
-                </div>
-                <div className={cls.filter_item}>
                     <div className={cls.item_image}>3</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_title}>Moon</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_image}>4</div>
+                    <div className={cls.item_title}>Reyes</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_image}>5</div>
+                    <div className={cls.item_title}>Amaro</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_image}>6</div>
+                    <div className={cls.item_title}>Mayfair</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_image}>7</div>
+                    <div className={cls.item_title}>Lo-Fi</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_image}>8</div>
+                    <div className={cls.item_title}>1977</div>
                 </div>
                 <div className={cls.filter_item}>
-                    <div className={cls.item_image}>1</div>
-                    <div className={cls.item_title}>title</div>
+                    <div className={cls.item_image}>9</div>
+                    <div className={cls.item_title}>Slumber</div>
                 </div>
             </div>
         </div>

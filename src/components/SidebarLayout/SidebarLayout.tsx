@@ -38,7 +38,9 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         postImage,
         setPostImage,
         croppedImage,
-        setCroppedImage,
+        // setCroppedImage,
+        croppedImageForFilter,
+        setCroppedImageForFilter,
         // croppedAreaPixels,
         setCroppedAreaPixels,
         rotation,
@@ -156,6 +158,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             >
                                 <ImageFiltersContent
                                     croppedImage={croppedImage}
+                                    croppedImageForFilter={croppedImageForFilter}
+                                    setCroppedImageForFilter={setCroppedImageForFilter}
                                     applyClarendonFilter={applyClarendonFilter}
                                 />
                             </AddPostBasicModal>

@@ -15,9 +15,10 @@ export const useAddPost = () => {
 
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
 
-    const [croppedImageFile, setCroppedImageFile] = useState(null)
+    // const [croppedImageFile, setCroppedImageFile] = useState(null)
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
+    const [croppedImageForFilter, setCroppedImageForFilter] = useState<string>('')
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
     const [rotation, setRotation] = useState<number>(0)
 
@@ -54,7 +55,8 @@ export const useAddPost = () => {
             // @ts-expect-error
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
             setCroppedImage(await url)
-            setCroppedImageFile(await file) // возможно нужно будет для создания поста ?!
+            setCroppedImageForFilter(await url)
+            // setCroppedImageFile(await file) // возможно нужно будет для создания поста ?!
         } catch (e) {
             console.error('crop error', e)
         }
@@ -112,7 +114,7 @@ export const useAddPost = () => {
             // Function 'applyPresetOnImage' is returning a Blob
             const blob = await applyPresetOnImage(image, clarendon())
             // image.src = window.URL.createObjectURL(blob)
-            setCroppedImage((image.src = window.URL.createObjectURL(blob)))
+            setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
         } catch (error) {
             console.log('error filter', error)
         }
@@ -121,12 +123,14 @@ export const useAddPost = () => {
     return {
         isPhotoUploaded,
         setIsPhotoUploaded,
-        croppedImageFile,
-        setCroppedImageFile,
+        // croppedImageFile,
+        // setCroppedImageFile,
         postImage,
         setPostImage,
         croppedImage,
         setCroppedImage,
+        croppedImageForFilter,
+        setCroppedImageForFilter,
         croppedAreaPixels,
         setCroppedAreaPixels,
         rotation,
