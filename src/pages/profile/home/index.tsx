@@ -6,7 +6,7 @@ import { NextPageWithLayout } from '@/pages/_app'
 import { getSidebarLayout } from '@/components/SidebarLayout/SidebarLayout'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import Image from 'next/image'
-import { gingham, applyPresetOnImage } from 'instagram-filters'
+import { clarendon, applyPresetOnImage } from 'instagram-filters'
 import { Button } from '@/shared/ui/Button/Button'
 
 const ProfileHome: NextPageWithLayout = () => {
@@ -19,22 +19,48 @@ const ProfileHome: NextPageWithLayout = () => {
             if (file && file.size < 1000000) {
                 console.log('file uploaded', file)
                 const formData = new FormData()
-                console.log('formData', formData)
                 formData.append('file', file)
                 setMyImage(URL.createObjectURL(file))
-                console.log('createObjectURL', URL.createObjectURL(file))
+                console.log('createObjectURL in upload', URL.createObjectURL(file))
             } else {
-                console.log('error')
+                console.log('error upload')
             }
         }
     }
 
-    const applyFilter = () => {
-        // const blob = applyPresetOnImage(myImage, gingham())
-        // console.log('blob filter', blob)
-        const image = document.querySelector('#myImage')
-        console.log('image filter', image)
-        image.src = window.URL.createObjectURL(blob)
+    const applyFilter = async () => {
+        try {
+            // const { url } = await applyPresetOnImage(myImage, gingham())
+            // console.log('url', url)
+            // setMyImage(await url)
+            //
+            // On existing image
+            const image = document.querySelector('#myImage')
+            // Function `applyPresetOnImage` is returning a Blob
+            const blob = applyPresetOnImage(image, clarendon())
+            image.src = window.URL.createObjectURL(blob) // execute 'createObjectURL' on 'URL'
+            // setMyImage((image.srcObject = blob)) // pending
+            //
+            // From URL
+            // const blob = applyPresetOnImage(myImage, clarendon())
+            // const image = document.querySelector('#myImage')
+            // image.src = window.URL.createObjectURL(blob)
+            console.log('image filter', image)
+            console.log('blob filter', blob)
+            //
+            // Using preset of filters manually
+            // const canvas = document.querySelector('#myImage')
+            // const context = canvas.getContext('2d')
+            // // Retrieve canvas pixels
+            // const pixels = context.getImageData(0, 0, canvas.width, canvas.height)
+            // // Transform canvas pixels with the "clarendon" filter
+            // const filteredPixels = clarendon()(pixels)
+            //
+            // // Replace pixels on the canvas
+            // context.putImageData(filteredPixels, 0, 0)
+        } catch (error) {
+            console.log('error filter', error)
+        }
     }
 
     return (
