@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PublicationContentProps {
     croppedImage: string
@@ -12,6 +13,7 @@ interface PublicationContentProps {
     setDescription: (value: string) => void
     descriptionError: string
     setDescriptionError: (value: string) => void
+    postIsLoading: boolean
 }
 
 export const PublicationContent = ({
@@ -19,7 +21,8 @@ export const PublicationContent = ({
     description,
     setDescription,
     descriptionError,
-    setDescriptionError
+    setDescriptionError,
+    postIsLoading
 }: PublicationContentProps) => {
     const { t } = useTranslation('add-post-modal')
     const { data: profileData } = useGetProfileDataQuery()
@@ -37,6 +40,8 @@ export const PublicationContent = ({
             setDescriptionError('')
         }
     }, [description])
+
+    if (postIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <div className={cls.publicationModal_content}>

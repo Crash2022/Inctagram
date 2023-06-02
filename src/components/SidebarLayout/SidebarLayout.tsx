@@ -61,7 +61,9 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         goFromPhotoFiltersToCropModalHandler,
         goFromPhotoFiltersToPublicationModalHandler,
         goFromPublicationModalToFiltersHandler,
-        publicationHandler
+        publicationHandler,
+        postIsLoading,
+        imageIsLoading
     } = useCropImage()
 
     useEffect(() => {
@@ -172,6 +174,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                     setDescription={setDescription}
                                     descriptionError={descriptionError}
                                     setDescriptionError={setDescriptionError}
+                                    postIsLoading={postIsLoading}
                                 />
                             </AddPostBasicModal>
 

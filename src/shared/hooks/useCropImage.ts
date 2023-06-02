@@ -85,13 +85,15 @@ export const useCropImage = () => {
 
         if (trimValue && trimValue.length <= 500) {
             try {
+                // добавление описания
                 const publish = await createPost({ description })
                 console.log('publish', publish)
 
-                if (croppedImageFile !== null) {
-                    const uploadImage = await uploadImageToPost(croppedImageFile)
-                    console.log('uploadImage', uploadImage)
-                }
+                // добавление фотографии
+                // if (croppedImageFile !== null) {
+                //     const uploadImage = await uploadImageToPost(croppedImageFile)
+                //     console.log('uploadImage', uploadImage)
+                // }
             } catch (error) {
                 console.log('publicationHandler error', error)
             }
@@ -135,6 +137,8 @@ export const useCropImage = () => {
         goFromPhotoFiltersToCropModalHandler,
         goFromPhotoFiltersToPublicationModalHandler,
         goFromPublicationModalToFiltersHandler,
-        publicationHandler
+        publicationHandler,
+        postIsLoading,
+        imageIsLoading
     }
 }
