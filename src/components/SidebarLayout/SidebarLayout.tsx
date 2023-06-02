@@ -62,8 +62,9 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         goFromImageFiltersToPublicationModalHandler,
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
-        postIsLoading
+        postIsLoading,
         // imageIsLoading
+        applyClarendonFilter
     } = useAddPost()
 
     useEffect(() => {
@@ -155,7 +156,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             >
                                 <ImageFiltersContent
                                     croppedImage={croppedImage}
-                                    setCroppedImage={setCroppedImage}
+                                    applyClarendonFilter={applyClarendonFilter}
                                 />
                             </AddPostBasicModal>
 

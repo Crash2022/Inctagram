@@ -4,6 +4,7 @@ import { getCroppedImg } from '@/shared/utils/getCroppedImg'
 import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
+import { applyPresetOnImage, clarendon } from 'instagram-filters'
 
 export const useAddPost = () => {
     const { t } = useTranslation('add-post-modal')
@@ -104,6 +105,19 @@ export const useAddPost = () => {
         }
     }
 
+    // функиця для применения фильтра к фотографии
+    const applyClarendonFilter = async () => {
+        try {
+            const image = document.querySelector('#CroppedImageForFilter')
+            // Function 'applyPresetOnImage' is returning a Blob
+            const blob = await applyPresetOnImage(image, clarendon())
+            // image.src = window.URL.createObjectURL(blob)
+            setCroppedImage((image.src = window.URL.createObjectURL(blob)))
+        } catch (error) {
+            console.log('error filter', error)
+        }
+    }
+
     return {
         isPhotoUploaded,
         setIsPhotoUploaded,
@@ -137,6 +151,7 @@ export const useAddPost = () => {
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
-        imageIsLoading
+        imageIsLoading,
+        applyClarendonFilter
     }
 }

@@ -2,29 +2,16 @@ import React from 'react'
 import cls from './ImageFiltersContent.module.scss'
 import Image from 'next/image'
 // import NoImage from '../../../../public/assets/images/no-image-01.png'
-import { clarendon, applyPresetOnImage } from 'instagram-filters'
 
 interface PhotoFiltersContentProps {
     croppedImage: string
-    setCroppedImage: (value: string) => void
+    applyClarendonFilter: () => void
 }
 
 export const ImageFiltersContent = ({
     croppedImage,
-    setCroppedImage
+    applyClarendonFilter
 }: PhotoFiltersContentProps) => {
-    const applyClarendonFilter = async () => {
-        try {
-            const image = document.querySelector('#CroppedImageForFilter')
-            // Function 'applyPresetOnImage' is returning a Blob
-            const blob = await applyPresetOnImage(image, clarendon())
-            // image.src = window.URL.createObjectURL(blob)
-            setCroppedImage((image.src = window.URL.createObjectURL(blob)))
-        } catch (error) {
-            console.log('error filter', error)
-        }
-    }
-
     return (
         <div className={cls.photoFiltersModal_content}>
             <div className={cls.content_image}>
