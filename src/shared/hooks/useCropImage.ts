@@ -40,13 +40,13 @@ export const useCropImage = () => {
         setIsCropImageModalOpen(true)
         setIsAddPostOpen(false)
     }
-    const goFromCropToAddPhotoModalHandler = () => {
+    const goFromCropToAddImageModalHandler = () => {
         setIsCropImageModalOpen(false)
         setIsAddPostOpen(true)
     }
 
     // перейти к фильтрам
-    const goFromCropToPhotoFiltersModalHandler = async () => {
+    const goFromCropToImageFiltersModalHandler = async () => {
         // получение кадрированного изображения
         try {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -64,17 +64,17 @@ export const useCropImage = () => {
         setIsImageFiltersModalOpen(true)
         setIsCropImageModalOpen(false)
     }
-    const goFromPhotoFiltersToCropModalHandler = () => {
+    const goFromImageFiltersToCropModalHandler = () => {
         setIsImageFiltersModalOpen(false)
         setIsCropImageModalOpen(true)
     }
 
     // перейти к публикации
-    const goFromPhotoFiltersToPublicationModalHandler = () => {
+    const goFromImageFiltersToPublicationModalHandler = () => {
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)
     }
-    const goFromPublicationModalToFiltersHandler = () => {
+    const goFromPublicationModalToImageFiltersHandler = () => {
         setIsPublicationModalOpen(false)
         setIsImageFiltersModalOpen(true)
     }
@@ -132,11 +132,11 @@ export const useCropImage = () => {
         isPublicationModalOpen,
         setIsPublicationModalOpen,
         goFromAddToCropModalHandler,
-        goFromCropToAddPhotoModalHandler,
-        goFromCropToPhotoFiltersModalHandler,
-        goFromPhotoFiltersToCropModalHandler,
-        goFromPhotoFiltersToPublicationModalHandler,
-        goFromPublicationModalToFiltersHandler,
+        goFromCropToAddImageModalHandler,
+        goFromCropToImageFiltersModalHandler,
+        goFromImageFiltersToCropModalHandler,
+        goFromImageFiltersToPublicationModalHandler,
+        goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
         imageIsLoading

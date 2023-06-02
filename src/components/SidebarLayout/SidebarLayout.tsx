@@ -56,11 +56,11 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         isPublicationModalOpen,
         setIsPublicationModalOpen,
         goFromAddToCropModalHandler,
-        goFromCropToAddPhotoModalHandler,
-        goFromCropToPhotoFiltersModalHandler,
-        goFromPhotoFiltersToCropModalHandler,
-        goFromPhotoFiltersToPublicationModalHandler,
-        goFromPublicationModalToFiltersHandler,
+        goFromCropToAddImageModalHandler,
+        goFromCropToImageFiltersModalHandler,
+        goFromImageFiltersToCropModalHandler,
+        goFromImageFiltersToPublicationModalHandler,
+        goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
         imageIsLoading
@@ -130,8 +130,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 isPrevious={true}
                                 isNext={true}
                                 nextButtonTitle={'Next'}
-                                prevFunc={goFromCropToAddPhotoModalHandler}
-                                nextFunc={goFromCropToPhotoFiltersModalHandler}
+                                prevFunc={goFromCropToAddImageModalHandler}
+                                nextFunc={goFromCropToImageFiltersModalHandler}
                             >
                                 <ImageCropContent
                                     postImage={postImage}
@@ -149,8 +149,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 isPrevious={true}
                                 isNext={true}
                                 nextButtonTitle={'Next'}
-                                prevFunc={goFromPhotoFiltersToCropModalHandler}
-                                nextFunc={goFromPhotoFiltersToPublicationModalHandler}
+                                prevFunc={goFromImageFiltersToCropModalHandler}
+                                nextFunc={goFromImageFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
                             >
                                 <ImageFiltersContent croppedImage={croppedImage} />
@@ -164,7 +164,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 isPrevious={true}
                                 isNext={true}
                                 nextButtonTitle={'Publish'}
-                                prevFunc={goFromPublicationModalToFiltersHandler}
+                                prevFunc={goFromPublicationModalToImageFiltersHandler}
                                 nextFunc={publicationHandler}
                                 modalWidth={'900'}
                             >

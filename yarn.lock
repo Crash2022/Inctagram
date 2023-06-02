@@ -5910,6 +5910,11 @@ inherits@2, inherits@2.0.4, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, i
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
+instagram-filters@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/instagram-filters/-/instagram-filters-1.1.0.tgz#9a4bbe07f3f0fc3bbf9880e81360918e2965e2bc"
+  integrity sha512-c9HfBM98gTAR+xlpLaTQD39Jxo4WSV6VX7AAx2mGxUo877BNy/eXxFVdPTJgbOMEIfJ+ENIGNeGqL2aYi5I7Gg==
+
 internal-slot@^1.0.3, internal-slot@^1.0.4, internal-slot@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/internal-slot/-/internal-slot-1.0.5.tgz#f2a2ee21f668f8627a4667f309dc0f4fb6674986"
