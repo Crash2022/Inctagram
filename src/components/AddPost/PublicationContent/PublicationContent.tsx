@@ -30,6 +30,12 @@ export const PublicationContent = ({
         } else {
             setDescriptionError('')
         }
+
+        if (description.length > 500) {
+            setDescriptionError(t('DescriptionLimit'))
+        } else {
+            setDescriptionError('')
+        }
     }, [description])
 
     return (
@@ -53,9 +59,7 @@ export const PublicationContent = ({
                                 quality={100}
                             />
                         </div>
-                        <div className={cls.header_userName}>
-                            {profileData && profileData.userName}
-                        </div>
+                        <div className={cls.header_userName}>{profileData?.userName}</div>
                     </div>
                     <div className={cls.info_textarea}>
                         <Textarea

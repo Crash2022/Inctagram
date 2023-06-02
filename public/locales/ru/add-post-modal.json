@@ -21,5 +21,6 @@
   "Publish": "Опубликовать",
   "Description": "Описание публикации",
   "DescriptionLimit": "Превышено количество символов",
+  "DescriptionNull": "Пожалуйста заполните поле с описанием",
   "Snackbar_EmptyDescription": "Заполните поле с описанием"
 }

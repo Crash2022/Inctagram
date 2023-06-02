@@ -96,10 +96,11 @@ export const useCropImage = () => {
                 console.log('publicationHandler error', error)
             }
         } else {
-            enqueueSnackbar(t('Snackbar_EmptyDescription'), {
-                variant: 'error',
-                autoHideDuration: 3000
-            })
+            // enqueueSnackbar(t('Snackbar_EmptyDescription'), {
+            //     variant: 'error',
+            //     autoHideDuration: 3000
+            // })
+            setDescriptionError(t('DescriptionNull'))
         }
     }
 
