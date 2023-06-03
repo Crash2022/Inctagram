@@ -21,7 +21,6 @@ interface PhotoFiltersContentProps {
     applyImageFilter: (filterName: any) => void
     applyImageFilterToExample: (imgId: any, filterName: any, stateName: any) => void
     isImageFiltersLoading: boolean
-
     filterExampleTwo: string
     setFilterExampleTwo: (image: string) => void
     filterExampleThree: string
@@ -55,7 +54,6 @@ export const ImageFiltersContent = ({
     applyImageFilter,
     applyImageFilterToExample,
     isImageFiltersLoading,
-
     filterExampleTwo,
     setFilterExampleTwo,
     filterExampleThree,

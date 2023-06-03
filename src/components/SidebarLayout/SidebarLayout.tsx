@@ -38,7 +38,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         croppedImage,
         croppedImageForFilter,
         setCroppedImageForFilter,
-        isImageFiltersLoading,
         setCroppedAreaPixels,
         rotation,
         setRotation,
@@ -62,10 +61,11 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
-        // imageIsLoading
+        // imageIsLoading,
         applyImageFilter,
-        applyImageFilterToExample,
 
+        applyImageFilterToExample,
+        isImageFiltersLoading,
         filterExampleTwo,
         setFilterExampleTwo,
         filterExampleThree,

@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack'
 import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
 import { applyPresetOnImage } from 'instagram-filters'
 
-// export type CurrentImageFilterType = 'normal' | 'clarendon' | 'moon'
+// export type CurrentImageFilterType = 'normal' | 'inkwell' | 'brooklyn'
 
 export const useAddPost = () => {
     const { t } = useTranslation('add-post-modal')
@@ -68,18 +68,18 @@ export const useAddPost = () => {
         // получение кадрированного изображения
         try {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
-            setCroppedImage(await url) // оригинал кадрированного изображения
-            setCroppedImageForFilter(await url) // для модалки с фильтрами
+            setCroppedImage(url) // оригинал кадрированного изображения
+            setCroppedImageForFilter(url) // для модалки с фильтрами
             // setCroppedImageFile(await file) // возможно будет нужно ?!
 
-            setFilterExampleTwo(await url) // для сетки с примерами фильтров
-            setFilterExampleThree(await url) // для сетки с примерами фильтров
-            setFilterExampleFour(await url) // для сетки с примерами фильтров
-            setFilterExampleFive(await url) // для сетки с примерами фильтров
-            setFilterExampleSix(await url) // для сетки с примерами фильтров
-            setFilterExampleSeven(await url) // для сетки с примерами фильтров
-            setFilterExampleEight(await url) // для сетки с примерами фильтров
-            setFilterExampleNine(await url) // для сетки с примерами фильтров
+            setFilterExampleTwo(url) // для сетки с примерами фильтров
+            setFilterExampleThree(url) // для сетки с примерами фильтров
+            setFilterExampleFour(url) // для сетки с примерами фильтров
+            setFilterExampleFive(url) // для сетки с примерами фильтров
+            setFilterExampleSix(url) // для сетки с примерами фильтров
+            setFilterExampleSeven(url) // для сетки с примерами фильтров
+            setFilterExampleEight(url) // для сетки с примерами фильтров
+            setFilterExampleNine(url) // для сетки с примерами фильтров
         } catch (e) {
             console.error('crop error', e)
         }
@@ -110,7 +110,7 @@ export const useAddPost = () => {
 
     // функиця для сетки с примерами фильтров
     const applyImageFilterToExample = async (imgId: string, filterName: any, stateName: any) => {
-        setIsImageFiltersLoading(true)
+        // setIsImageFiltersLoading(true)
         try {
             const image = document.querySelector(`#${imgId}`)
             // const image = document.getElementById(imgId)
@@ -120,7 +120,7 @@ export const useAddPost = () => {
         } catch (error) {
             console.log('error filter', error)
         } finally {
-            setIsImageFiltersLoading(false)
+            // setIsImageFiltersLoading(false)
         }
     }
 
@@ -172,7 +172,6 @@ export const useAddPost = () => {
         // setCroppedImage,
         croppedImageForFilter,
         setCroppedImageForFilter,
-        isImageFiltersLoading,
         // setIsImageFiltersLoading,
         // croppedAreaPixels,
         setCroppedAreaPixels,
@@ -200,8 +199,9 @@ export const useAddPost = () => {
         postIsLoading,
         // imageIsLoading,
         applyImageFilter,
-        applyImageFilterToExample,
 
+        applyImageFilterToExample,
+        isImageFiltersLoading,
         filterExampleTwo,
         setFilterExampleTwo,
         filterExampleThree,
