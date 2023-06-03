@@ -22,8 +22,9 @@ export const useAddPost = () => {
     const [croppedImage, setCroppedImage] = useState<string>('')
     const [croppedImageForFilter, setCroppedImageForFilter] = useState<string>('')
     // const [currentImageFilter, setCurrentImageFilter] = useState<CurrentImageFilterType>('normal')
+    const [isImageFiltersLoading, setIsImageFiltersLoading] = useState<boolean>(false)
 
-    // для сетки фильтров (нужно зарефакторить эту дичь!)
+    // для сетки фильтров (нужно зарефакторить эту дичь!!!)
     const [filterExampleTwo, setFilterExampleTwo] = useState<string>('')
     const [filterExampleThree, setFilterExampleThree] = useState<string>('')
     const [filterExampleFour, setFilterExampleFour] = useState<string>('')
@@ -108,13 +109,17 @@ export const useAddPost = () => {
 
     // для сетки с примерами фильтров
     const applyImageFilterToExample = async (imgId: string, filterName: any, stateName: any) => {
+        setIsImageFiltersLoading(true)
         try {
             const image = document.querySelector(`#${imgId}`)
             // const image = document.getElementById(imgId)
             const blob = await applyPresetOnImage(image, filterName())
             stateName((image.src = window.URL.createObjectURL(blob)))
+            // setIsImageFiltersLoading(false)
         } catch (error) {
             console.log('error filter', error)
+        } finally {
+            setIsImageFiltersLoading(false)
         }
     }
 
@@ -166,6 +171,8 @@ export const useAddPost = () => {
         // setCroppedImage,
         croppedImageForFilter,
         setCroppedImageForFilter,
+        isImageFiltersLoading,
+        // setIsImageFiltersLoading,
         // croppedAreaPixels,
         setCroppedAreaPixels,
         rotation,
@@ -195,20 +202,20 @@ export const useAddPost = () => {
         applyImageFilterToExample,
 
         filterExampleTwo,
-        // setFilterExampleTwo,
+        setFilterExampleTwo,
         filterExampleThree,
-        // setFilterExampleThree,
+        setFilterExampleThree,
         filterExampleFour,
-        // setFilterExampleFour,
+        setFilterExampleFour,
         filterExampleFive,
-        // setFilterExampleFive,
+        setFilterExampleFive,
         filterExampleSix,
-        // setFilterExampleSix,
+        setFilterExampleSix,
         filterExampleSeven,
-        // setFilterExampleSeven,
+        setFilterExampleSeven,
         filterExampleEight,
-        // setFilterExampleEight,
-        filterExampleNine
-        // setFilterExampleNine
+        setFilterExampleEight,
+        filterExampleNine,
+        setFilterExampleNine
     }
 }

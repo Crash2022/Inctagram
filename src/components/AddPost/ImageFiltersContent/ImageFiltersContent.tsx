@@ -12,6 +12,7 @@ import {
     kelvin,
     slumber
 } from 'instagram-filters'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PhotoFiltersContentProps {
     croppedImage: string
@@ -19,15 +20,24 @@ interface PhotoFiltersContentProps {
     setCroppedImageForFilter: (image: string) => void
     applyImageFilter: (filterName: any) => void
     applyImageFilterToExample: (imgId: any, filterName: any, stateName: any) => void
+    isImageFiltersLoading: boolean
 
     filterExampleTwo: string
+    setFilterExampleTwo: (image: string) => void
     filterExampleThree: string
+    setFilterExampleThree: (image: string) => void
     filterExampleFour: string
+    setFilterExampleFour: (image: string) => void
     filterExampleFive: string
+    setFilterExampleFive: (image: string) => void
     filterExampleSix: string
+    setFilterExampleSix: (image: string) => void
     filterExampleSeven: string
+    setFilterExampleSeven: (image: string) => void
     filterExampleEight: string
+    setFilterExampleEight: (image: string) => void
     filterExampleNine: string
+    setFilterExampleNine: (image: string) => void
 }
 
 export const ImageFiltersContent = ({
@@ -36,15 +46,24 @@ export const ImageFiltersContent = ({
     setCroppedImageForFilter,
     applyImageFilter,
     applyImageFilterToExample,
+    isImageFiltersLoading,
 
     filterExampleTwo,
+    setFilterExampleTwo,
     filterExampleThree,
+    setFilterExampleThree,
     filterExampleFour,
+    setFilterExampleFour,
     filterExampleFive,
+    setFilterExampleFive,
     filterExampleSix,
+    setFilterExampleSix,
     filterExampleSeven,
+    setFilterExampleSeven,
     filterExampleEight,
-    filterExampleNine
+    setFilterExampleEight,
+    filterExampleNine,
+    setFilterExampleNine
 }: PhotoFiltersContentProps) => {
     // сетка с фильтрами
     const imageFilters = [
@@ -133,15 +152,17 @@ export const ImageFiltersContent = ({
 
     // применение фильтров к сетке
     useEffect(() => {
-        applyImageFilterToExample('filterExampleTwo', inkwell, filterExampleTwo)
-        applyImageFilterToExample('filterExampleThree', brooklyn, filterExampleThree)
-        applyImageFilterToExample('filterExampleFour', clarendon, filterExampleFour)
-        applyImageFilterToExample('filterExampleFive', reyes, filterExampleFive)
-        applyImageFilterToExample('filterExampleSix', amaro, filterExampleSix)
-        applyImageFilterToExample('filterExampleSeven', ashby, filterExampleSeven)
-        applyImageFilterToExample('filterExampleEight', kelvin, filterExampleEight)
-        applyImageFilterToExample('filterExampleNine', slumber, filterExampleNine)
+        applyImageFilterToExample('filterExampleTwo', inkwell, setFilterExampleTwo)
+        applyImageFilterToExample('filterExampleThree', brooklyn, setFilterExampleThree)
+        applyImageFilterToExample('filterExampleFour', clarendon, setFilterExampleFour)
+        applyImageFilterToExample('filterExampleFive', reyes, setFilterExampleFive)
+        applyImageFilterToExample('filterExampleSix', amaro, setFilterExampleSix)
+        applyImageFilterToExample('filterExampleSeven', ashby, setFilterExampleSeven)
+        applyImageFilterToExample('filterExampleEight', kelvin, setFilterExampleEight)
+        applyImageFilterToExample('filterExampleNine', slumber, setFilterExampleNine)
     }, [])
+
+    if (isImageFiltersLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <div className={cls.photoFiltersModal_content}>
