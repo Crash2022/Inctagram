@@ -40,6 +40,14 @@ interface PhotoFiltersContentProps {
     setFilterExampleNine: (image: string) => void
 }
 
+interface ImageFiltersType {
+    id: number
+    title: string
+    imgId: string
+    imgExampleSrc: string
+    func: () => void
+}
+
 export const ImageFiltersContent = ({
     croppedImage,
     croppedImageForFilter,
@@ -66,7 +74,7 @@ export const ImageFiltersContent = ({
     setFilterExampleNine
 }: PhotoFiltersContentProps) => {
     // сетка с фильтрами
-    const imageFilters = [
+    const imageFilters: ImageFiltersType[] = [
         // {
         //     id: 1,
         //     title: 'normal',

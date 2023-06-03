@@ -15,11 +15,17 @@ export const useAddPost = () => {
     const [createPost, { isLoading: postIsLoading }] = useCreatePostMutation()
     const [uploadImageToPost, { isLoading: imageIsLoading }] = useUploadImageToPostMutation()
 
-    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
+    // состояние модальных окон
+    const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
+    const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
+    const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
+    const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
-    // const [croppedImageFile, setCroppedImageFile] = useState(null)
+    // работа с изображением
+    const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
+    // const [croppedImageFile, setCroppedImageFile] = useState(null)
     const [croppedImageForFilter, setCroppedImageForFilter] = useState<string>('')
     // const [currentImageFilter, setCurrentImageFilter] = useState<CurrentImageFilterType>('normal')
     const [isImageFiltersLoading, setIsImageFiltersLoading] = useState<boolean>(false)
@@ -39,11 +45,6 @@ export const useAddPost = () => {
 
     const [description, setDescription] = useState<string>('')
     const [descriptionError, setDescriptionError] = useState<string>('')
-
-    const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
-    const [isCropImageModalOpen, setIsCropImageModalOpen] = useState<boolean>(false)
-    const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
-    const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
     // переход к кадрированию изображения
     const goFromAddToCropModalHandler = () => {
@@ -69,7 +70,7 @@ export const useAddPost = () => {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
             setCroppedImage(await url) // оригинал кадрированного изображения
             setCroppedImageForFilter(await url) // для модалки с фильтрами
-            // setCroppedImageFile(await file) // возможно нужно будет ?!
+            // setCroppedImageFile(await file) // возможно будет нужно ?!
 
             setFilterExampleTwo(await url) // для сетки с примерами фильтров
             setFilterExampleThree(await url) // для сетки с примерами фильтров
@@ -107,7 +108,7 @@ export const useAddPost = () => {
         }
     }
 
-    // для сетки с примерами фильтров
+    // функиця для сетки с примерами фильтров
     const applyImageFilterToExample = async (imgId: string, filterName: any, stateName: any) => {
         setIsImageFiltersLoading(true)
         try {
