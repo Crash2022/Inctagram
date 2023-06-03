@@ -33,15 +33,11 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const {
         isPhotoUploaded,
         setIsPhotoUploaded,
-        // croppedImageFile,
-        // setCroppedImageFile,
         postImage,
         setPostImage,
         croppedImage,
-        // setCroppedImage,
         croppedImageForFilter,
         setCroppedImageForFilter,
-        // croppedAreaPixels,
         setCroppedAreaPixels,
         rotation,
         setRotation,
@@ -66,7 +62,17 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         publicationHandler,
         postIsLoading,
         // imageIsLoading
-        applyClarendonFilter
+        applyImageFilter,
+        applyImageFilterToExample,
+
+        filterExampleTwo,
+        filterExampleThree,
+        filterExampleFour,
+        filterExampleFive,
+        filterExampleSix,
+        filterExampleSeven,
+        filterExampleEight,
+        filterExampleNine
     } = useAddPost()
 
     useEffect(() => {
@@ -160,7 +166,16 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                     croppedImage={croppedImage}
                                     croppedImageForFilter={croppedImageForFilter}
                                     setCroppedImageForFilter={setCroppedImageForFilter}
-                                    applyClarendonFilter={applyClarendonFilter}
+                                    applyImageFilter={applyImageFilter}
+                                    applyImageFilterToExample={applyImageFilterToExample}
+                                    filterExampleTwo={filterExampleTwo}
+                                    filterExampleThree={filterExampleThree}
+                                    filterExampleFour={filterExampleFour}
+                                    filterExampleFive={filterExampleFive}
+                                    filterExampleSix={filterExampleSix}
+                                    filterExampleSeven={filterExampleSeven}
+                                    filterExampleEight={filterExampleEight}
+                                    filterExampleNine={filterExampleNine}
                                 />
                             </AddPostBasicModal>
 

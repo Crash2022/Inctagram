@@ -27,7 +27,7 @@ export const AddPostContent = ({
             const file = event.target.files[0]
 
             if (file && file.size < 1000000) {
-                console.log('file', file)
+                // console.log('file', file)
 
                 const formData = new FormData()
                 formData.append('file', file)

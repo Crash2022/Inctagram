@@ -4,7 +4,9 @@ import { getCroppedImg } from '@/shared/utils/getCroppedImg'
 import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
-import { applyPresetOnImage, clarendon } from 'instagram-filters'
+import { applyPresetOnImage } from 'instagram-filters'
+
+// export type CurrentImageFilterType = 'normal' | 'clarendon' | 'moon'
 
 export const useAddPost = () => {
     const { t } = useTranslation('add-post-modal')
@@ -19,6 +21,18 @@ export const useAddPost = () => {
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
     const [croppedImageForFilter, setCroppedImageForFilter] = useState<string>('')
+    // const [currentImageFilter, setCurrentImageFilter] = useState<CurrentImageFilterType>('normal')
+
+    // для сетки фильтров (нужно зарефакторить эту дичь!)
+    const [filterExampleTwo, setFilterExampleTwo] = useState<string>('')
+    const [filterExampleThree, setFilterExampleThree] = useState<string>('')
+    const [filterExampleFour, setFilterExampleFour] = useState<string>('')
+    const [filterExampleFive, setFilterExampleFive] = useState<string>('')
+    const [filterExampleSix, setFilterExampleSix] = useState<string>('')
+    const [filterExampleSeven, setFilterExampleSeven] = useState<string>('')
+    const [filterExampleEight, setFilterExampleEight] = useState<string>('')
+    const [filterExampleNine, setFilterExampleNine] = useState<string>('')
+
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedAreaType | null>(null)
     const [rotation, setRotation] = useState<number>(0)
 
@@ -30,7 +44,7 @@ export const useAddPost = () => {
     const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
     const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
-    // перейти к кадрированию изображения
+    // переход к кадрированию изображения
     const goFromAddToCropModalHandler = () => {
         if (!isPhotoUploaded) {
             enqueueSnackbar(t('Snackbar_ImageNotUploaded'), {
@@ -47,16 +61,23 @@ export const useAddPost = () => {
         setIsAddPostOpen(true)
     }
 
-    // перейти к фильтрам
+    // переход к фильтрам
     const goFromCropToImageFiltersModalHandler = async () => {
         // получение кадрированного изображения
         try {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
-            setCroppedImage(await url)
-            setCroppedImageForFilter(await url)
-            // setCroppedImageFile(await file) // возможно нужно будет для создания поста ?!
+            setCroppedImage(await url) // оригинал кадрированного изображения
+            setCroppedImageForFilter(await url) // для модалки с фильтрами
+            // setCroppedImageFile(await file) // возможно нужно будет ?!
+
+            setFilterExampleTwo(await url) // для сетки с примерами фильтров
+            setFilterExampleThree(await url) // для сетки с примерами фильтров
+            setFilterExampleFour(await url) // для сетки с примерами фильтров
+            setFilterExampleFive(await url) // для сетки с примерами фильтров
+            setFilterExampleSix(await url) // для сетки с примерами фильтров
+            setFilterExampleSeven(await url) // для сетки с примерами фильтров
+            setFilterExampleEight(await url) // для сетки с примерами фильтров
+            setFilterExampleNine(await url) // для сетки с примерами фильтров
         } catch (e) {
             console.error('crop error', e)
         }
@@ -69,8 +90,35 @@ export const useAddPost = () => {
         setIsImageFiltersModalOpen(false)
         setIsCropImageModalOpen(true)
     }
+    // функиця для применения фильтра к фотографии
+    const applyImageFilter = async (filterName: any) => {
+        try {
+            const image = document.querySelector('#CroppedImageForFilter')
+            // Function 'applyPresetOnImage' is returning a Blob
+            const blob = await applyPresetOnImage(image, filterName())
+            // image.src = window.URL.createObjectURL(blob)
+            setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
 
-    // перейти к публикации
+            // if (currentImageFilter === filterName) return
+            // setCurrentImageFilter(filterName)
+        } catch (error) {
+            console.log('error filter', error)
+        }
+    }
+
+    // для сетки с примерами фильтров
+    const applyImageFilterToExample = async (imgId: string, filterName: any, stateName: any) => {
+        try {
+            const image = document.querySelector(`#${imgId}`)
+            // const image = document.getElementById(imgId)
+            const blob = await applyPresetOnImage(image, filterName())
+            stateName((image.src = window.URL.createObjectURL(blob)))
+        } catch (error) {
+            console.log('error filter', error)
+        }
+    }
+
+    // переход к публикации
     const goFromImageFiltersToPublicationModalHandler = () => {
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)
@@ -80,7 +128,7 @@ export const useAddPost = () => {
         setIsImageFiltersModalOpen(true)
     }
 
-    // опубликовать пост
+    // публикция поста
     const publicationHandler = async () => {
         const trimValue = description.trim()
 
@@ -107,19 +155,6 @@ export const useAddPost = () => {
         }
     }
 
-    // функиця для применения фильтра к фотографии
-    const applyClarendonFilter = async () => {
-        try {
-            const image = document.querySelector('#CroppedImageForFilter')
-            // Function 'applyPresetOnImage' is returning a Blob
-            const blob = await applyPresetOnImage(image, clarendon())
-            // image.src = window.URL.createObjectURL(blob)
-            setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
-        } catch (error) {
-            console.log('error filter', error)
-        }
-    }
-
     return {
         isPhotoUploaded,
         setIsPhotoUploaded,
@@ -128,10 +163,10 @@ export const useAddPost = () => {
         postImage,
         setPostImage,
         croppedImage,
-        setCroppedImage,
+        // setCroppedImage,
         croppedImageForFilter,
         setCroppedImageForFilter,
-        croppedAreaPixels,
+        // croppedAreaPixels,
         setCroppedAreaPixels,
         rotation,
         setRotation,
@@ -155,7 +190,25 @@ export const useAddPost = () => {
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
-        imageIsLoading,
-        applyClarendonFilter
+        // imageIsLoading,
+        applyImageFilter,
+        applyImageFilterToExample,
+
+        filterExampleTwo,
+        // setFilterExampleTwo,
+        filterExampleThree,
+        // setFilterExampleThree,
+        filterExampleFour,
+        // setFilterExampleFour,
+        filterExampleFive,
+        // setFilterExampleFive,
+        filterExampleSix,
+        // setFilterExampleSix,
+        filterExampleSeven,
+        // setFilterExampleSeven,
+        filterExampleEight,
+        // setFilterExampleEight,
+        filterExampleNine
+        // setFilterExampleNine
     }
 }
