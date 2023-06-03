@@ -8,7 +8,7 @@ import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PublicationContentProps {
-    croppedImage: string
+    croppedImageForFilter: string
     description: string
     setDescription: (text: string) => void
     descriptionError: string
@@ -17,7 +17,7 @@ interface PublicationContentProps {
 }
 
 export const PublicationContent = ({
-    croppedImage,
+    croppedImageForFilter,
     description,
     setDescription,
     descriptionError,
@@ -46,7 +46,7 @@ export const PublicationContent = ({
     return (
         <div className={cls.publicationModal_content}>
             <div className={cls.content_image}>
-                <Image src={croppedImage} alt={'post-photo'} width={500} height={500} />
+                <Image src={croppedImageForFilter} alt={'post-photo'} width={500} height={500} />
             </div>
             <div className={cls.content_publication}>
                 <div className={cls.publication_info}>

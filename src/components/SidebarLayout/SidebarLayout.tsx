@@ -210,7 +210,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 modalWidth={'900'}
                             >
                                 <PublicationContent
-                                    croppedImage={croppedImage}
+                                    croppedImageForFilter={croppedImageForFilter}
                                     description={description}
                                     setDescription={setDescription}
                                     descriptionError={descriptionError}
