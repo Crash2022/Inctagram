@@ -1,11 +1,10 @@
 import { PostUpdate } from '@/components/PostModal/PostMain/PostUpdate/PostUpdate'
 import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
+import { useState } from 'react'
 
-interface PostMainType {
-    update: boolean
-    setUpdate: (update: boolean) => void
-}
-export const PostMain = ({ update, setUpdate }: PostMainType) => {
+export const PostMain = () => {
+    const [update, setUpdate] = useState<boolean>(false)
+
     if (update) {
         return <PostUpdate setUpdate={setUpdate} />
     } else {

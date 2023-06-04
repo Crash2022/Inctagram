@@ -15,6 +15,7 @@ import React, { useState } from 'react'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { Photo } from '@/models/profile-types'
 import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
+import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 // import { profileApi } from '@/shared/api/profile-api'
 // import { Photo } from '@/models/profile-types'
 // import dynamic from 'next/dynamic'
@@ -89,7 +90,7 @@ const Profile: NextPageWithLayout = () => {
     return (
         <>
             <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
-                <PostContent />
+                <PostMain />
             </PostBasicModal>
 
             <Head>

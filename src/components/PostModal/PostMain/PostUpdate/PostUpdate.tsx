@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cls from './PostUpdate.module.scss'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
@@ -15,6 +15,7 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
     const { t } = useTranslation('post-modal')
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
+    const [description, setDescription] = useState<string>('')
 
     const {
         control,
@@ -28,12 +29,11 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
         <>
             <div className={cls.postModal_mainBox}>
                 <div className={cls.updatePostModal_header}>
-                    <div className={cls.modal_headerTitle}>Edit Post</div>
+                    <div className={cls.modal_headerTitle}>{t('EditPost')}</div>
                     <div className={cls.closeButton}>
                         <button
                             onClick={() => {
                                 setUpdate(false)
-                                console.log('nazhal')
                             }}
                         >
                             X
@@ -65,7 +65,7 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
                         </div>
                         <form className={cls.updateDesc}>
                             <div className={cls.textAreaBlock}>
-                                <div className={cls.description}>Add publication descriptions</div>
+                                <div className={cls.description}>{t('AddPostPublication')}</div>
                                 <div>
                                     <Controller
                                         name={'update-description'}
@@ -74,20 +74,20 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
                                             <Textarea
                                                 {...field}
                                                 placeholder={''}
-                                                value={field.value}
+                                                value={description}
                                                 onChange={(value) => {
-                                                    field.onChange(value)
+                                                    setDescription(value.currentTarget.value)
                                                 }}
-                                                error={errors.aboutMe?.message}
+                                                // error={errors.aboutMe?.message}
                                             />
                                         )}
                                     />
                                 </div>
-                                <div className={cls.lettersCount}>200/500</div>
+                                <div className={cls.lettersCount}>{description.length}/500</div>
                             </div>
                             <div className={cls.buttonBlock}>
                                 <Button type={'submit'} theme={'primary'}>
-                                    Publish
+                                    {t('Publish')}
                                 </Button>
                             </div>
                         </form>
