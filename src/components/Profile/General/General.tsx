@@ -72,14 +72,12 @@ export const General = () => {
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
+        // надо пофиксить валидацию на 'пробелы'
         // const trimValue = watch('aboutMe').trim()
         //
         // if (trimValue && trimValue.length === 0) {
-        //     console.log('trim')
         //     return
-        //     // setAboutMeError('')
         // }
-        // console.log(watch('aboutMe').trim())
 
         console.log('submit profile', submitData)
         const res = await setProfileData(submitData)
