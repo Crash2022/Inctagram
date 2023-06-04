@@ -33,12 +33,6 @@ export const PublicationContent = ({
         } else {
             setDescriptionError('')
         }
-
-        if (description.length > 500) {
-            setDescriptionError(t('DescriptionLimit'))
-        } else {
-            setDescriptionError('')
-        }
     }, [description])
 
     if (postIsLoading) return <LoaderScreen variant={'circle'} />

@@ -49,7 +49,7 @@ export const General = () => {
     ] = useDeleteAvatarMutation()
 
     const ProfileGeneralSchema = yup.object().shape({
-        userName: yup.string().min(6, t('Err_Yup_Min')).max(30, t('Err_Yup_Max_Name')),
+        userName: yup.string().min(6, t('Err_Yup_Min_Name')).max(30, t('Err_Yup_Max_Name')),
         aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
     })
 
@@ -72,6 +72,15 @@ export const General = () => {
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
+        // const trimValue = watch('aboutMe').trim()
+        //
+        // if (trimValue && trimValue.length === 0) {
+        //     console.log('trim')
+        //     return
+        //     // setAboutMeError('')
+        // }
+        // console.log(watch('aboutMe').trim())
+
         console.log('submit profile', submitData)
         const res = await setProfileData(submitData)
         console.log('profile response', res)
