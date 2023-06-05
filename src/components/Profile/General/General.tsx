@@ -50,7 +50,12 @@ export const General = () => {
 
     const ProfileGeneralSchema = yup.object().shape({
         userName: yup.string().min(6, t('Err_Yup_Min_Name')).max(30, t('Err_Yup_Max_Name')),
-        aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
+        aboutMe: yup
+            .string()
+            .max(200, t('Err_Yup_Max_AboutMe'))
+            .required(t('Err_Yup_Required'))
+            .trim(t('Err_Yup_Trim_AboutMe'))
+            .strict(true)
     })
 
     const {
@@ -72,13 +77,6 @@ export const General = () => {
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
-        // надо пофиксить валидацию на 'пробелы'
-        // const trimValue = watch('aboutMe').trim()
-        //
-        // if (trimValue && trimValue.length === 0) {
-        //     return
-        // }
-
         console.log('submit profile', submitData)
         const res = await setProfileData(submitData)
         console.log('profile response', res)
