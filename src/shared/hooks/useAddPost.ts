@@ -24,16 +24,16 @@ export const useAddPost = () => {
     const [isImageFiltersModalOpen, setIsImageFiltersModalOpen] = useState<boolean>(false)
     const [isPublicationModalOpen, setIsPublicationModalOpen] = useState<boolean>(false)
 
-    // работа с изображением
+    // стейты для изображений
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
-    const [croppedImageFile, setCroppedImageFile] = useState<any>()
+    const [croppedImageFile, setCroppedImageFile] = useState<File | null>(null)
     const [croppedImageForFilter, setCroppedImageForFilter] = useState<string>('')
     // const [currentImageFilter, setCurrentImageFilter] = useState<CurrentImageFilterType>('normal')
     const [isImageFiltersLoading, setIsImageFiltersLoading] = useState<boolean>(false)
 
-    // для сетки фильтров (нужно зарефакторить эту дичь!!!)
+    // для сетки фильтров (нужно зарефакторить эту дичь!?)
     const [filterExampleTwo, setFilterExampleTwo] = useState<string>('')
     const [filterExampleThree, setFilterExampleThree] = useState<string>('')
     const [filterExampleFour, setFilterExampleFour] = useState<string>('')
@@ -101,7 +101,7 @@ export const useAddPost = () => {
             const image = document.querySelector('#CroppedImageForFilter')
             // Function 'applyPresetOnImage' is returning a Blob
             const blob = await applyPresetOnImage(image, filterName())
-            setCroppedImageFile(blob) // перезапись файла на файл с фильтром
+            setCroppedImageFile(blob) // перезапись файла на файл с применённым фильтром
             // image.src = window.URL.createObjectURL(blob)
             // setCroppedImageForFilter(croppedImage) // обнуление фотографии на normal (не работает!)
             setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
@@ -169,6 +169,19 @@ export const useAddPost = () => {
                 console.log('publishObj', publishObj)
                 const publish = await createPost(publishObj)
                 console.log('publish', publish)
+                // зачистка всех полей
+                setIsPublicationModalOpen(false)
+                setPostImage('')
+                setCroppedImage('')
+                setCroppedImageForFilter('')
+                setDescription('')
+                setIsPhotoUploaded(false)
+                setCroppedImageFile(null)
+
+                enqueueSnackbar(t('Snackbar_PostAdded'), {
+                    variant: 'success',
+                    autoHideDuration: 3000
+                })
             } catch (error) {
                 console.log('publicationHandler error', error)
             }
