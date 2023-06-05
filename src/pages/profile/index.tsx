@@ -138,12 +138,7 @@ const Profile: NextPageWithLayout = () => {
                                 <div>{t('Publications')}</div>
                             </div>
                         </div>
-                        <div className={cls.info_description}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.
-                        </div>
+                        <div className={cls.info_description}>{profileData.aboutMe}</div>
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>
