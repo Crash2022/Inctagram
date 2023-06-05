@@ -164,7 +164,7 @@ export const useAddPost = () => {
             try {
                 const publishObj: CreatePost = {
                     description,
-                    childrenMetadata: { uploadId: uploadImageResponse?.images[1].uploadId }
+                    childrenMetadata: [{ uploadId: uploadImageResponse?.images[1].uploadId }]
                 }
                 console.log('publishObj', publishObj)
                 const publish = await createPost(publishObj)
