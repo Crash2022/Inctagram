@@ -158,6 +158,7 @@ export const ImageFiltersContent = ({
 
     // применение фильтров к сетке
     useEffect(() => {
+        // Promise.all([
         applyImageFilterToExample('filterExampleTwo', inkwell, setFilterExampleTwo)
         applyImageFilterToExample('filterExampleThree', brooklyn, setFilterExampleThree)
         applyImageFilterToExample('filterExampleFour', clarendon, setFilterExampleFour)
@@ -166,6 +167,9 @@ export const ImageFiltersContent = ({
         applyImageFilterToExample('filterExampleSeven', ashby, setFilterExampleSeven)
         applyImageFilterToExample('filterExampleEight', kelvin, setFilterExampleEight)
         applyImageFilterToExample('filterExampleNine', slumber, setFilterExampleNine)
+        // ]).then((r) => {
+        //     console.log(r)
+        // })
     }, [])
 
     if (isImageFiltersLoading) return <LoaderScreen variant={'circle'} />
@@ -202,6 +206,11 @@ export const ImageFiltersContent = ({
                 </div>
 
                 {imageFilters.map((f) => {
+                    // const onClickHandler = () => {
+                    //     // setCroppedImageForFilter(croppedImage)
+                    //     f.func()
+                    // }
+
                     return (
                         <div key={f.id} className={cls.filter_item} onClick={f.func}>
                             <div className={cls.item_image}>

@@ -69,7 +69,7 @@ export const useAddPost = () => {
         try {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
             setCroppedImage(url) // оригинал кадрированного изображения
-            setCroppedImageForFilter(url) // для модалки с фильтрами
+            setCroppedImageForFilter(url) // фото для модалки с фильтрами
             // setCroppedImageFile(await file) // возможно будет нужно ?!
 
             setFilterExampleTwo(url) // для сетки с примерами фильтров
@@ -99,10 +99,8 @@ export const useAddPost = () => {
             // Function 'applyPresetOnImage' is returning a Blob
             const blob = await applyPresetOnImage(image, filterName())
             // image.src = window.URL.createObjectURL(blob)
+            // setCroppedImageForFilter(croppedImage) // обнуление фотографии на normal (не работает!)
             setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
-
-            // if (currentImageFilter === filterName) return
-            // setCurrentImageFilter(filterName)
         } catch (error) {
             console.log('error filter', error)
         }
