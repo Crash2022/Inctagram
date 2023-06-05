@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { baseURL } from '@/shared/api/baseURL'
-import { GetPostsResponse, AddPostsResponse, UploadPostImage } from '@/models/posts-types'
+import {
+    GetPostsResponse,
+    AddPostsResponse,
+    UploadPostImage,
+    CreatePost
+} from '@/models/posts-types'
 
 export const userPostsAPI = createApi({
     reducerPath: 'userPostsAPI',
@@ -25,8 +30,8 @@ export const userPostsAPI = createApi({
             }),
             providesTags: (result) => ['UserPosts']
         }),
-        createPost: build.mutation<AddPostsResponse, { description: string }>({
-            query: (payload: { description: string }) => ({
+        createPost: build.mutation<AddPostsResponse, CreatePost>({
+            query: (payload: CreatePost) => ({
                 url: '/posts',
                 method: 'POST',
                 body: payload

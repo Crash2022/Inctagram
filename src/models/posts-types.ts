@@ -32,3 +32,9 @@ export interface UploadPostImage {
         }
     ]
 }
+export interface CreatePost {
+    description: string
+    childrenMetadata: {
+        uploadId: string
+    }
+}

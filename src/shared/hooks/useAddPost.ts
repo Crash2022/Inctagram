@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
 import { applyPresetOnImage } from 'instagram-filters'
+import { CreatePost, UploadPostImage } from '@/models/posts-types'
 
 // export type CurrentImageFilterType = 'normal' | 'inkwell' | 'brooklyn'
 
@@ -14,6 +15,8 @@ export const useAddPost = () => {
 
     const [createPost, { isLoading: postIsLoading }] = useCreatePostMutation()
     const [uploadImageToPost, { isLoading: imageIsUploading }] = useUploadImageToPostMutation()
+
+    const [uploadImageResponse, setUploadImageResponse] = useState<UploadPostImage | null>(null)
 
     // состояние модальных окон
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
@@ -137,6 +140,7 @@ export const useAddPost = () => {
             // загрузка изображения на бэкенд
             try {
                 const imageResult = await uploadImageToPost(formData)
+                setUploadImageResponse(imageResult.data)
                 console.log('imageResult', imageResult)
             } catch (e) {
                 console.log('imageResult error', e)
@@ -158,15 +162,13 @@ export const useAddPost = () => {
 
         if (trimValue && trimValue.length <= 500) {
             try {
-                // добавление описания
-                const publish = await createPost({ description })
+                const publishObj: CreatePost = {
+                    description,
+                    childrenMetadata: { uploadId: uploadImageResponse?.images[1].uploadId }
+                }
+                console.log('publishObj', publishObj)
+                const publish = await createPost(publishObj)
                 console.log('publish', publish)
-
-                // добавление фотографии
-                // if (croppedImageFile !== null) {
-                //     const uploadImage = await uploadImageToPost(croppedImageFile)
-                //     console.log('uploadImage', uploadImage)
-                // }
             } catch (error) {
                 console.log('publicationHandler error', error)
             }

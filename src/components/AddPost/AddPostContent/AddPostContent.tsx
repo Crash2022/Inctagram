@@ -49,10 +49,6 @@ export const AddPostContent = ({
         })
     }
 
-    // const myLoader=({src})=>{
-    //     return `${API}/user/photo/${blog.postedBy.username}`;
-    // }
-
     return (
         <div className={cls.addPostModal_content}>
             <div className={cls.content_image}>
