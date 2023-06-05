@@ -126,12 +126,20 @@ export const useAddPost = () => {
     const goFromImageFiltersToPublicationModalHandler = async () => {
         console.log('croppedImageForFilter', croppedImageForFilter)
 
-        const myPostImageFile = new File([croppedImageForFilter], 'public-post-image.jpeg', {
+        const file = new File([croppedImageForFilter], 'public-post-image.jpeg', {
             type: 'image/jpeg'
         })
+        // const files = []
+        // files.push(myPostImageFile)
+
+        // if (files.length) {
+        //     const file = files[0]
+        //     console.log('files', files)
+        //     console.log('file', file)
+
         const formData = new FormData()
-        formData.append('publicationImage', myPostImageFile)
-        console.log('myPostImageFile', myPostImageFile)
+        formData.append('file', file)
+        console.log('myPostImageFile', file)
 
         // загрузка изображения на бэкенд
         try {
@@ -140,6 +148,7 @@ export const useAddPost = () => {
         } catch (e) {
             console.log('imageResult error', e)
         }
+        // }
         // переход к публикации
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)

@@ -20,7 +20,7 @@ export const AddPostContent = ({
     const { t } = useTranslation('add-post-modal')
     const { enqueueSnackbar } = useSnackbar()
 
-    const [isAvaBroken, setIsAvaBroken] = useState<boolean>(false)
+    const [isImageBroken, setIsImageBroken] = useState<boolean>(false)
 
     const uploadPhotoHandler = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files?.length) {
@@ -42,7 +42,7 @@ export const AddPostContent = ({
     }
 
     const imageErrorHandler = () => {
-        setIsAvaBroken(true)
+        setIsImageBroken(true)
         enqueueSnackbar(t('Snackbar_ErrorImage'), {
             variant: 'error',
             autoHideDuration: 3000

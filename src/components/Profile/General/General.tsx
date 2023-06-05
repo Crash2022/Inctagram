@@ -85,14 +85,14 @@ export const General = () => {
     const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files?.length) {
             const file = event.target.files[0]
-            console.log('file', file)
+            // console.log('file', file)
 
             if (file && file.size < 1000000) {
                 const formData = new FormData()
-                formData.append('avatarImage', file)
-                console.log('file formData', formData)
+                formData.append('file', file)
 
                 try {
+                    // console.log('file formData', formData)
                     await uploadAvatar(formData)
                     setUserAvatar(URL.createObjectURL(file))
                     // await router.push(InctagramPath.PROFILE.PROFILE)
