@@ -29,16 +29,9 @@ export const AddPostContent = ({
 
             if (file && file.size < 1000000) {
                 const formData = new FormData()
-                formData.append('post-image', file)
+                formData.append('upload-post-image', file)
                 setPostImage(URL.createObjectURL(file))
                 setIsPhotoUploaded(true)
-
-                // apply rotation if needed (getCroppedImg.ts)
-                // const orientation = getOrientation(file)
-                // const rotation = ORIENTATION_TO_ANGLE[orientation]
-                // if (rotation) {
-                //     imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
-                // }
             } else {
                 enqueueSnackbar(t('Snackbar_LargeImageSize'), {
                     variant: 'error',
@@ -72,11 +65,9 @@ export const AddPostContent = ({
                         // id={'Post_Photo'}
                         width={220}
                         height={220}
-                        // fill
                         onError={imageErrorHandler}
                         quality={100}
                         // priority
-                        // loader={myLoader}
                     />
                 )}
             </div>
@@ -85,9 +76,8 @@ export const AddPostContent = ({
                     id={'Upload_Photo'}
                     title={t('AddPhotoButton')}
                     onChangeUpload={uploadPhotoHandler}
-                    // name={postPhoto!}
-                    // multiple
                     accept={'image/*'}
+                    // multiple
                 />
             </div>
         </div>

@@ -126,8 +126,8 @@ export const useAddPost = () => {
     const goFromImageFiltersToPublicationModalHandler = async () => {
         console.log('croppedImageForFilter', croppedImageForFilter)
 
-        const myPostImageFile = new File([croppedImageForFilter], 'post-image.jpeg', {
-            type: croppedImageForFilter
+        const myPostImageFile = new File([croppedImageForFilter], 'public-post-image.jpeg', {
+            type: 'image/jpeg'
         })
         const formData = new FormData()
         formData.append('publicationImage', myPostImageFile)
