@@ -25,7 +25,7 @@ export const useAddPost = () => {
     const [isPhotoUploaded, setIsPhotoUploaded] = useState<boolean>(false)
     const [postImage, setPostImage] = useState<string>('')
     const [croppedImage, setCroppedImage] = useState<string>('')
-    // const [croppedImageFile, setCroppedImageFile] = useState(null)
+    const [croppedImageFile, setCroppedImageFile] = useState<any>()
     const [croppedImageForFilter, setCroppedImageForFilter] = useState<string>('')
     // const [currentImageFilter, setCurrentImageFilter] = useState<CurrentImageFilterType>('normal')
     const [isImageFiltersLoading, setIsImageFiltersLoading] = useState<boolean>(false)
@@ -69,8 +69,8 @@ export const useAddPost = () => {
         try {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
             setCroppedImage(url) // оригинал кадрированного изображения
-            setCroppedImageForFilter(url) // фото для модалки с фильтрами
-            // setCroppedImageFile(await file) // возможно будет нужно ?!
+            setCroppedImageForFilter(url) // изображение для модалки с фильтрами
+            setCroppedImageFile(file) // формирование тип 'файл' для дальнейших действий
 
             setFilterExampleTwo(url) // для сетки с примерами фильтров
             setFilterExampleThree(url) // для сетки с примерами фильтров
@@ -98,6 +98,7 @@ export const useAddPost = () => {
             const image = document.querySelector('#CroppedImageForFilter')
             // Function 'applyPresetOnImage' is returning a Blob
             const blob = await applyPresetOnImage(image, filterName())
+            setCroppedImageFile(blob) // перезапись файла на файл с фильтром
             // image.src = window.URL.createObjectURL(blob)
             // setCroppedImageForFilter(croppedImage) // обнуление фотографии на normal (не работает!)
             setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
@@ -126,29 +127,22 @@ export const useAddPost = () => {
     const goFromImageFiltersToPublicationModalHandler = async () => {
         console.log('croppedImageForFilter', croppedImageForFilter)
 
-        const file = new File([croppedImageForFilter], 'public-post-image.jpeg', {
-            type: 'image/jpeg'
-        })
-        // const files = []
-        // files.push(myPostImageFile)
+        const file = croppedImageFile
+        console.log('file', file)
 
-        // if (files.length) {
-        //     const file = files[0]
-        //     console.log('files', files)
-        //     console.log('file', file)
+        if (file) {
+            const formData = new FormData()
+            formData.append('file', file)
 
-        const formData = new FormData()
-        formData.append('file', file)
-        console.log('myPostImageFile', file)
-
-        // загрузка изображения на бэкенд
-        try {
-            const imageResult = await uploadImageToPost(formData)
-            console.log('imageResult', imageResult)
-        } catch (e) {
-            console.log('imageResult error', e)
+            // загрузка изображения на бэкенд
+            try {
+                const imageResult = await uploadImageToPost(formData)
+                console.log('imageResult', imageResult)
+            } catch (e) {
+                console.log('imageResult error', e)
+            }
         }
-        // }
+
         // переход к публикации
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)
