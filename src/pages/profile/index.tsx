@@ -160,6 +160,7 @@ const Profile: NextPageWithLayout = () => {
                                         alt={'post-photo'}
                                         width={265}
                                         height={265}
+                                        priority
                                         onClick={() => {
                                             setOpenPostModal(true)
                                         }}
