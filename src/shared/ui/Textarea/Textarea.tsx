@@ -48,8 +48,9 @@ export const Textarea: React.FC<CustomTextareaPropsType> = ({
     return (
         <div className={finalTextareaDivWrapperClassName}>
             <div className={s.placeholder}>{placeholder}</div>
-            {error && <span className={s.errorMessage}>{error}</span>}
+            {/* {error && <span className={s.errorMessage}>{error}</span>} */}
             <textarea onChange={onChangeCallback} onKeyPress={onKeyPressCallback} {...restProps} />
+            {error && <span className={s.errorMessage}>{error}</span>}
         </div>
     )
 }

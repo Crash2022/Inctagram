@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
+import React, { PropsWithChildren, ReactElement, useEffect } from 'react'
 import cls from './SidebarLayout.module.scss'
 import Head from 'next/head'
 import { Header } from '../Header/Header'
@@ -10,49 +10,83 @@ import ProfileIcon from './../../../public/assets/icons/profile-icon.svg'
 import BookmarkIcon from './../../../public/assets/icons/bookmark-outline.svg'
 import Statistics from './../../../public/assets/icons/statistics.svg'
 import LogoutIcon from './../../../public/assets/icons/logout-icon.svg'
-// import { useTranslation } from 'react-i18next'
 import { useTranslation } from 'next-i18next'
 import { InctagramPath } from '@/shared/api/path'
 import { useLogoutMutation } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-import { AddPostModal } from '@/components/AddPostModal/AddPostModal'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-
-interface MenuLinkType {
-    id: number
-    icon: any
-    href: string
-    title: any
-}
+import { AddPostBasicModal } from '@/components/AddPost/AddPostBasicModal/AddPostBasicModal'
+import { AddPostContent } from '@/components/AddPost/AddPostContent/AddPostContent'
+import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCropContent'
+import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
+import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
+import { useAddPost } from '@/shared/hooks/useAddPost'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const router = useRouter()
-    const [logout, { isSuccess, error, isError, isLoading }] = useLogoutMutation()
+
+    const [logout, { isSuccess, isLoading }] = useLogoutMutation()
+
     const isPaid = true // исправить на динамическое значение
-    const [open, setOpen] = useState<boolean>(false)
 
-    // const [menuLink, setMenuLink] = useState<MenuLinkType[]>([
-    //     { id: 1, icon: <HomeIcon />, href: InctagramPath.PROFILE.HOME, title: t('Home') },
-    //     { id: 2, icon: <AddIcon />, href: InctagramPath.PROFILE.ADD_POST, title: t('Add') },
-    //     { id: 3, icon: <ProfileIcon />, href: InctagramPath.PROFILE.PROFILE, title: t('Profile') },
-    //     {
-    //         id: 4,
-    //         icon: <BookmarkIcon />,
-    //         href: InctagramPath.PROFILE.FAVORITES,
-    //         title: t('Favorites')
-    //     }
-    // ])
-
-    const addPostHandler = () => {
-        setOpen(true)
-    }
+    const {
+        isPhotoUploaded,
+        setIsPhotoUploaded,
+        postImage,
+        setPostImage,
+        croppedImage,
+        croppedImageForFilter,
+        setCroppedImageForFilter,
+        setCroppedAreaPixels,
+        rotation,
+        setRotation,
+        description,
+        setDescription,
+        descriptionError,
+        setDescriptionError,
+        isAddPostOpen,
+        setIsAddPostOpen,
+        isCropImageModalOpen,
+        setIsCropImageModalOpen,
+        isImageFiltersModalOpen,
+        setIsImageFiltersModalOpen,
+        isPublicationModalOpen,
+        setIsPublicationModalOpen,
+        goFromAddToCropModalHandler,
+        goFromCropToAddImageModalHandler,
+        goFromCropToImageFiltersModalHandler,
+        goFromImageFiltersToCropModalHandler,
+        goFromImageFiltersToPublicationModalHandler,
+        goFromPublicationModalToImageFiltersHandler,
+        publicationHandler,
+        postIsLoading,
+        imageIsUploading,
+        applyImageFilter,
+        applyImageFilterToExample,
+        isImageFiltersLoading,
+        filterExampleTwo,
+        setFilterExampleTwo,
+        filterExampleThree,
+        setFilterExampleThree,
+        filterExampleFour,
+        setFilterExampleFour,
+        filterExampleFive,
+        setFilterExampleFive,
+        filterExampleSix,
+        setFilterExampleSix,
+        filterExampleSeven,
+        setFilterExampleSeven,
+        filterExampleEight,
+        setFilterExampleEight,
+        filterExampleNine,
+        setFilterExampleNine
+    } = useAddPost()
 
     useEffect(() => {
         if (isSuccess) void router.push(InctagramPath.AUTH.LOGIN)
     }, [isSuccess])
 
-    // useLoader(isLoading)
     if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
@@ -69,26 +103,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                 <nav>
                     <div className={cls.menuList}>
                         <div className={cls.menuList_top}>
-                            {/*{menuLink.map((el) => {*/}
-                            {/*    return (*/}
-                            {/*        <div*/}
-                            {/*            key={el.id}*/}
-                            {/*            className={*/}
-                            {/*                router.pathname === el.href*/}
-                            {/*                    ? cls.menuList_item_active*/}
-                            {/*                    : cls.menuList_item*/}
-                            {/*            }*/}
-                            {/*        >*/}
-                            {/*            <div className={cls.item_image}>{el.icon}</div>*/}
-                            {/*            <LinkA*/}
-                            {/*                href={el.href}*/}
-                            {/*                text={el.title}*/}
-                            {/*                className={cls.link}*/}
-                            {/*            />*/}
-                            {/*        </div>*/}
-                            {/*    )*/}
-                            {/*})}*/}
-
                             <div
                                 className={
                                     router.pathname === InctagramPath.PROFILE.HOME
@@ -106,24 +120,117 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 />
                             </div>
 
-                            <AddPostModal
-                                open={open}
-                                setOpen={setOpen}
-                                header={t('AddPhotoModal')}
-                            />
+                            {/* модалка для добавления фото */}
+                            <AddPostBasicModal
+                                open={isAddPostOpen}
+                                setOpen={setIsAddPostOpen}
+                                headerTitle={'AddPost_HeaderTitle'}
+                                // isNextForUpload={true} // вариант с выкл. кнопки
+                                isNext={true}
+                                nextButtonTitle={'Next'}
+                                // isCancelBtn={true}
+                                nextFunc={goFromAddToCropModalHandler}
+                                isPhotoUploaded={isPhotoUploaded}
+                            >
+                                <AddPostContent
+                                    postImage={postImage}
+                                    setPostImage={setPostImage}
+                                    setIsPhotoUploaded={setIsPhotoUploaded}
+                                />
+                            </AddPostBasicModal>
+
+                            {/* модалка для кадрирования фото */}
+                            <AddPostBasicModal
+                                open={isCropImageModalOpen}
+                                setOpen={setIsCropImageModalOpen}
+                                headerTitle={'Crop_HeaderTitle'}
+                                isPrevious={true}
+                                isNext={true}
+                                nextButtonTitle={'Next'}
+                                prevFunc={goFromCropToAddImageModalHandler}
+                                nextFunc={goFromCropToImageFiltersModalHandler}
+                            >
+                                <ImageCropContent
+                                    postImage={postImage}
+                                    setCroppedAreaPixels={setCroppedAreaPixels}
+                                    rotation={rotation}
+                                    setRotation={setRotation}
+                                />
+                            </AddPostBasicModal>
+
+                            {/* модалка для фильтров фото */}
+                            <AddPostBasicModal
+                                open={isImageFiltersModalOpen}
+                                setOpen={setIsImageFiltersModalOpen}
+                                headerTitle={'Filters_HeaderTitle'}
+                                isPrevious={true}
+                                isNext={true}
+                                nextButtonTitle={'Next'}
+                                prevFunc={goFromImageFiltersToCropModalHandler}
+                                nextFunc={goFromImageFiltersToPublicationModalHandler}
+                                modalWidth={'900'}
+                            >
+                                <ImageFiltersContent
+                                    imageIsUploading={imageIsUploading}
+                                    croppedImage={croppedImage}
+                                    croppedImageForFilter={croppedImageForFilter}
+                                    setCroppedImageForFilter={setCroppedImageForFilter}
+                                    applyImageFilter={applyImageFilter}
+                                    applyImageFilterToExample={applyImageFilterToExample}
+                                    isImageFiltersLoading={isImageFiltersLoading}
+                                    filterExampleTwo={filterExampleTwo}
+                                    setFilterExampleTwo={setFilterExampleTwo}
+                                    filterExampleThree={filterExampleThree}
+                                    setFilterExampleThree={setFilterExampleThree}
+                                    filterExampleFour={filterExampleFour}
+                                    setFilterExampleFour={setFilterExampleFour}
+                                    filterExampleFive={filterExampleFive}
+                                    setFilterExampleFive={setFilterExampleFive}
+                                    filterExampleSix={filterExampleSix}
+                                    setFilterExampleSix={setFilterExampleSix}
+                                    filterExampleSeven={filterExampleSeven}
+                                    setFilterExampleSeven={setFilterExampleSeven}
+                                    filterExampleEight={filterExampleEight}
+                                    setFilterExampleEight={setFilterExampleEight}
+                                    filterExampleNine={filterExampleNine}
+                                    setFilterExampleNine={setFilterExampleNine}
+                                />
+                            </AddPostBasicModal>
+
+                            {/* модалка для публикации */}
+                            <AddPostBasicModal
+                                open={isPublicationModalOpen}
+                                setOpen={setIsPublicationModalOpen}
+                                headerTitle={'Publication_HeaderTitle'}
+                                isPrevious={true}
+                                isNext={true}
+                                nextButtonTitle={'Publish'}
+                                prevFunc={goFromPublicationModalToImageFiltersHandler}
+                                nextFunc={publicationHandler}
+                                modalWidth={'900'}
+                            >
+                                <PublicationContent
+                                    croppedImageForFilter={croppedImageForFilter}
+                                    description={description}
+                                    setDescription={setDescription}
+                                    descriptionError={descriptionError}
+                                    setDescriptionError={setDescriptionError}
+                                    postIsLoading={postIsLoading}
+                                />
+                            </AddPostBasicModal>
 
                             <div className={cls.menuList_item}>
                                 <div>
                                     <AddIcon />
                                 </div>
-                                <div className={cls.link} onClick={addPostHandler}>
+                                <div
+                                    className={cls.link}
+                                    onClick={() => {
+                                        setIsAddPostOpen(true)
+                                    }}
+                                >
                                     {t('Add')}
                                 </div>
-                                {/*<LinkA*/}
-                                {/*    href={InctagramPath.PROFILE.ADD_POST}*/}
-                                {/*    text={t('Add')}*/}
-                                {/*    className={cls.link}*/}
-                                {/*/>*/}
                             </div>
                             <div
                                 className={
@@ -183,11 +290,12 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                         <div className={cls.menuList_bottom}>
                             <div
                                 className={cls.menuList_item}
-                                onClick={async () => {
-                                    const res = await logout()
-                                    console.log('logout', res)
+                                onClick={() => {
+                                    logout().then((res) => {
+                                        console.log(res)
+                                    })
                                     localStorage.removeItem('accessToken')
-                                    await router.push(InctagramPath.AUTH.LOGIN)
+                                    void router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >
                                 <div className={cls.item_image}>

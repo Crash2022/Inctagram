@@ -9,9 +9,8 @@ import { useTranslation } from 'next-i18next'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { UpdateUserProfile } from '@/models/profile-types'
-import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import {
     useDeleteAvatarMutation,
@@ -21,13 +20,12 @@ import {
 } from '@/services/UserProfileService'
 import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
-import { useRouter } from 'next/router'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ControlledTextarea } from '@/shared/ui/Controlled/ControlledTextarea'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const router = useRouter()
     const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
@@ -51,14 +49,20 @@ export const General = () => {
     ] = useDeleteAvatarMutation()
 
     const ProfileGeneralSchema = yup.object().shape({
-        userName: yup.string().min(6, t('Err_Yup_Min')).max(30, t('Err_Yup_Max_Name')),
-        aboutMe: yup.string().max(200, t('Err_Yup_Max_AboutMe'))
+        userName: yup.string().min(6, t('Err_Yup_Min_Name')).max(30, t('Err_Yup_Max_Name')),
+        aboutMe: yup
+            .string()
+            .max(200, t('Err_Yup_Max_AboutMe'))
+            .required(t('Err_Yup_Required'))
+            .trim(t('Err_Yup_Trim_AboutMe'))
+            .strict(true)
     })
 
     const {
         control,
         handleSubmit,
         setValue,
+        watch,
         formState: { errors }
     } = useForm<UpdateUserProfile>({
         defaultValues: {
@@ -79,12 +83,10 @@ export const General = () => {
     }
 
     const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length) {
+        if (event.target.files?.length) {
             const file = event.target.files[0]
 
             if (file && file.size < 1000000) {
-                console.log('file', file)
-
                 const formData = new FormData()
                 formData.append('file', file)
 
@@ -100,14 +102,15 @@ export const General = () => {
                     // )
 
                     // location.reload() // принудительная перезагрузка компоненты
-                } catch {
+                } catch (e) {
+                    console.log('upload avatar error', e)
                     enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
                         variant: 'error',
                         autoHideDuration: 3000
                     })
                 }
             } else {
-                enqueueSnackbar(t('Snackbar_LargeSizeAvatar'), {
+                enqueueSnackbar(t('Snackbar_LargeImageSize'), {
                     variant: 'error',
                     autoHideDuration: 3000
                 })
@@ -116,7 +119,7 @@ export const General = () => {
     }
 
     const deleteAvatarHandler = async () => {
-        if (profileData.avatars.length === 0) {
+        if (profileData && profileData.avatars.length === 0) {
             enqueueSnackbar(t('Snackbar_NoAvatar'), {
                 variant: 'info',
                 autoHideDuration: 3000
@@ -129,7 +132,7 @@ export const General = () => {
 
     const imageErrorHandler = () => {
         setIsAvaBroken(true)
-        enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
+        enqueueSnackbar(t('Snackbar_ErrorImage'), {
             variant: 'error',
             autoHideDuration: 3000
         })
@@ -158,7 +161,7 @@ export const General = () => {
     useEffect(() => {
         if (uploadAvatarIsError) {
             console.log(uploadAvatarError)
-            enqueueSnackbar(t('Snackbar_UploadAvatarError'), {
+            enqueueSnackbar(t('Snackbar_UploadImageError'), {
                 variant: 'error',
                 autoHideDuration: 3000
             })
@@ -179,7 +182,7 @@ export const General = () => {
                     <div className={cls.avatar} id={'Avatar_Div'}>
                         <Image
                             src={
-                                profileData.avatars.length !== 0
+                                profileData && profileData.avatars.length !== 0
                                     ? profileData.avatars[0].url
                                     : DefaultProfileAvatar
                             }
@@ -189,10 +192,10 @@ export const General = () => {
                             height={204}
                             onError={imageErrorHandler}
                             quality={100}
-                            // priority
+                            priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
-                            <DeletePhotoIcon width={30} height={30} />
+                            <DeletePhotoIcon />
                         </div>
                     </div>
                     <div className={cls.addAvatar_btn}>
@@ -246,23 +249,14 @@ export const General = () => {
                         type={'date'}
                         max={profileDate}
                     />
-                    <div className={cls.textarea}>
-                        <Controller
-                            name={'aboutMe'}
-                            control={control}
-                            render={({ field }: any) => (
-                                <Textarea
-                                    {...field}
-                                    placeholder={t('AboutMe')}
-                                    value={field.value}
-                                    onChange={(value) => {
-                                        field.onChange(value)
-                                    }}
-                                    error={errors.aboutMe?.message}
-                                />
-                            )}
-                        />
-                    </div>
+                    <ControlledTextarea
+                        divClassName={cls.textarea}
+                        name={'aboutMe'}
+                        placeholder={t('AboutMe')}
+                        control={control}
+                        error={errors.aboutMe?.message}
+                    />
+                    <div className={cls.textarea_length}>{watch('aboutMe').length} / 200</div>
                 </div>
             </div>
 
@@ -271,6 +265,7 @@ export const General = () => {
                 className={styles.btn}
                 theme={'primary'}
                 type={'submit'}
+                disabled={watch('aboutMe').length > 200}
             >
                 {t('Save')}
             </Button>

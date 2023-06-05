@@ -1,0 +1,42 @@
+@import '../../../styles/mixins';
+
+.photoFiltersModal_content {
+    width: 100%;
+    @include flexOnlyBetween;
+    gap: 20px;
+    overflow: hidden;
+
+    .content_image {
+        border: 1px solid var(--snippet-border);
+
+        img {
+            object-fit: contain;
+        }
+    }
+    .content_filters {
+        width: 100%;
+        //border: 1px solid white;
+        @include flexBetween;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding-right: 20px;
+
+        .filter_item {
+
+            &:hover {
+                cursor: pointer;
+                opacity: 0.7;
+            }
+
+            .item_image {
+                //border: 1px solid white;
+                //overflow: hidden;
+                width: 100px;
+                height: 100px;
+            }
+            .item_title {
+                text-align: center;
+            }
+        }
+    }
+}

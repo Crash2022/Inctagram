@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { UserProfile } from '@/models/profile-types'
+import { UpdateUserProfile, UserProfile } from '@/models/profile-types'
 import { baseURL } from '@/shared/api/baseURL'
 
 export const userProfileAPI = createApi({
@@ -13,22 +13,22 @@ export const userProfileAPI = createApi({
     }),
     tagTypes: ['ProfileData'],
     endpoints: (build) => ({
-        getProfileData: build.query<UserProfile, void>({
+        getProfileData: build.query<UserProfile, any>({
             query: () => ({
                 url: '/users/profile'
             }),
             providesTags: (result) => ['ProfileData']
         }),
-        setProfileData: build.mutation<any, UserProfile>({
-            query: (payload: UserProfile) => ({
+        setProfileData: build.mutation<any, UpdateUserProfile>({
+            query: (payload: UpdateUserProfile) => ({
                 url: '/users/profile',
                 method: 'PUT',
                 body: payload
             }),
             invalidatesTags: ['ProfileData']
         }),
-        uploadAvatar: build.mutation<any, File>({
-            query: (payload: File) => ({
+        uploadAvatar: build.mutation<any, FormData>({
+            query: (payload: FormData) => ({
                 url: '/users/profile/avatar',
                 method: 'POST',
                 body: payload

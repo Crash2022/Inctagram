@@ -1,3 +1,27 @@
 {
-  "AddPhotoButton": "Выбрать файл с ПК"
+  "AddPost_HeaderTitle": "Добавить фотографию",
+  "AddPhotoButton": "Выбрать изображение",
+  "Snackbar_LargeImageSize": "Файл не должен превышать размер 1 Мб",
+  "Snackbar_ErrorImage": "Файл повреждён, попробуйте загрузить другой",
+  "Snackbar_ImageNotUploaded": "Пожалуйста выберите файл",
+
+  "Next": "Далее",
+
+  "Crop_HeaderTitle": "Кадрирование",
+  "Zoom": "Масштаб",
+  "Rotation": "Поворот",
+  "Original": "Оригинал",
+  "1to1": "1:1",
+  "3to2": "3:2",
+  "16to9": "16:9",
+
+  "Filters_HeaderTitle": "Фильтры",
+
+  "Publication_HeaderTitle": "Публикация",
+  "Publish": "Опубликовать",
+  "Description": "Описание публикации",
+  "DescriptionLimit": "Превышено количество символов",
+  "DescriptionNull": "Пожалуйста заполните поле с описанием",
+  "Snackbar_EmptyDescription": "Заполните поле с описанием",
+  "Snackbar_PostAdded": "Ваш пост опубликован"
 }

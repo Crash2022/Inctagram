@@ -1,0 +1,64 @@
+@import '../../../styles/mixins';
+
+.publicationModal_content {
+    width: 100%;
+    @include flexOnlyBetween;
+    overflow: hidden;
+
+    .content_image {
+        border: 1px solid var(--snippet-border);
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+    .content_publication {
+        width: 100%;
+        margin-top: 20px;
+
+        .publication_info {
+            border-bottom: 1px solid var(--snippet-border);
+            margin-bottom: 20px;
+
+            .info_header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding-left: 40px;
+                margin-bottom: 20px;
+
+                .header_avatar {
+
+                }
+                .header_userName {
+
+                }
+            }
+            .info_textarea {
+                width: 100%;
+                height: 165px;
+                padding-left: 40px;
+                margin-bottom: 30px; // для нижней границы
+
+                textarea {
+                    width: 330px;
+                }
+
+                .textarea_length {
+                    @include small-text-12;
+                    color: var(--light-900);
+                    text-align: right;
+                    padding-right: 30px;
+                }
+            }
+        }
+        .publication_addLocation {
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+        .publication_location {
+            padding-left: 40px;
+        }
+    }
+}

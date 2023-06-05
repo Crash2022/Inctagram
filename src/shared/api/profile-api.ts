@@ -1,10 +1,12 @@
-import { instance_JSON_Placeholder } from '@/shared/api/api-instance'
-import { Photo } from '@/models/profile-types'
+import { instance } from '@/shared/api/api-instance'
+import { GetPostsResponse } from '@/models/posts-types'
+import { UserProfile } from '@/models/profile-types'
 
 export const profileApi = {
-    getProfilePhotos: async () => {
-        return await instance_JSON_Placeholder
-            .get<Photo[]>('photos?_limit=12', {})
-            .then((res) => res.data)
+    getUserProfileData: async () => {
+        return await instance.get<UserProfile>('/users/profile', {}).then((res) => res.data)
+    },
+    getUserProfilePosts: async (userId: number) => {
+        return await instance.get<GetPostsResponse>(`/posts/${userId}`, {}).then((res) => res.data)
     }
 }

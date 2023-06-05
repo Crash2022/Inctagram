@@ -40,14 +40,14 @@ export const ControlledInput = ({
                 render={({ field }: any) => (
                     <Input
                         {...field}
-                        password={password || false}
+                        password={password ?? false}
                         placeholder={placeholder}
                         value={field.value}
                         onChange={(value) => {
                             field.onChange(value)
                         }}
                         error={error}
-                        disabled={disabled || false}
+                        disabled={disabled ?? false}
                         type={type}
                         max={max}
                         // error={!!control.formState.errors[name]}

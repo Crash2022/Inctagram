@@ -1,15 +1,15 @@
-import React, { ButtonHTMLAttributes, ChangeEvent, PropsWithChildren, useRef } from 'react'
+import React, { InputHTMLAttributes, ChangeEvent, PropsWithChildren } from 'react'
 import cls from '../Button/Button.module.scss'
 import clsx from 'clsx'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     title: string
     className?: string
     theme?: 'primary' | 'primaryWhite' | 'outline' | 'clear'
     onChangeUpload: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
+export const InputFile = (props: PropsWithChildren<InputProps>) => {
     const { theme = 'primary', className, title, id, onChangeUpload, ...restProps } = props
 
     // const inputRef = useRef<HTMLInputElement>(null)
@@ -21,12 +21,12 @@ export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
 
     return (
         <label>
-            {/*<button*/}
-            {/*    className={clsx(cls.button, [className, cls[theme]])}*/}
-            {/*    onClick={selectFileHandler}*/}
-            {/*>*/}
-            {/*    {title}*/}
-            {/*</button>*/}
+            {/* <button */}
+            {/*    className={clsx(cls.button, [className, cls[theme]])} */}
+            {/*    onClick={selectFileHandler} */}
+            {/* > */}
+            {/*    {title} */}
+            {/* </button> */}
             <span
                 className={clsx(cls.button, [className, cls[theme]])}
                 style={{ display: 'block', height: '100%', minWidth: '200px' }}
@@ -42,12 +42,12 @@ export const InputFile = (props: PropsWithChildren<ButtonProps>) => {
                 {...restProps}
             />
 
-            {/*вариант 2*/}
-            {/*<input*/}
-            {/*    type='file'*/}
-            {/*    onChange={uploadHandler}*/}
-            {/*    className={cls.input_file}*/}
-            {/*/>*/}
+            {/* вариант 2 */}
+            {/* <input */}
+            {/*    type='file' */}
+            {/*    onChange={uploadHandler} */}
+            {/*    className={cls.input_file} */}
+            {/* /> */}
         </label>
     )
 }

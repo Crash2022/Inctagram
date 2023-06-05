@@ -3,15 +3,17 @@ import { createWrapper, HYDRATE } from 'next-redux-wrapper'
 import { appReducer } from '@/store/slices/appSlice'
 import { authReducer } from '@/store/slices/authSlice'
 import { serviceAuthAPI } from '@/services/AuthService'
-import { userProfilePhotosAPI } from '@/services/UserProfilePhotosService'
 import { userProfileAPI } from '@/services/UserProfileService'
+import { postReducer } from '@/store/slices/postSlice'
+import { userPostsAPI } from '@/services/UserPostsService'
 
 const combinedReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
-    [userProfilePhotosAPI.reducerPath]: userProfilePhotosAPI.reducer,
+    post: postReducer,
     [serviceAuthAPI.reducerPath]: serviceAuthAPI.reducer,
-    [userProfileAPI.reducerPath]: userProfileAPI.reducer
+    [userProfileAPI.reducerPath]: userProfileAPI.reducer,
+    [userPostsAPI.reducerPath]: userPostsAPI.reducer
 })
 
 const reducer: typeof combinedReducer = (state, action: AnyAction) => {
@@ -28,9 +30,9 @@ export const makeStore = () =>
         reducer,
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware().concat(
-                userProfilePhotosAPI.middleware,
                 serviceAuthAPI.middleware,
-                userProfileAPI.middleware
+                userProfileAPI.middleware,
+                userPostsAPI.middleware
             )
     })
 

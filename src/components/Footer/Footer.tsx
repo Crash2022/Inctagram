@@ -4,7 +4,7 @@ import AddIcon from './../../../public/assets/icons/add-icon.svg'
 import ProfileIcon from './../../../public/assets/icons/profile-icon.svg'
 import { InctagramPath } from '@/shared/api/path'
 import { useRouter } from 'next/router'
-import { AddPostModal } from '@/components/AddPostModal/AddPostModal'
+// import { AddPostModal } from '@/components/AddPost/AddPostModal/AddPostModal'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 
@@ -16,7 +16,7 @@ export const Footer = () => {
     return (
         <footer className={s.footer}>
             <div className={s.container}>
-                <AddPostModal open={open} setOpen={setOpen} header={t('AddPhotoModal')} />
+                {/*<AddPostModal open={open} setOpen={setOpen} header={t('AddPhotoModal')} />*/}
 
                 <div className={s.items}>
                     <div

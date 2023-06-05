@@ -1,0 +1,47 @@
+@import '../../../styles/mixins';
+
+.commentBlock {
+    @include flexCenter;
+    margin: 20px 0;
+
+    .userAvatar {
+        width: 58px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .commentItems {
+        margin-left: 20px;
+
+        .comment {
+            width: 85%;
+
+            .commentText {
+                font-size: 14px;
+                opacity: 0.8;
+            }
+
+            .commentUserName {
+
+            }
+        }
+
+        .commentSubText {
+            margin-top: 5px;
+            font-size: 10px;
+            opacity: 0.5;
+
+            .commentDate, .answerButton, .commentLikeCount {
+                margin-right: 10px;
+            }
+
+            .answerButton {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .likeButton {
+        cursor: pointer;
+    }
+}

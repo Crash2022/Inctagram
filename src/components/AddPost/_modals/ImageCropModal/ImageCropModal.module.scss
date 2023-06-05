@@ -1,0 +1,35 @@
+//@import '../../../styles/mixins';
+//
+//.imageCropModal_mainBox {
+//    @include defaultModalStyle;
+//    @include flexColumn;
+//    width: 492px;
+//    height: 564px;
+//    background-color: var(--dark-300);
+//
+//    .imageCropModal_header {
+//        width: 100%;
+//        border-bottom: 1px solid var(--snippet-border);
+//        padding: var(--default-Modal-Margin);
+//        margin-bottom: 30px;
+//        @include h1-text-size;
+//        @include flexBetween;
+//
+//        .header_button {
+//            //color: var(--primary-500);
+//            font-size: 16px;
+//
+//            &:hover {
+//                cursor: pointer;
+//                color: var(--primary-500);
+//            }
+//        }
+//        .header_title {
+//            color: var(--primary-500);
+//        }
+//    }
+//    .imageCropModal_content {
+//        @include flexColumn;
+//        margin-bottom: 50px;
+//    }
+//}
