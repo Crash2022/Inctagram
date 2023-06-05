@@ -25,12 +25,11 @@ export const AddPostContent = ({
     const uploadPhotoHandler = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files?.length) {
             const file = event.target.files[0]
+            console.log('post-image', file)
 
             if (file && file.size < 1000000) {
-                // console.log('file', file)
-
                 const formData = new FormData()
-                formData.append('file', file)
+                formData.append('post-image', file)
                 setPostImage(URL.createObjectURL(file))
                 setIsPhotoUploaded(true)
 

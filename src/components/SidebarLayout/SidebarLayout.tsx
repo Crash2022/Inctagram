@@ -61,9 +61,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
-        // imageIsLoading,
+        imageIsUploading,
         applyImageFilter,
-
         applyImageFilterToExample,
         isImageFiltersLoading,
         filterExampleTwo,
@@ -172,6 +171,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 modalWidth={'900'}
                             >
                                 <ImageFiltersContent
+                                    imageIsUploading={imageIsUploading}
                                     croppedImage={croppedImage}
                                     croppedImageForFilter={croppedImageForFilter}
                                     setCroppedImageForFilter={setCroppedImageForFilter}

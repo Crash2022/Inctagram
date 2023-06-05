@@ -13,7 +13,7 @@ export const useAddPost = () => {
     const { enqueueSnackbar } = useSnackbar()
 
     const [createPost, { isLoading: postIsLoading }] = useCreatePostMutation()
-    const [uploadImageToPost, { isLoading: imageIsLoading }] = useUploadImageToPostMutation()
+    const [uploadImageToPost, { isLoading: imageIsUploading }] = useUploadImageToPostMutation()
 
     // состояние модальных окон
     const [isAddPostOpen, setIsAddPostOpen] = useState<boolean>(false)
@@ -123,7 +123,24 @@ export const useAddPost = () => {
     }
 
     // переход к публикации
-    const goFromImageFiltersToPublicationModalHandler = () => {
+    const goFromImageFiltersToPublicationModalHandler = async () => {
+        console.log('croppedImageForFilter', croppedImageForFilter)
+
+        const myPostImageFile = new File([croppedImageForFilter], 'post-image.jpeg', {
+            type: croppedImageForFilter
+        })
+        const formData = new FormData()
+        formData.append('publicationImage', myPostImageFile)
+        console.log('myPostImageFile', myPostImageFile)
+
+        // загрузка изображения на бэкенд
+        try {
+            const imageResult = await uploadImageToPost(formData)
+            console.log('imageResult', imageResult)
+        } catch (e) {
+            console.log('imageResult error', e)
+        }
+        // переход к публикации
         setIsImageFiltersModalOpen(false)
         setIsPublicationModalOpen(true)
     }
@@ -195,9 +212,8 @@ export const useAddPost = () => {
         goFromPublicationModalToImageFiltersHandler,
         publicationHandler,
         postIsLoading,
-        // imageIsLoading,
+        imageIsUploading,
         applyImageFilter,
-
         applyImageFilterToExample,
         isImageFiltersLoading,
         filterExampleTwo,

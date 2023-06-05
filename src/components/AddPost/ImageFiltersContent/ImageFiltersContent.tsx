@@ -15,6 +15,7 @@ import {
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PhotoFiltersContentProps {
+    imageIsUploading: boolean
     croppedImage: string
     croppedImageForFilter: string
     setCroppedImageForFilter: (image: string) => void
@@ -48,6 +49,7 @@ interface ImageFiltersType {
 }
 
 export const ImageFiltersContent = ({
+    imageIsUploading,
     croppedImage,
     croppedImageForFilter,
     setCroppedImageForFilter,
@@ -172,7 +174,8 @@ export const ImageFiltersContent = ({
         // })
     }, [])
 
-    if (isImageFiltersLoading) return <LoaderScreen variant={'circle'} />
+    if (imageIsUploading) return <LoaderScreen variant={'circle'} />
+    // if (isImageFiltersLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <div className={cls.photoFiltersModal_content}>

@@ -27,7 +27,7 @@ export const userPostsAPI = createApi({
         }),
         createPost: build.mutation<AddPostsResponse, { description: string }>({
             query: (payload: { description: string }) => ({
-                url: `/posts`,
+                url: '/posts',
                 method: 'POST',
                 body: payload
             }),
@@ -35,7 +35,7 @@ export const userPostsAPI = createApi({
         }),
         uploadImageToPost: build.mutation<UploadPostImage, FormData>({
             query: (payload: FormData) => ({
-                url: `/posts/image`,
+                url: '/posts/image',
                 method: 'POST',
                 body: payload
             }),

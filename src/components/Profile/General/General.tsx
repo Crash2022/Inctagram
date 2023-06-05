@@ -85,12 +85,12 @@ export const General = () => {
     const uploadAvatarHandler = async (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files?.length) {
             const file = event.target.files[0]
+            console.log('file', file)
 
             if (file && file.size < 1000000) {
-                console.log('file', file)
-
                 const formData = new FormData()
-                formData.append('file', file)
+                formData.append('avatarImage', file)
+                console.log('file formData', formData)
 
                 try {
                     await uploadAvatar(formData)
@@ -104,7 +104,8 @@ export const General = () => {
                     // )
 
                     // location.reload() // принудительная перезагрузка компоненты
-                } catch {
+                } catch (e) {
+                    console.log('upload avatar error', e)
                     enqueueSnackbar(t('Snackbar_ErrorAvatar'), {
                         variant: 'error',
                         autoHideDuration: 3000
@@ -193,7 +194,7 @@ export const General = () => {
                             height={204}
                             onError={imageErrorHandler}
                             quality={100}
-                            // priority
+                            priority
                         />
                         <div className={cls.delete_avatar} onClick={deleteAvatarHandler}>
                             <DeletePhotoIcon />

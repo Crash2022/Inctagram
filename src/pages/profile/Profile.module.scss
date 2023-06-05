@@ -10,18 +10,19 @@
         width: 100%;
 
         .header_photo {
-            width: 20%;
+            width: 35%;
 
             img {
                 border-radius: 50%;
             }
         }
         .header_info {
-            width: 80%;
+            width: 65%;
             @include divDefaultMarginBottom;
 
             .info_control {
                 @include flexBetween;
+                flex-wrap: wrap;
                 gap: 20px;
 
                 > div:first-child {
