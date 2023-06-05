@@ -1,4 +1,4 @@
-export interface AddPostsResponse {
+export interface PostType {
     id: number
     description: string
     location: string
@@ -19,7 +19,7 @@ export interface GetPostsResponse {
     pagesCount: number
     page: number
     pageSize: number
-    items: AddPostsResponse[]
+    items: PostType[]
 }
 export interface UploadPostImage {
     images: [

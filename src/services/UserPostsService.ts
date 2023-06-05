@@ -1,11 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { baseURL } from '@/shared/api/baseURL'
-import {
-    GetPostsResponse,
-    AddPostsResponse,
-    UploadPostImage,
-    CreatePost
-} from '@/models/posts-types'
+import { GetPostsResponse, PostType, UploadPostImage, CreatePost } from '@/models/posts-types'
 
 export const userPostsAPI = createApi({
     reducerPath: 'userPostsAPI',
@@ -18,19 +13,19 @@ export const userPostsAPI = createApi({
     }),
     tagTypes: ['UserPosts'],
     endpoints: (build) => ({
-        getUserPostById: build.query<AddPostsResponse, number>({
-            query: (postId: number) => ({
-                url: `/posts/p/${postId}`
-            }),
-            providesTags: (result) => ['UserPosts']
-        }),
         getUserPosts: build.query<GetPostsResponse, number>({
             query: (userId: number) => ({
                 url: `/posts/${userId}`
             }),
             providesTags: (result) => ['UserPosts']
         }),
-        createPost: build.mutation<AddPostsResponse, CreatePost>({
+        getUserPostById: build.query<PostType, number>({
+            query: (postId: number) => ({
+                url: `/posts/p/${postId}`
+            }),
+            providesTags: (result) => ['UserPosts']
+        }),
+        createPost: build.mutation<PostType, CreatePost>({
             query: (payload: CreatePost) => ({
                 url: '/posts',
                 method: 'POST',
@@ -72,8 +67,8 @@ export const userPostsAPI = createApi({
 })
 
 export const {
-    useGetUserPostByIdQuery,
     useGetUserPostsQuery,
+    useGetUserPostByIdQuery,
     useCreatePostMutation,
     useUploadImageToPostMutation,
     useDeletePostMutation,

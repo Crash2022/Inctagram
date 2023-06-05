@@ -16,6 +16,8 @@ import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicM
 import { Photo } from '@/models/profile-types'
 import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
+import { useGetUserPostsQuery } from '@/services/UserPostsService'
+import { PostType } from '@/models/posts-types'
 // import { profileApi } from '@/shared/api/profile-api'
 // import { Photo } from '@/models/profile-types'
 // import dynamic from 'next/dynamic'
@@ -81,11 +83,20 @@ const Profile: NextPageWithLayout = () => {
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 
     // const { photos } = props
-    const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
+    // const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
     const { data: meData } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
+    const {
+        data: posts,
+        error,
+        isLoading: postsIsLoading,
+        isError
+    } = useGetUserPostsQuery(profileData?.id)
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
+    if (postsIsLoading) return <LoaderScreen variant={'circle'} />
+
+    console.log(posts)
 
     return (
         <>
@@ -104,14 +115,14 @@ const Profile: NextPageWithLayout = () => {
                             src={
                                 profileData && profileData.avatars.length === 0
                                     ? DefaultProfileAvatar
-                                    : profileData.avatars[0].url
+                                    : profileData?.avatars[0].url
                             }
                             // src={DefaultProfileAvatar}
                             alt={'profile-avatar'}
                             width={204}
                             height={204}
                             quality={100}
-                            // priority
+                            priority
                         />
                     </div>
                     <div className={cls.header_info}>
@@ -138,34 +149,26 @@ const Profile: NextPageWithLayout = () => {
                                 <div>{t('Publications')}</div>
                             </div>
                         </div>
-                        <div className={cls.info_description}>{profileData.aboutMe}</div>
+                        <div className={cls.info_description}>{profileData?.aboutMe}</div>
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>
                     <div className={cls.content_list}>
-                        {photos &&
-                            photos.map((photo: Photo) => {
-                                return (
-                                    <div key={photo.id} className={cls.list_item}>
-                                        {/* <Image */}
-                                        {/*    src={photo.url} */}
-                                        {/*    alt={'gallery-photo'} */}
-                                        {/*    width={265} */}
-                                        {/*    height={265} */}
-                                        {/* /> */}
-
-                                        <img
-                                            src={photo.url}
-                                            alt='gallery-photo'
-                                            width={265}
-                                            height={265}
-                                            onClick={() => {
-                                                setOpenPostModal(true)
-                                            }}
-                                        />
-                                    </div>
-                                )
-                            })}
+                        {posts?.items.map((post: PostType) => {
+                            return (
+                                <div key={post.id} className={cls.list_item}>
+                                    <Image
+                                        src={post.images[0].url}
+                                        alt={'post-photo'}
+                                        width={265}
+                                        height={265}
+                                        onClick={() => {
+                                            setOpenPostModal(true)
+                                        }}
+                                    />
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
