@@ -63,7 +63,7 @@ export const AddPostContent = ({
                         height={220}
                         onError={imageErrorHandler}
                         quality={100}
-                        // priority
+                        priority
                     />
                 )}
             </div>

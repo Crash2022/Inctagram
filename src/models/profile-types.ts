@@ -1,12 +1,3 @@
-// временный тип
-export interface Photo {
-    albumId: number
-    id: number
-    title: string
-    url: string
-    thumbnailUrl: string
-}
-
 export interface UserProfile {
     id: number
     userName: string

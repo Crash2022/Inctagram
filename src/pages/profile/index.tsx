@@ -8,27 +8,24 @@ import DefaultProfileAvatar from '../../../public/assets/images/default-avatar.p
 import { useMeQuery } from '@/services/AuthService'
 import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
-import { useFetchUserProfilePhotosQuery } from '@/services/UserProfilePhotosService'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import React, { useState } from 'react'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
-import { Photo } from '@/models/profile-types'
 import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 import { useGetUserPostsQuery } from '@/services/UserPostsService'
-import { PostType } from '@/models/posts-types'
-// import { profileApi } from '@/shared/api/profile-api'
-// import { Photo } from '@/models/profile-types'
+import { GetPostsResponse, PostType } from '@/models/posts-types'
+import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
 // const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
 
 // export const getStaticProps = async () => {
-//     const photos = await profileApi.getProfilePhotos()
+//     const posts = await profileApi.getUserProfilePosts()
 //
-//     if (!photos) {
+//     if (!posts) {
 //         return {
 //             notFound: true
 //         }
@@ -36,20 +33,23 @@ import { PostType } from '@/models/posts-types'
 //
 //     return {
 //         props: {
-//             photos
+//             posts
 //         },
 //         revalidate: 100 // перезапрос данных через указанное время (в секундах)
 //     }
 // }
 
-// export const getServerSideProps = async ({ res }) => {
+// export const getServerSideProps = async () => {
 //     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
 //     // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
-//     const photos = await profileApi.getProfilePhotos()
 //
-//     // console.log(photos, 'backend')
+//     // const profile = await profileApi.getUserProfileData()
+//     // const posts = await profileApi.getUserProfilePosts(profile.id)
+//     const posts = await profileApi.getUserProfilePosts(98)
 //
-//     if (!photos) {
+//     // console.log(posts, 'backend posts')
+//
+//     if (!posts) {
 //         return {
 //             notFound: true
 //         }
@@ -68,22 +68,19 @@ import { PostType } from '@/models/posts-types'
 //
 //     return {
 //         props: {
-//             photos
+//             posts
 //         }
 //     }
 // }
 
-// type ProfileProps = {
-//     photos: Photo[]
-// }
+interface ProfileProps {
+    posts: GetPostsResponse
+}
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
 
-    const [openPostModal, setOpenPostModal] = useState<boolean>(false)
-
-    // const { photos } = props
-    // const { data: photos, error, isLoading, isError } = useFetchUserProfilePhotosQuery(12)
+    // const { posts } = props
     const { data: meData } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
     const {
@@ -92,6 +89,8 @@ const Profile: NextPageWithLayout = () => {
         isLoading: postsIsLoading,
         isError
     } = useGetUserPostsQuery(profileData?.id)
+
+    const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
     if (postsIsLoading) return <LoaderScreen variant={'circle'} />
@@ -122,7 +121,6 @@ const Profile: NextPageWithLayout = () => {
                             width={204}
                             height={204}
                             quality={100}
-                            priority
                         />
                     </div>
                     <div className={cls.header_info}>
