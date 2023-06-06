@@ -99,10 +99,6 @@ const Profile: NextPageWithLayout = () => {
 
     return (
         <>
-            <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
-                <PostMain />
-            </PostBasicModal>
-
             <Head>
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
@@ -165,6 +161,9 @@ const Profile: NextPageWithLayout = () => {
                                             setOpenPostModal(true)
                                         }}
                                     />
+                                    <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
+                                        <PostMain post={post} />
+                                    </PostBasicModal>
                                 </div>
                             )
                         })}

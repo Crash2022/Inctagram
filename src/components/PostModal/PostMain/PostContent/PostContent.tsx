@@ -16,11 +16,13 @@ import { Comment } from '@/components/PostModal/Comment/Comment'
 import { useTranslation } from 'react-i18next'
 import { useDeletePostMutation } from '@/services/UserPostsService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { PostType } from '@/models/posts-types'
 
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
+    post: PostType
 }
-export const PostContent = ({ setUpdate }: PostContentProps) => {
+export const PostContent = ({ setUpdate, post }: PostContentProps) => {
     const { t } = useTranslation('post-modal')
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
@@ -40,7 +42,7 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
             icon: TrashIcon,
             title: 'DeletePost',
             func: () => {
-                // deletePost()
+                deletePost(post.id)
             }
         }
     ]
@@ -58,7 +60,15 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
     return (
         <>
             <div className={cls.postModal_mainBox}>
-                <div className={cls.postModal_image}></div>
+                <div className={cls.postModal_image}>
+                    <Image
+                        src={post.images[0].url}
+                        alt={'post-photo'}
+                        width={562}
+                        height={562}
+                        priority
+                    />
+                </div>
                 <div className={cls.postModal_items}>
                     <div className={cls.header}>
                         <div className={cls.headerTitle}>
@@ -90,11 +100,9 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
                                     ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
-                            userName={'test user Name'}
-                            text={
-                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
-                            }
-                            date={'2 hours age'}
+                            userName={profileData.userName}
+                            text={post.description}
+                            date={'2 hours ago'}
                             likeButton={false}
                             likeCount={0}
                         />
@@ -104,7 +112,7 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
                             text={
                                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
                             }
-                            date={'2 hours age'}
+                            date={'2 hours ago'}
                             likeButton={true}
                             likeCount={3}
                         />
@@ -114,7 +122,7 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
                             text={
                                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
                             }
-                            date={'2 hours age'}
+                            date={'2 hours ago'}
                             likeButton={false}
                             likeCount={4}
                         />
