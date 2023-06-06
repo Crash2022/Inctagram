@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import { useDeletePostMutation } from '@/services/UserPostsService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostType } from '@/models/posts-types'
+import { formatDate } from '@/shared/utils/formatDate'
 
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
@@ -102,7 +103,7 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
                             }
                             userName={profileData.userName}
                             text={post.description}
-                            date={'2 hours ago'}
+                            date={formatDate(post.createdAt)}
                             likeButton={false}
                             likeCount={0}
                         />
