@@ -18,9 +18,12 @@ import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export const ForgotPasswordForm = () => {
     const { t } = useTranslation('forgot')
+    const recaptchaRef = React.createRef()
+
     const [open, setOpen] = useState<boolean>(false)
     const [forgotPassword, { error, isError, isSuccess }] = useForgotPasswordMutation()
 
@@ -44,25 +47,7 @@ export const ForgotPasswordForm = () => {
     // sitekey="6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ"
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
-        // grecaptcha.ready(function() {
-        //     grecaptcha.execute('6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ', {action: 'submit'}).then(function(token) {
-        //         // Add your logic to submit to your backend server here
-        //
-        //         console.log('submit', data)
-        //         localStorage.setItem('email', control._getWatch('email'))
-        //         if (!isSuccess) {
-        //             const res = await forgotPassword(data)
-        //             console.log('forgot response error', res)
-        //             setOpen(true)
-        //         }
-        //         if (isSuccess) {
-        //             data.recaptcha = true
-        //             const res = await forgotPassword(data)
-        //             console.log('forgot response success', res)
-        //             setOpen(true)
-        //         }
-        //     })
-        // })
+        // recaptchaRef.current.execute()
 
         console.log('submit', data)
         localStorage.setItem('email', control._getWatch('email'))
@@ -77,6 +62,20 @@ export const ForgotPasswordForm = () => {
             console.log('forgot response success', res)
             setOpen(true)
         }
+    }
+
+    const onReCAPTCHAChange = (captchaCode: string) => {
+        // If the reCAPTCHA code is null or undefined indicating that
+        // the reCAPTCHA was expired then return early
+        if (!captchaCode) {
+            return
+        }
+        // Else reCAPTCHA was executed successfully so proceed with the
+        // alert(`Hey, ${email}`)
+
+        // Reset the reCAPTCHA so that it can be executed again if user
+        // submits another email.
+        recaptchaRef.current.reset()
     }
 
     const messageModalOKHandler = () => {
@@ -116,7 +115,6 @@ export const ForgotPasswordForm = () => {
                     theme={'primary'}
                     type={'submit'}
                     id={'ForgotSendLinkButton'}
-                    // data-sitekey={'6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'}
                 >
                     {!isSuccess ? t('SendLink') : t('SendLinkAgain')}
                 </Button>
@@ -138,6 +136,13 @@ export const ForgotPasswordForm = () => {
                             </div>
                             <label htmlFor={'recaptcha'}>{t('Robot')}</label>
                         </div>
+
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            size='invisible'
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                            onChange={onReCAPTCHAChange}
+                        />
 
                         <CaptchaIcon />
                     </div>
