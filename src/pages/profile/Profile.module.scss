@@ -61,6 +61,8 @@
 
             .list_item {
                 img {
+                    object-fit: cover;
+
                     &:hover {
                         cursor: pointer;
                     }

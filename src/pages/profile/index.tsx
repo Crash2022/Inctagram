@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from 'react'
 import Head from 'next/head'
 import cls from './Profile.module.scss'
 import Image from 'next/image'
@@ -10,13 +11,11 @@ import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import React, { useState } from 'react'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
-import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 import { useGetUserPostsQuery } from '@/services/UserPostsService'
-import { GetPostsResponse, PostType } from '@/models/posts-types'
-import { profileApi } from '@/shared/api/profile-api'
+import { PostType } from '@/models/posts-types'
+// import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -73,9 +72,9 @@ import { profileApi } from '@/shared/api/profile-api'
 //     }
 // }
 
-interface ProfileProps {
-    posts: GetPostsResponse
-}
+// interface ProfileProps {
+//     posts: GetPostsResponse
+// }
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
@@ -91,6 +90,14 @@ const Profile: NextPageWithLayout = () => {
     } = useGetUserPostsQuery(profileData?.id)
 
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
+
+    const togglePostModal = useCallback(
+        (postId: number) => () => {
+            setOpenPostModal(!openPostModal)
+            console.log(`postId: ${postId}`)
+        },
+        []
+    )
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
     if (postsIsLoading) return <LoaderScreen variant={'circle'} />
@@ -139,7 +146,7 @@ const Profile: NextPageWithLayout = () => {
                                 <div>{t('Subscribers')}</div>
                             </div>
                             <div className={cls.numbers_item}>
-                                <div>2218</div>
+                                <div>{posts?.items.length}</div>
                                 <div>{t('Publications')}</div>
                             </div>
                         </div>
@@ -157,11 +164,14 @@ const Profile: NextPageWithLayout = () => {
                                         width={265}
                                         height={265}
                                         priority
-                                        onClick={() => {
-                                            setOpenPostModal(true)
-                                        }}
+                                        onClick={togglePostModal(post.id)}
                                     />
-                                    <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
+                                    <PostBasicModal
+                                        open={openPostModal}
+                                        setOpen={setOpenPostModal}
+                                        // setOpen={togglePostModal(post.id)}
+                                        postId={post.id}
+                                    >
                                         <PostMain post={post} />
                                     </PostBasicModal>
                                 </div>
