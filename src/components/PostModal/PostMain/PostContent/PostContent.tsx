@@ -1,3 +1,4 @@
+import React from 'react'
 import cls from './PostContent.module.scss'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
@@ -13,6 +14,8 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Comment } from '@/components/PostModal/Comment/Comment'
 import { useTranslation } from 'react-i18next'
+import { useDeletePostMutation } from '@/services/UserPostsService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
@@ -21,6 +24,7 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
     const { t } = useTranslation('post-modal')
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
+    const [deletePost, { isLoading: deleteIsLoading }] = useDeletePostMutation()
 
     const menuItems = [
         {
@@ -36,7 +40,7 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
             icon: TrashIcon,
             title: 'DeletePost',
             func: () => {
-                alert('Delete Post')
+                // deletePost()
             }
         }
     ]
@@ -48,6 +52,8 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
     } = useForm<any>({
         defaultValues: {}
     })
+
+    if (deleteIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>
