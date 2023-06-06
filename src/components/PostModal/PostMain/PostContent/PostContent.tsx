@@ -175,10 +175,10 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
                                 </div>
                                 <span className={cls.likesCount}>2243 {t('Likes')}</span>
                             </div>
-                            <div className={cls.postDate}>July 3, 2021</div>
+                            <div className={cls.postDate}>{formatDate(post.createdAt)}</div>
                         </div>
                     </div>
-                    <form className={cls.addComentBlock}>
+                    <form className={cls.addCommentBlock}>
                         <div className={cls.input}>
                             <ControlledInput
                                 name={'add-comment'}
