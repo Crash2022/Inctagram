@@ -65,8 +65,8 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
                     <Image
                         src={post.images[0].url}
                         alt={'post-photo'}
-                        width={562}
-                        height={562}
+                        width={575}
+                        height={575}
                         priority
                     />
                 </div>

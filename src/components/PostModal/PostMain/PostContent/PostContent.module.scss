@@ -4,13 +4,14 @@
     @include defaultModalStyle;
     display: flex;
     //width: 984px;
-    width: 1126px;
-    height: 564px;
+    width: 1150px;
+    height: 575px;
     background-color: var(--dark-300);
 
     .postModal_image {
         width: 50%;
-        background-color: green;
+        background-color: gray;
+        overflow: hidden;
     }
 
     .postModal_items {
@@ -24,7 +25,6 @@
             .headerTitle {
                 @include flexBetween;
             }
-
             .profileData {
                 @include flexCenter;
 
@@ -65,7 +65,6 @@
                         cursor: pointer;
                     }
                 }
-
                 .secondButtonBlock {
                     .addToFavorite {
                         cursor: pointer;
