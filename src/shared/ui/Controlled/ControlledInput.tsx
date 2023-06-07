@@ -35,7 +35,7 @@ export const ControlledInput = ({
         <div className={divClassName}>
             <Controller
                 name={name}
-                control={control.control}
+                control={control}
                 rules={rules}
                 render={({ field }: any) => (
                     <Input
