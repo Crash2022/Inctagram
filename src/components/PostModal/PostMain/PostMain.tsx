@@ -1,24 +1,25 @@
 import { PostUpdate } from '@/components/PostModal/PostMain/PostUpdate/PostUpdate'
 import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
 import React, { useState } from 'react'
-import { PostType } from '@/models/posts-types'
-import { useGetUserPostByIdQuery, useGetUserPostsQuery } from '@/services/UserPostsService'
+import { useGetUserPostByIdQuery } from '@/services/UserPostsService'
 import { useAppSelector } from '@/shared/hooks/useAppSelector'
 import { selectorPostId } from '@/store/selectors'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
-export const PostMain = () => {
-    const [update, setUpdate] = useState<boolean>(false)
-    const postId = useAppSelector(selectorPostId)
-    const { data: post, error, isLoading: postIsLoading, isError } = useGetUserPostByIdQuery(postId)
+interface PostMainProps {
+    setOpenPostModal: (value: boolean) => void
+}
 
-    console.log(postId)
+export const PostMain = ({ setOpenPostModal }: PostMainProps) => {
+    const postId = useAppSelector(selectorPostId)
+    const [update, setUpdate] = useState<boolean>(false)
+    const { data: post, error, isLoading: postIsLoading, isError } = useGetUserPostByIdQuery(postId)
 
     if (postIsLoading) return <LoaderScreen variant={'circle'} />
 
     if (update) {
         return <PostUpdate setUpdate={setUpdate} post={post} />
     } else {
-        return <PostContent setUpdate={setUpdate} post={post} />
+        return <PostContent setUpdate={setUpdate} setOpenPostModal={setOpenPostModal} post={post} />
     }
 }

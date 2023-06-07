@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { action } from '@storybook/addon-actions'
 
 interface PostStateType {
     photos: string[]
@@ -12,8 +11,6 @@ const initialState: PostStateType = {
     description: '',
     postId: null
 }
-
-console.log(initialState.postId)
 
 export const postSlice = createSlice<any, any>({
     name: 'post',

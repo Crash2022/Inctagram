@@ -23,9 +23,10 @@ import { setPostId } from '@/store/slices/postSlice'
 
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
+    setOpenPostModal: (value: boolean) => void
     post: PostType
 }
-export const PostContent = ({ setUpdate, post }: PostContentProps) => {
+export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentProps) => {
     const { t } = useTranslation('post-modal')
     const dispatch = useAppDispatch()
 
@@ -46,7 +47,9 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
             icon: TrashIcon,
             title: 'DeletePost',
             func: () => {
-                deletePost(post.id)
+                deletePost(post.id).then((res) => {
+                    setOpenPostModal(false)
+                })
                 dispatch(setPostId({ postId: null }))
             }
         }
@@ -54,20 +57,20 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
 
     const {
         control,
-        handleSubmit,
         formState: { errors }
     } = useForm<any>({
         defaultValues: {}
     })
 
     if (deleteIsLoading) return <LoaderScreen variant={'circle'} />
+    if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>
             <div className={cls.postModal_mainBox}>
                 <div className={cls.postModal_image}>
                     <Image
-                        src={post.images[0].url}
+                        src={post?.images[0].url}
                         alt={'post-photo'}
                         width={575}
                         height={575}

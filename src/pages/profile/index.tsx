@@ -13,12 +13,10 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
-import { useGetUserPostByIdQuery, useGetUserPostsQuery } from '@/services/UserPostsService'
+import { useGetUserPostsQuery } from '@/services/UserPostsService'
 import { PostType } from '@/models/posts-types'
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
 import { setPostId } from '@/store/slices/postSlice'
-import { selectorPostId } from '@/store/selectors'
-import { useAppSelector } from '@/shared/hooks/useAppSelector'
 // import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
 
@@ -99,7 +97,6 @@ const Profile: NextPageWithLayout = () => {
     const togglePostModal = useCallback(
         (postId: number) => () => {
             setOpenPostModal(!openPostModal)
-            console.log(`postId: ${postId}`)
             dispatch(setPostId({ postId }))
         },
         []
@@ -108,21 +105,17 @@ const Profile: NextPageWithLayout = () => {
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
     if (postsIsLoading) return <LoaderScreen variant={'circle'} />
 
-    console.log(posts)
-
     return (
         <>
             <Head>
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
             </Head>
-            <PostBasicModal
-                open={openPostModal}
-                setOpen={setOpenPostModal}
-                // setOpen={togglePostModal(post.id)}
-            >
-                <PostMain />
+
+            <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
+                <PostMain setOpenPostModal={setOpenPostModal} />
             </PostBasicModal>
+
             <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
                     <div className={cls.header_photo}>

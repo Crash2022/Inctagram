@@ -4,7 +4,7 @@ import { GetPostsResponse, PostType, UploadPostImage, CreatePost } from '@/model
 export const userPostsAPI = createApi({
     reducerPath: 'userPostsAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NEXT_APP_BASE_URL,
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
         prepareHeaders: (headers) => {
             headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
             return headers
