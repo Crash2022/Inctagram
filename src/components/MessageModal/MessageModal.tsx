@@ -2,7 +2,7 @@ import React from 'react'
 import { CustomModal } from '@/shared/ui/CustomModal/CustomModal'
 import s from './MessageModal.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import clsx from 'clsx'
 
 interface MessageModalProps {

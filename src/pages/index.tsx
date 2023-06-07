@@ -1,9 +1,8 @@
 import s from '@/styles/Home.module.scss'
 import { NextPageWithLayout } from '@/pages/_app'
 import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
-import { useTranslation } from 'react-i18next'
-// import { useTranslation } from 'next-i18next'
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'next-i18next' // использовать эту библиотеку!
 import { useMeQuery } from '@/services/AuthService'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -11,13 +10,8 @@ import { InctagramPath } from '@/shared/api/path'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 const Home: NextPageWithLayout = () => {
-    const { t } = useTranslation('home')
+    // const { t } = useTranslation('home')
     const router = useRouter()
-
-    // пример i18n через useContext
-    // const lang = useContext('en') // обернуть App
-    // const allPageData = content['en'] // импортировать в компоненте (вместо content любое название импорта)
-    // <div>{allPageData.title}</div> // вставить в разметку
 
     const { data: meData, isLoading } = useMeQuery()
 
@@ -34,18 +28,10 @@ const Home: NextPageWithLayout = () => {
 
     return (
         <>
-            <div className={s.main}>{/*Main*/}</div>
+            <div className={s.main}>{/* Main */}</div>
         </>
     )
 }
 
 Home.getLayout = getHeaderLayout
 export default Home
-
-// export async function getStaticProps({ locale }) {
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(locale, ['header', 'home']))
-//         }
-//     }
-// }

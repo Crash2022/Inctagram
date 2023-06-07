@@ -6,7 +6,7 @@ import DefaultProfileAvatar from '../../../../../public/assets/images/default-av
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 interface PostUpdatedPropsType {
     setUpdate: (update: boolean) => void

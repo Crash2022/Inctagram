@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import cls from './Management.module.scss'
 import { ContentBox } from '@/shared/ui/ContentBox/ContentBox'
 import { useTranslation } from 'next-i18next'
@@ -7,8 +7,8 @@ import PaypalIcon from '../../../../public/assets/icons/pay-paypal.svg'
 import StripeIcon from '../../../../public/assets/icons/pay-stripe.svg'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 
-type RadioAccountTypes = 'Personal' | 'Business'
-type RadioCostsTypes = '10' | '50' | '100'
+// type RadioAccountTypes = 'Personal' | 'Business'
+// type RadioCostsTypes = '10' | '50' | '100'
 
 export const Management = () => {
     const { t } = useTranslation('settings-management')

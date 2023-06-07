@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
+// import { Input } from '@/shared/ui/Input/Input'
+// import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
+// import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 import { Title } from '@/components/Forms/Title/Title'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
-// import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
-import { useTranslation } from 'react-i18next'
-// import { useTranslation } from 'next-i18next'
-// import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-// import { PasswordRecoveryType } from '@/models/auth-types'
-// import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
+import { useTranslation } from 'next-i18next'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { PasswordRecoveryType } from '@/models/auth-types'
 import { InctagramPath } from '@/shared/api/path'
 import { useForgotPasswordMutation } from '@/services/AuthService'
-// import { yupResolver } from '@hookform/resolvers/yup'
-// import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
-// import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { Input } from '@/shared/ui/Input/Input'
 import { NEXT_PUBLIC_RECAPTCHA_SITE_KEY } from '@/shared/api/recaptcha-site-key'
 
 export const ForgotPasswordForm = () => {
@@ -30,54 +29,62 @@ export const ForgotPasswordForm = () => {
 
     const [open, setOpen] = useState<boolean>(false)
     const [robot, setRobot] = useState<boolean>(false)
-    const [email, setEmail] = useState<string>('')
+    // const [email, setEmail] = useState<string>('')
+    // const [emailError, setEmailError] = useState<string>('')
 
-    // const ForgotSchema = yup.object().shape({
-    //     email: yup.string().required(t('Err_Yup_Required')),
-    //     recaptcha: yup.boolean().oneOf([true], t('Robot'))
-    // })
+    const ForgotSchema = yup.object().shape({
+        email: yup.string().required(t('Err_Yup_Required')),
+        recaptcha: yup.boolean().oneOf([true], t('Robot'))
+    })
 
-    // const {
-    //     control,
-    //     handleSubmit,
-    //     formState: { errors }
-    // } = useForm<PasswordRecoveryType>({
-    //     defaultValues: {
-    //         email: '',
-    //         recaptcha: false
-    //     },
-    //     resolver: yupResolver(ForgotSchema)
-    // })
+    const {
+        control,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<PasswordRecoveryType>({
+        defaultValues: {
+            email: ''
+            // recaptcha: false
+        },
+        resolver: yupResolver(ForgotSchema)
+    })
 
-    // const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
-    //     console.log('submit', data)
-    //     localStorage.setItem('email', control._getWatch('email'))
-    //
-    //     if (!isSuccess) {
-    //         const res = await forgotPassword(data)
-    //         console.log('forgot response error', res)
-    //         setOpen(true)
-    //     }
-    //     if (isSuccess) {
-    //         data.recaptcha = true
-    //         const res = await forgotPassword(data)
-    //         console.log('forgot response success', res)
-    //         setOpen(true)
-    //     }
-    // }
+    const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
+        console.log('submit', data)
+        localStorage.setItem('email', control._getWatch('email'))
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault()
-
-        if (grecaptcha.getResponse() === '') {
-            // event.preventDefault()
-            setRobot(true)
-            // alert("Please click <I'm not a robot> before sending the job")
-        }
-
-        // Execute the reCAPTCHA when the form is submitted
-        // recaptchaRef.current.execute()
+        // if (!isSuccess) {
+        //     const res = await forgotPassword(data)
+        //     console.log('forgot response error', res)
+        //     setOpen(true)
+        // }
+        // if (isSuccess) {
+        //     data.recaptcha = true
+        //     const res = await forgotPassword(data)
+        //     console.log('forgot response success', res)
+        //     setOpen(true)
+        // }
     }
+
+    // const handleSubmit = (event: any) => {
+    //     event.preventDefault()
+    //
+    //     // const trimValue = email.trim()
+    //     // if (trimValue && trimValue.length < 1) {
+    //     //     setEmailError(t('Err_Yup_Required'))
+    //     // }
+    //
+    //     // if (emailError.length === 0) setEmailError(t('Err_Yup_Required'))
+    //
+    //     if (grecaptcha.getResponse() === '') {
+    //         // event.preventDefault()
+    //         setRobot(true)
+    //         // alert("Please click <I'm not a robot> before sending the job")
+    //     }
+    //
+    //     // Execute the reCAPTCHA when the form is submitted
+    //     // recaptchaRef.current.execute()
+    // }
 
     const onReCAPTCHAChange = (captchaCode: string) => {
         setRobot(false) // текст с ошибкой
@@ -99,13 +106,13 @@ export const ForgotPasswordForm = () => {
 
     return (
         <FormWrapper marginTop={96}>
-            <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit}>
+            <form className={clsx(styles.form, 'authForm')} onSubmit={handleSubmit(onSubmit)}>
                 <MessageModal
                     open={open}
                     setOpen={setOpen}
                     header={t('EmailSent')}
-                    text={t('HaveSent') + email}
-                    // text={t('HaveSent') + control._getWatch('email')}
+                    // text={t('HaveSent') + email}
+                    text={t('HaveSent') + control._getWatch('email')}
                     buttonTitleOK={t('MainButton')}
                     extraCallbackOK={() => {
                         setOpen(false)
@@ -114,23 +121,25 @@ export const ForgotPasswordForm = () => {
 
                 <Title title={t('Forgot')} className={styles.title} />
                 <div className={styles.inputContainer} style={{ marginBottom: '54px' }}>
-                    {/* <ControlledInput */}
-                    {/*    id={'Forgot_Email'} */}
-                    {/*    name={'email'} */}
-                    {/*    placeholder={t('Email')} */}
-                    {/*    control={control} */}
-                    {/*    error={errors.email?.message} */}
-                    {/* /> */}
-                    <Input
+                    <ControlledInput
                         id={'Forgot_Email'}
                         name={'email'}
-                        type={'email'}
-                        value={email}
-                        onChange={(e) => {
-                            setEmail(e.currentTarget.value)
-                        }}
                         placeholder={t('Email')}
+                        control={control}
+                        error={errors.email?.message}
                     />
+
+                    {/* <Input */}
+                    {/*    id={'Forgot_Email'} */}
+                    {/*    name={'email'} */}
+                    {/*    type={'email'} */}
+                    {/*    value={email} */}
+                    {/*    onChange={(e) => { */}
+                    {/*        setEmail(e.currentTarget.value) */}
+                    {/*    }} */}
+                    {/*    placeholder={t('Email')} */}
+                    {/*    // error={emailError} */}
+                    {/* /> */}
                     <p>{t('EnterEmail')}</p>
                 </div>
 

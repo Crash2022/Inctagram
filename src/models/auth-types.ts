@@ -15,7 +15,8 @@ export interface LoginPayloadType {
 
 export interface PasswordRecoveryType {
     email: string
-    recaptcha: boolean
+    // recaptcha: boolean
+    recaptcha: string
 }
 
 export interface NewPasswordType {

@@ -1,9 +1,8 @@
 import { PropsWithChildren, ReactElement } from 'react'
-
 import cls from './HeaderLayout.module.scss'
 import Head from 'next/head'
 import { Header } from '../Header/Header'
-import { Footer } from '../Footer/Footer'
+// import { Footer } from '../Footer/Footer'
 
 export const HeaderLayout = ({ children }: PropsWithChildren) => {
     return (
@@ -16,7 +15,7 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
             </Head>
             <Header />
             <main className={cls.layoutContainer}>{children}</main>
-            {/*<Footer />*/}
+            {/* <Footer /> */}
         </>
     )
 }
