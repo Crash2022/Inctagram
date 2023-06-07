@@ -54,11 +54,14 @@
         }
     }
     .profilePage_content {
+        .list_noItems {
+            @include flexCenter;
+            opacity: 0.5;
+        }
         .content_list {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-
             .list_item {
                 img {
                     object-fit: cover;

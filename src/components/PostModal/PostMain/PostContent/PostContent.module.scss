@@ -3,7 +3,6 @@
 .postModal_mainBox {
     @include defaultModalStyle;
     display: flex;
-    //width: 984px;
     width: 1150px;
     height: 575px;
     background-color: var(--dark-300);
