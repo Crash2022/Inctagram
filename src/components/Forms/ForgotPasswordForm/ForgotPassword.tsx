@@ -42,7 +42,6 @@ export const ForgotPasswordForm = () => {
     } = useForm<PasswordRecoveryType>({
         defaultValues: {
             email: '',
-            // recaptcha: false
             recaptcha: ''
         },
         resolver: yupResolver(ForgotSchema)
