@@ -18,6 +18,8 @@ import { useDeletePostMutation } from '@/services/UserPostsService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostType } from '@/models/posts-types'
 import { formatDate } from '@/shared/utils/formatDate'
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
+import { setPostId } from '@/store/slices/postSlice'
 
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
@@ -25,6 +27,7 @@ interface PostContentProps {
 }
 export const PostContent = ({ setUpdate, post }: PostContentProps) => {
     const { t } = useTranslation('post-modal')
+    const dispatch = useAppDispatch()
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
     const [deletePost, { isLoading: deleteIsLoading }] = useDeletePostMutation()
@@ -44,6 +47,7 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
             title: 'DeletePost',
             func: () => {
                 deletePost(post.id)
+                dispatch(setPostId({ postId: null }))
             }
         }
     ]

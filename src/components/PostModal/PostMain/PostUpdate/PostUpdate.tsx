@@ -12,6 +12,7 @@ import { LoginPayloadType } from '@/models/auth-types'
 import { InctagramPath } from '@/shared/api/path'
 import { useLoginMutation } from '@/services/AuthService'
 import { useUpdatePostMutation } from '@/services/UserPostsService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PostUpdatedPropsType {
     setUpdate: (update: boolean) => void
@@ -50,6 +51,8 @@ export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
             console.log('updatePost error', error)
         }
     }
+
+    if (isLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>

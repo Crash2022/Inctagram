@@ -6,11 +6,10 @@ interface PostBasicModalProps {
     setOpen: (value: boolean) => void
     // setOpen: () => void
     // setOpen: (postId: number) => void
-    postId: number
     children: ReactElement
 }
 
-export const PostBasicModal = ({ open, setOpen, postId, children }: PostBasicModalProps) => {
+export const PostBasicModal = ({ open, setOpen, children }: PostBasicModalProps) => {
     return (
         <CustomModal
             open={open}
