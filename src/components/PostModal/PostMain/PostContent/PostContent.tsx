@@ -107,26 +107,6 @@ export const PostContent = ({ setUpdate, post }: PostContentProps) => {
                             likeButton={false}
                             likeCount={0}
                         />
-                        <Comment
-                            avatar={DefaultProfileAvatar}
-                            userName={'test user Name'}
-                            text={
-                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
-                            }
-                            date={'2 hours ago'}
-                            likeButton={true}
-                            likeCount={3}
-                        />
-                        <Comment
-                            avatar={DefaultProfileAvatar}
-                            userName={'test user Name'}
-                            text={
-                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
-                            }
-                            date={'2 hours ago'}
-                            likeButton={false}
-                            likeCount={4}
-                        />
                     </div>
                     <div className={cls.likesBlock}>
                         <div className={cls.buttonItems}>

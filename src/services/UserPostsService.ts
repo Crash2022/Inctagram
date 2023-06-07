@@ -57,9 +57,9 @@ export const userPostsAPI = createApi({
         }),
         updatePost: build.mutation<any, { description: string; postId: number }>({
             query: (payload: { description: string; postId: number }) => ({
-                url: `/user/posts/${payload.postId}`,
+                url: `/posts/${payload.postId}`,
                 method: 'PUT',
-                body: payload.description
+                body: { description: payload.description }
             }),
             invalidatesTags: ['UserPosts']
         })

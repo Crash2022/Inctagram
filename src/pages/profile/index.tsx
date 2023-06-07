@@ -154,6 +154,9 @@ const Profile: NextPageWithLayout = () => {
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>
+                    {posts?.items.length === 0 && (
+                        <div className={cls.list_noItems}>{t('NoPosts')}</div>
+                    )}
                     <div className={cls.content_list}>
                         {posts?.items.map((post: PostType) => {
                             return (

@@ -10,7 +10,7 @@ export const PostMain = ({ post }: PostMainProps) => {
     const [update, setUpdate] = useState<boolean>(false)
 
     if (update) {
-        return <PostUpdate setUpdate={setUpdate} />
+        return <PostUpdate setUpdate={setUpdate} post={post} />
     } else {
         return <PostContent setUpdate={setUpdate} post={post} />
     }

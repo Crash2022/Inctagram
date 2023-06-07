@@ -3,27 +3,53 @@ import cls from './PostUpdate.module.scss'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import DefaultProfileAvatar from '../../../../../public/assets/images/default-avatar.png'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { useTranslation } from 'next-i18next'
+import { PostType, UpdatePostPayloadType } from '@/models/posts-types'
+import { LoginPayloadType } from '@/models/auth-types'
+import { InctagramPath } from '@/shared/api/path'
+import { useLoginMutation } from '@/services/AuthService'
+import { useUpdatePostMutation } from '@/services/UserPostsService'
 
 interface PostUpdatedPropsType {
     setUpdate: (update: boolean) => void
+    post: PostType
 }
-export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
+export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
     const { t } = useTranslation('post-modal')
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
-    const [description, setDescription] = useState<string>('')
+
+    const [updateProfile, { data: updateProfileData, error, isError, isLoading }] =
+        useUpdatePostMutation()
+
+    const [text, setText] = useState<string>(post.description)
 
     const {
         control,
         handleSubmit,
         formState: { errors }
     } = useForm<any>({
-        defaultValues: {}
+        defaultValues: {
+            description: post.description,
+            postId: post.id
+        }
     })
+
+    const onSubmit: SubmitHandler<UpdatePostPayloadType> = async (
+        submitData: UpdatePostPayloadType
+    ) => {
+        console.log('submit updatePost', submitData)
+        try {
+            const res = await updateProfile(submitData)
+            console.log('updatePost response', res)
+            setUpdate(false)
+        } catch (error: any) {
+            console.log('updatePost error', error)
+        }
+    }
 
     return (
         <>
@@ -41,7 +67,15 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
                     </div>
                 </div>
                 <div className={cls.updatePostModal_body}>
-                    <div className={cls.postModal_image}></div>
+                    <div className={cls.postModal_image}>
+                        <Image
+                            src={post.images[0].url}
+                            alt={'post-photo'}
+                            width={575}
+                            height={575}
+                            priority
+                        />
+                    </div>
                     <div className={cls.postModal_items}>
                         <div className={cls.header}>
                             <div className={cls.headerTitle}>
@@ -63,27 +97,28 @@ export const PostUpdate = ({ setUpdate }: PostUpdatedPropsType) => {
                                 </div>
                             </div>
                         </div>
-                        <form className={cls.updateDesc}>
+                        <form className={cls.updateDesc} onSubmit={handleSubmit(onSubmit)}>
                             <div className={cls.textAreaBlock}>
                                 <div className={cls.description}>{t('AddPostPublication')}</div>
                                 <div>
                                     <Controller
-                                        name={'update-description'}
+                                        name={'description'}
                                         control={control}
                                         render={({ field }: any) => (
                                             <Textarea
                                                 {...field}
                                                 placeholder={''}
-                                                value={description}
+                                                value={field.value}
                                                 onChange={(value) => {
-                                                    setDescription(value.currentTarget.value)
+                                                    field.onChange(value)
+                                                    setText(value.currentTarget.value)
                                                 }}
-                                                // error={errors.aboutMe?.message}
+                                                error={errors.description?.message}
                                             />
                                         )}
                                     />
                                 </div>
-                                <div className={cls.lettersCount}>{description.length}/500</div>
+                                <div className={cls.lettersCount}>{text.length}/500</div>
                             </div>
                             <div className={cls.buttonBlock}>
                                 <Button type={'submit'} theme={'primary'}>
