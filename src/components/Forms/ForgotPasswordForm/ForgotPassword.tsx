@@ -16,7 +16,6 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { NEXT_PUBLIC_RECAPTCHA_SITE_KEY } from '@/shared/api/recaptcha-site-key'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 // import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 
@@ -125,9 +124,7 @@ export const ForgotPasswordForm = () => {
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             size='normal'
-                            // sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                            // sitekey={process.env.local.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                            sitekey={NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                             onChange={onReCAPTCHAChange}
                         />
                     </div>
