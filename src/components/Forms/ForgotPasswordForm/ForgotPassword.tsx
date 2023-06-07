@@ -27,7 +27,7 @@ export const ForgotPasswordForm = () => {
     const [forgotPassword, { isError, isSuccess, isLoading }] = useForgotPasswordMutation()
 
     const [open, setOpen] = useState<boolean>(false)
-    const [robot, setRobot] = useState<boolean>(false)
+    const [isRobot, setIsRobot] = useState<boolean>(false)
 
     const ForgotSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email'))
@@ -57,16 +57,17 @@ export const ForgotPasswordForm = () => {
             console.log('forgot response', forgotResponse)
             setOpen(true)
         } else {
-            setRobot(true)
+            setIsRobot(true)
         }
     }
 
-    const onReCAPTCHAChange = (captchaCode: string) => {
+    const onReCAPTCHAChange = () => {
+        // return (captchaCode: string)
         // console.log('captchaCode in recaptchaRef', recaptchaRef.current.getValue())
 
         if (recaptchaRef.current.getValue()) {
             setValue('recaptcha', recaptchaRef.current.getValue())
-            setRobot(false)
+            setIsRobot(false)
             // console.log('onChange recaptcha hook form value', control._getWatch('recaptcha'))
         }
     }
@@ -115,7 +116,7 @@ export const ForgotPasswordForm = () => {
                 </Link>
 
                 <div className={styles.captcha_google}>
-                    {robot ? (
+                    {isRobot ? (
                         <div className={styles.robot_message}>{t('RecaptchaRobotMessage')}</div>
                     ) : (
                         ''
