@@ -13,8 +13,12 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
-import { useGetUserPostsQuery } from '@/services/UserPostsService'
+import { useGetUserPostByIdQuery, useGetUserPostsQuery } from '@/services/UserPostsService'
 import { PostType } from '@/models/posts-types'
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
+import { setPostId } from '@/store/slices/postSlice'
+import { selectorPostId } from '@/store/selectors'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
 // import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
 
@@ -78,6 +82,7 @@ import { PostType } from '@/models/posts-types'
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
+    const dispatch = useAppDispatch()
 
     // const { posts } = props
     const { data: meData } = useMeQuery()
@@ -95,6 +100,7 @@ const Profile: NextPageWithLayout = () => {
         (postId: number) => () => {
             setOpenPostModal(!openPostModal)
             console.log(`postId: ${postId}`)
+            dispatch(setPostId({ postId }))
         },
         []
     )
@@ -110,6 +116,13 @@ const Profile: NextPageWithLayout = () => {
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
             </Head>
+            <PostBasicModal
+                open={openPostModal}
+                setOpen={setOpenPostModal}
+                // setOpen={togglePostModal(post.id)}
+            >
+                <PostMain />
+            </PostBasicModal>
             <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
                     <div className={cls.header_photo}>
@@ -169,14 +182,6 @@ const Profile: NextPageWithLayout = () => {
                                         priority
                                         onClick={togglePostModal(post.id)}
                                     />
-                                    <PostBasicModal
-                                        open={openPostModal}
-                                        setOpen={setOpenPostModal}
-                                        // setOpen={togglePostModal(post.id)}
-                                        postId={post.id}
-                                    >
-                                        <PostMain post={post} />
-                                    </PostBasicModal>
                                 </div>
                             )
                         })}
