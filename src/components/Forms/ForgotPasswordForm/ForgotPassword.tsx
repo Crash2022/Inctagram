@@ -3,7 +3,7 @@ import styles from '@/components/Forms/FormWrapper/Form.module.scss'
 import { Title } from '@/components/Forms/Title/Title'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
-import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
+// import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 import { useTranslation } from 'react-i18next'
 // import { useTranslation } from 'next-i18next'
 // import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -20,14 +20,16 @@ import clsx from 'clsx'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Input } from '@/shared/ui/Input/Input'
+import { NEXT_PUBLIC_RECAPTCHA_SITE_KEY } from '@/shared/api/recaptcha-site-key'
 
 export const ForgotPasswordForm = () => {
     const { t } = useTranslation('forgot')
     const recaptchaRef = React.createRef()
 
-    const [open, setOpen] = useState<boolean>(false)
-    const [forgotPassword, { error, isError, isSuccess }] = useForgotPasswordMutation()
+    const [forgotPassword, { isError, isSuccess }] = useForgotPasswordMutation()
 
+    const [open, setOpen] = useState<boolean>(false)
+    const [robot, setRobot] = useState<boolean>(false)
     const [email, setEmail] = useState<string>('')
 
     // const ForgotSchema = yup.object().shape({
@@ -48,10 +50,9 @@ export const ForgotPasswordForm = () => {
     // })
 
     // const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
-    //     // recaptchaRef.current.execute()
-    //
     //     console.log('submit', data)
     //     localStorage.setItem('email', control._getWatch('email'))
+    //
     //     if (!isSuccess) {
     //         const res = await forgotPassword(data)
     //         console.log('forgot response error', res)
@@ -67,11 +68,20 @@ export const ForgotPasswordForm = () => {
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
+
+        if (grecaptcha.getResponse() === '') {
+            // event.preventDefault()
+            setRobot(true)
+            // alert("Please click <I'm not a robot> before sending the job")
+        }
+
         // Execute the reCAPTCHA when the form is submitted
-        recaptchaRef.current.execute()
+        // recaptchaRef.current.execute()
     }
 
     const onReCAPTCHAChange = (captchaCode: string) => {
+        setRobot(false) // текст с ошибкой
+
         // If the reCAPTCHA code is null or undefined indicating that
         // the reCAPTCHA was expired then return early
         if (!captchaCode) {
@@ -140,14 +150,22 @@ export const ForgotPasswordForm = () => {
 
                 {!isSuccess ? (
                     <div className={styles.captcha_google}>
-                        <ReCAPTCHA
-                            ref={recaptchaRef}
-                            size='invisible'
-                            // sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                            // sitekey={process.env.local.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                            sitekey={'6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'}
-                            onChange={onReCAPTCHAChange}
-                        />
+                        {robot ? (
+                            <div className={styles.robot_message}>{t('RecaptchaRobotMessage')}</div>
+                        ) : (
+                            ''
+                        )}
+                        <div className={styles.recaptcha}>
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                // size='invisible'
+                                size='normal'
+                                // sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                // sitekey={process.env.local.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                sitekey={NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                onChange={onReCAPTCHAChange}
+                            />
+                        </div>
                     </div>
                 ) : (
                     // <div className={styles.captcha}>

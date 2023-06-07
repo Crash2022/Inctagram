@@ -37,3 +37,4 @@ next-env.d.ts
 
 #api
 /src/shared/api/baseURL.ts
+/src/shared/api/recaptcha-site-key.ts

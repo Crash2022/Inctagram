@@ -12,5 +12,7 @@
 
   "EmailSent": "E-mail sent",
   "HaveSent": "Please, check your email. We have sent a link to confirm your registration to ",
-  "MainButton": "OK"
+  "MainButton": "OK",
+
+  "RecaptchaRobotMessage": "Please, confirm that you are not robot"
 }
