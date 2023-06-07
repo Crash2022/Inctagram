@@ -9,6 +9,7 @@
   "Robot": "I'm not a robot",
 
   "Err_Yup_Required": "The field is required",
+  "Err_Yup_Email": "The field must be e-mail type",
 
   "EmailSent": "E-mail sent",
   "HaveSent": "Please, check your email. We have sent a link to confirm your registration to ",

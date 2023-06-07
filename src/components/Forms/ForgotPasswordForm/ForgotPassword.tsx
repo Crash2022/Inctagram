@@ -33,7 +33,7 @@ export const ForgotPasswordForm = () => {
     // const [emailError, setEmailError] = useState<string>('')
 
     const ForgotSchema = yup.object().shape({
-        email: yup.string().required(t('Err_Yup_Required')),
+        email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
         recaptcha: yup.boolean().oneOf([true], t('Robot'))
     })
 
@@ -43,8 +43,9 @@ export const ForgotPasswordForm = () => {
         formState: { errors }
     } = useForm<PasswordRecoveryType>({
         defaultValues: {
-            email: ''
+            email: '',
             // recaptcha: false
+            recaptcha: ''
         },
         resolver: yupResolver(ForgotSchema)
     })
@@ -52,6 +53,15 @@ export const ForgotPasswordForm = () => {
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
         console.log('submit', data)
         localStorage.setItem('email', control._getWatch('email'))
+
+        if (grecaptcha.getResponse() === '') {
+            // event.preventDefault()
+            setRobot(true)
+            // alert("Please click <I'm not a robot> before sending the job")
+        }
+
+        // Execute the reCAPTCHA when the form is submitted
+        // recaptchaRef.current.execute()
 
         // if (!isSuccess) {
         //     const res = await forgotPassword(data)
@@ -95,10 +105,10 @@ export const ForgotPasswordForm = () => {
             return
         }
         // Else reCAPTCHA was executed successfully so proceed with the
-        // alert(`Hey, ${email}`)
+        // alert(`Hey, ${email}`) // пример
+        // setValue('recaptcha', captchaCode)
 
-        // Reset the reCAPTCHA so that it can be executed again if user
-        // submits another email.
+        // Reset the reCAPTCHA so that it can be executed again if user submits another email
         recaptchaRef.current.reset()
     }
 
