@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { baseURL } from '@/shared/api/baseURL'
 import { GetPostsResponse, PostType, UploadPostImage, CreatePost } from '@/models/posts-types'
 
 export const userPostsAPI = createApi({
     reducerPath: 'userPostsAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: baseURL,
+        baseUrl: process.env.NEXT_APP_BASE_URL,
         prepareHeaders: (headers) => {
             headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
             return headers

@@ -7,7 +7,7 @@ import {
 import { baseURL } from '@/shared/api/baseURL'
 import { serviceAuthAPI } from '@/services/AuthService'
 
-const baseQuery = fetchBaseQuery({ baseUrl: baseURL, credentials: 'include' })
+const baseQuery = fetchBaseQuery({ baseUrl: process.env.NEXT_APP_BASE_URL, credentials: 'include' })
 export const baseQueryWithReauth: BaseQueryFn<
     string | FetchArgs,
     unknown,

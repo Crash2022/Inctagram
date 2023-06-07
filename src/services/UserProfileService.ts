@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { UpdateUserProfile, UserProfile } from '@/models/profile-types'
-import { baseURL } from '@/shared/api/baseURL'
 
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: baseURL,
+        baseUrl: process.env.NEXT_APP_BASE_URL,
         prepareHeaders: (headers) => {
             headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
             return headers
