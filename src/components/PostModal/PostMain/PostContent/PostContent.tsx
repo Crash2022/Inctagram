@@ -72,8 +72,8 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
                     <Image
                         src={post?.images[0].url}
                         alt={'post-photo'}
-                        width={575}
-                        height={575}
+                        width={573}
+                        height={573}
                         priority
                     />
                 </div>

@@ -71,8 +71,8 @@ export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
                         <Image
                             src={post.images[0].url}
                             alt={'post-photo'}
-                            width={575}
-                            height={575}
+                            width={561}
+                            height={561}
                             priority
                         />
                     </div>
