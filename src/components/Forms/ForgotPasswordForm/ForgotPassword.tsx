@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
-// import { Checkbox } from '@/shared/ui/Checkbox/Checkbox'
-// import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 import { Title } from '@/components/Forms/Title/Title'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
@@ -20,6 +18,7 @@ import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { NEXT_PUBLIC_RECAPTCHA_SITE_KEY } from '@/shared/api/recaptcha-site-key'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+// import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 
 export const ForgotPasswordForm = () => {
     const { t } = useTranslation('forgot')
@@ -61,18 +60,6 @@ export const ForgotPasswordForm = () => {
         } else {
             setRobot(true)
         }
-
-        // if (!isSuccess) {
-        //     const res = await forgotPassword(data)
-        //     console.log('forgot response error', res)
-        //     setOpen(true)
-        // }
-        // if (isSuccess) {
-        //     // data.recaptcha = true
-        //     const res = await forgotPassword(data)
-        //     console.log('forgot response success', res)
-        //     setOpen(true)
-        // }
     }
 
     const onReCAPTCHAChange = (captchaCode: string) => {
