@@ -1,15 +1,13 @@
 import '@/styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
-import { ReactElement, Suspense } from 'react'
+import { ReactElement } from 'react'
 import { NextPage } from 'next'
 import { useProgressLoader } from '@/shared/hooks/useProgressLoader'
 import '../styles/nprogress.css'
 import { appWithI18Next } from 'ni18n'
 import { wrapper } from '@/store/store'
 import { Provider } from 'react-redux'
-// import { GetStaticProps } from 'next'
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { ni18nConfig } from '../../ni18n.config'
 // import { appWithTranslation } from 'next-i18next'
 import { SnackbarProvider } from 'notistack'
@@ -48,9 +46,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
             <Provider store={store}>
                 <AuthRedirect>
                     <SnackbarProvider maxSnack={2}>
-                        {/*<Suspense fallback={<div>...</div>}>*/}
+                        {/* <Suspense fallback={<div>...</div>}> */}
                         {getLayout(<Component {...pageProps} />)}
-                        {/*</Suspense>*/}
+                        {/* </Suspense> */}
                     </SnackbarProvider>
                 </AuthRedirect>
             </Provider>
@@ -61,31 +59,3 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 // export default App
 export default appWithI18Next(App, ni18nConfig)
 // export default appWithTranslation(App)
-
-// для i18n !!!
-// export const getStaticProps: GetStaticProps = async ({locale = DEFAULT_LOCALE}) => {
-//     return (
-//         props: {
-//             ...(await serverSideTranslations(locale, ['common'])),
-//             // Will be passed to the page component as props
-//         }
-//     )
-// }
-
-// export async function getStaticProps({ locale }) {
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(locale, [
-//                 'home',
-//                 'header',
-//                 'sidebar',
-//                 'login',
-//                 'registration',
-//                 'forgot',
-//                 'new-password',
-//                 'profile'
-//             ]))
-//             // Will be passed to the page component as props
-//         }
-//     }
-// }

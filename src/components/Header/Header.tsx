@@ -5,11 +5,9 @@ import LogoIcon from '../../../public/assets/images/logo.png'
 // import LoginIcon from './../../../public/assets/icons/login-icon.svg'
 import RuFlag from './../../../public/assets/icons/flag-ru.svg'
 import UkFlag from './../../../public/assets/icons/flag-uk.svg'
-import { useTranslation } from 'react-i18next'
-// import { useTranslation } from 'next-i18next'
-import { useLogoutMutation, useMeQuery } from '@/services/AuthService'
+import { useTranslation } from 'next-i18next'
+import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
-// import { useState } from 'react'
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // import { InctagramPath } from '@/shared/api/path'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
@@ -48,18 +46,20 @@ export const Header = () => {
                 </div>
 
                 <div className={cls.lang}>
-                    {/*<div>NOW={locale}</div>*/}
+                    {/* <div>NOW={locale}</div> */}
                     {locales &&
                         locales.map((l) => {
                             return (
                                 <div
                                     key={l}
                                     // onClick={() => toggleLanguage(l)}
-                                    onClick={() => toggleLanguageNew(l)}
+                                    onClick={() => {
+                                        toggleLanguageNew(l)
+                                    }}
                                     className={cls.lang_item}
                                     // className={activeLang === l ? cls.active : ''}
                                 >
-                                    {/*{l.toUpperCase()}*/}
+                                    {/* {l.toUpperCase()} */}
                                     {l === 'ru' ? (
                                         <RuFlag width={50} height={40} />
                                     ) : (
@@ -70,23 +70,23 @@ export const Header = () => {
                         })}
                 </div>
 
-                {/*{meData && localStorage.getItem('accessToken') ? (*/}
-                {/*    <div*/}
-                {/*        className={cls.auth}*/}
-                {/*        onClick={async () => {*/}
-                {/*            await logout().then((res) => {*/}
-                {/*                console.log('logout', res)*/}
-                {/*                localStorage.removeItem('accessToken')*/}
-                {/*                router.push(InctagramPath.AUTH.LOGIN)*/}
-                {/*            })*/}
-                {/*        }}*/}
-                {/*    >*/}
-                {/*        <div>{t('LogOut')}</div>*/}
-                {/*        <LogoutIcon />*/}
-                {/*    </div>*/}
-                {/*) : (*/}
-                {/*    ''*/}
-                {/*)}*/}
+                {/* {meData && localStorage.getItem('accessToken') ? ( */}
+                {/*    <div */}
+                {/*        className={cls.auth} */}
+                {/*        onClick={async () => { */}
+                {/*            await logout().then((res) => { */}
+                {/*                console.log('logout', res) */}
+                {/*                localStorage.removeItem('accessToken') */}
+                {/*                router.push(InctagramPath.AUTH.LOGIN) */}
+                {/*            }) */}
+                {/*        }} */}
+                {/*    > */}
+                {/*        <div>{t('LogOut')}</div> */}
+                {/*        <LogoutIcon /> */}
+                {/*    </div> */}
+                {/* ) : ( */}
+                {/*    '' */}
+                {/* )} */}
             </div>
         </header>
     )

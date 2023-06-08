@@ -2,15 +2,16 @@
 
 .postModal_mainBox {
     @include defaultModalStyle;
-    width: 984px;
-    height: 564px;
+    width: 1150px;
+    height: 624px;
     background-color: var(--dark-300);
 
     .updatePostModal_header {
         width: 100%;
         @include flexBetween;
         padding: 10px 20px;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid var(--snippet-border);
+        height: 60px;
 
         .modal_headerTitle {
             font-size: 20px;
@@ -27,12 +28,13 @@
     }
 
     .updatePostModal_body {
-        height: 92%;
+        //height: 92%;
         display: flex;
 
         .postModal_image {
-            width: 50%;
-            background-color: green;
+            width: 49%;
+            background-color: gray;
+            overflow: hidden;
         }
 
         .postModal_items {

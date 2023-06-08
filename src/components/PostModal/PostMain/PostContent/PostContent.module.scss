@@ -3,13 +3,14 @@
 .postModal_mainBox {
     @include defaultModalStyle;
     display: flex;
-    width: 984px;
-    height: 564px;
+    width: 1150px;
+    height: 575px;
     background-color: var(--dark-300);
 
     .postModal_image {
         width: 50%;
-        background-color: green;
+        background-color: gray;
+        overflow: hidden;
     }
 
     .postModal_items {
@@ -23,7 +24,6 @@
             .headerTitle {
                 @include flexBetween;
             }
-
             .profileData {
                 @include flexCenter;
 
@@ -64,7 +64,6 @@
                         cursor: pointer;
                     }
                 }
-
                 .secondButtonBlock {
                     .addToFavorite {
                         cursor: pointer;
@@ -110,12 +109,13 @@
             }
         }
 
-        .addComentBlock {
+        .addCommentBlock {
             @include flexBetween;
-            padding: 0 20px;
+            //padding: 5px 20px;
 
             .input {
                 width: 80%;
+                padding: 5px 20px;
             }
 
             .button {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import cls from './PublicationContent.module.scss'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import DefaultProfileAvatar from '../../../../public/assets/images/default-avatar.png'

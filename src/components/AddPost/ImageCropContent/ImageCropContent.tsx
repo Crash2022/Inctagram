@@ -1,7 +1,7 @@
 import React, { SVGProps, useCallback, useState } from 'react'
 import cls from './ImageCropContent.module.scss'
 import Cropper from 'react-easy-crop'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import ExpandScale from '../../../../public/assets/icons/expand-scale.svg'
 // import ImageIcon24 from '../../../../public/assets/icons/img-icon24.svg'
 import SquareIcon from '../../../../public/assets/icons/rectangle-square.svg'

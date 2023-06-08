@@ -1,17 +1,23 @@
 @import '../../../styles/mixins';
 
 .commentBlock {
-    @include flexCenter;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     margin: 20px 0;
 
     .userAvatar {
-        width: 58px;
-        border-radius: 50%;
-        overflow: hidden;
+        //width: 58px;
+
+        img {
+            //border-radius: 50%;
+            //overflow: hidden;
+        }
     }
 
     .commentItems {
         margin-left: 20px;
+        width: 100%;
 
         .comment {
             width: 85%;
@@ -20,7 +26,6 @@
                 font-size: 14px;
                 opacity: 0.8;
             }
-
             .commentUserName {
 
             }
@@ -34,7 +39,6 @@
             .commentDate, .answerButton, .commentLikeCount {
                 margin-right: 10px;
             }
-
             .answerButton {
                 cursor: pointer;
             }

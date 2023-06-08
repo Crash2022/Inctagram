@@ -1,3 +1,4 @@
+import React from 'react'
 import cls from './PostContent.module.scss'
 import Image from 'next/image'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
@@ -12,15 +13,25 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Comment } from '@/components/PostModal/Comment/Comment'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
+import { useDeletePostMutation } from '@/services/UserPostsService'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { PostType } from '@/models/posts-types'
+import { formatDate } from '@/shared/utils/formatDate'
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
+import { setPostId } from '@/store/slices/postSlice'
 
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
+    setOpenPostModal: (value: boolean) => void
+    post: PostType
 }
-export const PostContent = ({ setUpdate }: PostContentProps) => {
+export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentProps) => {
     const { t } = useTranslation('post-modal')
+    const dispatch = useAppDispatch()
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
+    const [deletePost, { isLoading: deleteIsLoading }] = useDeletePostMutation()
 
     const menuItems = [
         {
@@ -36,23 +47,36 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
             icon: TrashIcon,
             title: 'DeletePost',
             func: () => {
-                alert('Delete Post')
+                deletePost(post.id).then((res) => {
+                    setOpenPostModal(false)
+                })
+                dispatch(setPostId({ postId: null }))
             }
         }
     ]
 
     const {
         control,
-        handleSubmit,
         formState: { errors }
     } = useForm<any>({
         defaultValues: {}
     })
 
+    if (deleteIsLoading) return <LoaderScreen variant={'circle'} />
+    if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
+
     return (
         <>
             <div className={cls.postModal_mainBox}>
-                <div className={cls.postModal_image}></div>
+                <div className={cls.postModal_image}>
+                    <Image
+                        src={post?.images[0].url}
+                        alt={'post-photo'}
+                        width={573}
+                        height={573}
+                        priority
+                    />
+                </div>
                 <div className={cls.postModal_items}>
                     <div className={cls.header}>
                         <div className={cls.headerTitle}>
@@ -84,33 +108,11 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
                                     ? DefaultProfileAvatar
                                     : profileData.avatars[0].url
                             }
-                            userName={'test user Name'}
-                            text={
-                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
-                            }
-                            date={'2 hours age'}
+                            userName={profileData.userName}
+                            text={post.description}
+                            date={formatDate(post.createdAt)}
                             likeButton={false}
                             likeCount={0}
-                        />
-                        <Comment
-                            avatar={DefaultProfileAvatar}
-                            userName={'test user Name'}
-                            text={
-                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
-                            }
-                            date={'2 hours age'}
-                            likeButton={true}
-                            likeCount={3}
-                        />
-                        <Comment
-                            avatar={DefaultProfileAvatar}
-                            userName={'test user Name'}
-                            text={
-                                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, perferendis.'
-                            }
-                            date={'2 hours age'}
-                            likeButton={false}
-                            likeCount={4}
                         />
                     </div>
                     <div className={cls.likesBlock}>
@@ -160,10 +162,10 @@ export const PostContent = ({ setUpdate }: PostContentProps) => {
                                 </div>
                                 <span className={cls.likesCount}>2243 {t('Likes')}</span>
                             </div>
-                            <div className={cls.postDate}>July 3, 2021</div>
+                            <div className={cls.postDate}>{formatDate(post.createdAt)}</div>
                         </div>
                     </div>
-                    <form className={cls.addComentBlock}>
+                    <form className={cls.addCommentBlock}>
                         <div className={cls.input}>
                             <ControlledInput
                                 name={'add-comment'}

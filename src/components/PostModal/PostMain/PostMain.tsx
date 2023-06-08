@@ -1,13 +1,25 @@
 import { PostUpdate } from '@/components/PostModal/PostMain/PostUpdate/PostUpdate'
 import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useGetUserPostByIdQuery } from '@/services/UserPostsService'
+import { useAppSelector } from '@/shared/hooks/useAppSelector'
+import { selectorPostId } from '@/store/selectors'
+import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
-export const PostMain = () => {
+interface PostMainProps {
+    setOpenPostModal: (value: boolean) => void
+}
+
+export const PostMain = ({ setOpenPostModal }: PostMainProps) => {
+    const postId = useAppSelector(selectorPostId)
     const [update, setUpdate] = useState<boolean>(false)
+    const { data: post, error, isLoading: postIsLoading, isError } = useGetUserPostByIdQuery(postId)
+
+    if (postIsLoading) return <LoaderScreen variant={'circle'} />
 
     if (update) {
-        return <PostUpdate setUpdate={setUpdate} />
+        return <PostUpdate setUpdate={setUpdate} post={post} />
     } else {
-        return <PostContent setUpdate={setUpdate} />
+        return <PostContent setUpdate={setUpdate} setOpenPostModal={setOpenPostModal} post={post} />
     }
 }

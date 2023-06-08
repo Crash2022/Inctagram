@@ -3,7 +3,7 @@ import cls from './AddPostContent.module.scss'
 import ImageIcon from '../../../../public/assets/icons/img-icon.svg'
 import Image from 'next/image'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 
 interface AddPostContentProps {

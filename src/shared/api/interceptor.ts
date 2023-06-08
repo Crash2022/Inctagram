@@ -4,10 +4,12 @@ import {
     fetchBaseQuery,
     FetchBaseQueryError
 } from '@reduxjs/toolkit/dist/query/react'
-import { baseURL } from '@/shared/api/baseURL'
 import { serviceAuthAPI } from '@/services/AuthService'
 
-const baseQuery = fetchBaseQuery({ baseUrl: baseURL, credentials: 'include' })
+const baseQuery = fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    credentials: 'include'
+})
 export const baseQueryWithReauth: BaseQueryFn<
     string | FetchArgs,
     unknown,

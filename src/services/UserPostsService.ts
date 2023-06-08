@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { baseURL } from '@/shared/api/baseURL'
 import { GetPostsResponse, PostType, UploadPostImage, CreatePost } from '@/models/posts-types'
 
 export const userPostsAPI = createApi({
     reducerPath: 'userPostsAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: baseURL,
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
         prepareHeaders: (headers) => {
             headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
             return headers
@@ -57,9 +56,9 @@ export const userPostsAPI = createApi({
         }),
         updatePost: build.mutation<any, { description: string; postId: number }>({
             query: (payload: { description: string; postId: number }) => ({
-                url: `/user/posts/${payload.postId}`,
+                url: `/posts/${payload.postId}`,
                 method: 'PUT',
-                body: payload.description
+                body: { description: payload.description }
             }),
             invalidatesTags: ['UserPosts']
         })

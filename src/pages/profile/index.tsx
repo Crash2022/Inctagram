@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from 'react'
 import Head from 'next/head'
 import cls from './Profile.module.scss'
 import Image from 'next/image'
@@ -10,13 +11,13 @@ import { ButtonLink } from '@/shared/ui/ButtonLink/ButtonLink'
 import { InctagramPath } from '@/shared/api/path'
 import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import React, { useState } from 'react'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
-import { PostContent } from '@/components/PostModal/PostMain/PostContent/PostContent'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 import { useGetUserPostsQuery } from '@/services/UserPostsService'
-import { GetPostsResponse, PostType } from '@/models/posts-types'
-import { profileApi } from '@/shared/api/profile-api'
+import { PostType } from '@/models/posts-types'
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
+import { setPostId } from '@/store/slices/postSlice'
+// import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
 
 // пример LazyLoading
@@ -73,12 +74,13 @@ import { profileApi } from '@/shared/api/profile-api'
 //     }
 // }
 
-interface ProfileProps {
-    posts: GetPostsResponse
-}
+// interface ProfileProps {
+//     posts: GetPostsResponse
+// }
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
+    const dispatch = useAppDispatch()
 
     // const { posts } = props
     const { data: meData } = useMeQuery()
@@ -92,21 +94,28 @@ const Profile: NextPageWithLayout = () => {
 
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 
+    const togglePostModal = useCallback(
+        (postId: number) => () => {
+            setOpenPostModal(!openPostModal)
+            dispatch(setPostId({ postId }))
+        },
+        []
+    )
+
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
     if (postsIsLoading) return <LoaderScreen variant={'circle'} />
 
-    console.log(posts)
-
     return (
         <>
-            <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
-                <PostMain />
-            </PostBasicModal>
-
             <Head>
                 <title>Inctagram Index</title>
                 <meta name='title' content='Profile Home' />
             </Head>
+
+            <PostBasicModal open={openPostModal} setOpen={setOpenPostModal}>
+                <PostMain setOpenPostModal={setOpenPostModal} />
+            </PostBasicModal>
+
             <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
                     <div className={cls.header_photo}>
@@ -143,7 +152,7 @@ const Profile: NextPageWithLayout = () => {
                                 <div>{t('Subscribers')}</div>
                             </div>
                             <div className={cls.numbers_item}>
-                                <div>2218</div>
+                                <div>{posts?.items.length}</div>
                                 <div>{t('Publications')}</div>
                             </div>
                         </div>
@@ -151,6 +160,9 @@ const Profile: NextPageWithLayout = () => {
                     </div>
                 </div>
                 <div className={cls.profilePage_content}>
+                    {posts?.items.length === 0 && (
+                        <div className={cls.list_noItems}>{t('NoPosts')}</div>
+                    )}
                     <div className={cls.content_list}>
                         {posts?.items.map((post: PostType) => {
                             return (
@@ -161,9 +173,7 @@ const Profile: NextPageWithLayout = () => {
                                         width={265}
                                         height={265}
                                         priority
-                                        onClick={() => {
-                                            setOpenPostModal(true)
-                                        }}
+                                        onClick={togglePostModal(post.id)}
                                     />
                                 </div>
                             )
