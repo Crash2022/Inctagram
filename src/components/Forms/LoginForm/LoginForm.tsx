@@ -18,6 +18,7 @@ import * as yup from 'yup'
 import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import {LoginSchema} from "@/shared/utils/validationSchemas";
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -26,10 +27,11 @@ export const LoginForm = () => {
     const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
     const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
 
-    const LoginSchema = yup.object().shape({
+ /*    const LoginSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
         password: yup.string().required(t('Err_Yup_Required'))
-    })
+    }) */
+    const schema = LoginSchema(t)
 
     const {
         control,
@@ -40,7 +42,7 @@ export const LoginForm = () => {
             email: '',
             password: ''
         },
-        resolver: yupResolver(LoginSchema)
+        resolver: yupResolver(schema)
     })
 
     const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {

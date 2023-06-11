@@ -17,6 +17,7 @@ import clsx from 'clsx'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import {ForgotSchema} from "@/shared/utils/validationSchemas";
 // import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 
 export const ForgotPasswordForm = () => {
@@ -28,10 +29,12 @@ export const ForgotPasswordForm = () => {
     const [open, setOpen] = useState<boolean>(false)
     const [isRobot, setIsRobot] = useState<boolean>(false)
 
-    const ForgotSchema = yup.object().shape({
+   /*  const ForgotSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email'))
         // recaptcha: yup.boolean().oneOf([true], t('Robot'))
-    })
+    }) */
+
+    const schema = ForgotSchema(t)
 
     const {
         control,
@@ -43,7 +46,7 @@ export const ForgotPasswordForm = () => {
             email: '',
             recaptcha: ''
         },
-        resolver: yupResolver(ForgotSchema)
+        resolver: yupResolver(schema)
     })
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {

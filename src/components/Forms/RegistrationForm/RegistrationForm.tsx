@@ -19,6 +19,7 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import {SignUpSchema} from "@/shared/utils/validationSchemas";
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
@@ -26,7 +27,7 @@ export const RegistrationForm = () => {
     const [open, setOpen] = useState<boolean>(false)
     const [registration, { isSuccess, error, isError, isLoading }] = useRegistrationMutation()
 
-    const SignUpSchema = yup.object().shape({
+/*     const SignUpSchema = yup.object().shape({
         userName: yup
             .string()
             .required(t('Err_Yup_Required'))
@@ -42,7 +43,8 @@ export const RegistrationForm = () => {
             .string()
             .required(t('Err_Yup_Required'))
             .oneOf([yup.ref('password'), null], t('Err_Yup_FieldMatch'))
-    })
+    }) */
+    const schema = SignUpSchema(t)
 
     const {
         control,
@@ -55,7 +57,7 @@ export const RegistrationForm = () => {
             password: '',
             confirmPassword: ''
         },
-        resolver: yupResolver(SignUpSchema)
+        resolver: yupResolver(schema)
     })
 
     const onSubmit: SubmitHandler<RegistrationPayloadType> = async (

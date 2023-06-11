@@ -29,7 +29,7 @@ export const General = () => {
     const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
-    const { data: profileData, isLoading } = useGetProfileDataQuery()
+    const { data: profileData, isLoading } = useGetProfileDataQuery(null)
     const [
         setProfileData,
         { data: setProfileDataResponse, isError: isSetError, isLoading: setProfileIsLoading }
@@ -49,14 +49,15 @@ export const General = () => {
     ] = useDeleteAvatarMutation()
 
     const ProfileGeneralSchema = yup.object().shape({
-        userName: yup.string().min(6, t('Err_Yup_Min_Name')).max(30, t('Err_Yup_Max_Name')),
+        userName: yup.string().min(6, t('Err_Yup_Min_Name') || 'Min name length is 6').max(30, t('Err_Yup_Max_Name') || 'Max name length is 30'),
         aboutMe: yup
             .string()
-            .max(200, t('Err_Yup_Max_AboutMe'))
-            .required(t('Err_Yup_Required'))
-            .trim(t('Err_Yup_Trim_AboutMe'))
+            .max(200, t('Err_Yup_Max_AboutMe') ?? 'Max about me length is 200')
+            .required(t('Err_Yup_Required') ?? 'About me is required')
+            .trim(t('Err_Yup_Trim_AboutMe') ?? 'About me should not start or end with spaces')
             .strict(true)
     })
+
 
     const {
         control,
@@ -256,7 +257,7 @@ export const General = () => {
                         control={control}
                         error={errors.aboutMe?.message}
                     />
-                    <div className={cls.textarea_length}>{watch('aboutMe').length} / 200</div>
+                    <div className={cls.textarea_length}>{watch('aboutMe')?.length || 0} / 200</div> {/* if watch('aboutMe') is not null or undefined, give me its length. Otherwise, return 0 */}
                 </div>
             </div>
 
