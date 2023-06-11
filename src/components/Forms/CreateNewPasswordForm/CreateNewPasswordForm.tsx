@@ -1,20 +1,21 @@
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
-import { Title } from '@/components/Forms/Title/Title'
-import { Button } from '@/shared/ui/Button/Button'
-import React, { useEffect, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useTranslation } from 'next-i18next'
-import { useNewPasswordMutation } from '@/services/AuthService'
-import * as yup from 'yup'
-import { useRouter } from 'next/router'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { MessageModal } from '@/components/MessageModal/MessageModal'
-import { InctagramPath } from '@/shared/api/path'
-import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
-import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import {Title} from '@/components/Forms/Title/Title'
+import {Button} from '@/shared/ui/Button/Button'
+import React, {useEffect, useState} from 'react'
+import {SubmitHandler, useForm} from 'react-hook-form'
+import {useTranslation} from 'next-i18next'
+import {useNewPasswordMutation} from '@/services/AuthService'
+import {useRouter} from 'next/router'
+import {yupResolver} from '@hookform/resolvers/yup'
+import {MessageModal} from '@/components/MessageModal/MessageModal'
+import {InctagramPath} from '@/shared/api/path'
+import {useErrorSnackbar} from '@/shared/hooks/useErrorSnackbar'
+import {ControlledInput} from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
-import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import {LoaderScreen} from '@/shared/ui/Loader/LoaderScreen'
+import {FormWrapper} from '@/components/Forms/FormWrapper/FormWrapper'
+import {NewPasswordSchema} from "@/shared/utils/validationSchemas";
+import {handleFormErrors} from "@/shared/utils/errorHandler";
 // import { useTranslation } from 'next-i18next'
 
 export const CreateNewPasswordForm = () => {
@@ -24,14 +25,8 @@ export const CreateNewPasswordForm = () => {
     const [newPassword, { isSuccess, error, isError, isLoading }] = useNewPasswordMutation()
     const [open, setOpen] = useState<boolean>(false)
 
-    const NewPasswordSchema = yup.object().shape({
-        newPassword: yup
-            .string()
-            .required(t('Err_Yup_Required'))
-            .min(6, t('Err_Yup_Min'))
-            .max(20, t('Err_Yup_Max_Password')),
-        confirmPassword: yup.string().oneOf([yup.ref('newPassword'), null], t('Err_Yup_FieldMatch'))
-    })
+
+    const schema = NewPasswordSchema(t)
 
     const {
         control,
@@ -42,9 +37,9 @@ export const CreateNewPasswordForm = () => {
             newPassword: '',
             confirmPassword: ''
         },
-        resolver: yupResolver(NewPasswordSchema)
+        resolver: yupResolver(schema)
     })
-
+    const errorMessages = handleFormErrors(errors, t);
     const onSubmit: SubmitHandler<any> = async (data: any) => {
         console.log('submit recovery', data)
         data.recoveryCode = code
@@ -87,7 +82,7 @@ export const CreateNewPasswordForm = () => {
                         type={'password'}
                         placeholder={t('Password')}
                         control={control}
-                        error={errors.newPassword?.message}
+                        error={errorMessages.newPassword}
                     />
                     <ControlledInput
                         password
@@ -96,7 +91,7 @@ export const CreateNewPasswordForm = () => {
                         type={'password'}
                         placeholder={t('ConfirmPassword')}
                         control={control}
-                        error={errors.confirmPassword?.message}
+                        error={errorMessages.confirmPassword}
                     />
                     <p>{t('PasswordLength')}</p>
                 </div>

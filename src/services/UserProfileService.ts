@@ -12,7 +12,7 @@ export const userProfileAPI = createApi({
     }),
     tagTypes: ['ProfileData'],
     endpoints: (build) => ({
-        getProfileData: build.query<UserProfile, any>({
+        getProfileData: build.query<UserProfile, null>({
             query: () => ({
                 url: '/users/profile'
             }),

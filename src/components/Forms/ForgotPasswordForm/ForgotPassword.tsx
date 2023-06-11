@@ -1,22 +1,23 @@
-import React, { useRef, useState } from 'react'
+import React, {useRef, useState} from 'react'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
-import { Title } from '@/components/Forms/Title/Title'
+import {Title} from '@/components/Forms/Title/Title'
 import Link from 'next/link'
-import { Button } from '@/shared/ui/Button/Button'
-import { useTranslation } from 'next-i18next'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { PasswordRecoveryType } from '@/models/auth-types'
-import { InctagramPath } from '@/shared/api/path'
-import { useForgotPasswordMutation } from '@/services/AuthService'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { MessageModal } from '@/components/MessageModal/MessageModal'
-import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
-import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
+import {Button} from '@/shared/ui/Button/Button'
+import {useTranslation} from 'next-i18next'
+import {SubmitHandler, useForm} from 'react-hook-form'
+import {PasswordRecoveryType} from '@/models/auth-types'
+import {InctagramPath} from '@/shared/api/path'
+import {useForgotPasswordMutation} from '@/services/AuthService'
+import {yupResolver} from '@hookform/resolvers/yup'
+import {MessageModal} from '@/components/MessageModal/MessageModal'
+import {useErrorSnackbar} from '@/shared/hooks/useErrorSnackbar'
+import {ControlledInput} from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
-import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import {FormWrapper} from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import {LoaderScreen} from '@/shared/ui/Loader/LoaderScreen'
+import {ForgotSchema} from "@/shared/utils/validationSchemas";
+import {handleFormErrors} from "@/shared/utils/errorHandler";
 // import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 
 export const ForgotPasswordForm = () => {
@@ -28,10 +29,13 @@ export const ForgotPasswordForm = () => {
     const [open, setOpen] = useState<boolean>(false)
     const [isRobot, setIsRobot] = useState<boolean>(false)
 
-    const ForgotSchema = yup.object().shape({
+   /*  const ForgotSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email'))
         // recaptcha: yup.boolean().oneOf([true], t('Robot'))
-    })
+    }) */
+
+    const schema = ForgotSchema(t)
+
 
     const {
         control,
@@ -43,9 +47,9 @@ export const ForgotPasswordForm = () => {
             email: '',
             recaptcha: ''
         },
-        resolver: yupResolver(ForgotSchema)
+        resolver: yupResolver(schema)
     })
-
+    const errorMessages = handleFormErrors(errors, t);
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
         console.log('submit forgot', data)
         localStorage.setItem('email', control._getWatch('email'))
@@ -95,7 +99,7 @@ export const ForgotPasswordForm = () => {
                         name={'email'}
                         placeholder={t('Email')}
                         control={control}
-                        error={errors.email?.message}
+                        error={errorMessages.email}
                     />
                     <p>{t('EnterEmail')}</p>
                 </div>

@@ -18,6 +18,8 @@ import * as yup from 'yup'
 import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import {LoginSchema} from "@/shared/utils/validationSchemas";
+import {handleFormErrors} from "@/shared/utils/errorHandler";
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -26,10 +28,11 @@ export const LoginForm = () => {
     const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
     const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
 
-    const LoginSchema = yup.object().shape({
+ /*    const LoginSchema = yup.object().shape({
         email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
         password: yup.string().required(t('Err_Yup_Required'))
-    })
+    }) */
+    const schema = LoginSchema(t)
 
     const {
         control,
@@ -40,9 +43,9 @@ export const LoginForm = () => {
             email: '',
             password: ''
         },
-        resolver: yupResolver(LoginSchema)
+        resolver: yupResolver(schema)
     })
-
+    const errorMessages = handleFormErrors(errors, t);
     const onSubmit: SubmitHandler<LoginPayloadType> = async (submitData: LoginPayloadType) => {
         console.log('submit login', submitData)
 
@@ -76,7 +79,7 @@ export const LoginForm = () => {
                         name={'email'}
                         placeholder={t('Email')}
                         control={control}
-                        error={errors.email?.message}
+                        error={errorMessages.email}
                     />
                     <ControlledInput
                         id={'Login_Password'}
@@ -85,7 +88,7 @@ export const LoginForm = () => {
                         password
                         placeholder={t('Password')}
                         control={control}
-                        error={errors.password?.message}
+                        error={errorMessages.password}
                     />
                 </div>
 
