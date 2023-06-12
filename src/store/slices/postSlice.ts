@@ -17,7 +17,8 @@ export const postSlice = createSlice({
     initialState,
     reducers: {
         setPhotoToPost: (state, action: PayloadAction<{ photo: string }>) => {
-            state.photos = action.payload.photo
+            // state.photos = action.payload.photo
+            state.photos.push(action.payload.photo)
         },
         setPostId: (state, action: PayloadAction<{ postId: number }>) => {
             state.postId = action.payload.postId
