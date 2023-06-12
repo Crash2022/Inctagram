@@ -16,7 +16,7 @@ const initialState: AuthStateType = {
     isEmailSent: false
 }
 
-const authSlice = createSlice<any, any>({
+const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {},

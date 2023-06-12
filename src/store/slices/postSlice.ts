@@ -12,7 +12,7 @@ const initialState: PostStateType = {
     postId: null
 }
 
-export const postSlice = createSlice<any, any>({
+export const postSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {

@@ -14,11 +14,11 @@ const initialState: AppStateType = {
     error: 'default'
 }
 
-export const appSlice = createSlice<any, any>({
+export const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
-        setAppStatus: (state, action: PayloadAction<{ isLoading: boolean }>) => {
+        setAppStatus: (state: AppStateType, action: PayloadAction<{ isLoading: boolean }>) => {
             state.isLoading = action.payload.isLoading
         }
     }
