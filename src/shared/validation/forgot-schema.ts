@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { TranslateFn } from '@/models/translate'
+import { TranslateFn } from '@/models/translate-type'
 
 export const ForgotSchema = (t: TranslateFn) => {
     return yup.object().shape({
