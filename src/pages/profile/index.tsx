@@ -78,6 +78,8 @@ import { setPostId } from '@/store/slices/postSlice'
 //     posts: GetPostsResponse
 // }
 
+// commit for cookies
+
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
     const dispatch = useAppDispatch()
