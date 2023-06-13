@@ -87,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 //     posts: GetPostsResponse
 // }
 
-// commit for cookies
+// commit for cookies v2
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
