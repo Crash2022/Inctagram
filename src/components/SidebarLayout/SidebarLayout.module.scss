@@ -10,16 +10,15 @@
 
     nav {
         width: 220px;
+        height: var(--default-Content-Height);
         padding-top: 72px;
         padding-left: var(--default-sidedar-padding);
         padding-right: var(--default-sidedar-padding);
         border-right: 1px solid var(--snippet-border);
 
         .menuList {
-            //height: calc(1080px - var(--navbar-height));
             display: flex;
             flex-direction: column;
-            //justify-content: space-between;
 
             .menuList_top {
                 margin-bottom: 110px;
