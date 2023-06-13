@@ -22,6 +22,7 @@ import { profileApi } from '@/shared/api/profile-api'
 import { serialize } from 'cookie'
 import { GetServerSideProps } from 'next'
 import { useCookies } from 'react-cookie'
+import axios from 'axios'
 
 // пример LazyLoading
 // const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
@@ -55,15 +56,16 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
     // const profile = await profileApi.getUserProfileData()
     // const posts = await profileApi.getUserProfilePosts(profile.id)
-    const posts = await profileApi.getUserProfilePosts(98)
+    // const posts = await profileApi.getUserProfilePosts(98)
+    const posts: any = await axios.get(`/posts/${98}`, {}).then((res) => res.data)
 
-    // console.log(posts, 'backend posts')
+    console.log(posts, 'backend posts')
 
-    if (!posts) {
-        return {
-            notFound: true
-        }
-    }
+    // if (!posts) {
+    //     return {
+    //         notFound: true
+    //     }
+    // }
 
     // данные из стора можно достать с помощью wrapper.useWrappedStore
     // чтобы не было "морганий" страницы, если роут защищён
