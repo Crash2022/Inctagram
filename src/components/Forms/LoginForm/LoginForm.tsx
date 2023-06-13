@@ -25,7 +25,6 @@ export const LoginForm = () => {
     const router = useRouter()
 
     const [cookies, setCookie] = useCookies()
-    console.log('cookies', cookies)
 
     const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
     const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()

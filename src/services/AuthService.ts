@@ -49,10 +49,10 @@ export const serviceAuthAPI = createApi({
         }),
         me: build.query<MeResponseType, any>({
             query: () => ({
-                url: '/auth/me',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
+                url: '/auth/me'
+                // headers: {
+                //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                // }
             })
         }),
         forgotPassword: build.mutation<any, PasswordRecoveryType>({

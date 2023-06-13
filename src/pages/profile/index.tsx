@@ -83,28 +83,24 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     }
 }
 
-// interface ProfileProps {
-//     posts: GetPostsResponse
-// }
+interface ProfileProps {
+    posts: GetPostsResponse
+}
 
-// commit for cookies v2
-
-const Profile: NextPageWithLayout = () => {
+const Profile: NextPageWithLayout = (props: ProfileProps) => {
     const { t } = useTranslation('profile-home')
     const dispatch = useAppDispatch()
 
-    const [cookies, setCookie] = useCookies()
-    console.log('cookies', cookies)
+    const { posts } = props
 
-    // const { posts } = props
     const { data: meData } = useMeQuery()
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
-    const {
-        data: posts,
-        error,
-        isLoading: postsIsLoading,
-        isError
-    } = useGetUserPostsQuery(profileData?.id)
+    // const {
+    //     data: posts,
+    //     error,
+    //     isLoading: postsIsLoading,
+    //     isError
+    // } = useGetUserPostsQuery(profileData?.id)
 
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 
@@ -113,7 +109,7 @@ const Profile: NextPageWithLayout = () => {
             setOpenPostModal(!openPostModal)
             dispatch(setPostId({ postId }))
         },
-        []
+        [dispatch, openPostModal]
     )
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
