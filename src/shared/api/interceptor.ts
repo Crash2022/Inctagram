@@ -22,7 +22,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         // try to get a new token
         const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
 
-        const [cookies, setCookie, removeCookie] = useCookies()
+        const [cookies, setCookie] = useCookies()
 
         if (refreshResult.data.accessToken) {
             // if (refreshResult.data) {

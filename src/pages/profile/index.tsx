@@ -21,6 +21,7 @@ import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
 import { serialize } from 'cookie'
 import { GetServerSideProps } from 'next'
+import { useCookies } from 'react-cookie'
 
 // пример LazyLoading
 // const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
@@ -91,6 +92,9 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
     const dispatch = useAppDispatch()
+
+    const [cookies, setCookie] = useCookies()
+    console.log('cookies', cookies)
 
     // const { posts } = props
     const { data: meData } = useMeQuery()
