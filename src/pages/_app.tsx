@@ -12,6 +12,7 @@ import { ni18nConfig } from '../../ni18n.config'
 // import { appWithTranslation } from 'next-i18next'
 import { SnackbarProvider } from 'notistack'
 import AuthRedirect from '@/features/AuthRedirect/AuthRedirect'
+import { CookiesProvider } from 'react-cookie'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -46,9 +47,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
             <Provider store={store}>
                 <AuthRedirect>
                     <SnackbarProvider maxSnack={2}>
-                        {/* <Suspense fallback={<div>...</div>}> */}
-                        {getLayout(<Component {...pageProps} />)}
-                        {/* </Suspense> */}
+                        <CookiesProvider>
+                            {/* <Suspense fallback={<div>...</div>}> */}
+                            {getLayout(<Component {...pageProps} />)}
+                            {/* </Suspense> */}
+                        </CookiesProvider>
                     </SnackbarProvider>
                 </AuthRedirect>
             </Provider>

@@ -1,12 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { UpdateUserProfile, UserProfile } from '@/models/profile-types'
+// import { cookies } from 'next/headers'
+import { useCookies } from 'react-cookie'
 
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
         prepareHeaders: (headers) => {
-            headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
+            const [cookies, setCookie] = useCookies()
+            // headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
+            headers.set('Authorization', `Bearer ${cookies.get('accessToken')}`)
             return headers
         }
     }),

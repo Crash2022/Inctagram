@@ -21,10 +21,13 @@ import { ImageCropContent } from '@/components/AddPost/ImageCropContent/ImageCro
 import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/ImageFiltersContent'
 import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
 import { useAddPost } from '@/shared/hooks/useAddPost'
+import { useCookies } from 'react-cookie'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
     const router = useRouter()
+
+    const [cookies, setCookie, removeCookie] = useCookies()
 
     const [logout, { isSuccess, isLoading }] = useLogoutMutation()
 
@@ -294,7 +297,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                     logout().then((res) => {
                                         console.log(res)
                                     })
-                                    localStorage.removeItem('accessToken')
+                                    // localStorage.removeItem('accessToken')
+                                    removeCookie('accessToken', { path: '/' })
                                     void router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >

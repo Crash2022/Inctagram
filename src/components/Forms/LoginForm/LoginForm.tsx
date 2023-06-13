@@ -18,10 +18,13 @@ import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { LoginSchema } from '@/shared/validation/login-schema'
+import { useCookies } from 'react-cookie'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
     const router = useRouter()
+
+    const [cookies, setCookie] = useCookies()
 
     const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
     const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
@@ -44,7 +47,8 @@ export const LoginForm = () => {
         try {
             const res = await login(submitData)
             console.log('login response', res)
-            localStorage.setItem('accessToken', res.data.accessToken)
+            // localStorage.setItem('accessToken', res.data.accessToken)
+            setCookie('accessToken', res.data.accessToken, { path: '/' })
             await refetchMeData()
             await router.push(InctagramPath.PROFILE.PROFILE)
         } catch (error: any) {

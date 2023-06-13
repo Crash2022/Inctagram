@@ -14,11 +14,13 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 import { useGetUserPostsQuery } from '@/services/UserPostsService'
-import { PostType } from '@/models/posts-types'
+import { GetPostsResponse, PostType } from '@/models/posts-types'
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
 import { setPostId } from '@/store/slices/postSlice'
-// import { profileApi } from '@/shared/api/profile-api'
+import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
+import { serialize } from 'cookie'
+import { GetServerSideProps } from 'next'
 
 // пример LazyLoading
 // const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
@@ -40,39 +42,45 @@ import { setPostId } from '@/store/slices/postSlice'
 //     }
 // }
 
-// export const getServerSideProps = async () => {
-//     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
-//     // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
-//
-//     // const profile = await profileApi.getUserProfileData()
-//     // const posts = await profileApi.getUserProfilePosts(profile.id)
-//     const posts = await profileApi.getUserProfilePosts(98)
-//
-//     // console.log(posts, 'backend posts')
-//
-//     if (!posts) {
-//         return {
-//             notFound: true
-//         }
-//     }
-//
-//     // данные из стора можно достать с помощью wrapper.useWrappedStore
-//     // чтобы не было "морганий" страницы, если роут защищён
-//     // if (!me) {
-//     //     return {
-//     //         redirect: {
-//     //             destination: '/login',
-//     //             permanent: false
-//     //         }
-//     //     }
-//     // }
-//
-//     return {
-//         props: {
-//             posts
-//         }
-//     }
-// }
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+    // const cookie = serialize('ssr-cookie', 'ssr-cookie-value', {
+    //     httpOnly: true,
+    //     path: '/'
+    // })
+    // res.setHeader('Set-Cookie', cookie)
+
+    // перезапрос данных через указанное время stale-while-revalidate (в секундах)
+    // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
+
+    // const profile = await profileApi.getUserProfileData()
+    // const posts = await profileApi.getUserProfilePosts(profile.id)
+    const posts = await profileApi.getUserProfilePosts(98)
+
+    // console.log(posts, 'backend posts')
+
+    if (!posts) {
+        return {
+            notFound: true
+        }
+    }
+
+    // данные из стора можно достать с помощью wrapper.useWrappedStore
+    // чтобы не было "морганий" страницы, если роут защищён
+    // if (!me) {
+    //     return {
+    //         redirect: {
+    //             destination: '/login',
+    //             permanent: false
+    //         }
+    //     }
+    // }
+
+    return {
+        props: {
+            posts
+        }
+    }
+}
 
 // interface ProfileProps {
 //     posts: GetPostsResponse
@@ -105,7 +113,7 @@ const Profile: NextPageWithLayout = () => {
     )
 
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
-    if (postsIsLoading) return <LoaderScreen variant={'circle'} />
+    // if (postsIsLoading) return <LoaderScreen variant={'circle'} />
 
     return (
         <>
