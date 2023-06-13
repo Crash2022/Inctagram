@@ -1,17 +1,13 @@
 import axios from 'axios'
+import { Cookies } from 'react-cookie'
 // import { useCookies } from 'react-cookie'
 // import { cookies } from 'next/headers'
-import { Cookies } from 'react-cookie'
 
 export const instance = axios.create({
     baseURL: process.env.NEXT_APP_BASE_URL,
     withCredentials: true
     // headers: {
     //     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-    // }
-
-    // headers: {
-    //     Authorization: `Bearer process.env.ACCESS_TOKEN`
     // }
 
     // headers: {
@@ -41,13 +37,3 @@ instance.interceptors.request.use(
         return await Promise.reject(error)
     }
 )
-
-// instance.interceptors.request.use(
-//     (config) => {
-//         config.headers.Authorization = process.env.ACCESS_TOKEN
-//         return config
-//     },
-//     async (error: any) => {
-//         return await Promise.reject(error)
-//     }
-// )

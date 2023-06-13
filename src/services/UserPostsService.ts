@@ -14,9 +14,9 @@ export const userPostsAPI = createApi({
             // const [cookies, setCookie] = useCookies()
             // headers.set('Authorization', `Bearer ${cookies.get('accessToken')}`)
 
-            // const cookies = new Cookies()
-            // const accessToken = cookies.get('accessToken')
-            // headers.set('Authorization', `Bearer ${accessToken}`)
+            const cookies = new Cookies()
+            const accessToken = cookies.get('accessToken')
+            headers.set('Authorization', `Bearer ${accessToken}`)
 
             return headers
         }

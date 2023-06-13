@@ -30,7 +30,6 @@ export const baseQueryWithReauth: BaseQueryFn<
         // const accessToken = cookies.get('accessToken')
 
         if (refreshResult.data.accessToken) {
-            // if (refreshResult.data) {
             // store the new token
             // api.dispatch(tokenReceived(refreshResult.data))
 
