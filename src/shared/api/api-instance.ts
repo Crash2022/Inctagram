@@ -26,21 +26,21 @@ export const instance = axios.create({
     // }
 })
 
-// instance.interceptors.request.use(
-//     (config) => {
-//         // config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
-//
-//         const cookies = new Cookies()
-//         const accessToken = cookies.get('accessToken')
-//         if (accessToken) {
-//             config.headers.Authorization = `Bearer ${accessToken}`
-//         }
-//         return config
-//     },
-//     async (error: any) => {
-//         return await Promise.reject(error)
-//     }
-// )
+instance.interceptors.request.use(
+    (config) => {
+        // config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+
+        const cookies = new Cookies()
+        const accessToken = cookies.get('accessToken')
+        if (accessToken) {
+            config.headers.Authorization = `Bearer ${accessToken}`
+        }
+        return config
+    },
+    async (error: any) => {
+        return await Promise.reject(error)
+    }
+)
 
 // instance.interceptors.request.use(
 //     (config) => {
