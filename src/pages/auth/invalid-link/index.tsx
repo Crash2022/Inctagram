@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { getHeaderLayout } from '@/components/HeaderLayout/HeaderLayout'
 import { ConfirmEmailBox } from '@/components/ConfirmEmailBox/ConfirmEmailBox'
 import waitEmailLink from '../../../../public/assets/images/waitEmailLink.png'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { useRegistrationResendLinkMutation } from '@/services/AuthService'
 
 const InvalidLink = () => {

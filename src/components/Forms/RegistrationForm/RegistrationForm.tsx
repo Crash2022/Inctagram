@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
 import GoogleIcon from 'public/assets/icons/googleIcon.svg'
 import GitIcon from 'public/assets/icons/gitIcon.svg'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegistrationMutation } from '@/services/AuthService'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -19,30 +18,13 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
+import { RegistrationSchema } from '@/shared/validation/registration-schema'
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
 
     const [open, setOpen] = useState<boolean>(false)
     const [registration, { isSuccess, error, isError, isLoading }] = useRegistrationMutation()
-
-    const SignUpSchema = yup.object().shape({
-        userName: yup
-            .string()
-            .required(t('Err_Yup_Required'))
-            .min(6, t('Err_Yup_Min'))
-            .max(30, t('Err_Yup_Max_Name')),
-        email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email')),
-        password: yup
-            .string()
-            .required(t('Err_Yup_Required'))
-            .min(6, t('Err_Yup_Min'))
-            .max(20, t('Err_Yup_Max_Password')),
-        confirmPassword: yup
-            .string()
-            .required(t('Err_Yup_Required'))
-            .oneOf([yup.ref('password'), null], t('Err_Yup_FieldMatch'))
-    })
 
     const {
         control,
@@ -55,7 +37,7 @@ export const RegistrationForm = () => {
             password: '',
             confirmPassword: ''
         },
-        resolver: yupResolver(SignUpSchema)
+        resolver: yupResolver(RegistrationSchema(t))
     })
 
     const onSubmit: SubmitHandler<RegistrationPayloadType> = async (

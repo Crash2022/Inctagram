@@ -9,7 +9,6 @@ import { PasswordRecoveryType } from '@/models/auth-types'
 import { InctagramPath } from '@/shared/api/path'
 import { useForgotPasswordMutation } from '@/services/AuthService'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
@@ -17,6 +16,7 @@ import clsx from 'clsx'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
+import { ForgotSchema } from '@/shared/validation/forgot-schema'
 // import CaptchaIcon from 'public/assets/icons/reCaptcha.svg'
 
 export const ForgotPasswordForm = () => {
@@ -28,11 +28,6 @@ export const ForgotPasswordForm = () => {
     const [open, setOpen] = useState<boolean>(false)
     const [isRobot, setIsRobot] = useState<boolean>(false)
 
-    const ForgotSchema = yup.object().shape({
-        email: yup.string().required(t('Err_Yup_Required')).email(t('Err_Yup_Email'))
-        // recaptcha: yup.boolean().oneOf([true], t('Robot'))
-    })
-
     const {
         control,
         handleSubmit,
@@ -43,7 +38,7 @@ export const ForgotPasswordForm = () => {
             email: '',
             recaptcha: ''
         },
-        resolver: yupResolver(ForgotSchema)
+        resolver: yupResolver(ForgotSchema(t))
     })
 
     const onSubmit: SubmitHandler<PasswordRecoveryType> = async (data: PasswordRecoveryType) => {
