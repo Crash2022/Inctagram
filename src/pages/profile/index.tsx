@@ -13,16 +13,13 @@ import { useGetProfileDataQuery } from '@/services/UserProfileService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
-import { useGetUserPostsQuery } from '@/services/UserPostsService'
+// import { useGetUserPostsQuery } from '@/services/UserPostsService'
 import { GetPostsResponse, PostType } from '@/models/posts-types'
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
 import { setPostId } from '@/store/slices/postSlice'
 import { profileApi } from '@/shared/api/profile-api'
 // import dynamic from 'next/dynamic'
-import { serialize } from 'cookie'
 import { GetServerSideProps } from 'next'
-import { useCookies } from 'react-cookie'
-import axios from 'axios'
 
 // пример LazyLoading
 // const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
@@ -45,51 +42,30 @@ import axios from 'axios'
 // }
 
 export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {
-    // const cookie = serialize('ssr-cookie', 'ssr-cookie-value', {
+    // не помню зачем
+    // const cookie = serialize('accessToken', 'ssr-cookie-value', {
     //     httpOnly: true,
     //     path: '/'
     // })
     // res.setHeader('Set-Cookie', cookie)
 
-    const cookies = req.cookies.accessToken
-    console.log('cookies', cookies)
-
     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
     // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
 
-    const profile = await profileApi.getUserProfileData(cookies)
-    const posts = await profileApi.getUserProfilePosts(profile.id)
     // const posts = await profileApi.getUserProfilePosts(98)
-
-    // const postsRes = await fetch(
-    //     `https://inctagram-api-git-main-shuliakleonid.vercel.app/api/posts/${98}`,
-    //     {
-    //         credentials: 'include',
-    //         headers: {
-    //             // Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-    //             Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk4LCJpYXQiOjE2ODY3NjM1OTQsImV4cCI6MTY4Njc2NzE5NH0.Ed2YVw50JDCmPSQ4SYmRheANCtGc8nlb7lri-LA2RVs`
-    //         }
-    //     }
-    // )
-
-    // const posts = await axios
-    //     .get(`https://inctagram-api-git-main-shuliakleonid.vercel.app/api/posts/${98}`, {
-    //         withCredentials: true,
-    //         headers: {
-    //             // Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-    //             Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk4LCJpYXQiOjE2ODY3NjM1OTQsImV4cCI6MTY4Njc2NzE5NH0.Ed2YVw50JDCmPSQ4SYmRheANCtGc8nlb7lri-LA2RVs`
-    //         }
-    //     })
-    //     .then((res) => res.data)
-    // const posts = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-
-    // const posts = await postsRes.json()
-
-    // console.log(posts, 'backend posts')
+    const accessToken = req.cookies.accessToken
+    const profile = await profileApi.getUserProfileData(accessToken)
+    const posts = await profileApi.getUserProfilePosts(profile.id)
 
     if (!posts) {
         return {
             notFound: true
+        }
+    }
+
+    return {
+        props: {
+            posts
         }
     }
 
@@ -103,17 +79,9 @@ export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {
     //         }
     //     }
     // }
-
-    return {
-        props: {
-            // posts: JSON.parse(JSON.stringify(posts))
-            posts
-        }
-    }
 }
 
 interface ProfileProps {
-    // posts: any
     posts: GetPostsResponse
 }
 

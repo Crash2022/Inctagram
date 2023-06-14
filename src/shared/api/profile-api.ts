@@ -4,13 +4,13 @@ import { UserProfile } from '@/models/profile-types'
 import axios from 'axios'
 
 export const profileApi = {
-    getUserProfileData: async (token: string | undefined) => {
+    getUserProfileData: async (accessToken: string | undefined) => {
         return await axios
             .get<UserProfile>('/users/profile', {
                 baseURL: process.env.NEXT_PUBLIC_BASE_URL,
                 withCredentials: true,
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             })
             .then((res) => res.data)

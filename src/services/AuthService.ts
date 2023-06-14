@@ -52,7 +52,6 @@ export const serviceAuthAPI = createApi({
             query: () => {
                 const cookies = new Cookies()
                 const accessToken = cookies.get('accessToken')
-                // headers.set('Authorization', `Bearer ${accessToken}`)
 
                 return {
                     url: '/auth/me',
@@ -61,6 +60,12 @@ export const serviceAuthAPI = createApi({
                     }
                 }
             }
+            // query: () => ({
+            //     url: '/auth/me',
+            //     headers: {
+            //         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            //     }
+            // })
         }),
         forgotPassword: build.mutation<any, PasswordRecoveryType>({
             query: (payload: PasswordRecoveryType) => ({

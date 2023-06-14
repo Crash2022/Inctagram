@@ -12,7 +12,7 @@ import { ni18nConfig } from '../../ni18n.config'
 // import { appWithTranslation } from 'next-i18next'
 import { SnackbarProvider } from 'notistack'
 import AuthRedirect from '@/features/AuthRedirect/AuthRedirect'
-import { Cookies, CookiesProvider } from 'react-cookie'
+// import { Cookies, CookiesProvider } from 'react-cookie'
 
 export const inter = Inter({
     weight: ['300', '400', '500', '600', '700'],
@@ -35,7 +35,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     const { store } = wrapper.useWrappedStore(pageProps)
     // const protectedRoutes = [InctagramPath.PROFILE.PROFILE]
 
-    const cookies = new Cookies()
+    // const cookies = new Cookies()
 
     return (
         <>
@@ -49,11 +49,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
             <Provider store={store}>
                 <AuthRedirect>
                     <SnackbarProvider maxSnack={2}>
-                        <CookiesProvider cookies={cookies}>
-                            {/* <Suspense fallback={<div>...</div>}> */}
-                            {getLayout(<Component {...pageProps} />)}
-                            {/* </Suspense> */}
-                        </CookiesProvider>
+                        {/* <CookiesProvider cookies={cookies}> */}
+                        {/* <Suspense fallback={<div>...</div>}> */}
+                        {getLayout(<Component {...pageProps} />)}
+                        {/* </Suspense> */}
+                        {/* </CookiesProvider> */}
                     </SnackbarProvider>
                 </AuthRedirect>
             </Provider>
