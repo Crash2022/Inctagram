@@ -19,6 +19,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { LoginSchema } from '@/shared/validation/login-schema'
 import { useCookies } from 'react-cookie'
+import { ACCESS_TOKEN } from '@/shared/api/constants'
 
 export const LoginForm = () => {
     const { t } = useTranslation('login')
@@ -48,7 +49,7 @@ export const LoginForm = () => {
             const res = await login(submitData)
             console.log('login response', res)
             // localStorage.setItem('accessToken', res.data.accessToken)
-            setCookie('accessToken', res.data.accessToken, { path: '/' })
+            setCookie(ACCESS_TOKEN, res.data.accessToken, { path: '/' })
             await refetchMeData()
             await router.push(InctagramPath.PROFILE.PROFILE)
         } catch (error: any) {

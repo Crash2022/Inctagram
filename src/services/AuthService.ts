@@ -9,6 +9,7 @@ import {
 } from '@/models/auth-types'
 import { baseQueryWithReauth } from '@/shared/api/interceptor'
 import { Cookies } from 'react-cookie'
+import { ACCESS_TOKEN } from '@/shared/api/constants'
 
 export const serviceAuthAPI = createApi({
     reducerPath: 'serviceAuthAPI',
@@ -51,7 +52,7 @@ export const serviceAuthAPI = createApi({
         me: build.query<MeResponseType, any>({
             query: () => {
                 const cookies = new Cookies()
-                const accessToken = cookies.get('accessToken')
+                const accessToken = cookies.get(ACCESS_TOKEN)
 
                 return {
                     url: '/auth/me',

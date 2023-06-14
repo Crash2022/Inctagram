@@ -22,6 +22,7 @@ import { ImageFiltersContent } from '@/components/AddPost/ImageFiltersContent/Im
 import { PublicationContent } from '@/components/AddPost/PublicationContent/PublicationContent'
 import { useAddPost } from '@/shared/hooks/useAddPost'
 import { useCookies } from 'react-cookie'
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/shared/api/constants'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
     const { t } = useTranslation('sidebar')
@@ -298,8 +299,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                         console.log(res)
                                     })
                                     // localStorage.removeItem('accessToken')
-                                    removeCookie('accessToken', { path: '/' })
-                                    removeCookie('refreshToken', { path: '/' })
+                                    removeCookie(ACCESS_TOKEN, { path: '/' })
+                                    removeCookie(REFRESH_TOKEN, { path: '/' })
                                     void router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >

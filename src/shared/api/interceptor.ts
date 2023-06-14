@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit/dist/query/react'
 import { serviceAuthAPI } from '@/services/AuthService'
 import { Cookies } from 'react-cookie'
+import { ACCESS_TOKEN } from '@/shared/api/constants'
 
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
@@ -30,7 +31,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 
             // localStorage.setItem('accessToken', refreshResult.data.accessToken)
 
-            cookies.set('accessToken', refreshResult.data.accessToken, { path: '/' })
+            cookies.set(ACCESS_TOKEN, refreshResult.data.accessToken, { path: '/' })
 
             await serviceAuthAPI.endpoints.me()
 

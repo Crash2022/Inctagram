@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { UpdateUserProfile, UserProfile } from '@/models/profile-types'
 import { Cookies } from 'react-cookie'
+import { ACCESS_TOKEN } from '@/shared/api/constants'
 
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',
@@ -10,7 +11,7 @@ export const userProfileAPI = createApi({
             // headers.set('Authorization', `Bearer ${localStorage.getItem('accessToken')}`)
 
             const cookies = new Cookies()
-            const accessToken = cookies.get('accessToken')
+            const accessToken = cookies.get(ACCESS_TOKEN)
             headers.set('Authorization', `Bearer ${accessToken}`)
 
             return headers
