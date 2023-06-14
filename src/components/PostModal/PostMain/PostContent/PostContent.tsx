@@ -24,7 +24,7 @@ import { setPostId } from '@/store/slices/postSlice'
 interface PostContentProps {
     setUpdate?: (update: boolean) => void
     setOpenPostModal: (value: boolean) => void
-    post: PostType
+    post: PostType | undefined
 }
 export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentProps) => {
     const { t } = useTranslation('post-modal')

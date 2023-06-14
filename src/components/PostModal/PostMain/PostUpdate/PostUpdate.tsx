@@ -13,15 +13,14 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
 interface PostUpdatedPropsType {
     setUpdate: (update: boolean) => void
-    post: PostType
+    post: PostType | undefined
 }
 export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
     const { t } = useTranslation('post-modal')
 
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
 
-    const [updateProfile, { data: updateProfileData, error, isError, isLoading }] =
-        useUpdatePostMutation()
+    const [updateProfile, { data: updateProfileData, isLoading }] = useUpdatePostMutation()
 
     const [text, setText] = useState<string>(post.description)
 
@@ -68,32 +67,36 @@ export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
                 </div>
                 <div className={cls.updatePostModal_body}>
                     <div className={cls.postModal_image}>
-                        <Image
-                            src={post.images[0].url}
-                            alt={'post-photo'}
-                            width={561}
-                            height={561}
-                            priority
-                        />
+                        {post && (
+                            <Image
+                                src={post.images[0].url}
+                                alt={'post-photo'}
+                                width={561}
+                                height={561}
+                                priority
+                            />
+                        )}
                     </div>
                     <div className={cls.postModal_items}>
                         <div className={cls.header}>
                             <div className={cls.headerTitle}>
                                 <div className={cls.profileData}>
                                     <div className={cls.userAvatar}>
-                                        <Image
-                                            src={
-                                                profileData && profileData.avatars.length === 0
-                                                    ? DefaultProfileAvatar
-                                                    : profileData.avatars[0].url
-                                            }
-                                            alt={'profile-avatar'}
-                                            width={35}
-                                            height={35}
-                                            quality={100}
-                                        />
+                                        {profileData && (
+                                            <Image
+                                                src={
+                                                    profileData.avatars.length === 0
+                                                        ? DefaultProfileAvatar
+                                                        : profileData.avatars[0].url
+                                                }
+                                                alt={'profile-avatar'}
+                                                width={35}
+                                                height={35}
+                                                quality={100}
+                                            />
+                                        )}
                                     </div>
-                                    <div className={cls.userName}>{profileData.userName}</div>
+                                    <div className={cls.userName}>{profileData?.userName}</div>
                                 </div>
                             </div>
                         </div>

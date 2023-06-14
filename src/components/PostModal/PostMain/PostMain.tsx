@@ -13,7 +13,7 @@ interface PostMainProps {
 export const PostMain = ({ setOpenPostModal }: PostMainProps) => {
     const postId = useAppSelector(selectorPostId)
     const [update, setUpdate] = useState<boolean>(false)
-    const { data: post, error, isLoading: postIsLoading, isError } = useGetUserPostByIdQuery(postId)
+    const { data: post, isLoading: postIsLoading } = useGetUserPostByIdQuery(postId)
 
     if (postIsLoading) return <LoaderScreen variant={'circle'} />
 
