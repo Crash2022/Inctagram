@@ -16,9 +16,11 @@ export const baseQueryWithReauth: BaseQueryFn<
     FetchBaseQueryError
 > = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
+
     if (result.error && result.error.status === 401) {
         // try to get a new token
         const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
+
         if (refreshResult.data.accessToken) {
             // if (refreshResult.data) {
             // store the new token

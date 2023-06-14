@@ -46,9 +46,6 @@ import { setPostId } from '@/store/slices/postSlice'
 //
 //     // const profile = await profileApi.getUserProfileData()
 //     // const posts = await profileApi.getUserProfilePosts(profile.id)
-//     const posts = await profileApi.getUserProfilePosts(98)
-//
-//     // console.log(posts, 'backend posts')
 //
 //     if (!posts) {
 //         return {
@@ -118,20 +115,22 @@ const Profile: NextPageWithLayout = () => {
 
             <div className={cls.profilePageHome}>
                 <div className={cls.profilePage_header}>
-                    <div className={cls.header_photo}>
-                        <Image
-                            src={
-                                profileData && profileData.avatars.length === 0
-                                    ? DefaultProfileAvatar
-                                    : profileData?.avatars[0].url
-                            }
-                            // src={DefaultProfileAvatar}
-                            alt={'profile-avatar'}
-                            width={204}
-                            height={204}
-                            quality={100}
-                        />
-                    </div>
+                    {profileData && (
+                        <div className={cls.header_photo}>
+                            <Image
+                                src={
+                                    profileData.avatars.length === 0
+                                        ? DefaultProfileAvatar
+                                        : profileData?.avatars[0].url
+                                }
+                                // src={DefaultProfileAvatar}
+                                alt={'profile-avatar'}
+                                width={204}
+                                height={204}
+                                quality={100}
+                            />
+                        </div>
+                    )}
                     <div className={cls.header_info}>
                         <div className={cls.info_control}>
                             <div>{meData?.userName}</div>

@@ -23,7 +23,7 @@ export const LoginForm = () => {
     const { t } = useTranslation('login')
     const router = useRouter()
 
-    const [login, { data: loginData, error, isError, isLoading }] = useLoginMutation()
+    const [login, { data: loginData, isError, isLoading }] = useLoginMutation()
     const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
 
     const {
