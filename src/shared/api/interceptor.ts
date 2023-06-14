@@ -5,9 +5,8 @@ import {
     FetchBaseQueryError
 } from '@reduxjs/toolkit/dist/query/react'
 import { serviceAuthAPI } from '@/services/AuthService'
-// import { cookies } from 'next/headers'
-// import { useCookies } from 'react-cookie'
-import { Cookies } from 'react-cookie'
+import { cookies } from 'next/headers'
+import { useCookies, Cookies } from 'react-cookie'
 
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
@@ -36,7 +35,8 @@ export const baseQueryWithReauth: BaseQueryFn<
             // localStorage.setItem('accessToken', refreshResult.data.accessToken)
 
             // setCookie('accessToken', refreshResult.data.accessToken, { path: '/' })
-            cookies.set('accessToken', refreshResult.data.accessToken)
+            cookies.set('accessToken', refreshResult.data.accessToken, { path: '/' })
+            // console.log('inter cookie', cookies.get('accessToken'))
 
             await serviceAuthAPI.endpoints.me()
 

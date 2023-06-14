@@ -299,6 +299,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                     })
                                     // localStorage.removeItem('accessToken')
                                     removeCookie('accessToken', { path: '/' })
+                                    removeCookie('refreshToken', { path: '/' })
                                     void router.push(InctagramPath.AUTH.LOGIN)
                                 }}
                             >

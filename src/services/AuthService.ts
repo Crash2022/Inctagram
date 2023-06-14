@@ -8,6 +8,7 @@ import {
     RegistrationPayloadType
 } from '@/models/auth-types'
 import { baseQueryWithReauth } from '@/shared/api/interceptor'
+import { Cookies } from 'react-cookie'
 
 export const serviceAuthAPI = createApi({
     reducerPath: 'serviceAuthAPI',
@@ -48,12 +49,18 @@ export const serviceAuthAPI = createApi({
             })
         }),
         me: build.query<MeResponseType, any>({
-            query: () => ({
-                url: '/auth/me',
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            query: () => {
+                const cookies = new Cookies()
+                const accessToken = cookies.get('accessToken')
+                // headers.set('Authorization', `Bearer ${accessToken}`)
+
+                return {
+                    url: '/auth/me',
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
                 }
-            })
+            }
         }),
         forgotPassword: build.mutation<any, PasswordRecoveryType>({
             query: (payload: PasswordRecoveryType) => ({

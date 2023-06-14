@@ -47,8 +47,8 @@ export const LoginForm = () => {
         try {
             const res = await login(submitData)
             console.log('login response', res)
-            localStorage.setItem('accessToken', res.data.accessToken)
-            // setCookie('accessToken', res.data.accessToken, { path: '/' })
+            // localStorage.setItem('accessToken', res.data.accessToken)
+            setCookie('accessToken', res.data.accessToken, { path: '/' })
             await refetchMeData()
             await router.push(InctagramPath.PROFILE.PROFILE)
         } catch (error: any) {
