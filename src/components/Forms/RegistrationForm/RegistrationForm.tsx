@@ -3,14 +3,13 @@ import { Title } from '@/components/Forms/Title/Title'
 import Link from 'next/link'
 import { Button } from '@/shared/ui/Button/Button'
 import GoogleIcon from 'public/assets/icons/googleIcon.svg'
-import GitIcon from 'public/assets/icons/gitIcon.svg'
+import GitIcon from 'public/assets/icons/gitIcon.svg' // use GitIcon instead of GithubIcon
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRegistrationMutation } from '@/services/AuthService'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { RegistrationPayloadType } from '@/models/auth-types'
 import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { MessageModal } from '@/components/MessageModal/MessageModal'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
@@ -76,7 +75,11 @@ export const RegistrationForm = () => {
 
                 <div className={styles.imgBody}>
                     <GoogleIcon />
-                    <GitIcon />
+                    <a href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/github/callback`} target="_blank" rel="noreferrer">
+                        <GitIcon />
+                    </a>
+
+
                 </div>
 
                 <div className={styles.inputContainer}>
@@ -127,11 +130,3 @@ export const RegistrationForm = () => {
         </FormWrapper>
     )
 }
-
-// export async function getStaticProps({ locale }) {
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(locale, ['header', 'registration']))
-//         }
-//     }
-// }
