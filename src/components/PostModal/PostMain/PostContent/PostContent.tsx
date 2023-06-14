@@ -26,6 +26,7 @@ interface PostContentProps {
     setOpenPostModal: (value: boolean) => void
     post: PostType
 }
+
 export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentProps) => {
     const { t } = useTranslation('post-modal')
     const dispatch = useAppDispatch()
@@ -83,20 +84,18 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
                             <div className={cls.profileData}>
                                 <div className={cls.userAvatar}>
                                     {profileData && (
-                                        <div className={cls.header_photo}>
-                                            <Image
-                                                src={
-                                                    profileData.avatars.length === 0
-                                                        ? DefaultProfileAvatar
-                                                        : profileData?.avatars[0].url
-                                                }
-                                                // src={DefaultProfileAvatar}
-                                                alt={'profile-avatar'}
-                                                width={35}
-                                                height={35}
-                                                quality={100}
-                                            />
-                                        </div>
+                                        <Image
+                                            src={
+                                                profileData.avatars.length === 0
+                                                    ? DefaultProfileAvatar
+                                                    : profileData?.avatars[0].url
+                                            }
+                                            // src={DefaultProfileAvatar}
+                                            alt={'profile-avatar'}
+                                            width={35}
+                                            height={35}
+                                            quality={100}
+                                        />
                                     )}
                                 </div>
                                 <div className={cls.userName}>{profileData?.userName}</div>
@@ -105,20 +104,22 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
                         </div>
                     </div>
                     <div className={cls.commentsBlock}>
-                        <Comment
-                            your
-                            desc
-                            avatar={
-                                profileData && profileData.avatars.length === 0
-                                    ? DefaultProfileAvatar
-                                    : profileData.avatars[0].url
-                            }
-                            userName={profileData.userName}
-                            text={post.description}
-                            date={formatDate(post.createdAt)}
-                            likeButton={false}
-                            likeCount={0}
-                        />
+                        {profileData && (
+                            <Comment
+                                your
+                                desc
+                                avatar={
+                                    profileData.avatars.length === 0
+                                        ? DefaultProfileAvatar
+                                        : profileData?.avatars[0].url
+                                }
+                                userName={profileData?.userName}
+                                text={post.description}
+                                date={formatDate(post.createdAt)}
+                                likeButton={false}
+                                likeCount={0}
+                            />
+                        )}
                     </div>
                     <div className={cls.likesBlock}>
                         <div className={cls.buttonItems}>
