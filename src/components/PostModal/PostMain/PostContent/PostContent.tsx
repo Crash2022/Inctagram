@@ -82,17 +82,22 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
                         <div className={cls.headerTitle}>
                             <div className={cls.profileData}>
                                 <div className={cls.userAvatar}>
-                                    <Image
-                                        src={
-                                            profileData && profileData.avatars.length === 0
-                                                ? DefaultProfileAvatar
-                                                : profileData.avatars[0].url
-                                        }
-                                        alt={'profile-avatar'}
-                                        width={35}
-                                        height={35}
-                                        quality={100}
-                                    />
+                                    {profileData && (
+                                        <div className={cls.header_photo}>
+                                            <Image
+                                                src={
+                                                    profileData.avatars.length === 0
+                                                        ? DefaultProfileAvatar
+                                                        : profileData?.avatars[0].url
+                                                }
+                                                // src={DefaultProfileAvatar}
+                                                alt={'profile-avatar'}
+                                                width={35}
+                                                height={35}
+                                                quality={100}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                                 <div className={cls.userName}>{profileData?.userName}</div>
                             </div>
