@@ -12,8 +12,8 @@ interface AddPostBasicModalProps {
     isPrevious?: boolean
     isNext?: boolean
     nextButtonTitle: string
-    isNextForUpload?: boolean
-    isPhotoUploaded?: boolean
+    // isNextForUpload?: boolean
+    // isPhotoUploaded?: boolean
     isCancelBtn?: boolean
     prevFunc?: () => void
     nextFunc?: () => void
@@ -28,8 +28,8 @@ export const AddPostBasicModal = ({
     isPrevious,
     isNext,
     nextButtonTitle,
-    isNextForUpload,
-    isPhotoUploaded,
+    // isNextForUpload,
+    // isPhotoUploaded,
     isCancelBtn,
     prevFunc,
     nextFunc,

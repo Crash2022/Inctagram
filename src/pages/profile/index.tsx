@@ -82,7 +82,7 @@ const Profile: NextPageWithLayout = () => {
     // const { posts } = props
     const { data: meData } = useMeQuery({})
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery({})
-    const { data: posts, isLoading: postsIsLoading } = useGetUserPostsQuery(profileData.id)
+    const { data: posts, isLoading: postsIsLoading } = useGetUserPostsQuery(profileData?.id)
 
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 

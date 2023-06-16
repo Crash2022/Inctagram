@@ -6,7 +6,7 @@ import { Textarea } from '@/shared/ui/Textarea/Textarea'
 interface ControlledCustomTextareaProps {
     name: string
     placeholder: string
-    control: UseFormReturn<any>
+    control: any // UseFormReturn<any>
     rules?: Omit<
         RegisterOptions<any, any>,
         'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
@@ -34,6 +34,7 @@ export const ControlledTextarea = ({
                 render={({ field }: any) => (
                     <Textarea
                         {...field}
+                        ref={null}
                         placeholder={placeholder}
                         value={field.value}
                         onChange={(value) => {

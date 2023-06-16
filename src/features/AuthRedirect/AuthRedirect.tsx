@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
@@ -21,7 +21,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 const isBrowser = () => typeof window !== 'undefined'
 
 interface AuthRedirectType {
-    children: ReactNode
+    children: ReactElement
 }
 
 const AuthRedirect = ({ children }: AuthRedirectType) => {

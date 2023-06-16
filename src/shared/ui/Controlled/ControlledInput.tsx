@@ -42,6 +42,7 @@ export const ControlledInput = ({
                 render={({ field }: any) => (
                     <Input
                         {...field}
+                        ref={null}
                         id={id}
                         password={password ?? false}
                         placeholder={placeholder}

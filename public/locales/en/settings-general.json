@@ -15,6 +15,7 @@
 
   "Err_Yup_Min_Name": "Minimal length is 6 symbols",
   "Err_Yup_Max_Name": "Maximum length is 30 symbols",
+  "Err_Yup_Max_NameExtra": "Maximum length is 50 symbols",
   "Err_Yup_Trim_AboutMe": "Minimum length is 1 symbol",
   "Err_Yup_Max_AboutMe": "Maximum length is 200 symbols",
   "Err_Yup_Required": "Field is required"

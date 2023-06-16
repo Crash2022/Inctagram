@@ -7,7 +7,6 @@ import Image from 'next/image'
 import { Button } from '@/shared/ui/Button/Button'
 import { useTranslation } from 'next-i18next'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { UpdateUserProfile } from '@/shared/types/profile-types'
@@ -22,6 +21,7 @@ import { useSnackbar } from 'notistack'
 import { profileDate } from '@/shared/utils/dateNowForProfileSetting'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { ControlledTextarea } from '@/shared/ui/Controlled/ControlledTextarea'
+import { ProfileSchema } from '@/shared/validation/profile-schema'
 
 export const General = () => {
     const { t } = useTranslation('settings-general')
@@ -48,16 +48,6 @@ export const General = () => {
         { data: deleteAvatarResult, error: deleteAvatarError, isLoading: deleteAvatarIsLoading }
     ] = useDeleteAvatarMutation()
 
-    const ProfileGeneralSchema = yup.object().shape({
-        userName: yup.string().min(6, t('Err_Yup_Min_Name')).max(30, t('Err_Yup_Max_Name')),
-        aboutMe: yup
-            .string()
-            .max(200, t('Err_Yup_Max_AboutMe'))
-            .required(t('Err_Yup_Required'))
-            .trim(t('Err_Yup_Trim_AboutMe'))
-            .strict(true)
-    })
-
     const {
         control,
         handleSubmit,
@@ -73,7 +63,7 @@ export const General = () => {
             dateOfBirth: '',
             aboutMe: ''
         },
-        resolver: yupResolver(ProfileGeneralSchema)
+        resolver: yupResolver(ProfileSchema(t))
     })
 
     const onSubmit: SubmitHandler<UpdateUserProfile> = async (submitData: UpdateUserProfile) => {
@@ -125,7 +115,7 @@ export const General = () => {
                 autoHideDuration: 3000
             })
         } else {
-            await deleteAvatar()
+            await deleteAvatar({})
             setUserAvatar(DefaultProfileAvatar)
         }
     }
