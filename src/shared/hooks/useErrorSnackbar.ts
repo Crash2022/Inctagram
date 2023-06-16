@@ -8,7 +8,7 @@ export const useErrorSnackbar = (isError: boolean) => {
 
     useEffect(() => {
         if (isError)
-            enqueueSnackbar(/*error.data.messages[0].message*/ t('Error'), {
+            enqueueSnackbar(t('Error'), {
                 variant: 'error',
                 autoHideDuration: 3000
             })

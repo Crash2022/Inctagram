@@ -8,7 +8,7 @@ export function usePush(): NextRouter['push'] {
     routerRef.current = router
 
     const [{ push }] = useState<Pick<NextRouter, 'push'>>({
-        push: (path) => routerRef.current.push(path)
+        push: async (path) => await routerRef.current.push(path)
     })
     return push
 }
