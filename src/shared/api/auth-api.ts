@@ -4,7 +4,7 @@ import {
     PasswordRecoveryType,
     RegistrationConfirmationPayloadType,
     RegistrationPayloadType
-} from '@/models/auth-types'
+} from '@/shared/types/auth-types'
 
 export const authApi = {
     registration: async (arg: RegistrationPayloadType) => {

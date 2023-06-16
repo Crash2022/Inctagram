@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { CroppedAreaType } from '@/models/image-crop-types'
+import { CroppedAreaType } from '@/shared/types/image-crop-types'
 import { getCroppedImg } from '@/shared/utils/getCroppedImg'
 import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import { useCreatePostMutation, useUploadImageToPostMutation } from '@/services/UserPostsService'
 import { applyPresetOnImage } from 'instagram-filters'
-import { CreatePost, UploadPostImage } from '@/models/posts-types'
+import { CreatePost, UploadPostImage } from '@/shared/types/posts-types'
 
 // export type CurrentImageFilterType = 'normal' | 'inkwell' | 'brooklyn'
 

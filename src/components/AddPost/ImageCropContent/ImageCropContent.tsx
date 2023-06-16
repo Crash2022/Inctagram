@@ -7,7 +7,7 @@ import ExpandScale from '../../../../public/assets/icons/expand-scale.svg'
 import SquareIcon from '../../../../public/assets/icons/rectangle-square.svg'
 import RectangleIcon32 from '../../../../public/assets/icons/rectangle-2.svg'
 import RectangleIcon169 from '../../../../public/assets/icons/rectangle-1.svg'
-import { CroppedAreaType, CropType } from '@/models/image-crop-types'
+import { CroppedAreaType, CropType } from '@/shared/types/image-crop-types'
 
 interface ImageCropContentProps {
     postImage: string

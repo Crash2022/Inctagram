@@ -25,7 +25,7 @@ export const PublicationContent = ({
     postIsLoading
 }: PublicationContentProps) => {
     const { t } = useTranslation('add-post-modal')
-    const { data: profileData } = useGetProfileDataQuery()
+    const { data: profileData } = useGetProfileDataQuery({})
 
     useEffect(() => {
         if (description.length > 500) {

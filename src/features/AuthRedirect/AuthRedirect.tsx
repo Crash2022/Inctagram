@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useMeQuery } from '@/services/AuthService'
 import { useRouter } from 'next/router'
 import { InctagramPath } from '@/shared/api/path'
@@ -20,11 +20,15 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 // check if you are on the client (browser) or server
 const isBrowser = () => typeof window !== 'undefined'
 
-const AuthRedirect = ({ children }) => {
-    const router = useRouter()
-    const { data: meData, isLoading, isError, isAuthenticated } = useMeQuery()
+interface AuthRedirectType {
+    children: ReactNode
+}
 
-    let unprotectedRoutes = [
+const AuthRedirect = ({ children }: AuthRedirectType) => {
+    const router = useRouter()
+    const { data: meData, isLoading, isError } = useMeQuery({})
+
+    const unprotectedRoutes = [
         InctagramPath.AUTH.LOGIN,
         InctagramPath.AUTH.REGISTRATION,
         InctagramPath.AUTH.FORGOT_PASSWORD,
@@ -35,7 +39,7 @@ const AuthRedirect = ({ children }) => {
     ]
 
     // let pathIsProtected = protectedRoutes.indexOf(router.pathname) !== -1
-    let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1
+    const pathIsProtected = !unprotectedRoutes.includes(router.pathname)
 
     useEffect(() => {
         if (isBrowser() && !isLoading && !meData && pathIsProtected) {

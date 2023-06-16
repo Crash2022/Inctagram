@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { authApi } from '@/shared/api/auth-api'
 import { createAppAsyncThunk } from '@/shared/utils/createAppAsyncThunk'
 import { AxiosError } from 'axios'
-import { LoginPayloadType, RegistrationPayloadType } from '@/models/auth-types'
+import { LoginPayloadType, RegistrationPayloadType } from '@/shared/types/auth-types'
 
 interface AuthStateType {
     profile: any

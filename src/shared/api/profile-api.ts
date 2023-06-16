@@ -1,6 +1,6 @@
 import { instance } from '@/shared/api/api-instance'
-import { GetPostsResponse } from '@/models/posts-types'
-import { UserProfile } from '@/models/profile-types'
+import { GetPostsResponse } from '@/shared/types/posts-types'
+import { UserProfile } from '@/shared/types/profile-types'
 
 export const profileApi = {
     getUserProfileData: async () => {

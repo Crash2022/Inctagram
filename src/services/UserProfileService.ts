@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { UpdateUserProfile, UserProfile } from '@/models/profile-types'
+import { UpdateUserProfile, UserProfile } from '@/shared/types/profile-types'
 
 export const userProfileAPI = createApi({
     reducerPath: 'userProfileAPI',

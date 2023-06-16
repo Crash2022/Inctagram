@@ -6,7 +6,7 @@ import {
     PasswordRecoveryType,
     RegistrationConfirmationPayloadType,
     RegistrationPayloadType
-} from '@/models/auth-types'
+} from '@/shared/types/auth-types'
 import { baseQueryWithReauth } from '@/shared/api/interceptor'
 
 export const serviceAuthAPI = createApi({

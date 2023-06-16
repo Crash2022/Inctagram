@@ -10,7 +10,7 @@ import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { UpdateUserProfile } from '@/models/profile-types'
+import { UpdateUserProfile } from '@/shared/types/profile-types'
 import { InputFile } from '@/shared/ui/InputFile/InputFile'
 import {
     useDeleteAvatarMutation,
@@ -29,7 +29,7 @@ export const General = () => {
     const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
-    const { data: profileData, isLoading } = useGetProfileDataQuery()
+    const { data: profileData, isLoading } = useGetProfileDataQuery({})
     const [
         setProfileData,
         { data: setProfileDataResponse, isError: isSetError, isLoading: setProfileIsLoading }

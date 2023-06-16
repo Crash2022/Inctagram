@@ -7,7 +7,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { useTranslation } from 'next-i18next'
-import { PostType, UpdatePostPayloadType } from '@/models/posts-types'
+import { PostType, UpdatePostPayloadType } from '@/shared/types/posts-types'
 import { useUpdatePostMutation } from '@/services/UserPostsService'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 
@@ -18,7 +18,7 @@ interface PostUpdatedPropsType {
 export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
     const { t } = useTranslation('post-modal')
 
-    const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
+    const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery({})
 
     const [updateProfile, { data: updateProfileData, isLoading }] = useUpdatePostMutation()
 

@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useLoginMutation, useMeQuery } from '@/services/AuthService'
-import { LoginPayloadType } from '@/models/auth-types'
+import { LoginPayloadType } from '@/shared/types/auth-types'
 import { InctagramPath } from '@/shared/api/path'
 import { useErrorSnackbar } from '@/shared/hooks/useErrorSnackbar'
 import { ControlledInput } from '@/shared/ui/Controlled/ControlledInput'
@@ -24,7 +24,7 @@ export const LoginForm = () => {
     const router = useRouter()
 
     const [login, { data: loginData, isError, isLoading }] = useLoginMutation()
-    const { data: meData, isMeLoading, refetch: refetchMeData } = useMeQuery()
+    const { data: meData, refetch: refetchMeData } = useMeQuery({})
 
     const {
         control,

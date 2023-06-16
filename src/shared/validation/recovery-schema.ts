@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { TranslateFn } from '@/models/translate-type'
+import { TranslateFn } from '@/shared/types/translate-type'
 
 export const RecoverySchema = (t: TranslateFn) => {
     return yup.object().shape({

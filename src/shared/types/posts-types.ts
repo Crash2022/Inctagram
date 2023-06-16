@@ -43,5 +43,5 @@ export interface CreatePost {
 
 export interface UpdatePostPayloadType {
     description: string
-    id: number
+    postId: number
 }

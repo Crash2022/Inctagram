@@ -14,7 +14,7 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { PostBasicModal } from '@/components/PostModal/PostBasicModal/PostBasicModal'
 import { PostMain } from '@/components/PostModal/PostMain/PostMain'
 import { useGetUserPostsQuery } from '@/services/UserPostsService'
-import { PostType } from '@/models/posts-types'
+import { PostType } from '@/shared/types/posts-types'
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
 import { setPostId } from '@/store/slices/postSlice'
 // import { profileApi } from '@/shared/api/profile-api'
@@ -80,14 +80,9 @@ const Profile: NextPageWithLayout = () => {
     const dispatch = useAppDispatch()
 
     // const { posts } = props
-    const { data: meData } = useMeQuery()
-    const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery()
-    const {
-        data: posts,
-        error,
-        isLoading: postsIsLoading,
-        isError
-    } = useGetUserPostsQuery(profileData?.id)
+    const { data: meData } = useMeQuery({})
+    const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery({})
+    const { data: posts, isLoading: postsIsLoading } = useGetUserPostsQuery(profileData.id)
 
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 

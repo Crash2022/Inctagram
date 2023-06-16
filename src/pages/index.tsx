@@ -13,7 +13,7 @@ const Home: NextPageWithLayout = () => {
     // const { t } = useTranslation('home')
     const router = useRouter()
 
-    const { data: meData, isLoading } = useMeQuery()
+    const { data: meData, isLoading } = useMeQuery({})
 
     useEffect(() => {
         if (meData) {

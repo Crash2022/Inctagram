@@ -18,7 +18,7 @@ export const Header = () => {
     const { locale, locales, push } = useRouter()
     const router = useRouter()
     // const [activeLang, setActiveLang] = useState<string>('en')
-    const { data: meData, isLoading } = useMeQuery()
+    const { data: meData, isLoading } = useMeQuery({})
     // const [logout, { isSuccess, error, isError, isLoading: logoutIsLoading }] = useLogoutMutation()
 
     // const toggleLanguage = (language: string): void => {
