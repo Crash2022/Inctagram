@@ -13,9 +13,11 @@
   "Snackbar_ErrorImage": "Файл повреждён, попробуйте загрузить другой",
   "Snackbar_UploadImageError": "Произошла ошибка во время загрузки. Пожалуйста, повторите",
 
-  "Err_Yup_Min_Name": "Минимальная длина 6 символов",
-  "Err_Yup_Max_Name": "Максимальная длина 30 символов",
-  "Err_Yup_Max_NameExtra": "Максимальная длина 50 символов",
+  "Err_Yup_Min_UserName": "Минимальная длина 6 символов",
+  "Err_Yup_Max_UserName": "Максимальная длина 30 символов",
+  "Err_Yup_Max_Name": "Максимальная длина 50 символов",
+  "Err_Yup_OnlyLetters_Name": "Разрешены только буквы без пробелов",
+  "Err_Yup_OnlyLettersWithDash_City": "Разрешены только буквы и дефис без пробелов",
   "Err_Yup_Trim_AboutMe": "Минимальная длина 1 символ",
   "Err_Yup_Max_AboutMe": "Максимальная длина 200 символов",
   "Err_Yup_Required": "Поле обязательно для заполнения"
