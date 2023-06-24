@@ -44,10 +44,14 @@ export const LoginForm = () => {
         try {
             const res = await login(submitData)
             console.log('login response', res)
-            // @ts-expect-error
-            localStorage.setItem('accessToken', res.data.accessToken)
-            await refetchMeData()
-            await router.push(InctagramPath.PROFILE.PROFILE)
+
+            if ('data' in res) {
+                localStorage.setItem('accessToken', res.data.accessToken)
+                await refetchMeData()
+                await router.push(InctagramPath.PROFILE.PROFILE)
+            } else {
+                console.log('No data in response');
+            }
         } catch (error: any) {
             console.log('login error', error)
         }
