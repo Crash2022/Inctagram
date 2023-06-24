@@ -76,7 +76,7 @@ export const ForgotPasswordForm = () => {
                     open={open}
                     setOpen={setOpen}
                     header={t('EmailSent')}
-                    text={t('HaveSent') + control._getWatch('email')}
+                    text={`${t('HaveSent')}${control._getWatch('email') ?? ""}`}
                     buttonTitleOK={t('MainButton')}
                     extraCallbackOK={() => {
                         setOpen(false)

@@ -44,7 +44,7 @@ export const LoginForm = () => {
         try {
             const res = await login(submitData)
             console.log('login response', res)
-            // @ts-ignore
+            // @ts-expect-error
             localStorage.setItem('accessToken', res.data.accessToken)
             await refetchMeData()
             await router.push(InctagramPath.PROFILE.PROFILE)

@@ -14,7 +14,7 @@ export const PostMain = ({ setOpenPostModal }: PostMainProps) => {
     const postId = useAppSelector(selectorPostId);
     const [update, setUpdate] = useState<boolean>(false);
 
-    const { data: post, isLoading: postIsLoading } = useGetUserPostByIdQuery(postId || -1);
+    const { data: post, isLoading: postIsLoading } = useGetUserPostByIdQuery(postId ?? -1);
 
     // Early return if post is loading or if the postId is invalid.
     if (postIsLoading || postId === null || !post) return <LoaderScreen variant={'circle'} />

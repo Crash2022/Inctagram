@@ -17,10 +17,10 @@ export const Management = () => {
     const [openSuccess, setOpenSuccess] = useState<boolean>(false)
 
     const radioAccountOptions = [t('Personal'), t('Business')];
-    const [radioAccTypeButton, setRadioAccTypeButton] = useState<string>(t('Personal') as string);
+    const [radioAccTypeButton, setRadioAccTypeButton] = useState<string>(t('Personal') ?? "" );
 
     const radioCostsOptions = [t('10PM') , t('50PM') , t('100PY') ];
-    const [radioCostButton, setRadioCostButton] = useState<string>(t('10PM') as string);
+    const [radioCostButton, setRadioCostButton] = useState<string>(t('10PM') ?? "");
 
     // const isError = true
     // const isSuccess = true
