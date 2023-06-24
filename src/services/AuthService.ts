@@ -81,11 +81,19 @@ export const serviceAuthAPI = createApi({
                 url: '/auth/update-tokens',
                 method: 'POST'
             })
+        }),
+        githubRegistration: build.mutation<any, string>({
+            query: (githubAccessToken: string) => ({
+                url: '/auth/github-registration',
+                method: 'POST',
+                body: { githubAccessToken }
+            })
         })
     })
 })
 
 export const {
+    useGithubRegistrationMutation,
     useRegistrationMutation,
     useRegistrationConfirmationMutation,
     useRegistrationResendLinkMutation,

@@ -76,7 +76,10 @@ export const RegistrationForm = () => {
 
                 <div className={styles.imgBody}>
                     <GoogleIcon />
-                    <GitIcon />
+                    <a href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/github/callback`} target="_blank" rel="noreferrer">
+                        <GitIcon />
+                    </a>
+
                 </div>
 
                 <div className={styles.inputContainer}>
