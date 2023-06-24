@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { Button } from '@/shared/ui/Button/Button'
 import Link from 'next/link'
 import styles from '@/components/Forms/FormWrapper/Form.module.scss'
@@ -23,7 +23,7 @@ export const LoginForm = () => {
     const { t } = useTranslation('login')
     const router = useRouter()
 
-    const [login, { data: loginData, isError, isSuccess, isLoading }] = useLoginMutation()
+    const [login, { data: loginData, isError, isLoading }] = useLoginMutation()
     const { data: meData, refetch: refetchMeData } = useMeQuery({})
 
     const {
@@ -44,26 +44,14 @@ export const LoginForm = () => {
         try {
             const res = await login(submitData)
             console.log('login response', res)
-
-            /*            localStorage.setItem('accessToken', res.data.accessToken)
-                        await refetchMeData()
-                        await router.push(InctagramPath.PROFILE.PROFILE) */
+            // @ts-ignore
+            localStorage.setItem('accessToken', res.data.accessToken)
+            await refetchMeData()
+            await router.push(InctagramPath.PROFILE.PROFILE)
         } catch (error: any) {
             console.log('login error', error)
         }
     }
-
-    useEffect(() => {
-        if (isSuccess && loginData && loginData.data) {
-            localStorage.setItem('accessToken', loginData.data.accessToken)
-            refetchMeData().then(() => {
-                router.push(InctagramPath.PROFILE.PROFILE)
-            })
-        } else if (loginData) {
-            console.log('login error', loginData.error)
-        }
-    }, [isSuccess, loginData])
-
 
     useErrorSnackbar(isError)
     if (isLoading) return <LoaderScreen variant={'circle'} />
