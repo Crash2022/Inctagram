@@ -22,7 +22,7 @@ export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
 
     const [updateProfile, { data: updateProfileData, isLoading }] = useUpdatePostMutation()
 
-    const [text, setText] = useState<string>(post.description)
+    const [text, setText] = useState<string>(post?.description ?? "")
 
     const {
         control,
@@ -30,8 +30,8 @@ export const PostUpdate = ({ setUpdate, post }: PostUpdatedPropsType) => {
         formState: { errors }
     } = useForm<any>({
         defaultValues: {
-            description: post.description,
-            postId: post.id
+            description: post?.description ?? '',
+            postId: post?.id ?? null
         }
     })
 
