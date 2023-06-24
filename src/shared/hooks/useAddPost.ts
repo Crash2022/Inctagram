@@ -69,6 +69,10 @@ export const useAddPost = () => {
     // переход к фильтрам
     const goFromCropToImageFiltersModalHandler = async () => {
         // получение кадрированного изображения
+        if(croppedAreaPixels === null){
+            console.error('Cropped area is null')
+            return
+        }
         try {
             const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation) as any
             setCroppedImage(url) // оригинал кадрированного изображения
@@ -91,6 +95,7 @@ export const useAddPost = () => {
         setIsImageFiltersModalOpen(true)
         setIsCropImageModalOpen(false)
     }
+
     const goFromImageFiltersToCropModalHandler = () => {
         setIsImageFiltersModalOpen(false)
         setIsCropImageModalOpen(true)
