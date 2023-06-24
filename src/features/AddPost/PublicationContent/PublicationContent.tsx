@@ -17,13 +17,13 @@ interface PublicationContentProps {
 }
 
 export const PublicationContent = ({
-    croppedImageForFilter,
-    description,
-    setDescription,
-    descriptionError,
-    setDescriptionError,
-    postIsLoading
-}: PublicationContentProps) => {
+                                       croppedImageForFilter,
+                                       description,
+                                       setDescription,
+                                       descriptionError,
+                                       setDescriptionError,
+                                       postIsLoading
+                                   }: PublicationContentProps) => {
     const { t } = useTranslation('add-post-modal')
     const { data: profileData } = useGetProfileDataQuery({})
 
@@ -48,9 +48,9 @@ export const PublicationContent = ({
                         <div className={cls.header_avatar}>
                             <Image
                                 src={
-                                    profileData && profileData.avatars.length === 0
-                                        ? DefaultProfileAvatar
-                                        : profileData.avatars[0].url
+                                    profileData && profileData.avatars.length !== 0
+                                        ? profileData.avatars[0].url
+                                        : DefaultProfileAvatar
                                 }
                                 alt={'profile-avatar'}
                                 width={36}
@@ -62,7 +62,7 @@ export const PublicationContent = ({
                     </div>
                     <div className={cls.info_textarea}>
                         <Textarea
-                            placeholder={t('Description')}
+                            placeholder={t('Description')??""}
                             value={description}
                             onChange={(e) => {
                                 setDescription(e.currentTarget.value)
