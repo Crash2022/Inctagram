@@ -17,6 +17,6 @@ export const RegistrationSchema = (t: TranslateFn) => {
         confirmPassword: yup
             .string()
             .required(t('Err_Yup_Required'))
-            .oneOf([yup.ref('password'), null], t('Err_Yup_FieldMatch'))
+            .oneOf([yup.ref('password')], t('Err_Yup_FieldMatch'))
     })
 }
