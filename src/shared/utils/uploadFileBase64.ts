@@ -14,7 +14,7 @@ export const uploadFileBase64 = (
     setFunction: (file64: string) => void, // загрузка изображения в стейт
     extraFunction?: (file64: string) => void // запрос на загрузку на сервер
 ) => {
-    if (e.target.files && e.target.files.length) {
+    if (e.target.files?.length) {
         const file = e.target.files[0]
 
         if (file.size < 4000000) {

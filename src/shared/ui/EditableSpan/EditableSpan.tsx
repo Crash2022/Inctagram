@@ -42,7 +42,9 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({
     }
 
     const enterChangeTitle = (event: KeyboardEvent<HTMLInputElement>) => {
-        return event.key === 'Enter' ? onClickNotEditSpanHandler() : ''
+        if (event.key === 'Enter') {
+            onClickNotEditSpanHandler();
+        }
     }
 
     useEffect(() => {

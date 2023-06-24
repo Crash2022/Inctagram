@@ -294,6 +294,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             <div
                                 className={cls.menuList_item}
                                 onClick={() => {
+                                    // @ts-ignore
                                     logout().then((res) => {
                                         console.log(res)
                                     })

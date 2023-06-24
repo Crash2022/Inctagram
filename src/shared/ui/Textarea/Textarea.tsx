@@ -43,7 +43,7 @@ export const Textarea: React.FC<CustomTextareaPropsType> = ({
         onEnter && e.key === 'Enter' && onEnter()
     }
 
-    const finalTextareaDivWrapperClassName = `${divClassName || s.textarea_wrapper}`
+    const finalTextareaDivWrapperClassName = `${divClassName ?? s.textarea_wrapper}`
 
     return (
         <div className={finalTextareaDivWrapperClassName}>
