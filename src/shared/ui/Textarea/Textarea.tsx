@@ -36,10 +36,10 @@ export const Textarea: React.FC<CustomTextareaPropsType> = ({
 }) => {
     const onChangeCallback = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // onChange && onChange(e);
-        onChangeText && onChangeText(e.currentTarget.value)
+        onChangeText?.(e.currentTarget.value)
     }
     const onKeyPressCallback = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        onKeyPress && onKeyPress(e)
+        onKeyPress?.(e)
         onEnter && e.key === 'Enter' && onEnter()
     }
 
