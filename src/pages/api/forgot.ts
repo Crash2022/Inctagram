@@ -1,11 +1,11 @@
 import fetch from 'node-fetch'
 
-const sleep = async () =>
-    await new Promise((resolve) => {
-        setTimeout(() => {
-            resolve()
-        }, 350)
-    })
+const sleep = async ():Promise<void> =>
+{ await new Promise<void>((resolve) => {
+    setTimeout(() => {
+        resolve()
+    }, 350)
+}); }
 
 export default async function handler(req: any, res: any) {
     const { body, method } = req
