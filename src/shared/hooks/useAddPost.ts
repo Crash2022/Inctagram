@@ -70,7 +70,7 @@ export const useAddPost = () => {
     const goFromCropToImageFiltersModalHandler = async () => {
         // получение кадрированного изображения
         try {
-            const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation)
+            const { file, url } = await getCroppedImg(postImage, croppedAreaPixels, rotation) as any
             setCroppedImage(url) // оригинал кадрированного изображения
             setCroppedImageForFilter(url) // изображение для модалки с фильтрами
             setCroppedImageFile(file) // формирование тип 'файл' для дальнейших действий
@@ -98,33 +98,42 @@ export const useAddPost = () => {
     // функиця для применения фильтра к фотографии
     const applyImageFilter = async (filterName: any) => {
         try {
-            const image = document.querySelector('#CroppedImageForFilter')
-            // Function 'applyPresetOnImage' is returning a Blob
+            const image = document.querySelector<HTMLImageElement>('#CroppedImageForFilter')
+            if (!image) {
+                throw new Error('Image not found');
+            }
             const blob = await applyPresetOnImage(image, filterName())
-            setCroppedImageFile(blob) // перезапись файла на файл с применённым фильтром
-            // image.src = window.URL.createObjectURL(blob)
-            // setCroppedImageForFilter(croppedImage) // обнуление фотографии на normal (не работает!)
+            if (!blob) {
+                throw new Error('Blob not found');
+            }
+
+            const file = new File([blob], "filteredImage.jpg");
+            setCroppedImageFile(file)
             setCroppedImageForFilter((image.src = window.URL.createObjectURL(blob)))
         } catch (error) {
             console.log('error filter', error)
         }
     }
 
-    // функиця для сетки с примерами фильтров
     const applyImageFilterToExample = async (imgId: string, filterName: any, stateName: any) => {
-        // setIsImageFiltersLoading(true)
         try {
-            const image = document.querySelector(`#${imgId}`)
-            // const image = document.getElementById(imgId)
+            const image = document.querySelector<HTMLImageElement>(`#${imgId}`)
+            if (!image) {
+                throw new Error('Image not found');
+            }
             const blob = await applyPresetOnImage(image, filterName())
-            stateName((image.src = window.URL.createObjectURL(blob)))
-            // setIsImageFiltersLoading(false)
+            if (!blob) {
+                throw new Error('Blob not found');
+            }
+            const file = new File([blob], "filteredImageExample.jpg");
+            stateName((image.src = window.URL.createObjectURL(file)))
         } catch (error) {
             console.log('error filter', error)
         } finally {
             // setIsImageFiltersLoading(false)
         }
     }
+
 
     // переход к публикации
     const goFromImageFiltersToPublicationModalHandler = async () => {
@@ -140,7 +149,10 @@ export const useAddPost = () => {
             // загрузка изображения на бэкенд
             try {
                 const imageResult = await uploadImageToPost(formData)
-                setUploadImageResponse(imageResult.data)
+                if ('data' in imageResult) {
+                    setUploadImageResponse(imageResult.data)
+                }
+
                 console.log('imageResult', imageResult)
             } catch (e) {
                 console.log('imageResult error', e)
@@ -162,14 +174,21 @@ export const useAddPost = () => {
 
         if (trimValue && trimValue.length <= 500) {
             try {
+                const uploadId = uploadImageResponse?.images?.[0]?.uploadId ?? ''; // Use the first item and a default value in case of undefined/null
+
+                if (!uploadId) {
+                    throw new Error("Upload ID is undefined");
+                }
+
                 const publishObj: CreatePost = {
                     description,
-                    childrenMetadata: [{ uploadId: uploadImageResponse?.images[1].uploadId }]
+                    childrenMetadata: [{ uploadId }]
                 }
+
                 console.log('publishObj', publishObj)
                 const publish = await createPost(publishObj)
                 console.log('publish', publish)
-                // зачистка всех полей
+
                 setIsPublicationModalOpen(false)
                 setPostImage('')
                 setCroppedImage('')
@@ -186,13 +205,11 @@ export const useAddPost = () => {
                 console.log('publicationHandler error', error)
             }
         } else {
-            // enqueueSnackbar(t('Snackbar_EmptyDescription'), {
-            //     variant: 'error',
-            //     autoHideDuration: 3000
-            // })
-            setDescriptionError(t('DescriptionNull'))
+            setDescriptionError(t('DescriptionNull') ?? "Error: Description is null")
         }
     }
+
+
 
     return {
         isPhotoUploaded,

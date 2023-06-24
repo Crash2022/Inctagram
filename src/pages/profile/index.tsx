@@ -17,72 +17,18 @@ import { useGetUserPostsQuery } from '@/services/UserPostsService'
 import { PostType } from '@/shared/types/posts-types'
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch'
 import { setPostId } from '@/store/slices/postSlice'
-// import { profileApi } from '@/shared/api/profile-api'
-// import dynamic from 'next/dynamic'
-
-// пример LazyLoading
-// const PhotoCard = dynamic(() => import('path here').then(module => module.PhotoCard))
-
-// export const getStaticProps = async () => {
-//     const posts = await profileApi.getUserProfilePosts()
-//
-//     if (!posts) {
-//         return {
-//             notFound: true
-//         }
-//     }
-//
-//     return {
-//         props: {
-//             posts
-//         },
-//         revalidate: 100 // перезапрос данных через указанное время (в секундах)
-//     }
-// }
-
-// export const getServerSideProps = async () => {
-//     // перезапрос данных через указанное время stale-while-revalidate (в секундах)
-//     // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=600')
-//
-//     // const profile = await profileApi.getUserProfileData()
-//     // const posts = await profileApi.getUserProfilePosts(profile.id)
-//
-//     if (!posts) {
-//         return {
-//             notFound: true
-//         }
-//     }
-//
-//     // данные из стора можно достать с помощью wrapper.useWrappedStore
-//     // чтобы не было "морганий" страницы, если роут защищён
-//     // if (!me) {
-//     //     return {
-//     //         redirect: {
-//     //             destination: '/login',
-//     //             permanent: false
-//     //         }
-//     //     }
-//     // }
-//
-//     return {
-//         props: {
-//             posts
-//         }
-//     }
-// }
-
-// interface ProfileProps {
-//     posts: GetPostsResponse
-// }
 
 const Profile: NextPageWithLayout = () => {
     const { t } = useTranslation('profile-home')
     const dispatch = useAppDispatch()
 
-    // const { posts } = props
     const { data: meData } = useMeQuery({})
     const { data: profileData, isLoading: profileDataIsLoading } = useGetProfileDataQuery({})
-    const { data: posts, isLoading: postsIsLoading } = useGetUserPostsQuery(profileData?.id)
+
+    // Pass undefined to useGetUserPostsQuery when profileData?.id is undefined
+    const userPostsQuery = useGetUserPostsQuery(profileData?.id ?? -1)
+    const posts = userPostsQuery.data;
+    const postsIsLoading = userPostsQuery.isLoading;
 
     const [openPostModal, setOpenPostModal] = useState<boolean>(false)
 
@@ -118,7 +64,6 @@ const Profile: NextPageWithLayout = () => {
                                         ? DefaultProfileAvatar
                                         : profileData?.avatars[0].url
                                 }
-                                // src={DefaultProfileAvatar}
                                 alt={'profile-avatar'}
                                 width={204}
                                 height={204}
