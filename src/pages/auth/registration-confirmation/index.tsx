@@ -12,7 +12,8 @@ import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 const RegistrationConfirmation = () => {
     const { t } = useTranslation('congratulations')
     const router = useRouter()
-    const { code } = router.query
+    const [code] = Array.isArray(router.query.code) ? router.query.code : [router.query.code];
+
 
     const [registrationConfirmation, { isSuccess, error, isError, isLoading }] =
         useRegistrationConfirmationMutation()
