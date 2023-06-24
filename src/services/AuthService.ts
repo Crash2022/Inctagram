@@ -41,7 +41,7 @@ export const serviceAuthAPI = createApi({
                 body: payload
             })
         }),
-        logout: build.mutation<any, void>({
+        logout: build.mutation<any, any>({
             query: () => ({
                 url: '/auth/logout',
                 method: 'POST'

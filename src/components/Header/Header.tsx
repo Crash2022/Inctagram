@@ -47,8 +47,7 @@ export const Header = () => {
 
                 <div className={cls.lang}>
                     {/* <div>NOW={locale}</div> */}
-                    {locales &&
-                        locales.map((l) => {
+                    {locales?.map((l) => {
                             return (
                                 <div
                                     key={l}
