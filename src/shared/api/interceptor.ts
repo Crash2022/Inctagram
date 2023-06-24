@@ -21,22 +21,19 @@ export const baseQueryWithReauth: BaseQueryFn<
         // try to get a new token
         const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
 
-        // @ts-expect-error
+        // @ts-expect-error Ignore as refreshResult.data can be null/undefined
         if (refreshResult.data.accessToken) {
-            // if (refreshResult.data) {
-            // store the new token
-            // api.dispatch(tokenReceived(refreshResult.data))
 
-            // @ts-expect-error
+            // @ts-expect-error Ignore as refreshResult.data can be null/undefined
             localStorage.setItem('accessToken', refreshResult.data.accessToken)
-            // @ts-expect-error
+
+            // @ts-expect-error Ignore as method 'me' might not exist on 'serviceAuthAPI.endpoints'
             await serviceAuthAPI.endpoints.me()
 
             // retry the initial query
             result = await baseQuery(args, api, extraOptions)
         } else {
-            // api.dispatch(logout())
-            // @ts-expect-error
+            // @ts-expect-error Ignore as method 'logout' might not exist on 'serviceAuthAPI.endpoints'
             await serviceAuthAPI.endpoints.logout()
         }
     }
