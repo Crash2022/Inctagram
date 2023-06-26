@@ -11,11 +11,13 @@ interface PostMainProps {
 }
 
 export const PostMain = ({ setOpenPostModal }: PostMainProps) => {
-    const postId = useAppSelector(selectorPostId)
-    const [update, setUpdate] = useState<boolean>(false)
-    const { data: post, isLoading: postIsLoading } = useGetUserPostByIdQuery(postId)
+    const postId = useAppSelector(selectorPostId);
+    const [update, setUpdate] = useState<boolean>(false);
 
-    if (postIsLoading) return <LoaderScreen variant={'circle'} />
+    const { data: post, isLoading: postIsLoading } = useGetUserPostByIdQuery(postId ?? -1);
+
+    // Early return if post is loading or if the postId is invalid.
+    if (postIsLoading || postId === null || !post) return <LoaderScreen variant={'circle'} />
 
     if (update) {
         return <PostUpdate setUpdate={setUpdate} post={post} />

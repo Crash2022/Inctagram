@@ -21,7 +21,7 @@ import { ForgotSchema } from '@/shared/validation/forgot-schema'
 
 export const ForgotPasswordForm = () => {
     const { t } = useTranslation('forgot')
-    const recaptchaRef = useRef(null)
+    const recaptchaRef = useRef<ReCAPTCHA | null>(null)
 
     const [forgotPassword, { isError, isSuccess, isLoading }] = useForgotPasswordMutation()
 
@@ -45,7 +45,7 @@ export const ForgotPasswordForm = () => {
         console.log('submit forgot', data)
         localStorage.setItem('email', control._getWatch('email'))
 
-        if (recaptchaRef.current.getValue()) {
+        if (recaptchaRef.current?.getValue()) {
             // console.log('submit recaptcha', control._getWatch('recaptcha'))
             const forgotResponse = await forgotPassword(data)
             console.log('forgot response', forgotResponse)
@@ -59,8 +59,8 @@ export const ForgotPasswordForm = () => {
         // return (captchaCode: string)
         // console.log('captchaCode in recaptchaRef', recaptchaRef.current.getValue())
 
-        if (recaptchaRef.current.getValue()) {
-            setValue('recaptcha', recaptchaRef.current.getValue())
+        if (recaptchaRef.current?.getValue()) {
+            setValue('recaptcha', recaptchaRef.current?.getValue() ?? "")
             setIsRobot(false)
             // console.log('onChange recaptcha hook form value', control._getWatch('recaptcha'))
         }
@@ -76,7 +76,7 @@ export const ForgotPasswordForm = () => {
                     open={open}
                     setOpen={setOpen}
                     header={t('EmailSent')}
-                    text={t('HaveSent') + control._getWatch('email')}
+                    text={`${t('HaveSent')}${control._getWatch('email') ?? ""}`}
                     buttonTitleOK={t('MainButton')}
                     extraCallbackOK={() => {
                         setOpen(false)
@@ -119,7 +119,7 @@ export const ForgotPasswordForm = () => {
                         <ReCAPTCHA
                             ref={recaptchaRef}
                             size='normal'
-                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ""}
                             onChange={onReCAPTCHAChange}
                         />
                     </div>

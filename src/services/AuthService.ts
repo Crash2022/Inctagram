@@ -41,7 +41,7 @@ export const serviceAuthAPI = createApi({
                 body: payload
             })
         }),
-        logout: build.mutation<any, void>({
+        logout: build.mutation<any, any>({
             query: () => ({
                 url: '/auth/logout',
                 method: 'POST'
@@ -81,11 +81,28 @@ export const serviceAuthAPI = createApi({
                 url: '/auth/update-tokens',
                 method: 'POST'
             })
+        }),
+        githubRegistration: build.mutation<any, string>({
+            query: (githubAccessToken: string) => ({
+                url: '/auth/github-registration',
+                method: 'POST',
+                body: { githubAccessToken }
+            })
+        }),
+        googleRegistration: build.mutation<any, string>({
+            query: (googleAccessToken: string) => ({
+                url: '/auth/google-registration',
+                method: 'POST',
+                body: { googleAccessToken }
+            })
         })
+
     })
 })
 
 export const {
+    useGoogleRegistrationMutation,
+    useGithubRegistrationMutation,
     useRegistrationMutation,
     useRegistrationConfirmationMutation,
     useRegistrationResendLinkMutation,

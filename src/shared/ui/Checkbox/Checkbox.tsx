@@ -23,8 +23,8 @@ export const Checkbox: React.FC<CheckboxPropsType> = ({
     ...restProps // все остальные пропсы попадут в объект restProps
 }) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e)
-        onChangeChecked && onChangeChecked(e.currentTarget.checked)
+        onChange?.(e)
+        onChangeChecked?.(e.currentTarget.checked)
     }
 
     // const finalInputClassName = `${s.checkbox} ${className ? className : ''}`
@@ -39,7 +39,7 @@ export const Checkbox: React.FC<CheckboxPropsType> = ({
 
                 {...restProps} // отдаём инпуту остальные пропсы, если они есть (checked, например, там внутри)
             />
-            {/*{children && <span className={s.checkmark}>{children}</span>}*/}
+
             <span className={s.checkmark}></span>
         </label> // благодаря label нажатие на спан передастся в инпут
     )

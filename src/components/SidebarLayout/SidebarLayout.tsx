@@ -149,6 +149,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 nextButtonTitle={'Next'}
                                 prevFunc={goFromCropToAddImageModalHandler}
                                 nextFunc={goFromCropToImageFiltersModalHandler}
+                                isPhotoUploaded={isPhotoUploaded
+                                }
                             >
                                 <ImageCropContent
                                     postImage={postImage}
@@ -169,7 +171,8 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 prevFunc={goFromImageFiltersToCropModalHandler}
                                 nextFunc={goFromImageFiltersToPublicationModalHandler}
                                 modalWidth={'900'}
-                            >
+
+                                isPhotoUploaded>
                                 <ImageFiltersContent
                                     imageIsUploading={imageIsUploading}
                                     croppedImage={croppedImage}
@@ -208,7 +211,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                                 prevFunc={goFromPublicationModalToImageFiltersHandler}
                                 nextFunc={publicationHandler}
                                 modalWidth={'900'}
-                            >
+                                isPhotoUploaded>
                                 <PublicationContent
                                     croppedImageForFilter={croppedImageForFilter}
                                     description={description}
@@ -291,7 +294,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
                             <div
                                 className={cls.menuList_item}
                                 onClick={() => {
-                                    logout().then((res) => {
+                                    logout({}).then((res) => {
                                         console.log(res)
                                     })
                                     localStorage.removeItem('accessToken')

@@ -18,6 +18,7 @@ interface AddPostBasicModalProps {
     prevFunc?: () => void
     nextFunc?: () => void
     modalWidth?: string
+    isPhotoUploaded:boolean
 }
 
 export const AddPostBasicModal = ({
@@ -33,7 +34,8 @@ export const AddPostBasicModal = ({
     isCancelBtn,
     prevFunc,
     nextFunc,
-    modalWidth
+    modalWidth,
+                                      isPhotoUploaded
 }: AddPostBasicModalProps) => {
     const { t } = useTranslation('add-post-modal')
 

@@ -62,7 +62,7 @@ export const CreateNewPasswordForm = () => {
                     open={open}
                     setOpen={setOpen}
                     header={t('PasswordUpdated')}
-                    text={t('Message')}
+                    text={t('Message') ??""}
                     buttonTitleOK={t('MainButton')}
                     extraCallbackOK={messageModalOKHandler}
                 />

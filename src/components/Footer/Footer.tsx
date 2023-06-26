@@ -16,7 +16,6 @@ export const Footer = () => {
     return (
         <footer className={s.footer}>
             <div className={s.container}>
-                {/*<AddPostModal open={open} setOpen={setOpen} header={t('AddPhotoModal')} />*/}
 
                 <div className={s.items}>
                     <div

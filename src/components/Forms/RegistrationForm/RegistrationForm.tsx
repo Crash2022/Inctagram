@@ -19,6 +19,7 @@ import clsx from 'clsx'
 import { LoaderScreen } from '@/shared/ui/Loader/LoaderScreen'
 import { FormWrapper } from '@/components/Forms/FormWrapper/FormWrapper'
 import { RegistrationSchema } from '@/shared/validation/registration-schema'
+import GoogleLogin from "react-google-login";
 
 export const RegistrationForm = () => {
     const { t } = useTranslation('registration')
@@ -68,15 +69,20 @@ export const RegistrationForm = () => {
                     open={open}
                     setOpen={setOpen}
                     header={t('EmailSent')}
-                    text={t('HaveSent') + control._getWatch('email')}
+                    text={`${t('HaveSent')} ${control._getWatch('email')}`}
                     buttonTitleOK={t('MainButton')}
                     extraCallbackOK={messageModalOKHandler}
                 />
                 <Title title={t('SignUp')} className={styles.title} />
 
                 <div className={styles.imgBody}>
-                    <GoogleIcon />
-                    <GitIcon />
+                    <a href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&response_type=code&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/google/callback&scope=email%20profile`} target="_blank" rel="noreferrer">
+                        <GoogleIcon />
+                    </a>
+                    <a href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}/auth/github/callback`} target="_blank" rel="noreferrer">
+                        <GitIcon />
+                    </a>
+
                 </div>
 
                 <div className={styles.inputContainer}>
@@ -128,10 +134,4 @@ export const RegistrationForm = () => {
     )
 }
 
-// export async function getStaticProps({ locale }) {
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(locale, ['header', 'registration']))
-//         }
-//     }
-// }
+

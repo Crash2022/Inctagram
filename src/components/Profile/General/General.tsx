@@ -26,7 +26,7 @@ import { ProfileSchema } from '@/shared/validation/profile-schema'
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
+    const [userAvatar, setUserAvatar] = useState<string>('/assets/images/default-avatar.png');
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery({})
@@ -116,7 +116,7 @@ export const General = () => {
             })
         } else {
             await deleteAvatar({})
-            setUserAvatar(DefaultProfileAvatar)
+            setUserAvatar('/assets/images/default-avatar.png')
         }
     }
 

@@ -23,9 +23,9 @@ const NotFoundPage = () => {
                 <LinkA href={'/'} text={'Index Page'} />
                 <span> after 5 seconds...</span>
             </div>
-            {/*<div className='notFoundImage'>*/}
-            {/*    <img src='/images/error404.jpg' alt='page404'/>*/}
-            {/*</div>*/}
+            {/* <div className='notFoundImage'> */}
+            {/*    <img src='/images/error404.jpg' alt='page404'/> */}
+            {/* </div> */}
         </div>
     )
 }

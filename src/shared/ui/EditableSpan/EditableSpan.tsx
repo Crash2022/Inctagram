@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react'
 import s from './EditableSpan.module.scss'
 
-type EditableSpanPropsType = {
+interface EditableSpanPropsType {
     title: string
     onChangeInput: (newInputValue: string) => void
     inputDivClassName?: any
@@ -42,7 +42,9 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({
     }
 
     const enterChangeTitle = (event: KeyboardEvent<HTMLInputElement>) => {
-        return event.key === 'Enter' ? onClickNotEditSpanHandler() : ''
+        if (event.key === 'Enter') {
+            onClickNotEditSpanHandler();
+        }
     }
 
     useEffect(() => {
@@ -55,9 +57,9 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({
     return (
         editMode
             ?
-            <div className={inputDivClassName ? inputDivClassName : ''}>
+            <div className={inputDivClassName || ''}>
                 <input
-                    className={inputClassName ? inputClassName : s.editableSpan_input}
+                    className={inputClassName || s.editableSpan_input}
                     value={inputTitle}
                     onChange={onChangeInputHandler}
                     onBlur={onClickNotEditSpanHandler}
@@ -67,7 +69,7 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({
                 />
             </div>
             : <span onDoubleClick={onClickEditSpanHandler}
-                    className={spanClassName ? spanClassName : s.editableSpan_text}>
+                    className={spanClassName || s.editableSpan_text}>
                 {title}
         </span>
     );

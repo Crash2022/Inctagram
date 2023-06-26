@@ -21,14 +21,14 @@ export const RadioButton: React.FC<RadioPropsType> = ({
     ...restProps
 }) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e)
-        onChangeOption && onChangeOption(e.currentTarget.value)
+        onChange?.(e)
+        onChangeOption?.(e.currentTarget.value)
     }
 
     // map options with key
     const mappedOptions: any[] = options
         ? options.map((option, i) => (
-              <label key={name + '-' + i} className={s.container}>
+            <label key={`${name}-${i}`} className={s.container}>
                   <input
                       type={'radio'}
                       name={name}

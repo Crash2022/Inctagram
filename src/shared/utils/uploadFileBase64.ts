@@ -14,7 +14,7 @@ export const uploadFileBase64 = (
     setFunction: (file64: string) => void, // загрузка изображения в стейт
     extraFunction?: (file64: string) => void // запрос на загрузку на сервер
 ) => {
-    if (e.target.files && e.target.files.length) {
+    if (e.target.files?.length) {
         const file = e.target.files[0]
 
         if (file.size < 4000000) {
@@ -42,29 +42,9 @@ export const convertFileToBase64 = (file: File, callBack: (value: string) => voi
 }
 
 // image error handler
-export const imageErrorHandler = (callback: (isBroken: boolean) => void) => {
-    callback(true)
-    console.log('Файл с изображением повреждён')
+export const imageErrorHandler = (callback: (err: Error | null, isBroken?: boolean) => void) => {
+    callback(new Error('Файл с изображением повреждён'), true)
 }
 
-// пример из Пятничного проекта
-// function for local state while uploading file
-// domainValue - значение с сервера (если оно есть)
-// currentValue - текущее значение (при выборе)
-// defaultValue - стандартное значение (из файла)
 
-// export const showFileAfterUploading = (
-//     domainValue: string | undefined,
-//     currentValue: string | undefined,
-//     defaultValue: string
-// ) => {
-//     if (domainValue) {
-//         if (currentValue === defaultValue) {
-//             return domainValue
-//         } else {
-//             return currentValue
-//         }
-//     } else {
-//         return currentValue
-//     }
-// }
+

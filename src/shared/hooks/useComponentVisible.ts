@@ -1,30 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-export const useComponentVisible = (initialIsVisible: boolean) => {
-    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
-    const ref = useRef<HTMLElement>(null)
+export const useComponentVisible = (initialIsVisible: boolean): {
+    ref: React.RefObject<HTMLDivElement>,
+    isComponentVisible: boolean,
+    setIsComponentVisible: React.Dispatch<React.SetStateAction<boolean>>
+} => {
+    const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+    const ref = useRef<HTMLDivElement>(null);
 
-    const handleHideDropdown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-            setIsComponentVisible(false)
+    const handleClickOutside = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+            setIsComponentVisible(false);
         }
-    }
-
-    const handleClickOutside = (event: Event | React.SyntheticEvent) => {
-        if (ref.current !== null && !ref.current.contains(event.target as HTMLElement)) {
-            setIsComponentVisible(false)
-        }
-    }
+    };
 
     useEffect(() => {
-        document.addEventListener('keydown', handleHideDropdown, true)
-        document.addEventListener('click', handleClickOutside, true)
-
+        document.addEventListener('click', handleClickOutside, true);
         return () => {
-            document.removeEventListener('keydown', handleHideDropdown, true)
-            document.removeEventListener('click', handleClickOutside, true)
-        }
-    }, [])
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    });
 
-    return { ref, isComponentVisible, setIsComponentVisible }
-}
+    return { ref, isComponentVisible, setIsComponentVisible };
+};

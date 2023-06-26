@@ -16,11 +16,11 @@ export const Management = () => {
     const [openError, setOpenError] = useState<boolean>(false)
     const [openSuccess, setOpenSuccess] = useState<boolean>(false)
 
-    const radioAccountOptions = [t('Personal'), t('Business')]
-    const [radioAccTypeButton, setRadioAccTypeButton] = useState(t('Personal'))
+    const radioAccountOptions = [t('Personal'), t('Business')];
+    const [radioAccTypeButton, setRadioAccTypeButton] = useState<string>(t('Personal') ?? "" );
 
-    const radioCostsOptions = [t('10PM'), t('50PM'), t('100PY')]
-    const [radioCostButton, setRadioCostButton] = useState(t('10PM'))
+    const radioCostsOptions = [t('10PM') , t('50PM') , t('100PY') ];
+    const [radioCostButton, setRadioCostButton] = useState<string>(t('10PM') ?? "");
 
     // const isError = true
     // const isSuccess = true
@@ -43,7 +43,7 @@ export const Management = () => {
                 open={openError}
                 setOpen={setOpenError}
                 header={t('Error')}
-                text={t('Failed')}
+                text={t('Failed')??""}
                 buttonTitleOK={t('BackButton')}
                 extraCallbackOK={messageModalErrorHandler}
                 longButton
@@ -52,12 +52,13 @@ export const Management = () => {
             <MessageModal
                 open={openSuccess}
                 setOpen={setOpenSuccess}
-                header={t('Success')}
-                text={t('Successful')}
-                buttonTitleOK={t('OkButton')}
+                header={t('Success') || ''}
+                text={t('Successful') ?? ''}
+                buttonTitleOK={t('OkButton') || ''}
                 extraCallbackOK={messageModalSuccessHandler}
                 longButton
             />
+
 
             <div className={cls.account_types}>
                 <div className={cls.title}>{t('AccountType')}</div>

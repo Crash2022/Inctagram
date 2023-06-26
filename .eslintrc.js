@@ -25,6 +25,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         'react/display-name': 'off',
         '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/triple-slash-reference': 'off',
         '@typescript-eslint/no-misused-promises': [
             'error',
             {

@@ -1,5 +1,5 @@
-import * as yup from 'yup'
-import { TranslateFn } from '@/shared/types/translate-type'
+import * as yup from 'yup';
+import { TranslateFn } from '@/shared/types/translate-type';
 
 export const RegistrationSchema = (t: TranslateFn) => {
     return yup.object().shape({
@@ -17,6 +17,6 @@ export const RegistrationSchema = (t: TranslateFn) => {
         confirmPassword: yup
             .string()
             .required(t('Err_Yup_Required'))
-            .oneOf([yup.ref('password'), null], t('Err_Yup_FieldMatch'))
-    })
-}
+            .oneOf([yup.ref('password')], t('Err_Yup_FieldMatch'))
+    });
+};

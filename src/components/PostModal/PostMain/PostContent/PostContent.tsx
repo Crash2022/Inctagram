@@ -35,22 +35,16 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
 
     const menuItems = [
         {
-            id: 1,
-            icon: EditIcon,
-            title: 'EditPost',
-            func: () => {
-                setUpdate(true)
-            }
-        },
-        {
             id: 2,
             icon: TrashIcon,
             title: 'DeletePost',
             func: () => {
-                deletePost(post.id).then((res) => {
-                    setOpenPostModal(false)
-                })
-                dispatch(setPostId({ postId: null }))
+                if (post) {
+                    deletePost(post.id).then((res) => {
+                        setOpenPostModal(false)
+                    })
+                    dispatch(setPostId({ postId: -1 }))
+                }
             }
         }
     ]
@@ -64,6 +58,7 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
 
     if (deleteIsLoading) return <LoaderScreen variant={'circle'} />
     if (profileDataIsLoading) return <LoaderScreen variant={'circle'} />
+    if (!post) return null
 
     return (
         <>
@@ -113,8 +108,8 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
                                         : profileData?.avatars[0].url
                                 }
                                 userName={profileData?.userName}
-                                text={post.description}
-                                date={formatDate(post.createdAt)}
+                                text={post?.description ?? ""}
+                                date={post ? formatDate(post.createdAt):""}
                                 likeButton={false}
                                 likeCount={0}
                             />
@@ -167,7 +162,7 @@ export const PostContent = ({ setUpdate, setOpenPostModal, post }: PostContentPr
                                 </div>
                                 <span className={cls.likesCount}>2243 {t('Likes')}</span>
                             </div>
-                            <div className={cls.postDate}>{formatDate(post.createdAt)}</div>
+                            <div className={cls.postDate}>{post ? formatDate(post.createdAt):""}</div>
                         </div>
                     </div>
                     <form className={cls.addCommentBlock}>
