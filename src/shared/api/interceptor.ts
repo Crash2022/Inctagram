@@ -18,9 +18,10 @@ export const baseQueryWithReauth: BaseQueryFn<
     let result = await baseQuery(args, api, extraOptions)
 
     if (result.error && result.error.status === 401) {
+        console.log('REQUTH')
         // try to get a new token
         const refreshResult = await baseQuery('/auth/update-tokens', api, extraOptions)
-
+        console.log(refreshResult, "REAUTH")
         // @ts-expect-error Ignore as refreshResult.data can be null/undefined
         if (refreshResult.data.accessToken) {
 
