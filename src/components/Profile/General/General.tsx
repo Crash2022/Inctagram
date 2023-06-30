@@ -26,7 +26,10 @@ import { ProfileSchema } from '@/shared/validation/profile-schema'
 export const General = () => {
     const { t } = useTranslation('settings-general')
     const { enqueueSnackbar } = useSnackbar()
-    const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
+    const [userAvatar, setUserAvatar] = useState<string>(
+        'src/public/assets/images/default-avatar.png'
+    )
+    // const [userAvatar, setUserAvatar] = useState<string>(DefaultProfileAvatar)
     const [isAvaBroken, setIsAvaBroken] = useState(false)
 
     const { data: profileData, isLoading } = useGetProfileDataQuery({})
@@ -84,13 +87,6 @@ export const General = () => {
                     await uploadAvatar(formData)
                     setUserAvatar(URL.createObjectURL(file))
                     // await router.push(InctagramPath.PROFILE.PROFILE)
-
-                    // setUserAvatar(
-                    //     profileData.avatars.length !== 0
-                    //         ? profileData.avatars[0].url
-                    //         : '/assets/images/default-avatar.png'
-                    // )
-
                     // location.reload() // принудительная перезагрузка компоненты
                 } catch (e) {
                     console.log('upload avatar error', e)
@@ -116,7 +112,7 @@ export const General = () => {
             })
         } else {
             await deleteAvatar({})
-            setUserAvatar(DefaultProfileAvatar)
+            setUserAvatar('src/public/assets/images/default-avatar.png')
         }
     }
 
